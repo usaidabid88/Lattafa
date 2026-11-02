@@ -15,4 +15,4 @@
 | **TASK-11G-DEMO-SQL** | Add Phase 11 demo queries in `sql/06_demo_queries.sql` | DOCS | TASK-11B-IMPORT | DONE (Section 9 validated) |
 | **TASK-11G-DOCS** | Update ER diagram, FINAL_REPORT.md, and viva_notes.md | DOCS | TASK-11F-ADMIN-MGMT | DONE |
 | **TASK-11G-E2E-AUDIT** | End-to-end verification and responsive screenshots (390px, 1280px) | AUDITOR | TASK-11F-ADMIN-MGMT | DONE (AUDIT_11G.md PASS) |
-| **TASK-FINAL-REPORT** | LEAD compiles `MORNING_REPORT.md` | LEAD | ALL | IN_PROGRESS |
+| **TASK-FINAL-REPORT** | LEAD compiles `MORNING_REPORT.md` | LEAD | ALL | DONE (MORNING_REPORT.md generated) |
