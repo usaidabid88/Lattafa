@@ -375,3 +375,55 @@ obots.txt per domain using Python's RobotFileParser.
    *Viva Defense:*
    * **15 Database Test Assertions (sql/07_tests.sql)**: Mathematically validates single primary image triggers, gallery cascade deletions, category count roll-up consistency, brand FK constraints, and historic order preservation.
    * **25 Web Route Assertions (	est_app.py)**: Tests full end-to-end customer workflows, category filters, sorting, responsive views, and admin upload security with 100% pass rates.
+
+
+---
+
+---
+
+## Phase 12 – SRS Alignment
+
+### Sub-Phase 12A – Requirements Traceability Defense
+
+#### Member A – Users and Access
+1. **What is the purpose of the Requirements Traceability Matrix (`docs/traceability.csv`)?**  
+   *Viva Defense:* "The traceability matrix provides bi-directional verification between formal software engineering specifications and our actual database/software implementation. It maps all 63 requirements (21 Functional Requirements, 25 Acceptance Criteria, 7 Non-Functional Requirements, 6 Accessibility Requirements, 3 Usability Requirements, and 1 Operational Indicator) directly to their implementing MySQL tables/procedures, Flask route endpoints, Jinja templates, and test cases."
+2. **How does traceability protect user authentication and role-based access?**  
+   *Viva Defense:* "Requirements FR-02, FR-16, and AC-06.5 trace directly to our decoupled user management and guest session token architecture. We verify that sensitive customer credentials remain protected with salted cryptographic hashes and that guest checkout can proceed smoothly without compromising system auditability."
+
+#### Member B – Catalog and Inventory
+1. **How does the traceability matrix govern multi-vendor catalog integrity?**  
+   *Viva Defense:* "Requirements FR-17, FR-18, AC-06.1, and AC-06.2 map the expansion of suppliers into verified sellers. The matrix guarantees that views such as `v_product_catalog` enforce seller verification filters so that merchandise from unverified or rejected vendors is systematically excluded from the public catalog."
+2. **How does the matrix ensure accessibility compliance for catalog items?**  
+   *Viva Defense:* "Requirements FR-15 and AR-06 link the `product_images.alt_text` column directly to template rendering and accessibility assertions in `test_app.py`, ensuring all product imagery conforms to WCAG 2.1 Level AA screen reader standards."
+
+#### Member C – Orders and Payments
+1. **How does the traceability matrix eliminate financial divergence between cart and checkout?**  
+   *Viva Defense:* "Requirements FR-01, FR-08, FR-09, and NFR-06 mandate a single source of truth for all calculations. The matrix maps both `/cart` and `/checkout` to stored procedure `sp_cart_summary` and tables `delivery_rates` and `tax_rates`, preventing any discrepancy between the displayed cart total and the final charged order total."
+2. **How does traceability guarantee transactional recovery upon checkout failure?**  
+   *Viva Defense:* "Requirements FR-04, FR-10, and FR-11 link our payment attempt logger (`payment_attempts`) and atomic order placement procedure (`sp_place_order`) to specific automated rollback tests. The matrix proves that carts remain active if a payment fails or cancels, allowing instant customer retry without data loss."
+
+
+---
+
+### Sub-Phase 12B – Database Schema Alignment Defense
+
+#### Member A – Users and Access
+1. **How did we enable guest checkout without breaking referential integrity?**  
+   *Viva Defense:* "We altered `orders.user_id` and `orders.address_id` to be `NULLABLE` while creating dedicated guest capture columns (`guest_name`, `guest_email`, `guest_phone`, `guest_address_line1`, etc.). This satisfies FR-02 and AC-03.1. When an authenticated user checks out, `user_id` is linked via foreign key; when a guest checks out, `user_id` is NULL and customer contact information is stored directly on the order record alongside an immutable address snapshot."
+2. **What permissions does the new `shop_seller` MySQL role have?**  
+   *Viva Defense:* "In accordance with the principle of least privilege (POLP), the `shop_seller` role can SELECT categories, brands, delivery rates, and active catalog views. It has INSERT and UPDATE privileges on `products` and `product_images`, and SELECT/UPDATE privileges on `return_requests`. It has NO DELETE permissions on users, orders, or carts."
+
+#### Member B – Catalog and Inventory
+1. **How does the schema support multi-vendor seller governance?**  
+   *Viva Defense:* "We extended `suppliers` into audited `sellers` with `business_name`, `contact_name`, `store_location`, and `verification_status` ENUM ('pending', 'verified', 'rejected'). View `v_product_catalog` was updated to include an inner join filter `WHERE verification_status = 'verified'`, mathematically ensuring that items from unverified or rejected vendors are never displayed to shoppers (AC-06.2)."
+2. **How does the schema handle accessibility attributes on images?**  
+   *Viva Defense:* "We added an `alt_text VARCHAR(255)` column to `product_images`. View `v_product_catalog` projects `primary_image_alt`, which defaults to the product name and photo description, ensuring screen readers receive descriptive accessibility text (FR-15, AR-06)."
+
+#### Member C – Orders and Payments
+1. **Why is `sp_cart_summary` critical to preventing price divergence?**  
+   *Viva Defense:* "`sp_cart_summary` computes subtotal, provincial tax (from `tax_rates`), and delivery fee / estimated days (from `delivery_rates`) in a single stored procedure. Both `/cart` and `sp_place_order` invoke this exact same procedure. This eliminates duplicate calculation logic between frontend and backend and guarantees that the total displayed to the customer in the cart is identical to the amount charged on the invoice (FR-01, NFR-06, AC-01.2)."
+2. **How does `sp_merge_carts` handle anonymous to authenticated transitions?**  
+   *Viva Defense:* "When a guest browsing with a session cookie logs into their account, `sp_merge_carts` looks up both the guest cart and the customer's active account cart. It merges item quantities using `ON DUPLICATE KEY UPDATE quantity = cart_items.quantity + VALUES(quantity)` inside a single atomic operation, then cleans up the guest cart so the shopper never loses selected merchandise (FR-03, AC-08.2)."
+3. **How are status changes on orders and returns audited?**  
+   *Viva Defense:* "We implemented triggers `trg_order_status_history` and `trg_return_status_history`. Any time the status column on `orders` or `return_requests` changes, the engine synchronously records the previous status, new status, actor, and timestamp into dedicated audit tables, creating an immutable history for self-service package tracking (FR-12, FR-21)."

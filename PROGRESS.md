@@ -21,6 +21,12 @@ Current phase: ALL PHASES COMPLETE (100% Ready for Submission & Viva)
 - [x] Phase 11E – Product Card & Detail Gallery UI  ← DONE. Updated products.html and product_detail.html with aspect-ratio locked cards, multi-image gallery thumbnail switcher, brand attribution, and verified reviews. AUDIT_11D_11F: PASS.
 - [x] Phase 11F – Admin Catalog Management & File Uploads  ← DONE. Enhanced admin product form with brand dropdown, multi-category selector, and secure image file upload (validates MIME, rejects >2MB). AUDIT_11D_11F: PASS.
 - [x] Phase 11G – Testing, Demo Queries, Report & Viva Finalization  ← DONE. Executed sql/07_tests.sql (15/15 PASS), test_app.py (25/25 PASS), sql/06_demo_queries.sql Section 9 (0 errors). Updated docs/er_diagram.md, docs/viva_notes.md, docs/FINAL_REPORT.md. Captured 6 Playwright screenshots (390px and 1280px). AUDIT_11G: PASS.
+- [x] Phase 12A – Requirements Traceability Matrix  ← DONE. Created docs/traceability.csv mapping all 63 SRS requirements (21 FRs, 25 ACs, 7 NFRs, 6 ARs, 3 URs, 1 OI) to database objects, routes, templates, and test targets. Zero missing targets.
+- [x] Phase 12B – Database Schema Alignment (sql/09_srs_alignment.sql)  ← DONE. mysqldump backup created (backups/pre_phase12_20261103_025219.sql). Executed sql/09_srs_alignment.sql twice with zero errors (idempotency verified). Added delivery_rates, tax_rates, payment_methods, payment_attempts, order_status_history, support_tickets, return_requests, return_status_history, v_sellers, v_overdue_return_requests, sp_cart_summary, sp_merge_carts, and shop_seller role. 0 existing rows lost; 25/25 test_app.py and 15/15 sql/07_tests.sql assertions PASS.
+- [ ] Phase 12C – Checkout, Pricing & Payment Pipeline
+- [ ] Phase 12D – Support, Trust & Seller Operations
+- [ ] Phase 12E – Quality & Accessibility Pass
+- [ ] Phase 12F – Verification & Final Viva Defense Prep
 
 ## Known issues
 - Pakistani retail domains (Khaadi, Dawlance, etc.) returned 403 / anti-bot challenge during automated image retrieval; all 49 affected products use high-fidelity local specimen assets so no 404s exist; list logged to `data/images_report.json`.
