@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}Checkout - MUET Shop{% endblock %}
+
+{% block content %}
+<div class="mb-4 pb-2 border-bottom">
+    <h1 class="h3 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Finalize Order</h1>
+    <p class="text-craft-muted mb-0 small">Select your verified delivery address and preferred payment settlement method</p>
+</div>
+
+<form method="POST" action="{{ url_for('checkout') }}">
+    <div class="row g-4">
+        <!-- Order Summary -->
+        <div class="col-lg-7">
+            <div class="card-craft p-0 mb-4 overflow-hidden">
+                <div class="p-3" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
+                    <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary); letter-spacing: 0.02em;">Order Summary</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-craft align-middle">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th class="text-center" style="width: 70px;">Qty</th>
+                                <th class="text-end">Unit Price</th>
+                                <th class="text-end">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in (cart_items or items) %}
+                            <tr>
+                                <td>
+                                    <div class="fw-medium" style="color: var(--text-primary);">{{ item.product_name or item.name }}</div>
+                                </td>
+                                <td class="text-center tabular-nums" style="color: var(--text-secondary);">{{ item.quantity }}</td>
+                                <td class="text-end tabular-nums text-craft-muted">PKR {{ "{:,.2f}".format(item.unit_price or item.price) }}</td>
+                                <td class="text-end tabular-nums fw-medium" style="color: var(--text-primary);">PKR {{ "{:,.2f}".format(item.line_total) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr style="background-color: #faf9f6; border-top: 2px solid var(--border-hairline);">
+                                <td colspan="3" class="text-end fw-semibold small text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Total Payable:</td>
+                                <td class="text-end fw-bold tabular-nums fs-5" style="color: var(--accent-indigo);">PKR {{ "{:,.2f}".format(cart_total) }}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 p-3 rounded" style="background-color: #f1f5f9; border: 1px solid #e2e8f0; font-size: 0.85rem; color: #475569;">
+                <i class="bi bi-shield-check fs-5 text-secondary"></i>
+                <span>ACID transaction guarantees atomic order placement, inventory deduction, and instant invoice audit generation.</span>
+            </div>
+        </div>
+
+        <!-- Address & Payment Sidebar -->
+        <div class="col-lg-5">
+            <!-- Delivery Address -->
+            <div class="card-craft p-3 mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                    <h3 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Delivery Address</h3>
+                    <span class="badge-craft badge-neutral">Required</span>
+                </div>
+                {% if addresses %}
+                <div class="d-flex flex-column gap-2">
+                    {% for addr in addresses %}
+                    <label class="form-check-label d-flex align-items-start gap-2 p-2 rounded cursor-pointer" style="border: 1px solid var(--border-hairline); background-color: #faf9f6; cursor: pointer;">
+                        <input class="form-check-input mt-1" type="radio" name="address_id" id="addr_{{ addr.address_id }}" value="{{ addr.address_id }}" {% if loop.first %}checked{% endif %} required>
+                        <div>
+                            <div class="fw-medium small" style="color: var(--text-primary);">{{ addr.address_line1 }}</div>
+                            <div class="small text-craft-muted">{{ addr.city }}{% if addr.postal_code %}, {{ addr.postal_code }}{% endif %}</div>
+                        </div>
+                    </label>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-craft-muted small mb-0">No saved addresses found. Please ensure an address is attached to your account.</p>
+                {% endif %}
+            </div>
+
+            <!-- Payment Method -->
+            <div class="card-craft p-3 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                    <h3 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Payment Settlement</h3>
+                    <span class="badge-craft badge-neutral">Instant</span>
+                </div>
+                <div class="d-flex flex-column gap-2">
+                    <label class="form-check-label d-flex align-items-center gap-2 p-2 rounded" style="border: 1px solid var(--border-hairline); background-color: #faf9f6; cursor: pointer;">
+                        <input class="form-check-input" type="radio" name="payment_method" id="pm_cod" value="cod" checked required>
+                        <div class="small fw-medium" style="color: var(--text-primary);">Cash on Delivery (Standard Courier)</div>
+                    </label>
+                    <label class="form-check-label d-flex align-items-center gap-2 p-2 rounded" style="border: 1px solid var(--border-hairline); background-color: #faf9f6; cursor: pointer;">
+                        <input class="form-check-input" type="radio" name="payment_method" id="pm_card" value="card">
+                        <div class="small fw-medium" style="color: var(--text-primary);">Direct Debit / Credit Card (1Link / PayPak)</div>
+                    </label>
+                    <label class="form-check-label d-flex align-items-center gap-2 p-2 rounded" style="border: 1px solid var(--border-hairline); background-color: #faf9f6; cursor: pointer;">
+                        <input class="form-check-input" type="radio" name="payment_method" id="pm_bank" value="bank_transfer">
+                        <div class="small fw-medium" style="color: var(--text-primary);">Online Bank Transfer (IBFT Raast)</div>
+                    </label>
+                    <label class="form-check-label d-flex align-items-center gap-2 p-2 rounded" style="border: 1px solid var(--border-hairline); background-color: #faf9f6; cursor: pointer;">
+                        <input class="form-check-input" type="radio" name="payment_method" id="pm_wallet" value="wallet">
+                        <div class="small fw-medium" style="color: var(--text-primary);">Digital Wallet (Easypaisa / JazzCash)</div>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-indigo w-100 py-2 fs-6">
+                Confirm & Place Order <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock %}

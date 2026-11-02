@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Login - MUET Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-3">
+    <div class="col-md-5 col-lg-4">
+        <div class="card-craft p-4 mb-3">
+            <div class="text-center mb-4 pb-2 border-bottom">
+                <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Account Login</h1>
+                <p class="text-craft-muted small mb-0">Access your order history and shopping basket</p>
+            </div>
+
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="mb-3">
+                    <label for="email" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="e.g. ahmed.ali@example.com" style="border-color: var(--border-hairline);" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" style="border-color: var(--border-hairline);" required>
+                </div>
+                <button type="submit" class="btn btn-indigo w-100 py-2 mb-3">
+                    Login
+                </button>
+            </form>
+
+            <div class="text-center pt-2 border-top">
+                <span class="text-craft-muted small">New to the marketplace?</span>
+                <a href="{{ url_for('register') }}" class="small fw-semibold ms-1" style="color: var(--accent-indigo); text-decoration: none;">Create account</a>
+            </div>
+        </div>
+
+        <!-- Evaluator / Viva Demo Accounts Box -->
+        <div class="card-craft p-3" style="background-color: #faf9f6; font-size: 0.8rem;">
+            <div class="fw-semibold mb-1" style="color: var(--text-secondary); letter-spacing: 0.02em;">Evaluation & Viva Credentials</div>
+            <div class="text-craft-muted mb-2">Seed accounts populated in MySQL 8.0:</div>
+            <div class="d-flex flex-column gap-1 font-monospace">
+                <div><span class="text-craft-muted">Admin:</span> <code>admin@muetshop.pk</code> / <code>password123</code></div>
+                <div><span class="text-craft-muted">Staff:</span> <code>staff@muetshop.pk</code> / <code>password123</code></div>
+                <div><span class="text-craft-muted">Customer:</span> <code>ahmed.ali@example.com</code> / <code>password123</code></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}Manage Orders - MUET Shop Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4 pb-2 border-bottom">
+    <div>
+        <h1 class="h3 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Order Administration</h1>
+        <p class="text-craft-muted mb-0 small">Audit customer transactions, update fulfillment status, and trigger cancellation rollback procedures</p>
+    </div>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-craft btn-sm">
+        <i class="bi bi-arrow-left me-1"></i> Dashboard
+    </a>
+</div>
+
+<div class="card-craft p-0 overflow-hidden mb-4">
+    <div class="table-responsive">
+        <table class="table table-craft align-middle">
+            <thead>
+                <tr>
+                    <th style="width: 75px;">Ref</th>
+                    <th>Customer</th>
+                    <th>Date Placed</th>
+                    <th class="text-end">Total Amount</th>
+                    <th>Current Status</th>
+                    <th style="min-width: 170px;">State Transition</th>
+                    <th class="text-end" style="width: 140px;">Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for o in orders %}
+                <tr>
+                    <td class="tabular-nums fw-medium" style="color: var(--text-muted); font-size: 0.85rem;">
+                        #{{ o.order_id }}
+                    </td>
+                    <td>
+                        <div class="fw-medium" style="color: var(--text-primary);">{{ o.customer_name }}</div>
+                    </td>
+                    <td class="tabular-nums" style="color: var(--text-secondary); font-size: 0.85rem;">
+                        {{ o.order_date }}
+                    </td>
+                    <td class="text-end tabular-nums fw-medium" style="color: var(--text-primary);">
+                        PKR {{ "{:,.2f}".format(o.total_amount) }}
+                    </td>
+                    <td>
+                        {% if o.status == 'pending' %}
+                        <span class="badge-craft badge-status-pending"><i class="bi bi-clock"></i> Pending</span>
+                        {% elif o.status == 'paid' %}
+                        <span class="badge-craft badge-status-paid"><i class="bi bi-check-circle"></i> Paid</span>
+                        {% elif o.status == 'shipped' %}
+                        <span class="badge-craft badge-status-shipped"><i class="bi bi-truck"></i> Shipped</span>
+                        {% elif o.status == 'delivered' %}
+                        <span class="badge-craft badge-status-delivered"><i class="bi bi-bag-check"></i> Delivered</span>
+                        {% elif o.status == 'cancelled' %}
+                        <span class="badge-craft badge-status-cancelled"><i class="bi bi-x-circle"></i> Cancelled</span>
+                        {% else %}
+                        <span class="badge-craft badge-neutral">{{ o.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if o.status not in ['delivered', 'cancelled'] %}
+                        <form method="POST" action="{{ url_for('admin_order_status') }}" class="d-flex align-items-center gap-1">
+                            <input type="hidden" name="order_id" value="{{ o.order_id }}">
+                            <select name="new_status" class="form-select form-select-sm" style="width: 110px; font-size: 0.8rem; border-color: var(--border-hairline);">
+                                <option value="pending" {% if o.status == 'pending' %}selected{% endif %}>Pending</option>
+                                <option value="paid" {% if o.status == 'paid' %}selected{% endif %}>Paid</option>
+                                <option value="shipped" {% if o.status == 'shipped' %}selected{% endif %}>Shipped</option>
+                                <option value="delivered" {% if o.status == 'delivered' %}selected{% endif %}>Delivered</option>
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-outline-craft px-2 py-1" title="Update status">
+                                <i class="bi bi-check2"></i>
+                            </button>
+                        </form>
+                        {% else %}
+                        <span class="text-craft-muted small" style="font-size: 0.8rem;">Terminal State</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-end">
+                        <div class="d-inline-flex align-items-center gap-1">
+                            <a href="{{ url_for('order_detail', order_id=o.order_id) }}" class="btn btn-sm btn-outline-craft py-1 px-2" style="font-size: 0.8rem;" title="View Invoice">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            {% if o.status not in ['delivered', 'cancelled'] %}
+                            <form method="POST" action="{{ url_for('admin_order_cancel') }}" onsubmit="return confirm('Execute sp_cancel_order: cancel order and roll back product inventory?');" class="d-inline">
+                                <input type="hidden" name="order_id" value="{{ o.order_id }}">
+                                <button type="submit" class="btn btn-sm text-danger border-0 p-1" title="Cancel order (triggers stored procedure rollback)">
+                                    <span class="small">Cancel</span>
+                                </button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

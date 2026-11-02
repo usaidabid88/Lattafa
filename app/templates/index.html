@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}MUET Storefront – Pakistani Regional Marketplace{% endblock %}
+
+{% block content %}
+<!-- Editorial Asymmetric Hero -->
+<div class="card-craft p-4 p-md-5 mb-5" style="background: linear-gradient(180deg, #ffffff 0%, #fbf9f5 100%);">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+            <div class="d-inline-flex align-items-center gap-2 px-2 py-1 rounded mb-3" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline); font-size: 0.8rem;">
+                <span class="badge bg-dark font-mono text-uppercase" style="font-size: 0.7rem;">Verified</span>
+                <span class="text-secondary">MUET SE Department DBMS Complex Engineering Problem</span>
+            </div>
+            <h1 class="display-6 fw-bold mb-3" style="color: var(--text-primary); line-height: 1.2; letter-spacing: -0.02em;">
+                Regional merchants, transparent pricing in PKR, tracked delivery.
+            </h1>
+            <p class="lead mb-4" style="color: var(--text-secondary); font-size: 1.05rem; max-width: 38rem;">
+                A normalized relational marketplace connecting verified vendors in Karachi, Hyderabad, and Islamabad with university students. Built on strict ACID transactions with real-time inventory synchronization.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{{ url_for('products') }}" class="btn btn-indigo">
+                    Browse Catalog
+                </a>
+                {% if not session.get('user') %}
+                <a href="{{ url_for('register') }}" class="btn btn-outline-craft">
+                    Register Customer Account
+                </a>
+                {% else %}
+                <a href="{{ url_for('my_orders') }}" class="btn btn-outline-craft">
+                    View My Orders
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <!-- Featured Product Preview (Real Material Moment) -->
+            <div class="card-craft p-3" style="background-color: #ffffff; border-color: rgba(27, 54, 93, 0.15);">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-uppercase text-muted font-mono" style="font-size: 0.75rem;">Featured Product</span>
+                    <span class="badge badge-craft badge-stock-in">In Stock (15 units)</span>
+                </div>
+                <h5 class="fw-bold mb-1" style="color: var(--text-primary);">Samsung Galaxy S24 Ultra</h5>
+                <p class="text-muted small mb-3">512GB Titanium Black &bull; TechZone Karachi</p>
+                <div class="d-flex justify-content-between align-items-end pt-2 border-top" style="border-color: var(--border-hairline) !important;">
+                    <div>
+                        <span class="text-muted small d-block">Retail Price</span>
+                        <span class="fs-5 fw-bold tabular-nums" style="color: var(--accent-indigo);">PKR 399,999.00</span>
+                    </div>
+                    <a href="{{ url_for('product_detail', product_id=1) }}" class="btn btn-sm btn-outline-craft">
+                        View Product
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Structured Market Metrics -->
+<div class="row g-3 mb-5">
+    <div class="col-md-4">
+        <div class="card-craft p-4 h-100">
+            <span class="text-muted small d-block mb-1">Catalog Inventory</span>
+            <div class="d-flex align-items-baseline gap-2">
+                <h3 class="fw-bold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_products }}</h3>
+                <span class="text-secondary small">active products across 8 categories</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-craft p-4 h-100">
+            <span class="text-muted small d-block mb-1">Orders Dispatched</span>
+            <div class="d-flex align-items-baseline gap-2">
+                <h3 class="fw-bold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_orders }}</h3>
+                <span class="text-secondary small">fulfilled via TCS, Leopards & M&amp;P</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card-craft p-4 h-100">
+            <span class="text-muted small d-block mb-1">Registered Accounts</span>
+            <div class="d-flex align-items-baseline gap-2">
+                <h3 class="fw-bold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_users }}</h3>
+                <span class="text-secondary small">authenticated with salted hashes</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Departmental Overview -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold mb-0" style="color: var(--text-primary);">Store Departments</h5>
+    <a href="{{ url_for('products') }}" class="text-decoration-none small text-secondary">
+        All Categories &rarr;
+    </a>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <a href="{{ url_for('products', category_id=1) }}" class="card-craft p-3 text-decoration-none d-block">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fw-bold mb-1 text-dark">Electronics &amp; Computing</h6>
+                    <span class="text-muted small">Laptops, Phones &amp; Peripherals</span>
+                </div>
+                <i class="bi bi-arrow-right text-muted"></i>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ url_for('products', category_id=4) }}" class="card-craft p-3 text-decoration-none d-block">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fw-bold mb-1 text-dark">Fashion &amp; Apparel</h6>
+                    <span class="text-muted small">Men's Kurtas, Boski, Women's Lawn</span>
+                </div>
+                <i class="bi bi-arrow-right text-muted"></i>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ url_for('products', category_id=7) }}" class="card-craft p-3 text-decoration-none d-block">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fw-bold mb-1 text-dark">Home &amp; Kitchen</h6>
+                    <span class="text-muted small">Microwaves, Air Fryers, Kettles</span>
+                </div>
+                <i class="bi bi-arrow-right text-muted"></i>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

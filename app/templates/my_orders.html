@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}My Orders - MUET Shop{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-baseline mb-4 pb-2 border-bottom">
+    <div>
+        <h1 class="h3 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Order History</h1>
+        <p class="text-craft-muted mb-0 small">Track real-time shipment status and review generated transaction invoices</p>
+    </div>
+    {% if orders %}
+    <span class="badge-craft badge-neutral">{{ orders|length }} order{% if orders|length != 1 %}s{% endif %}</span>
+    {% endif %}
+</div>
+
+{% if orders %}
+<div class="card-craft p-0 mb-4 overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-craft align-middle">
+            <thead>
+                <tr>
+                    <th style="width: 140px;">Order #</th>
+                    <th>Date Placed</th>
+                    <th>Fulfillment Status</th>
+                    <th class="text-end">Total Amount</th>
+                    <th class="text-end" style="width: 110px;">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>
+                        <span class="fw-semibold tabular-nums" style="color: var(--text-primary);">Order #{{ order.order_id }}</span>
+                    </td>
+                    <td class="tabular-nums" style="color: var(--text-secondary); font-size: 0.85rem;">
+                        {{ order.order_date }}
+                    </td>
+                    <td>
+                        {% if order.status == 'pending' %}
+                        <span class="badge-craft badge-status-pending"><i class="bi bi-clock"></i> Pending</span>
+                        {% elif order.status == 'paid' %}
+                        <span class="badge-craft badge-status-paid"><i class="bi bi-check-circle"></i> Paid</span>
+                        {% elif order.status == 'shipped' %}
+                        <span class="badge-craft badge-status-shipped"><i class="bi bi-truck"></i> Shipped</span>
+                        {% elif order.status == 'delivered' %}
+                        <span class="badge-craft badge-status-delivered"><i class="bi bi-bag-check"></i> Delivered</span>
+                        {% elif order.status == 'cancelled' %}
+                        <span class="badge-craft badge-status-cancelled"><i class="bi bi-x-circle"></i> Cancelled</span>
+                        {% else %}
+                        <span class="badge-craft badge-neutral">{{ order.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-end fw-semibold tabular-nums" style="color: var(--text-primary);">
+                        PKR {{ "{:,.2f}".format(order.total_amount) }}
+                    </td>
+                    <td class="text-end">
+                        <a href="{{ url_for('order_detail', order_id=order.order_id) }}" class="btn btn-sm btn-outline-craft py-1 px-2" style="font-size: 0.8rem;">
+                            View Invoice <i class="bi bi-chevron-right ms-1"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="card-craft text-center py-5 px-4">
+    <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 56px; height: 56px; background-color: #f1f5f9; color: var(--text-muted); margin: 0 auto;">
+        <i class="bi bi-receipt fs-3"></i>
+    </div>
+    <h3 class="h5 fw-semibold mb-2" style="color: var(--text-primary);">No purchase history recorded</h3>
+    <p class="text-craft-muted mb-4 small" style="max-width: 400px; margin-left: auto; margin-right: auto;">
+        You haven't placed any orders yet. Discover our catalog of artisan crafts and local goods.
+    </p>
+    <div>
+        <a href="{{ url_for('products') }}" class="btn btn-indigo">
+            <i class="bi bi-grid me-1"></i> Browse Marketplace
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

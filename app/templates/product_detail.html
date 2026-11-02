@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} – MUET Shop{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb small">
+        <li class="breadcrumb-item"><a href="{{ url_for('products') }}" class="text-secondary text-decoration-none">Catalog</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('products', category_id=product.category_id) }}" class="text-secondary text-decoration-none">{{ product.category_name }}</a></li>
+        <li class="breadcrumb-item active text-dark" aria-current="page">{{ product.name }}</li>
+    </ol>
+</nav>
+
+<div class="row g-4 mb-5">
+    <!-- Product Specification & Overview -->
+    <div class="col-lg-8">
+        <div class="card-craft p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted small font-mono text-uppercase" style="font-size: 0.75rem;">Product #{{ product.product_id }}</span>
+                {% if product.stock_quantity > 5 %}
+                <span class="badge-craft badge-stock-in">{{ product.stock_quantity }} units available</span>
+                {% elif product.stock_quantity >= 1 %}
+                <span class="badge-craft badge-stock-low">Low stock: {{ product.stock_quantity }} units</span>
+                {% else %}
+                <span class="badge-craft badge-stock-out">Out of stock</span>
+                {% endif %}
+            </div>
+
+            <h2 class="fw-bold mb-2" style="color: var(--text-primary); letter-spacing: -0.02em;">{{ product.name }}</h2>
+            <div class="d-flex align-items-baseline gap-3 mb-4">
+                <span class="display-6 fw-bold tabular-nums" style="color: var(--accent-indigo);">
+                    PKR {{ "{:,.2f}".format(product.price) }}
+                </span>
+                <span class="text-muted small">Inclusive of standard regional taxes</span>
+            </div>
+
+            <div class="p-3 rounded mb-4" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+                <div class="row g-2 small">
+                    <div class="col-sm-6">
+                        <span class="text-muted d-block">Department Classification</span>
+                        <strong>{{ product.category_name }}</strong>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted d-block">Distributor / Supplier</span>
+                        <strong>{{ product.supplier_name }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <h6 class="fw-bold text-dark mb-2">Description</h6>
+            <p class="text-secondary leading-relaxed mb-0" style="font-size: 0.95rem;">
+                {{ product.description or 'No formal catalog description provided by vendor.' }}
+            </p>
+        </div>
+
+        <!-- Verified Reviews Section -->
+        <div class="card-craft p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0 text-dark">Customer Reviews</h5>
+                <span class="text-muted small font-mono">{{ reviews|length }} verified reviews</span>
+            </div>
+
+            {% if reviews %}
+            <div class="d-flex flex-column gap-3 mb-4">
+                {% for r in reviews %}
+                <div class="p-3 rounded border-bottom" style="border-color: var(--border-hairline) !important;">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <strong>{{ r.full_name }}</strong>
+                        <span class="text-warning small" title="{{ r.rating }} out of 5 stars">
+                            {% for i in range(r.rating) %}&#9733;{% endfor %}
+                            <span class="text-muted font-mono" style="font-size: 0.8rem;">({{ r.rating }}/5)</span>
+                        </span>
+                    </div>
+                    <p class="text-secondary small mb-1">{{ r.comment }}</p>
+                    <span class="text-muted font-mono" style="font-size: 0.75rem;">{{ r.created_at }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-muted small mb-4">No reviews yet for this product. Reviews require a confirmed delivered purchase.</p>
+            {% endif %}
+
+            <!-- Submit Review Form -->
+            {% if session.get('user') and session.get('role') == 'customer' %}
+            <div class="pt-3 border-top" style="border-color: var(--border-hairline) !important;">
+                <h6 class="fw-bold mb-2">Leave a Review (Delivered Purchases Only)</h6>
+                <form method="POST" action="{{ url_for('review_add') }}">
+                    <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                    <div class="row g-2 mb-2">
+                        <div class="col-sm-4">
+                            <label class="form-label small text-muted">Rating</label>
+                            <select name="rating" class="form-select form-select-sm" required>
+                                <option value="5">5 &ndash; Excellent</option>
+                                <option value="4">4 &ndash; Good</option>
+                                <option value="3">3 &ndash; Average</option>
+                                <option value="2">2 &ndash; Poor</option>
+                                <option value="1">1 &ndash; Terrible</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-8">
+                            <label class="form-label small text-muted">Feedback</label>
+                            <input type="text" name="comment" class="form-control form-control-sm" placeholder="Summarize your experience with this item..." required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-craft">Submit Review</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Purchase Action Sidebar -->
+    <div class="col-lg-4">
+        <div class="card-craft p-4 sticky-top" style="top: 80px;">
+            <h6 class="fw-bold text-dark mb-3">Order Fulfillment</h6>
+            
+            {% if product.stock_quantity > 0 %}
+                {% if session.get('user') and session.get('role') == 'customer' %}
+                <form method="POST" action="{{ url_for('cart_add') }}">
+                    <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label small text-muted">Order Quantity</label>
+                        <input type="number" class="form-control form-control-sm tabular-nums" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock_quantity }}" required>
+                        <span class="text-muted small d-block mt-1">Maximum {{ product.stock_quantity }} units per order.</span>
+                    </div>
+                    <button type="submit" class="btn btn-indigo w-100 py-2">
+                        Add to Shopping Cart
+                    </button>
+                </form>
+                {% elif not session.get('user') %}
+                <div class="alert alert-light border small text-muted mb-3">
+                    Please sign in to add products to your cart.
+                </div>
+                <a href="{{ url_for('login') }}" class="btn btn-indigo w-100 mb-2">Sign in to Purchase</a>
+                <a href="{{ url_for('register') }}" class="btn btn-outline-craft w-100">Create Account</a>
+                {% else %}
+                <div class="alert alert-light border small text-muted mb-0">
+                    Administrator/Staff accounts cannot place customer retail orders.
+                </div>
+                {% endif %}
+            {% else %}
+            <div class="alert alert-danger border-0 small mb-0">
+                This item is currently out of stock. Stock replenishment is in progress.
+            </div>
+            {% endif %}
+
+            <div class="mt-4 pt-3 border-top small text-secondary" style="border-color: var(--border-hairline) !important;">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <i class="bi bi-truck text-muted"></i>
+                    <span>Dispatched via TCS, Leopards &amp; M&amp;P</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-cash text-muted"></i>
+                    <span>Cash on Delivery (COD) available</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MUET Shop – Online Shopping System{% endblock %}</title>
+    <!-- Modern Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-page: #f8f7f4;
+            --bg-card: #ffffff;
+            --bg-raised: #f1ede4;
+            --border-hairline: rgba(31, 27, 22, 0.08);
+            --border-strong: rgba(31, 27, 22, 0.16);
+            --text-primary: #1f1b16;
+            --text-secondary: #5e554a;
+            --text-muted: #82786c;
+            --accent-indigo: #1b365d;
+            --accent-indigo-hover: #142846;
+            --accent-gold: #c59b27;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        main { flex: 1; }
+
+        /* Typography & Tabular Figures */
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Quiet, Crafted Navigation */
+        .navbar-custom {
+            background-color: #171c26;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 0;
+        }
+        .navbar-custom .navbar-brand {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #fdfbf7;
+            letter-spacing: -0.02em;
+        }
+        .navbar-custom .navbar-brand span {
+            color: #93c5fd;
+            font-weight: 400;
+            font-size: 0.85rem;
+            margin-left: 6px;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            padding-left: 8px;
+        }
+        .navbar-custom .nav-link {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            transition: color 0.15s ease, background-color 0.15s ease;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        /* Quiet Cards & Surfaces */
+        .card-craft {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-md);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .card-craft:hover {
+            border-color: var(--border-strong);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Buttons with Intentional Restraint */
+        .btn-indigo {
+            background-color: var(--accent-indigo);
+            border-color: var(--accent-indigo);
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            transition: background-color 0.15s ease;
+        }
+        .btn-indigo:hover {
+            background-color: var(--accent-indigo-hover);
+            border-color: var(--accent-indigo-hover);
+            color: #ffffff;
+        }
+
+        .btn-outline-craft {
+            background-color: transparent;
+            border: 1px solid var(--border-strong);
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            transition: background-color 0.15s ease, border-color 0.15s ease;
+        }
+        .btn-outline-craft:hover {
+            background-color: var(--bg-raised);
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
+        }
+
+        /* Badges */
+        .badge-craft {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .badge-stock-in, .badge-status-delivered {
+            background-color: #ecfdf5;
+            color: #065f46;
+            border-color: #a7f3d0;
+        }
+        .badge-stock-low, .badge-status-pending {
+            background-color: #fffbeb;
+            color: #92400e;
+            border-color: #fde68a;
+        }
+        .badge-stock-out, .badge-status-cancelled {
+            background-color: #fef2f2;
+            color: #991b1b;
+            border-color: #fecaca;
+        }
+        .badge-status-paid {
+            background-color: #eff6ff;
+            color: #1e40af;
+            border-color: #bfdbfe;
+        }
+        .badge-status-shipped {
+            background-color: #f5f3ff;
+            color: #5b21b6;
+            border-color: #ddd6fe;
+        }
+        .badge-neutral {
+            background-color: #f1f5f9;
+            color: #475569;
+            border-color: #e2e8f0;
+        }
+
+        /* Quiet Tables */
+        .table-craft {
+            margin-bottom: 0;
+            border-color: var(--border-hairline);
+        }
+        .table-craft th {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            color: var(--text-secondary);
+            background-color: #faf9f6;
+            border-bottom: 1px solid var(--border-hairline);
+            padding: 12px 16px;
+        }
+        .table-craft td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-hairline);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        .table-craft tr:last-child td {
+            border-bottom: none;
+        }
+        .table-craft tbody tr:hover {
+            background-color: rgba(31, 27, 22, 0.015);
+        }
+
+        /* Footer */
+        .footer-craft {
+            background-color: #ffffff;
+            border-top: 1px solid var(--border-hairline);
+            padding: 24px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+                MUET Shop <span>Sindh Marketplace</span>
+            </a>
+            <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('products') }}">Catalog</a>
+                    </li>
+                    {% if session.get('user') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('cart') }}">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('my_orders') }}">My Orders</a>
+                    </li>
+                    {% endif %}
+                    {% if session.get('role') in ['admin', 'staff'] %}
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="{{ url_for('admin_dashboard') }}">
+                            <i class="bi bi-shield-lock me-1"></i> Admin Console
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ms-auto align-items-center">
+                    {% if session.get('user') %}
+                    <li class="nav-item me-2">
+                        <span class="text-white-50 small">
+                            {{ session.get('user') }}
+                            <span class="badge bg-secondary ms-1 font-mono" style="font-size: 0.7rem;">{{ session.get('role') }}</span>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href="{{ url_for('logout') }}">Sign out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Sign in</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-sm btn-indigo text-white" href="{{ url_for('register') }}">Create account</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Alerts -->
+    <div class="container mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show border-0 shadow-sm" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Main Workspace -->
+    <main class="container my-4">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Quiet Footer -->
+    <footer class="footer-craft mt-auto">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+                <strong>MUET Online Shopping System</strong> &mdash; Department of Software Engineering, Jamshoro
+            </div>
+            <div class="font-mono text-muted" style="font-size: 0.8rem;">
+                MySQL 8.0 &bull; ACID Transactions &bull; RBAC
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

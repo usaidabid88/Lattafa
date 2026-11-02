@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Create Account - MUET Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-3">
+    <div class="col-md-6 col-lg-5">
+        <div class="card-craft p-4">
+            <div class="text-center mb-4 pb-2 border-bottom">
+                <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Create Customer Account</h1>
+                <p class="text-craft-muted small mb-0">Join our regional artisan & tech shopping platform</p>
+            </div>
+
+            <form method="POST" action="{{ url_for('register') }}">
+                <div class="mb-3">
+                    <label for="full_name" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Full Name *</label>
+                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="e.g. Fatima Noor" style="border-color: var(--border-hairline);" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Email Address *</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="e.g. fatima.noor@example.com" style="border-color: var(--border-hairline);" required>
+                </div>
+                <div class="row g-2 mb-3">
+                    <div class="col-sm-6">
+                        <label for="password" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Password *</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="At least 6 characters" style="border-color: var(--border-hairline);" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="confirm_password" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Confirm *</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Repeat password" style="border-color: var(--border-hairline);" required>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="phone" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Phone Number (Optional)</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="e.g. 03001234567" style="border-color: var(--border-hairline);">
+                </div>
+
+                <button type="submit" class="btn btn-indigo w-100 py-2 mb-3">
+                    Register Account
+                </button>
+            </form>
+
+            <div class="text-center pt-2 border-top">
+                <span class="text-craft-muted small">Already registered?</span>
+                <a href="{{ url_for('login') }}" class="small fw-semibold ms-1" style="color: var(--accent-indigo); text-decoration: none;">Sign in here</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

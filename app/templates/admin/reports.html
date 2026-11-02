@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% block title %}Executive Analytics & Views - MUET Shop Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4 pb-2 border-bottom">
+    <div>
+        <h1 class="h3 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Database Analytics & Analytical Views</h1>
+        <p class="text-craft-muted mb-0 small">Live aggregated views from MySQL 8.0 schema covering category revenue, low inventory triggers, and cart abandonment</p>
+    </div>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-craft btn-sm">
+        <i class="bi bi-arrow-left me-1"></i> Dashboard
+    </a>
+</div>
+
+<!-- Section 1: Sales by Category (v_sales_by_category) -->
+<div class="card-craft p-0 overflow-hidden mb-4">
+    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
+        <div>
+            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Departmental Sales Summary</h2>
+            <div class="small text-craft-muted font-monospace" style="font-size: 0.75rem;">View: v_sales_by_category</div>
+        </div>
+        <span class="badge-craft badge-neutral">Gross Revenue</span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-craft align-middle">
+            <thead>
+                <tr>
+                    <th>Department Category</th>
+                    <th class="text-center" style="width: 140px;">Completed Orders</th>
+                    <th class="text-center" style="width: 130px;">Units Sold</th>
+                    <th class="text-end" style="width: 200px;">Gross Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in sales_by_category %}
+                <tr>
+                    <td class="fw-medium" style="color: var(--text-primary);">{{ row.category_name }}</td>
+                    <td class="text-center tabular-nums" style="color: var(--text-secondary);">{{ row.total_orders }}</td>
+                    <td class="text-center">
+                        <span class="badge-craft badge-neutral tabular-nums">{{ row.total_units_sold }} units</span>
+                    </td>
+                    <td class="text-end fw-semibold tabular-nums" style="color: var(--text-primary);">
+                        PKR {{ "{:,.2f}".format(row.total_revenue_pkr) }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Section 2: Low Stock Alerts (v_low_stock) -->
+<div class="card-craft p-0 overflow-hidden mb-4">
+    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
+        <div>
+            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Inventory Replenishment Thresholds</h2>
+            <div class="small text-craft-muted font-monospace" style="font-size: 0.75rem;">View: v_low_stock (Threshold &le; 5 units)</div>
+        </div>
+        <span class="badge-craft badge-stock-low">Replenishment Action</span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-craft align-middle">
+            <thead>
+                <tr>
+                    <th style="width: 75px;">Ref</th>
+                    <th>Product Title</th>
+                    <th>Category</th>
+                    <th class="text-center" style="width: 150px;">Physical Reserve</th>
+                    <th>Assigned Supplier</th>
+                    <th class="text-end" style="width: 180px;">Supplier Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in low_stock %}
+                <tr>
+                    <td class="tabular-nums" style="color: var(--text-muted); font-size: 0.85rem;">#{{ item.product_id }}</td>
+                    <td class="fw-medium" style="color: var(--text-primary);">{{ item.product_name }}</td>
+                    <td><span class="badge-craft badge-neutral">{{ item.category_name }}</span></td>
+                    <td class="text-center">
+                        {% if item.stock_quantity <= 2 %}
+                        <span class="badge-craft badge-stock-out tabular-nums">{{ item.stock_quantity }} units left</span>
+                        {% else %}
+                        <span class="badge-craft badge-stock-low tabular-nums">{{ item.stock_quantity }} units left</span>
+                        {% endif %}
+                    </td>
+                    <td style="color: var(--text-secondary);">{{ item.supplier_name }}</td>
+                    <td class="text-end">
+                        <a href="tel:{{ item.supplier_phone }}" class="text-decoration-none tabular-nums small" style="color: var(--accent-indigo);">
+                            <i class="bi bi-telephone me-1"></i> {{ item.supplier_phone }}
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Section 3: Best Sellers (v_best_sellers) -->
+<div class="card-craft p-0 overflow-hidden mb-4">
+    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
+        <div>
+            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Catalog Volume Leaders</h2>
+            <div class="small text-craft-muted font-monospace" style="font-size: 0.75rem;">View: v_best_sellers</div>
+        </div>
+        <span class="badge-craft badge-stock-in">Ranked by Volume</span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-craft align-middle">
+            <thead>
+                <tr>
+                    <th class="text-center" style="width: 60px;">Rank</th>
+                    <th>Product Title</th>
+                    <th>Category</th>
+                    <th class="text-center" style="width: 130px;">Units Sold</th>
+                    <th class="text-end" style="width: 180px;">Total Revenue</th>
+                    <th class="text-center" style="width: 130px;">Current Reserve</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in best_sellers %}
+                <tr>
+                    <td class="text-center tabular-nums fw-semibold" style="color: var(--text-secondary); font-size: 0.85rem;">{{ loop.index }}</td>
+                    <td class="fw-medium" style="color: var(--text-primary);">{{ p.product_name }}</td>
+                    <td><span class="badge-craft badge-neutral">{{ p.category_name }}</span></td>
+                    <td class="text-center">
+                        <span class="badge-craft badge-neutral tabular-nums">{{ p.total_units_sold }} units</span>
+                    </td>
+                    <td class="text-end fw-semibold tabular-nums" style="color: var(--text-primary);">
+                        PKR {{ "{:,.2f}".format(p.total_revenue_pkr) }}
+                    </td>
+                    <td class="text-center tabular-nums" style="color: var(--text-secondary);">
+                        {{ p.current_stock }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Section 4: Abandoned Carts (v_abandoned_carts) -->
+<div class="card-craft p-0 overflow-hidden mb-4">
+    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
+        <div>
+            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Dormant Baskets & Recovery Prospects</h2>
+            <div class="small text-craft-muted font-monospace" style="font-size: 0.75rem;">View: v_abandoned_carts (Inactivity &ge; 7 Days)</div>
+        </div>
+        <span class="badge-craft badge-stock-low">Recovery Pipeline</span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-craft align-middle">
+            <thead>
+                <tr>
+                    <th style="width: 75px;">Cart</th>
+                    <th>Customer Name</th>
+                    <th>Email Address</th>
+                    <th>Phone</th>
+                    <th class="text-center" style="width: 120px;">Dormancy</th>
+                    <th class="text-end" style="width: 180px;">Estimated Basket</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in abandoned_carts %}
+                <tr>
+                    <td class="tabular-nums" style="color: var(--text-muted); font-size: 0.85rem;">#{{ c.cart_id }}</td>
+                    <td class="fw-medium" style="color: var(--text-primary);">{{ c.customer_name }}</td>
+                    <td>
+                        <a href="mailto:{{ c.customer_email }}" class="text-decoration-none small" style="color: var(--accent-indigo);">
+                            {{ c.customer_email }}
+                        </a>
+                    </td>
+                    <td class="tabular-nums small" style="color: var(--text-secondary);">{{ c.customer_phone }}</td>
+                    <td class="text-center">
+                        <span class="badge-craft badge-neutral tabular-nums">{{ c.days_idle }} days</span>
+                    </td>
+                    <td class="text-end fw-semibold tabular-nums" style="color: var(--text-primary);">
+                        PKR {{ "{:,.2f}".format(c.estimated_cart_value) }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
