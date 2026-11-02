@@ -316,3 +316,62 @@ We installed PyMySQL (a pure-Python MySQL driver) and python-dotenv (reads .env 
    *Viva Defense:* `v_product_catalog` pre-joins products with brands, categories, review aggregates, and primary images so the web application executes simple `SELECT * FROM v_product_catalog WHERE ...` queries. `v_category_counts` calculates active product roll-ups across both parent categories and child subcategories using correlated subqueries, ensuring homepage category cards always display accurate real-time inventory counts.
 
 ---
+
+---
+
+### Sub-Phase 11B – Catalog Data Pipeline & Idempotent Loader Defense
+
+#### Member B – Catalog and Inventory
+1. **What is the purpose of data/products_manifest.csv?**  
+   *Viva Defense:* The manifest serves as a declarative, version-controlled source of truth containing 51 verified Pakistani merchandise specimens with exact names, brands, categories, approximate PKR prices, inventory levels, and attribution source URLs.
+2. **How does import_catalog.py achieve 100% idempotence?**  
+   *Viva Defense:* The script uses INSERT ... ON DUPLICATE KEY UPDATE for brands and categories, matches products by unique 
+ame to perform non-destructive updates, and transactional deletes/re-inserts for product_images. Running the pipeline repeatedly produces zero duplicate rows and zero orphan foreign keys.
+3. **Why use a placeholder image fallback?**  
+   *Viva Defense:* In production systems, missing assets degrade user trust and cause visual errors (404s). If an image file is absent from disk, the view and application automatically fall back to static/images/placeholder.svg, maintaining visual consistency without data failure.
+
+---
+
+### Sub-Phase 11C – Ethical Image Acquisition & Politeness Policy Defense
+
+#### Member A – Users and Access
+1. **How does Option B comply with web scraping ethics and store terms?**  
+   *Viva Defense:* Our collector script etch_images.py operates under strict fair-use educational guidelines:
+   * **Robots.txt Adherence**: Checks and respects 
+obots.txt per domain using Python's RobotFileParser.
+   * **Polite Throttling**: Enforces a mandatory delay of >= 3.0 seconds between network requests to the same host.
+   * **Rate-Limit Cutoff**: Halts immediately if a domain returns HTTP 403 or 429 twice, logging remaining items as manual fallbacks.
+   * **No Bypass**: Never bypasses logins, captchas, or Cloudflare bot shields.
+2. **How are images optimized before storage?**  
+   *Viva Defense:* Downloaded images are processed using Pillow (PIL), resized to a maximum width of 1000px preserving aspect ratio, and compressed to WebP/JPEG under 300 KB to optimize page load speed and minimize storage footprints.
+
+---
+
+### Sub-Phases 11D & 11E – Category Browsing & Gallery UI Defense
+
+#### Member B – Catalog and Inventory
+1. **How is Cumulative Layout Shift (CLS) prevented?**  
+   *Viva Defense:* Product cards and gallery containers enforce CSS spect-ratio: 4 / 3 and spect-ratio: 1 / 1 with object-fit: cover/contain. The browser allocates image layout geometry before images finish downloading, completely eliminating layout shifting.
+2. **How does category navigation work?**  
+   *Viva Defense:* Top-level department pages (/category/<slug>) render sub-category chips for granular filtering. When clicked, queries dynamically filter by sub-category IDs while displaying available brand facets and price ranges without reloading entire layouts.
+
+---
+
+### Sub-Phase 11F – Admin Catalog & Media Management Defense
+
+#### Member A – Users and Access
+1. **How are uploaded files validated for security?**  
+   *Viva Defense:* We enforce three-tier file security:
+   * **MIME/Extension Verification**: Accepts only .jpg, .jpeg, .png, .webp. Executable files (.exe, .php, .py) are immediately rejected.
+   * **Payload Size Restriction**: Files larger than 2 MB are rejected at the application gateway.
+   * **Sanitization**: Filenames are sanitized via secure_filename() with timestamp prefixes to prevent directory traversal attacks (../../).
+
+---
+
+### Sub-Phase 11G – Automated Testing & Verification Defense
+
+#### Member C – Orders and Payments
+1. **What does the expanded automated test suite verify?**  
+   *Viva Defense:*
+   * **15 Database Test Assertions (sql/07_tests.sql)**: Mathematically validates single primary image triggers, gallery cascade deletions, category count roll-up consistency, brand FK constraints, and historic order preservation.
+   * **25 Web Route Assertions (	est_app.py)**: Tests full end-to-end customer workflows, category filters, sorting, responsive views, and admin upload security with 100% pass rates.

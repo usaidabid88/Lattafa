@@ -283,3 +283,81 @@ LIMIT 3;
 -- Shows: Real-time query against the v_abandoned_carts view
 SELECT cart_id, customer_name, customer_email, days_idle, estimated_cart_value
 FROM v_abandoned_carts;
+
+
+-- ============================================================================
+-- 9. PHASE 11 CATALOG EXPANSION & MULTI-MEDIA ANALYTICS
+-- ============================================================================
+
+-- Q9.1: Total Products per Brand with Origin Country
+-- Shows: Aggregation across brands table in 3NF with active inventory volume
+SELECT 
+    b.brand_id,
+    b.name AS brand_name,
+    COALESCE(b.country, 'International / Local') AS origin_country,
+    COUNT(p.product_id) AS total_products,
+    SUM(p.stock_quantity) AS total_units_in_stock
+FROM brands b
+LEFT JOIN products p ON b.brand_id = p.brand_id AND p.is_active = 1
+GROUP BY b.brand_id, b.name, b.country
+HAVING total_products > 0
+ORDER BY total_products DESC, b.name;
+
+-- Q9.2: Hierarchical Category Tree with Product Counts (Parent & Child Roll-Up)
+-- Shows: Logical self-referencing hierarchy navigation via v_category_counts
+SELECT 
+    c.category_id,
+    c.category_name,
+    c.category_slug,
+    CASE 
+        WHEN c.parent_category_id IS NULL THEN 'Top-Level Department'
+        ELSE 'Sub-Category'
+    END AS hierarchy_level,
+    c.active_product_count
+FROM v_category_counts c
+WHERE c.category_slug != 'home-living'
+ORDER BY COALESCE(c.parent_category_id, c.category_id), c.category_id;
+
+-- Q9.3: Top Rated Products per Category (Average Rating >= 4.0)
+-- Shows: Correlated ranking query against v_product_catalog view
+SELECT 
+    product_id,
+    product_name,
+    brand_name,
+    category_name,
+    price,
+    avg_rating,
+    review_count
+FROM v_product_catalog
+WHERE is_active = 1 AND avg_rating >= 4.0
+ORDER BY avg_rating DESC, review_count DESC;
+
+-- Q9.4: Catalog Audit: Products With Missing or Fallback Gallery Images
+-- Shows: Operational monitoring of merchandise requiring physical photo uploads
+SELECT 
+    p.product_id,
+    p.name AS product_name,
+    b.name AS brand_name,
+    c.name AS category_name,
+    COALESCE(pi.image_path, 'NONE') AS current_image_path
+FROM products p
+JOIN categories c ON p.category_id = c.category_id
+LEFT JOIN brands b ON p.brand_id = b.brand_id
+LEFT JOIN product_images pi ON p.product_id = pi.product_id AND pi.is_primary = 1
+WHERE pi.image_id IS NULL OR pi.image_path LIKE '%placeholder%'
+ORDER BY p.product_id;
+
+-- Q9.5: Average Retail Price and Price Range per Department
+-- Shows: Departmental financial profiling using statistical aggregates
+SELECT 
+    COALESCE(parent_c.name, c.name) AS department,
+    COUNT(p.product_id) AS total_items,
+    MIN(p.price) AS min_price_pkr,
+    ROUND(AVG(p.price), 2) AS avg_price_pkr,
+    MAX(p.price) AS max_price_pkr
+FROM products p
+JOIN categories c ON p.category_id = c.category_id
+LEFT JOIN categories parent_c ON c.parent_category_id = parent_c.category_id
+WHERE p.is_active = 1
+GROUP BY COALESCE(parent_c.name, c.name)
+ORDER BY avg_price_pkr DESC;

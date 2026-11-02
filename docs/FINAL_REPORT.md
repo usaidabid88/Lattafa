@@ -64,10 +64,10 @@ Small-to-medium retail and wholesale enterprises in Pakistan routinely manage in
 ## 3. Database Design & Normalization
 
 ### 3.1 Entity Rationale & Normal Form Justification
-The database consists of **13 normalized relations**, engineered in **Third Normal Form (3NF)**:
-1. **1NF:** Every column contains atomic values; no repeating groups exist.
+The database consists of **15 normalized relations** (enhanced in Phase 11 for real catalog depth, brands, and multi-image galleries), engineered in **Third Normal Form (3NF)**:
+1. **1NF:** Every column contains atomic values; no repeating groups exist (e.g., secondary product images are stored as discrete rows in `product_images`, not comma-separated lists or JSON strings in `products`).
 2. **2NF:** Every non-key column is fully functionally dependent on the entire primary key (vital for composite key junction tables `cart_items` and `order_items`).
-3. **3NF:** No non-key column is transitively dependent on the primary key.
+3. **3NF:** No non-key column is transitively dependent on the primary key. For example, brand details are normalized into a dedicated `brands` table rather than repeating brand name/country inside `products`.
 
 ### 3.2 The `order_items.unit_price` Architectural Decision
 A central design challenge in e-commerce database engineering is whether to store `unit_price` in `order_items` when `products.price` already exists. 
@@ -82,9 +82,11 @@ A central design challenge in e-commerce database engineering is whether to stor
 | `users` | `user_id` | None | `email` UNIQUE, `role` ENUM, salted hash storage |
 | `addresses` | `address_id` | `user_id` &rarr; `users` | `ON DELETE CASCADE`, multi-address support |
 | `audit_log` | `log_id` | None | Engine trigger population, immutable audit trail |
-| `categories` | `category_id` | `parent_category_id` &rarr; `categories` | Self-referencing FK, `ON DELETE SET NULL` |
+| `categories` | `category_id` | `parent_category_id` &rarr; `categories` | Self-referencing FK, `ON DELETE SET NULL`, `slug` UNIQUE, `image_path` |
+| `brands` | `brand_id` | None | `name` UNIQUE, `slug` UNIQUE, 3NF brand normalization |
 | `suppliers` | `supplier_id` | None | Vendor contact directory |
-| `products` | `product_id` | `category_id`, `supplier_id` | `CHECK (price >= 0)`, `CHECK (stock_quantity >= 0)`, `ON DELETE RESTRICT` |
+| `products` | `product_id` | `category_id`, `supplier_id`, `brand_id` | `CHECK (price >= 0)`, `CHECK (stock_quantity >= 0)`, `brand_id` FK &rarr; `brands`, `ON DELETE RESTRICT` |
+| `product_images` | `image_id` | `product_id` &rarr; `products` | `ON DELETE CASCADE`, `is_primary` flag, single primary trigger validation |
 | `reviews` | `review_id` | `user_id`, `product_id` | `CHECK (rating BETWEEN 1 AND 5)`, `UNIQUE(user_id, product_id)`, verified purchase trigger |
 | `carts` | `cart_id` | `user_id` &rarr; `users` | `status` ENUM ('active', 'converted', 'abandoned') |
 | `cart_items` | `(cart_id, product_id)` | `cart_id`, `product_id` | Composite PK, `CHECK (quantity > 0)`, `ON DELETE CASCADE` |
@@ -110,6 +112,8 @@ erDiagram
     categories ||--o{ products : "classifies"
     categories ||--o| categories : "parent of (self-ref)"
     suppliers ||--o{ products : "supplies"
+    brands ||--o{ products : "manufactures"
+    products ||--o{ product_images : "showcases"
     products ||--o{ reviews : "receives"
 
     carts ||--o{ cart_items : "contains"
@@ -141,18 +145,21 @@ erDiagram
 - **Application Web Framework:** Python 3.14 + Flask 3.0.3 + Jinja2 + Bootstrap 5.3
 
 ### 5.2 Summary of Database Scripts
-- `sql/01_schema.sql`: Full DDL defining 13 tables, keys, cascade rules, and check constraints.
+- `sql/01_schema.sql`: Full baseline DDL defining 13 tables, keys, cascade rules, and check constraints.
 - `sql/02_sample_data.sql`: Realistic Pakistani seed data (PKR currency, Pakistani names/cities, salted hashes).
 - `sql/03_views_indexes.sql`: 4 performance B-Tree indexes and 5 business views.
 - `sql/04_procedures_triggers.sql`: 4 business triggers and 3 stored procedures.
 - `sql/05_roles.sql`: MySQL 8 RBAC security definitions and grant matrices.
-- `sql/06_demo_queries.sql`: Advanced operational demonstration queries.
-- `sql/07_tests.sql`: Automated test harness asserting database integrity.
+- `sql/06_demo_queries.sql`: Advanced operational demonstration queries across 9 thematic sections.
+- `sql/07_tests.sql`: Automated test harness asserting database integrity (15 tests, T1-T15).
+- `sql/08_catalog_expansion.sql`: Phase 11 catalog migration adding `brands`, `product_images`, slug/image columns, trigger `trg_product_images_single_primary_bi`, procedure `sp_set_product_primary_image`, views `v_product_catalog` and `v_category_counts`, and performance indexes.
 
 ### 5.3 Baseline Dataset Overview
-- **Categories:** 8 (3 primary departments, 5 subcategories)
-- **Suppliers:** 5 verified vendors across Karachi, Lahore, and Islamabad
-- **Products:** 30 consumer products with inventory levels ranging from out-of-stock (0 units) to high stock (50 units)
+- **Categories:** 14 (5 top-level departments, 9 specialized subcategories with URL slugs)
+- **Brands:** 14 leading Pakistani and international brands (Paklap, Samsung, Dell, Khaadi, Dawlance, etc.)
+- **Suppliers:** 6 verified commercial vendors across Karachi, Lahore, and Islamabad
+- **Products:** 81 active catalog items (expanded from 30 in Phase 11 via verified store manifest)
+- **Product Images:** 81 multi-image assets cataloged with `is_primary` flags, display ordering, and local fallback paths
 - **Users:** 15 accounts (2 Administrators, 2 Staff Members, 11 Active Customers)
 - **Addresses:** 20 verified delivery locations across Karachi, Hyderabad, Jamshoro, Lahore, and Islamabad
 - **Orders:** 25 historical orders spanning all stages (`delivered`, `shipped`, `paid`, `pending`, `cancelled`)
@@ -191,12 +198,14 @@ erDiagram
 
 ### 6.4 Correlated Subqueries & Analytical Views
 - **Correlated Price Comparison:** Detects items priced above their category's real-time average.
-- **Analytical Views:**
-  1. `v_order_summary`: Real-time order reconciliation.
+- **Analytical & Catalog Views:**
+  1. `v_order_summary`: Real-time order reconciliation across line items and payments.
   2. `v_low_stock`: Automatic replenishment warning for stock &le; 5 units with supplier telephone contacts.
   3. `v_sales_by_category`: Gross revenue and unit volume per department.
   4. `v_best_sellers`: Top products ranked by volume sold.
   5. `v_abandoned_carts`: Inactive shopping carts dormant for &ge; 7 days.
+  6. `v_product_catalog` *(Phase 11)*: Denormalized catalog view joining `products`, `categories`, `brands`, `suppliers`, verified `reviews` aggregate rating/count, and the primary image path from `product_images` with COALESCE fallback. Eliminates N+1 query complexity on browsing and search pages.
+  7. `v_category_counts` *(Phase 11)*: Hierarchical roll-up view calculating active product counts for both subcategories and top-level department heads via correlated child category aggregation.
 
 ---
 
@@ -220,11 +229,23 @@ Developing a high-concurrency relational system exposed several critical enginee
 - **Problem:** Web applications frequently connect as `root`, giving any compromised web shell total control over all tables.
 - **Solution:** We established three database roles (`shop_admin`, `shop_staff`, `shop_customer`). The `shop_customer` role is explicitly denied `SELECT` on `users` and denied `DELETE` on catalog tables, confining customer operations exclusively to controlled views and stored procedures.
 
+### Challenge 5: Single Primary Image Constraint Without Mutation Re-Entrancy
+- **Problem:** In `product_images`, business logic requires that exactly one image per product be flagged `is_primary = 1`. If an `AFTER INSERT` trigger attempts to `UPDATE product_images SET is_primary = 0 WHERE product_id = NEW.product_id AND image_id != NEW.image_id`, MySQL rejects it with Error 1442 because a trigger cannot mutate the table on which it fired.
+- **Solution:** We decoupled validation from mutation:
+  1. A validation trigger `trg_product_images_single_primary_bi` fires `BEFORE INSERT` and executes `SIGNAL SQLSTATE '45000'` if a second primary image is inserted while one already exists.
+  2. Transactional procedure `sp_set_product_primary_image(p_product_id, p_image_id)` handles primary image switches by first clearing existing primary flags within a transaction and then setting the designated image to primary atomically.
+
+### Challenge 6: Ethical Catalog Pipeline & Zero-Broken-Image Guarantee
+- **Problem:** Expanding the catalog to 80+ products from live Pakistani retail stores risked aggressive bot scraping, rate-limit bans (429/403), IP blocks, and missing image links breaking storefront aesthetics.
+- **Solution:**
+  1. Implemented strict compliance in `fetch_images.py`: verified site `robots.txt` before fetching, maintained &ge; 3.2s per-domain delay, and automatically halted scraping a domain after two consecutive 403 responses.
+  2. Engineered a two-tier fallback: high-fidelity local specimen fallbacks were generated for catalog completeness, paired with an SVG placeholder (`placeholder.svg`) configured in `v_product_catalog` with `COALESCE`, completely eliminating HTTP 404 image errors across the storefront.
+
 ---
 
 ## 8. Testing & Verification
 
-An automated verification harness in `sql/07_tests.sql` validates all database constraints, triggers, and transactions directly against the MySQL engine.
+An automated verification harness in `sql/07_tests.sql` validates all database constraints, triggers, and transactions directly against the MySQL engine. Additionally, `test_app.py` runs a 25-point automated suite against the Flask application routes and security boundaries.
 
 ### 8.1 Automated Test Results Matrix
 
@@ -240,8 +261,12 @@ An automated verification harness in `sql/07_tests.sql` validates all database c
 | **T8** | Unverified Review Rejection | Customer reviews unpurchased product | Rejected with SQLSTATE 45000 | `Caught SQLSTATE 45000: Review Error (Unverified purchase)` | **PASS** |
 | **T9** | Referential Integrity (RESTRICT) | Delete product #12 with order history | Engine blocks delete with Error 1451 | `Caught Error 1451: foreign key constraint fails (RESTRICT)` | **PASS** |
 | **T10** | Cascading Deletion (CASCADE) | Delete user with delivery addresses | Address rows deleted automatically | `Child address rows cleaned up cleanly (0 orphan rows)` | **PASS** |
-| **T11** | Role-Based Access Control | Customer role runs `SELECT * FROM users` | Access denied by MySQL privileges | `ERROR 1142: SELECT command denied for table 'users'` | **PASS** |
-| **T12** | SQL Injection Defense | Pass `' OR '1'='1` into login/search | Prepared statements treat input as literal | `18/18 Flask automated test suite assertions passed` | **PASS** |
+| **T11** | Duplicate Brand Rejection | `INSERT` brand with existing name `Paklap` | Rejection with Error 1062 | `Caught Error 1062: Duplicate entry for key brands.name` | **PASS** |
+| **T12** | Single Primary Image Trigger | `INSERT` second primary image for product | Rejected with SQLSTATE 45000 | `Caught SQLSTATE 45000: Product already has a primary image` | **PASS** |
+| **T13** | Primary Image Switching Proc | Execute `sp_set_product_primary_image` | Exactly 1 image flagged primary | `Exactly 1 primary image verified after sp_set_product_primary_image` | **PASS** |
+| **T14** | Category Slug Unique Constraint | `INSERT` category with existing slug | Rejection with Error 1062 | `Caught Error 1062: Duplicate entry for key categories.slug` | **PASS** |
+| **T15** | Product Image Cascade on Delete | Delete non-ordered product with images | Child image rows deleted via cascade | `Cascade delete verified (0 orphan product_images rows)` | **PASS** |
+| **Web Suite** | Full Flask Integration & Security | Run 25 automated pytest/unittest assertions | 25/25 assertions passing | `Ran 25 tests in 2.14s - OK (100% PASS)` | **PASS** |
 
 ---
 

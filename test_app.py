@@ -104,6 +104,45 @@ def run_tests():
     res = client.post('/admin/order/status', data={'order_id': 20, 'new_status': 'shipped'}, follow_redirects=True)
     assert_test("POST /admin/order/status", res.status_code == 200 and b"status updated" in res.data)
 
+    # ─── PHASE 11 CATALOG & MULTI-MEDIA EXTENSIONS ─────────────────────────────
+    import io
+
+    # 20. Top-Level Department Browsing (11D)
+    res = client.get('/category/laptops-computers')
+    assert_test("GET /category/laptops-computers (11D)", res.status_code == 200 and b"Laptops and Computers" in res.data and b"Departments:" in res.data)
+
+    # 21. Sub-Category Browsing (11D)
+    res = client.get('/category/women-unstitched')
+    assert_test("GET /category/women-unstitched (11D)", res.status_code == 200 and b"Unstitched" in res.data)
+
+    # 22. Category Price Sorting (11D)
+    res = client.get('/category/laptops-computers?sort=price_asc')
+    assert_test("GET /category/laptops-computers?sort=price_asc (11D)", res.status_code == 200 and b"Price: Low to High" in res.data)
+
+    # 23. Category Brand Filtering (11D)
+    res = client.get('/category/laptops-computers?brand=Dell')
+    assert_test("GET /category/laptops-computers?brand=Dell (11D)", res.status_code == 200 and b"Dell" in res.data)
+
+    # 24. Product Multi-Image Gallery (11E)
+    res = client.get('/product/1')
+    assert_test("GET /product/1 Gallery (11E)", res.status_code == 200 and b"mainGalleryImage" in res.data)
+
+    # 25. Admin Image Upload Validation - Invalid Extension (11F)
+    fake_txt = (io.BytesIO(b'malicious script'), 'shell.txt')
+    res = client.post('/admin/product/add', data={
+        'name': 'Test Upload Bad Ext', 'category_id': 1, 'supplier_id': 1,
+        'price': '1000', 'stock_quantity': '10', 'image': fake_txt
+    }, follow_redirects=True)
+    assert_test("Admin Upload Format Check (11F)", b"Invalid image format" in res.data)
+
+    # 26. Admin Image Upload Validation - Oversized File (11F)
+    huge_file = (io.BytesIO(b'0' * (2 * 1024 * 1024 + 1024)), 'oversized.jpg')
+    res = client.post('/admin/product/add', data={
+        'name': 'Test Upload Huge File', 'category_id': 1, 'supplier_id': 1,
+        'price': '1000', 'stock_quantity': '10', 'image': huge_file
+    }, follow_redirects=True)
+    assert_test("Admin Upload Size Check (11F)", b"exceeds maximum limit" in res.data)
+
     print(f"\nTest Summary: {passed} PASSED, {failed} FAILED\n")
     return failed == 0
 
