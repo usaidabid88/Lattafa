@@ -6,12 +6,16 @@ WHY: Provides the web interface (routes, session management, form handling) on
 """
 
 import os
+import time
+import shutil
 import functools
+from decimal import Decimal
 from flask import (
     Flask, render_template, request, redirect, url_for,
-    session, flash, g
+    session, flash, g, abort, send_from_directory
 )
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
 from db import get_connection
 
@@ -79,7 +83,7 @@ def inject_user():
 
 @app.route('/')
 def index():
-    """Homepage with quick stats."""
+    """Homepage with 5 department cards, featured specimen, and live stats."""
     conn = get_db()
     with conn.cursor() as cur:
         cur.execute("SELECT COUNT(*) AS cnt FROM products WHERE is_active = 1")
@@ -88,10 +92,21 @@ def index():
         total_orders = cur.fetchone()['cnt']
         cur.execute("SELECT COUNT(*) AS cnt FROM users WHERE role = 'customer'")
         total_users = cur.fetchone()['cnt']
+
+        # 5 Department Cards from v_category_counts
+        cur.execute("""
+            SELECT category_id, category_name, category_slug, image_path, active_product_count
+            FROM v_category_counts
+            WHERE parent_category_id IS NULL AND category_slug != 'home-living'
+            ORDER BY category_id
+        """)
+        departments = cur.fetchall()
+
     return render_template('index.html',
                            total_products=total_products,
                            total_orders=total_orders,
-                           total_users=total_users)
+                           total_users=total_users,
+                           departments=departments)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -174,56 +189,230 @@ def logout():
 
 # ─── PRODUCT CATALOG ──────────────────────────────────────────────────────────
 
-@app.route('/products')
-def products():
-    """Product listing with search and category filter."""
-    q = request.args.get('q', '').strip()
-    category_id = request.args.get('category_id', '', type=str)
+@app.route('/category/<slug>')
+def category_view(slug):
+    """Category browsing page with sub-category chips, brand/price filters, sorting, and pagination."""
+    page = request.args.get('page', 1, type=int)
+    if page < 1:
+        page = 1
+    per_page = 12
+    offset = (page - 1) * per_page
+
+    brand_filter = request.args.get('brand', '').strip()
+    min_price = request.args.get('min_price', '', type=str)
+    max_price = request.args.get('max_price', '', type=str)
+    sort_by = request.args.get('sort', 'newest').strip()
+    search_q = request.args.get('q', '').strip()
+    sub_slug = request.args.get('sub', '').strip()
 
     conn = get_db()
     with conn.cursor() as cur:
-        # Get all categories for the filter dropdown
-        cur.execute("SELECT category_id, name FROM categories ORDER BY name")
-        categories = cur.fetchall()
+        # 1. Fetch current category details
+        cur.execute("""
+            SELECT category_id, name, slug, parent_category_id, image_path
+            FROM categories
+            WHERE slug = %s
+        """, (slug,))
+        current_cat = cur.fetchone()
 
-        # Build query with parameterized filters
-        sql = """
-            SELECT p.product_id, p.name, p.price, p.stock_quantity,
-                   p.is_active, c.name AS category_name
+        if not current_cat:
+            abort(404)
+
+        # 2. Determine hierarchy (top-level department vs child subcategory)
+        if current_cat['parent_category_id'] is None:
+            parent_cat = None
+            cur.execute("""
+                SELECT category_id, name, slug
+                FROM categories
+                WHERE parent_category_id = %s
+                ORDER BY name
+            """, (current_cat['category_id'],))
+            subcategories = cur.fetchall()
+            target_cat_ids = [current_cat['category_id']] + [s['category_id'] for s in subcategories]
+        else:
+            cur.execute("""
+                SELECT category_id, name, slug
+                FROM categories
+                WHERE category_id = %s
+            """, (current_cat['parent_category_id'],))
+            parent_cat = cur.fetchone()
+
+            cur.execute("""
+                SELECT category_id, name, slug
+                FROM categories
+                WHERE parent_category_id = %s
+                ORDER BY name
+            """, (current_cat['parent_category_id'],))
+            subcategories = cur.fetchall()
+            target_cat_ids = [current_cat['category_id']]
+
+        # If user clicked a sub-category chip while browsing top-level
+        if sub_slug:
+            cur.execute("SELECT category_id FROM categories WHERE slug = %s", (sub_slug,))
+            sub_match = cur.fetchone()
+            if sub_match:
+                target_cat_ids = [sub_match['category_id']]
+
+        # 3. Available brands for sidebar filter
+        format_strings = ','.join(['%s'] * len(target_cat_ids))
+        cur.execute(f"""
+            SELECT DISTINCT b.brand_id, b.name AS brand_name, COUNT(p.product_id) AS product_count
             FROM products p
-            JOIN categories c ON p.category_id = c.category_id
-            WHERE p.is_active = 1
-        """
+            JOIN brands b ON p.brand_id = b.brand_id
+            WHERE p.is_active = 1 AND p.category_id IN ({format_strings})
+            GROUP BY b.brand_id, b.name
+            ORDER BY b.name
+        """, target_cat_ids)
+        available_brands = cur.fetchall()
+
+        # 4. Build query on v_product_catalog
+        where_clauses = ["is_active = 1"]
         params = []
 
+        where_clauses.append(f"category_id IN ({format_strings})")
+        params.extend(target_cat_ids)
+
+        if brand_filter:
+            where_clauses.append("brand_name = %s")
+            params.append(brand_filter)
+
+        if min_price:
+            try:
+                where_clauses.append("price >= %s")
+                params.append(Decimal(min_price))
+            except Exception:
+                pass
+
+        if max_price:
+            try:
+                where_clauses.append("price <= %s")
+                params.append(Decimal(max_price))
+            except Exception:
+                pass
+
+        if search_q:
+            where_clauses.append("(product_name LIKE %s OR description LIKE %s)")
+            params.extend([f"%{search_q}%", f"%{search_q}%"])
+
+        where_sql = " AND ".join(where_clauses)
+
+        # Count total matching products for pagination
+        count_sql = f"SELECT COUNT(*) AS total FROM v_product_catalog WHERE {where_sql}"
+        cur.execute(count_sql, params)
+        total_products = cur.fetchone()['total']
+
+        # Determine sorting
+        if sort_by == 'price_asc':
+            order_sql = "ORDER BY price ASC, product_id DESC"
+        elif sort_by == 'price_desc':
+            order_sql = "ORDER BY price DESC, product_id DESC"
+        elif sort_by == 'rating':
+            order_sql = "ORDER BY avg_rating DESC, review_count DESC, product_id DESC"
+        else:
+            order_sql = "ORDER BY product_id DESC"
+
+        query_sql = f"""
+            SELECT product_id, product_name, short_description, price, stock_quantity,
+                   brand_name, category_name, category_slug, category_path,
+                   primary_image, avg_rating, review_count, source_store
+            FROM v_product_catalog
+            WHERE {where_sql}
+            {order_sql}
+            LIMIT %s OFFSET %s
+        """
+        cur.execute(query_sql, params + [per_page, offset])
+        products_list = cur.fetchall()
+
+    total_pages = (total_products + per_page - 1) // per_page
+    if total_pages == 0:
+        total_pages = 1
+
+    return render_template('category.html',
+                           current_cat=current_cat,
+                           parent_cat=parent_cat,
+                           subcategories=subcategories,
+                           sub_slug=sub_slug,
+                           products=products_list,
+                           available_brands=available_brands,
+                           brand_filter=brand_filter,
+                           min_price=min_price,
+                           max_price=max_price,
+                           sort_by=sort_by,
+                           search_q=search_q,
+                           page=page,
+                           total_pages=total_pages,
+                           total_products=total_products)
+
+
+@app.route('/products')
+def products():
+    """Product listing with search, category filter, brand filter, and price sort."""
+    q = request.args.get('q', '').strip()
+    category_id = request.args.get('category_id', '', type=str)
+    brand_filter = request.args.get('brand', '').strip()
+    sort_by = request.args.get('sort', '').strip()
+
+    conn = get_db()
+    with conn.cursor() as cur:
+        # Categories for filter
+        cur.execute("SELECT category_id, name, slug FROM categories ORDER BY name")
+        categories = cur.fetchall()
+
+        # Available brands for filter
+        cur.execute("SELECT DISTINCT brand_id, name AS brand_name FROM brands ORDER BY name")
+        brands = cur.fetchall()
+
+        # Query v_product_catalog
+        sql = """
+            SELECT product_id, product_name AS name, price, stock_quantity,
+                   is_active, category_name, category_slug, brand_name,
+                   primary_image, short_description, avg_rating, review_count
+            FROM v_product_catalog
+            WHERE is_active = 1
+        """
+        params = []
         if q:
-            sql += " AND (p.name LIKE %s OR p.description LIKE %s)"
+            sql += " AND (product_name LIKE %s OR description LIKE %s)"
             params.extend([f'%{q}%', f'%{q}%'])
         if category_id:
-            sql += " AND p.category_id = %s"
-            params.append(int(category_id))
+            sql += " AND (category_id = %s OR parent_category_id = %s)"
+            params.extend([int(category_id), int(category_id)])
+        if brand_filter:
+            sql += " AND brand_name = %s"
+            params.append(brand_filter)
 
-        sql += " ORDER BY p.name"
+        if sort_by == 'price_asc':
+            sql += " ORDER BY price ASC, product_id DESC"
+        elif sort_by == 'price_desc':
+            sql += " ORDER BY price DESC, product_id DESC"
+        elif sort_by == 'rating':
+            sql += " ORDER BY avg_rating DESC, review_count DESC, product_id DESC"
+        else:
+            sql += " ORDER BY product_id DESC"
+
         cur.execute(sql, params)
-        products = cur.fetchall()
+        prods = cur.fetchall()
 
     return render_template('products.html',
-                           products=products,
+                           products=prods,
                            categories=categories,
+                           brands=brands,
                            q=q,
-                           category_id=category_id)
+                           category_id=category_id,
+                           brand_filter=brand_filter,
+                           sort_by=sort_by)
 
 
 @app.route('/product/<int:product_id>')
 def product_detail(product_id):
-    """Single product page with reviews."""
+    """Single product page with multi-image gallery, brand specs, and reviews."""
     conn = get_db()
     with conn.cursor() as cur:
         cur.execute("""
-            SELECT p.*, c.name AS category_name, s.name AS supplier_name
-            FROM products p
-            JOIN categories c ON p.category_id = c.category_id
-            JOIN suppliers s ON p.supplier_id = s.supplier_id
+            SELECT p.*, s.name AS supplier_name
+            FROM v_product_catalog p
+            JOIN products pr ON p.product_id = pr.product_id
+            JOIN suppliers s ON pr.supplier_id = s.supplier_id
             WHERE p.product_id = %s
         """, (product_id,))
         product = cur.fetchone()
@@ -232,8 +421,21 @@ def product_detail(product_id):
             flash('Product not found.', 'danger')
             return redirect(url_for('products'))
 
+        # Get all images for this product (gallery)
         cur.execute("""
-            SELECT r.rating, r.comment, r.created_at, u.full_name
+            SELECT image_id, image_path, is_primary, sort_order
+            FROM product_images
+            WHERE product_id = %s
+            ORDER BY sort_order ASC, image_id ASC
+        """, (product_id,))
+        images = cur.fetchall()
+
+        if not images:
+            images = [{'image_id': 0, 'image_path': product['primary_image'], 'is_primary': 1, 'sort_order': 1}]
+
+        # Verified reviews
+        cur.execute("""
+            SELECT r.rating, r.comment, r.created_at, u.full_name AS customer_name, u.full_name
             FROM reviews r
             JOIN users u ON r.user_id = u.user_id
             WHERE r.product_id = %s
@@ -242,7 +444,9 @@ def product_detail(product_id):
         reviews = cur.fetchall()
 
     return render_template('product_detail.html',
-                           product=product, reviews=reviews)
+                           product=product,
+                           images=images,
+                           reviews=reviews)
 
 
 # ─── SHOPPING CART ────────────────────────────────────────────────────────────
@@ -610,11 +814,14 @@ def admin_products():
     conn = get_db()
     with conn.cursor() as cur:
         cur.execute("""
-            SELECT p.product_id, p.name, c.name AS category_name,
-                   p.price, p.stock_quantity, p.is_active
+            SELECT p.product_id, p.name, c.name AS category_name, b.name AS brand_name,
+                   p.price, p.stock_quantity, p.is_active,
+                   COALESCE(pi.image_path, 'static/images/placeholder.svg') AS primary_image
             FROM products p
             JOIN categories c ON p.category_id = c.category_id
-            ORDER BY p.product_id
+            LEFT JOIN brands b ON p.brand_id = b.brand_id
+            LEFT JOIN product_images pi ON p.product_id = pi.product_id AND pi.is_primary = 1
+            ORDER BY p.product_id DESC
         """)
         products = cur.fetchall()
     return render_template('admin/products.html', products=products)
@@ -623,16 +830,21 @@ def admin_products():
 @app.route('/admin/product/add', methods=['GET', 'POST'])
 @admin_required
 def admin_product_add():
-    """Add a new product."""
+    """Add a new product with optional brand and image upload."""
     conn = get_db()
     if request.method == 'POST':
         try:
+            brand_id = int(request.form['brand_id']) if request.form.get('brand_id') else None
             with conn.cursor() as cur:
                 cur.execute(
-                    "INSERT INTO products (category_id, supplier_id, name, description, "
-                    "price, stock_quantity, is_active) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                    """
+                    INSERT INTO products (category_id, brand_id, supplier_id, name, description, 
+                                         price, stock_quantity, is_active) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    """,
                     (
                         int(request.form['category_id']),
+                        brand_id,
                         int(request.form['supplier_id']),
                         request.form['name'].strip(),
                         request.form.get('description', '').strip(),
@@ -641,6 +853,38 @@ def admin_product_add():
                         1 if request.form.get('is_active') else 0
                     )
                 )
+                product_id = cur.lastrowid
+
+                # Image upload handling
+                file = request.files.get('image')
+                if file and file.filename:
+                    filename = secure_filename(file.filename).lower()
+                    ext = os.path.splitext(filename)[1]
+                    if ext not in ('.jpg', '.jpeg', '.png', '.webp'):
+                        flash('Invalid image format. Allowed: JPG, PNG, WebP.', 'danger')
+                        return redirect(request.url)
+
+                    file.seek(0, os.SEEK_END)
+                    file_size = file.tell()
+                    file.seek(0)
+                    if file_size > 2 * 1024 * 1024:
+                        flash('Image file exceeds maximum limit of 2 MB.', 'danger')
+                        return redirect(request.url)
+
+                    safe_name = f"admin-{product_id}-{int(time.time())}{ext}"
+                    rel_path = f"static/images/products/uploads/{safe_name}"
+                    root_dest = os.path.join(os.path.dirname(__file__), '..', rel_path)
+                    app_dest = os.path.join(os.path.dirname(__file__), rel_path)
+                    os.makedirs(os.path.dirname(root_dest), exist_ok=True)
+                    os.makedirs(os.path.dirname(app_dest), exist_ok=True)
+                    file.save(app_dest)
+                    shutil.copyfile(app_dest, root_dest)
+
+                    cur.execute(
+                        "INSERT INTO product_images (product_id, image_path, is_primary, sort_order) VALUES (%s, %s, 1, 1)",
+                        (product_id, rel_path)
+                    )
+
             conn.commit()
             flash('Product added successfully.', 'success')
             return redirect(url_for('admin_products'))
@@ -653,10 +897,12 @@ def admin_product_add():
         categories = cur.fetchall()
         cur.execute("SELECT supplier_id, name FROM suppliers ORDER BY name")
         suppliers = cur.fetchall()
+        cur.execute("SELECT brand_id, name FROM brands ORDER BY name")
+        brands = cur.fetchall()
 
     return render_template('admin/product_form.html',
                            product=None, categories=categories,
-                           suppliers=suppliers,
+                           suppliers=suppliers, brands=brands,
                            form_action=url_for('admin_product_add'))
 
 
@@ -667,13 +913,17 @@ def admin_product_edit(product_id):
     conn = get_db()
     if request.method == 'POST':
         try:
+            brand_id = int(request.form['brand_id']) if request.form.get('brand_id') else None
             with conn.cursor() as cur:
                 cur.execute(
-                    "UPDATE products SET category_id=%s, supplier_id=%s, name=%s, "
-                    "description=%s, price=%s, stock_quantity=%s, is_active=%s "
-                    "WHERE product_id=%s",
+                    """
+                    UPDATE products SET category_id=%s, brand_id=%s, supplier_id=%s, name=%s, 
+                                        description=%s, price=%s, stock_quantity=%s, is_active=%s 
+                    WHERE product_id=%s
+                    """,
                     (
                         int(request.form['category_id']),
+                        brand_id,
                         int(request.form['supplier_id']),
                         request.form['name'].strip(),
                         request.form.get('description', '').strip(),
@@ -683,6 +933,38 @@ def admin_product_edit(product_id):
                         product_id
                     )
                 )
+
+                # Image upload handling
+                file = request.files.get('image')
+                if file and file.filename:
+                    filename = secure_filename(file.filename).lower()
+                    ext = os.path.splitext(filename)[1]
+                    if ext not in ('.jpg', '.jpeg', '.png', '.webp'):
+                        flash('Invalid image format. Allowed: JPG, PNG, WebP.', 'danger')
+                        return redirect(request.url)
+
+                    file.seek(0, os.SEEK_END)
+                    file_size = file.tell()
+                    file.seek(0)
+                    if file_size > 2 * 1024 * 1024:
+                        flash('Image file exceeds maximum limit of 2 MB.', 'danger')
+                        return redirect(request.url)
+
+                    safe_name = f"admin-{product_id}-{int(time.time())}{ext}"
+                    rel_path = f"static/images/products/uploads/{safe_name}"
+                    root_dest = os.path.join(os.path.dirname(__file__), '..', rel_path)
+                    app_dest = os.path.join(os.path.dirname(__file__), rel_path)
+                    os.makedirs(os.path.dirname(root_dest), exist_ok=True)
+                    os.makedirs(os.path.dirname(app_dest), exist_ok=True)
+                    file.save(app_dest)
+                    shutil.copyfile(app_dest, root_dest)
+
+                    cur.execute("DELETE FROM product_images WHERE product_id = %s", (product_id,))
+                    cur.execute(
+                        "INSERT INTO product_images (product_id, image_path, is_primary, sort_order) VALUES (%s, %s, 1, 1)",
+                        (product_id, rel_path)
+                    )
+
             conn.commit()
             flash('Product updated successfully.', 'success')
             return redirect(url_for('admin_products'))
@@ -697,10 +979,12 @@ def admin_product_edit(product_id):
         categories = cur.fetchall()
         cur.execute("SELECT supplier_id, name FROM suppliers ORDER BY name")
         suppliers = cur.fetchall()
+        cur.execute("SELECT brand_id, name FROM brands ORDER BY name")
+        brands = cur.fetchall()
 
     return render_template('admin/product_form.html',
                            product=product, categories=categories,
-                           suppliers=suppliers,
+                           suppliers=suppliers, brands=brands,
                            form_action=url_for('admin_product_edit', product_id=product_id))
 
 

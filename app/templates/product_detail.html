@@ -1,159 +1,228 @@
 {% extends "base.html" %}
-{% block title %}{{ product.name }} – MUET Shop{% endblock %}
+{% block title %}{{ product.product_name or product.name }} – MUET Shop{% endblock %}
 
 {% block content %}
+<!-- Category Breadcrumb -->
 <nav aria-label="breadcrumb" class="mb-4">
     <ol class="breadcrumb small">
-        <li class="breadcrumb-item"><a href="{{ url_for('products') }}" class="text-secondary text-decoration-none">Catalog</a></li>
-        <li class="breadcrumb-item"><a href="{{ url_for('products', category_id=product.category_id) }}" class="text-secondary text-decoration-none">{{ product.category_name }}</a></li>
-        <li class="breadcrumb-item active text-dark" aria-current="page">{{ product.name }}</li>
+        <li class="breadcrumb-item"><a href="{{ url_for('index') }}" class="text-decoration-none" style="color: var(--accent-indigo);">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('products') }}" class="text-decoration-none" style="color: var(--accent-indigo);">Catalog</a></li>
+        {% if product.parent_category_slug %}
+        <li class="breadcrumb-item"><a href="{{ url_for('category_view', slug=product.parent_category_slug) }}" class="text-decoration-none" style="color: var(--accent-indigo);">{{ product.parent_category_name }}</a></li>
+        {% endif %}
+        {% if product.category_slug %}
+        <li class="breadcrumb-item"><a href="{{ url_for('category_view', slug=product.category_slug) }}" class="text-decoration-none" style="color: var(--accent-indigo);">{{ product.category_name }}</a></li>
+        {% endif %}
+        <li class="breadcrumb-item active text-truncate" style="max-width: 300px; color: var(--text-muted);">{{ product.product_name or product.name }}</li>
     </ol>
 </nav>
 
 <div class="row g-4 mb-5">
-    <!-- Product Specification & Overview -->
-    <div class="col-lg-8">
+    <!-- Left Column: Gallery (Large Image + Thumbnails) -->
+    <div class="col-lg-6">
+        <div class="card-craft p-3 mb-3 overflow-hidden">
+            <!-- Main Featured Image -->
+            <div class="position-relative overflow-hidden rounded" style="aspect-ratio: 1/1; background-color: #faf9f6;">
+                <img id="mainGalleryImage" 
+                     src="/{{ product.primary_image if product.primary_image else (images[0].image_path if images else 'static/images/placeholder.svg') }}" 
+                     alt="{{ product.product_name or product.name }}" 
+                     class="w-100 h-100" 
+                     style="object-fit: contain; transition: opacity 0.2s ease;"
+                     onerror="this.onerror=null; this.src='/static/images/placeholder.svg';">
+            </div>
+
+            <!-- Thumbnail Selector Strip -->
+            {% if images and images|length > 1 %}
+            <div class="d-flex gap-2 mt-3 overflow-x-auto pb-1">
+                {% for img in images %}
+                <button type="button" 
+                        class="p-1 rounded border-0 bg-transparent cursor-pointer thumbnail-btn {% if loop.first %}opacity-100 ring-2{% else %}opacity-75{% endif %}"
+                        style="width: 70px; height: 70px; flex-shrink: 0;"
+                        onclick="switchMainImage('/{{ img.image_path }}', this)">
+                    <img src="/{{ img.image_path }}" 
+                         alt="Thumbnail {{ loop.index }}" 
+                         class="w-100 h-100 rounded" 
+                         style="object-fit: cover; border: 1px solid var(--border-hairline);"
+                         onerror="this.onerror=null; this.src='/static/images/placeholder.svg';">
+                </button>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Provenance & Source Note -->
+        {% if product.source_store %}
+        <div class="card-craft p-3" style="background-color: #faf9f6; font-size: 0.8rem;">
+            <div class="d-flex align-items-center gap-2 text-craft-muted">
+                <i class="bi bi-info-circle text-secondary"></i>
+                <span>Educational specimen sourced from <strong>{{ product.source_store }}</strong>.</span>
+                {% if product.source_url %}
+                <a href="{{ product.source_url }}" target="_blank" rel="noopener noreferrer" class="ms-auto text-decoration-none" style="color: var(--accent-indigo);">
+                    View Source Store <i class="bi bi-box-arrow-up-right small"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Right Column: Purchasing & Specifications -->
+    <div class="col-lg-6">
         <div class="card-craft p-4 mb-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="text-muted small font-mono text-uppercase" style="font-size: 0.75rem;">Product #{{ product.product_id }}</span>
+                <span class="badge-craft badge-neutral text-uppercase" style="letter-spacing: 0.05em;">
+                    {{ product.brand_name or 'Artisan / Verified' }}
+                </span>
+                
                 {% if product.stock_quantity > 5 %}
-                <span class="badge-craft badge-stock-in">{{ product.stock_quantity }} units available</span>
+                <span class="badge-craft badge-stock-in">{{ product.stock_quantity }} units in stock</span>
                 {% elif product.stock_quantity >= 1 %}
-                <span class="badge-craft badge-stock-low">Low stock: {{ product.stock_quantity }} units</span>
+                <span class="badge-craft badge-stock-low">Low reserve: {{ product.stock_quantity }} units</span>
                 {% else %}
                 <span class="badge-craft badge-stock-out">Out of stock</span>
                 {% endif %}
             </div>
 
-            <h2 class="fw-bold mb-2" style="color: var(--text-primary); letter-spacing: -0.02em;">{{ product.name }}</h2>
-            <div class="d-flex align-items-baseline gap-3 mb-4">
-                <span class="display-6 fw-bold tabular-nums" style="color: var(--accent-indigo);">
+            <h1 class="h3 fw-bold mb-2" style="color: var(--text-primary); letter-spacing: -0.02em;">
+                {{ product.product_name or product.name }}
+            </h1>
+
+            <!-- Ratings -->
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <div class="text-warning small">
+                    {% set rating_int = product.avg_rating|int if product.avg_rating is defined else 0 %}
+                    {% for i in range(5) %}
+                        {% if i < rating_int %}&#9733;{% else %}&#9734;{% endif %}
+                    {% endfor %}
+                </div>
+                <span class="small tabular-nums text-secondary">
+                    {{ "{:.1f}".format(product.avg_rating) if product.avg_rating is defined else '0.0' }} ({{ reviews|length }} customer reviews)
+                </span>
+            </div>
+
+            <!-- Price -->
+            <div class="p-3 rounded mb-4" style="background-color: #faf9f6; border: 1px solid var(--border-hairline);">
+                <span class="small text-craft-muted text-uppercase fw-semibold d-block" style="letter-spacing: 0.05em;">Retail Price</span>
+                <span class="fs-2 fw-bold tabular-nums" style="color: var(--accent-indigo);">
                     PKR {{ "{:,.2f}".format(product.price) }}
                 </span>
-                <span class="text-muted small">Inclusive of standard regional taxes</span>
+                <span class="text-craft-muted small d-block">Includes regional duties and standard university packaging</span>
             </div>
 
-            <div class="p-3 rounded mb-4" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
-                <div class="row g-2 small">
-                    <div class="col-sm-6">
-                        <span class="text-muted d-block">Department Classification</span>
-                        <strong>{{ product.category_name }}</strong>
-                    </div>
-                    <div class="col-sm-6">
-                        <span class="text-muted d-block">Distributor / Supplier</span>
-                        <strong>{{ product.supplier_name }}</strong>
-                    </div>
-                </div>
-            </div>
-
-            <h6 class="fw-bold text-dark mb-2">Description</h6>
-            <p class="text-secondary leading-relaxed mb-0" style="font-size: 0.95rem;">
-                {{ product.description or 'No formal catalog description provided by vendor.' }}
-            </p>
-        </div>
-
-        <!-- Verified Reviews Section -->
-        <div class="card-craft p-4">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="fw-bold mb-0 text-dark">Customer Reviews</h5>
-                <span class="text-muted small font-mono">{{ reviews|length }} verified reviews</span>
-            </div>
-
-            {% if reviews %}
-            <div class="d-flex flex-column gap-3 mb-4">
-                {% for r in reviews %}
-                <div class="p-3 rounded border-bottom" style="border-color: var(--border-hairline) !important;">
-                    <div class="d-flex justify-content-between align-items-center mb-1">
-                        <strong>{{ r.full_name }}</strong>
-                        <span class="text-warning small" title="{{ r.rating }} out of 5 stars">
-                            {% for i in range(r.rating) %}&#9733;{% endfor %}
-                            <span class="text-muted font-mono" style="font-size: 0.8rem;">({{ r.rating }}/5)</span>
-                        </span>
-                    </div>
-                    <p class="text-secondary small mb-1">{{ r.comment }}</p>
-                    <span class="text-muted font-mono" style="font-size: 0.75rem;">{{ r.created_at }}</span>
-                </div>
-                {% endfor %}
-            </div>
-            {% else %}
-            <p class="text-muted small mb-4">No reviews yet for this product. Reviews require a confirmed delivered purchase.</p>
-            {% endif %}
-
-            <!-- Submit Review Form -->
-            {% if session.get('user') and session.get('role') == 'customer' %}
-            <div class="pt-3 border-top" style="border-color: var(--border-hairline) !important;">
-                <h6 class="fw-bold mb-2">Leave a Review (Delivered Purchases Only)</h6>
-                <form method="POST" action="{{ url_for('review_add') }}">
-                    <input type="hidden" name="product_id" value="{{ product.product_id }}">
-                    <div class="row g-2 mb-2">
-                        <div class="col-sm-4">
-                            <label class="form-label small text-muted">Rating</label>
-                            <select name="rating" class="form-select form-select-sm" required>
-                                <option value="5">5 &ndash; Excellent</option>
-                                <option value="4">4 &ndash; Good</option>
-                                <option value="3">3 &ndash; Average</option>
-                                <option value="2">2 &ndash; Poor</option>
-                                <option value="1">1 &ndash; Terrible</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-8">
-                            <label class="form-label small text-muted">Feedback</label>
-                            <input type="text" name="comment" class="form-control form-control-sm" placeholder="Summarize your experience with this item..." required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-sm btn-outline-craft">Submit Review</button>
-                </form>
-            </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <!-- Purchase Action Sidebar -->
-    <div class="col-lg-4">
-        <div class="card-craft p-4 sticky-top" style="top: 80px;">
-            <h6 class="fw-bold text-dark mb-3">Order Fulfillment</h6>
-            
+            <!-- Add to Bag Form -->
             {% if product.stock_quantity > 0 %}
-                {% if session.get('user') and session.get('role') == 'customer' %}
-                <form method="POST" action="{{ url_for('cart_add') }}">
-                    <input type="hidden" name="product_id" value="{{ product.product_id }}">
-                    <div class="mb-3">
-                        <label for="quantity" class="form-label small text-muted">Order Quantity</label>
-                        <input type="number" class="form-control form-control-sm tabular-nums" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock_quantity }}" required>
-                        <span class="text-muted small d-block mt-1">Maximum {{ product.stock_quantity }} units per order.</span>
+            <form method="POST" action="{{ url_for('cart_add') }}" class="mb-4">
+                <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                <div class="d-flex align-items-center gap-3">
+                    <div style="width: 100px;">
+                        <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary); font-size: 0.75rem;">Quantity</label>
+                        <input type="number" name="quantity" class="form-control tabular-nums text-center" value="1" min="1" max="{{ product.stock_quantity }}" style="border-color: var(--border-hairline);">
                     </div>
-                    <button type="submit" class="btn btn-indigo w-100 py-2">
-                        Add to Shopping Cart
-                    </button>
-                </form>
-                {% elif not session.get('user') %}
-                <div class="alert alert-light border small text-muted mb-3">
-                    Please sign in to add products to your cart.
+                    <div class="flex-grow-1 pt-4">
+                        {% if session.get('user') %}
+                        <button type="submit" class="btn btn-indigo w-100 py-2">
+                            <i class="bi bi-bag-plus me-1"></i> Add to Shopping Bag
+                        </button>
+                        {% else %}
+                        <a href="{{ url_for('login') }}" class="btn btn-indigo w-100 py-2">
+                            Sign In to Purchase
+                        </a>
+                        {% endif %}
+                    </div>
                 </div>
-                <a href="{{ url_for('login') }}" class="btn btn-indigo w-100 mb-2">Sign in to Purchase</a>
-                <a href="{{ url_for('register') }}" class="btn btn-outline-craft w-100">Create Account</a>
-                {% else %}
-                <div class="alert alert-light border small text-muted mb-0">
-                    Administrator/Staff accounts cannot place customer retail orders.
-                </div>
-                {% endif %}
+            </form>
             {% else %}
-            <div class="alert alert-danger border-0 small mb-0">
-                This item is currently out of stock. Stock replenishment is in progress.
+            <div class="alert alert-warning py-2 mb-4 small" role="alert">
+                <i class="bi bi-exclamation-triangle me-1"></i> This product is currently out of stock. Warehouse replenishment is underway.
             </div>
             {% endif %}
 
-            <div class="mt-4 pt-3 border-top small text-secondary" style="border-color: var(--border-hairline) !important;">
-                <div class="d-flex align-items-center gap-2 mb-2">
-                    <i class="bi bi-truck text-muted"></i>
-                    <span>Dispatched via TCS, Leopards &amp; M&amp;P</span>
-                </div>
-                <div class="d-flex align-items-center gap-2">
-                    <i class="bi bi-cash text-muted"></i>
-                    <span>Cash on Delivery (COD) available</span>
-                </div>
+            <!-- Description -->
+            <div>
+                <h2 class="h6 fw-semibold text-uppercase mb-2" style="letter-spacing: 0.05em; color: var(--text-secondary); font-size: 0.8rem;">Catalog Overview</h2>
+                <p class="small text-craft-muted leading-relaxed mb-0" style="font-size: 0.9rem; line-height: 1.6;">
+                    {{ product.description or product.short_description or 'No catalog description recorded.' }}
+                </p>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Verified Customer Reviews Section -->
+<div class="card-craft p-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+        <div>
+            <h2 class="h5 fw-bold mb-0" style="color: var(--text-primary);">Customer Evaluations</h2>
+            <span class="text-craft-muted small">Only customers with confirmed delivered orders may submit reviews (enforced via database trigger)</span>
+        </div>
+        <span class="badge-craft badge-neutral">{{ reviews|length }} verified</span>
+    </div>
+
+    {% if reviews %}
+    <div class="d-flex flex-column gap-3 mb-4">
+        {% for r in reviews %}
+        <div class="p-3 rounded" style="background-color: #faf9f6; border: 1px solid var(--border-hairline);">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+                <strong>{{ r.customer_name or r.full_name }}</strong>
+                <span class="text-warning small">
+                    {% for i in range(r.rating) %}&#9733;{% endfor %}
+                    <span class="text-craft-muted tabular-nums">({{ r.rating }}/5)</span>
+                </span>
+            </div>
+            <p class="small text-craft-secondary mb-1">{{ r.comment }}</p>
+            <span class="text-craft-muted small tabular-nums" style="font-size: 0.75rem;">{{ r.created_at }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-craft-muted small mb-4">No reviews recorded yet for this product specimen.</p>
+    {% endif %}
+
+    <!-- Leave Review Form -->
+    {% if session.get('user') and session.get('role') == 'customer' %}
+    <div class="pt-3 border-top">
+        <h3 class="h6 fw-bold mb-2">Submit Verified Review</h3>
+        <form method="POST" action="{{ url_for('review_add') }}">
+            <input type="hidden" name="product_id" value="{{ product.product_id }}">
+            <div class="row g-2 mb-2">
+                <div class="col-sm-3">
+                    <select name="rating" class="form-select form-select-sm" style="border-color: var(--border-hairline);" required>
+                        <option value="5">5 &ndash; Excellent</option>
+                        <option value="4">4 &ndash; Good</option>
+                        <option value="3">3 &ndash; Average</option>
+                        <option value="2">2 &ndash; Poor</option>
+                        <option value="1">1 &ndash; Terrible</option>
+                    </select>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" name="comment" class="form-control form-control-sm" placeholder="Write your verified feedback..." style="border-color: var(--border-hairline);" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-sm btn-outline-craft">
+                Post Review
+            </button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function switchMainImage(src, btn) {
+    const mainImg = document.getElementById('mainGalleryImage');
+    mainImg.style.opacity = '0.4';
+    setTimeout(() => {
+        mainImg.src = src;
+        mainImg.style.opacity = '1';
+    }, 120);
+
+    document.querySelectorAll('.thumbnail-btn').forEach(b => {
+        b.classList.remove('opacity-100');
+        b.classList.add('opacity-75');
+    });
+    btn.classList.remove('opacity-75');
+    btn.classList.add('opacity-100');
+}
+</script>
 {% endblock %}

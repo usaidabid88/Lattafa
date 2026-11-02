@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% block title %}{{ current_cat.name }} - MUET Shop{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb small">
+        <li class="breadcrumb-item"><a href="{{ url_for('index') }}" class="text-decoration-none" style="color: var(--accent-indigo);">Home</a></li>
+        {% if parent_cat %}
+        <li class="breadcrumb-item"><a href="{{ url_for('category_view', slug=parent_cat.slug) }}" class="text-decoration-none" style="color: var(--accent-indigo);">{{ parent_cat.name }}</a></li>
+        <li class="breadcrumb-item active" style="color: var(--text-muted);">{{ current_cat.name }}</li>
+        {% else %}
+        <li class="breadcrumb-item active" style="color: var(--text-muted);">{{ current_cat.name }}</li>
+        {% endif %}
+    </ol>
+</nav>
+
+<!-- Category Header & Subcategory Chips -->
+<div class="mb-4 pb-3 border-bottom">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+        <div>
+            <h1 class="h3 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">
+                {{ current_cat.name }}
+            </h1>
+            <p class="text-craft-muted small mb-0">
+                Verified regional artisan wares, electronics, and catalog inventory ({{ total_products }} item{% if total_products != 1 %}s{% endif %})
+            </p>
+        </div>
+        
+        <!-- Live Search inside Category -->
+        <form method="GET" action="{{ url_for('category_view', slug=current_cat.slug) }}" class="d-flex align-items-center gap-2" style="max-width: 320px;">
+            {% if brand_filter %}<input type="hidden" name="brand" value="{{ brand_filter }}">{% endif %}
+            {% if sort_by %}<input type="hidden" name="sort" value="{{ sort_by }}">{% endif %}
+            {% if sub_slug %}<input type="hidden" name="sub" value="{{ sub_slug }}">{% endif %}
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" name="q" value="{{ search_q }}" placeholder="Search in {{ current_cat.name }}..." style="border-color: var(--border-hairline);">
+                <button type="submit" class="btn btn-outline-craft">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Subcategory Chips -->
+    {% if subcategories %}
+    <div class="d-flex flex-wrap align-items-center gap-2 pt-1">
+        <span class="small text-craft-muted me-1 fw-semibold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.05em;">Departments:</span>
+        <a href="{{ url_for('category_view', slug=(parent_cat.slug if parent_cat else current_cat.slug)) }}" 
+           class="badge-craft {% if not sub_slug and not parent_cat %}badge-status-paid{% else %}badge-neutral{% endif %} text-decoration-none py-1 px-3">
+            All
+        </a>
+        {% for sub in subcategories %}
+        <a href="{{ url_for('category_view', slug=(parent_cat.slug if parent_cat else current_cat.slug), sub=sub.slug) }}" 
+           class="badge-craft {% if sub_slug == sub.slug or current_cat.slug == sub.slug %}badge-status-paid{% else %}badge-neutral{% endif %} text-decoration-none py-1 px-3">
+            {{ sub.name }}
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<div class="row g-4">
+    <!-- Filters Sidebar -->
+    <div class="col-lg-3">
+        <div class="card-craft p-3 mb-4 sticky-top" style="top: 80px; z-index: 10;">
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);"><i class="bi bi-sliders me-1"></i> Filters</h2>
+                {% if brand_filter or min_price or max_price or search_q or sub_slug %}
+                <a href="{{ url_for('category_view', slug=current_cat.slug) }}" class="small text-decoration-none" style="color: var(--accent-indigo); font-size: 0.8rem;">
+                    Reset All
+                </a>
+                {% endif %}
+            </div>
+
+            <form method="GET" action="{{ url_for('category_view', slug=current_cat.slug) }}">
+                {% if search_q %}<input type="hidden" name="q" value="{{ search_q }}">{% endif %}
+                {% if sub_slug %}<input type="hidden" name="sub" value="{{ sub_slug }}">{% endif %}
+
+                <!-- Sort Order -->
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary); font-size: 0.75rem;">Sort Order</label>
+                    <select class="form-select form-select-sm" name="sort" onchange="this.form.submit()" style="border-color: var(--border-hairline);">
+                        <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>Newest Arrivals</option>
+                        <option value="price_asc" {% if sort_by == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                        <option value="price_desc" {% if sort_by == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                        <option value="rating" {% if sort_by == 'rating' %}selected{% endif %}>Top Customer Rating</option>
+                    </select>
+                </div>
+
+                <!-- Brand Filter -->
+                {% if available_brands %}
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary); font-size: 0.75rem;">Brand Provenance</label>
+                    <select class="form-select form-select-sm" name="brand" onchange="this.form.submit()" style="border-color: var(--border-hairline);">
+                        <option value="">All Brands</option>
+                        {% for b in available_brands %}
+                        <option value="{{ b.brand_name }}" {% if brand_filter == b.brand_name %}selected{% endif %}>
+                            {{ b.brand_name }} ({{ b.product_count }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endif %}
+
+                <!-- Price Range Filter -->
+                <div class="mb-3">
+                    <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary); font-size: 0.75rem;">Price Range (PKR)</label>
+                    <div class="d-flex align-items-center gap-1 mb-2">
+                        <input type="number" class="form-control form-control-sm tabular-nums" name="min_price" value="{{ min_price }}" placeholder="Min" style="border-color: var(--border-hairline);">
+                        <span class="text-craft-muted small">-</span>
+                        <input type="number" class="form-control form-control-sm tabular-nums" name="max_price" value="{{ max_price }}" placeholder="Max" style="border-color: var(--border-hairline);">
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-outline-craft w-100">Apply Price Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Grid & Pagination -->
+    <div class="col-lg-9">
+        {% if products %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-4">
+            {% for p in products %}
+            <div class="col">
+                <div class="card-craft h-100 d-flex flex-column overflow-hidden position-relative" style="transition: transform 0.15s ease, box-shadow 0.15s ease;">
+                    <!-- Aspect-Ratio Image Container -->
+                    <a href="{{ url_for('product_detail', product_id=p.product_id) }}" class="d-block overflow-hidden position-relative" style="aspect-ratio: 4/3; background-color: #faf9f6;">
+                        <img src="/{{ p.primary_image }}" 
+                             alt="{{ p.product_name }}" 
+                             loading="lazy" 
+                             class="w-100 h-100" 
+                             style="object-fit: cover; transition: transform 0.2s ease;"
+                             onerror="this.onerror=null; this.src='/static/images/placeholder.svg';">
+                        
+                        <!-- Stock Status Tag -->
+                        <div class="position-absolute top-0 end-0 m-2">
+                            {% if p.stock_quantity > 5 %}
+                            <span class="badge-craft badge-stock-in" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">In Stock</span>
+                            {% elif p.stock_quantity >= 1 %}
+                            <span class="badge-craft badge-stock-low" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">Low Stock</span>
+                            {% else %}
+                            <span class="badge-craft badge-stock-out" style="box-shadow: 0 1px 3px rgba(0,0,0,0.1);">Out of Stock</span>
+                            {% endif %}
+                        </div>
+                    </a>
+
+                    <!-- Card Body -->
+                    <div class="p-3 d-flex flex-column flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="small text-craft-muted text-uppercase fw-semibold" style="font-size: 0.72rem; letter-spacing: 0.04em;">
+                                {{ p.brand_name }}
+                            </span>
+                            {% if p.avg_rating > 0 %}
+                            <span class="small tabular-nums text-warning" style="font-size: 0.75rem;">
+                                <i class="bi bi-star-fill text-warning"></i> {{ p.avg_rating }}
+                            </span>
+                            {% endif %}
+                        </div>
+
+                        <h3 class="h6 mb-2 flex-grow-1" style="font-size: 0.95rem; line-height: 1.35;">
+                            <a href="{{ url_for('product_detail', product_id=p.product_id) }}" class="text-decoration-none" style="color: var(--text-primary);">
+                                {{ p.product_name }}
+                            </a>
+                        </h3>
+
+                        {% if p.short_description %}
+                        <p class="text-craft-muted small mb-2 text-truncate" style="font-size: 0.8rem;">
+                            {{ p.short_description }}
+                        </p>
+                        {% endif %}
+
+                        <div class="d-flex justify-content-between align-items-baseline pt-2 border-top mt-auto">
+                            <span class="fw-bold tabular-nums fs-6" style="color: var(--accent-indigo);">
+                                PKR {{ "{:,.0f}".format(p.price) }}
+                            </span>
+                            
+                            {% if session.get('user') and p.stock_quantity > 0 %}
+                            <form method="POST" action="{{ url_for('cart_add') }}" class="d-inline">
+                                <input type="hidden" name="product_id" value="{{ p.product_id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-sm btn-outline-craft py-1 px-2" title="Add to Bag">
+                                    <i class="bi bi-bag-plus"></i>
+                                </button>
+                            </form>
+                            {% else %}
+                            <a href="{{ url_for('product_detail', product_id=p.product_id) }}" class="btn btn-sm btn-outline-craft py-1 px-2" style="font-size: 0.75rem;">
+                                Details
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if total_pages > 1 %}
+        <nav aria-label="Catalog pagination" class="d-flex justify-content-center mt-4">
+            <ul class="pagination pagination-sm">
+                {% if page > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('category_view', slug=current_cat.slug, page=page-1, brand=brand_filter, min_price=min_price, max_price=max_price, sort=sort_by, q=search_q, sub=sub_slug) }}">
+                        &laquo; Prev
+                    </a>
+                </li>
+                {% endif %}
+                
+                {% for p_num in range(1, total_pages + 1) %}
+                <li class="page-item {% if p_num == page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('category_view', slug=current_cat.slug, page=p_num, brand=brand_filter, min_price=min_price, max_price=max_price, sort=sort_by, q=search_q, sub=sub_slug) }}">
+                        {{ p_num }}
+                    </a>
+                </li>
+                {% endfor %}
+
+                {% if page < total_pages %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('category_view', slug=current_cat.slug, page=page+1, brand=brand_filter, min_price=min_price, max_price=max_price, sort=sort_by, q=search_q, sub=sub_slug) }}">
+                        Next &raquo;
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+
+        {% else %}
+        <!-- Empty State Filter Match -->
+        <div class="card-craft text-center py-5 px-4">
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 56px; height: 56px; background-color: #f1f5f9; color: var(--text-muted); margin: 0 auto;">
+                <i class="bi bi-funnel fs-3"></i>
+            </div>
+            <h3 class="h5 fw-semibold mb-2" style="color: var(--text-primary);">No products match your criteria</h3>
+            <p class="text-craft-muted mb-4 small" style="max-width: 400px; margin-left: auto; margin-right: auto;">
+                No items were found matching the selected brand, price threshold, or search keyword in this department.
+            </p>
+            <div>
+                <a href="{{ url_for('category_view', slug=current_cat.slug) }}" class="btn btn-outline-craft btn-sm">
+                    Clear All Filters
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
