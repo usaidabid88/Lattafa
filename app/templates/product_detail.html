@@ -38,6 +38,8 @@
                 <button type="button" 
                         class="p-1 rounded border-0 bg-transparent cursor-pointer thumbnail-btn {% if loop.first %}opacity-100{% else %}opacity-75{% endif %}"
                         style="width: 68px; height: 68px; flex-shrink: 0;"
+                        aria-label="View product image {{ loop.index }}"
+                        aria-pressed="{% if loop.first %}true{% else %}false{% endif %}"
                         onclick="switchMainImage('/{{ img.image_path }}', this)">
                     <img src="/{{ img.image_path }}" 
                          alt="Thumbnail {{ loop.index }}" 
@@ -220,9 +222,11 @@ function switchMainImage(src, btn) {
     document.querySelectorAll('.thumbnail-btn').forEach(b => {
         b.classList.remove('opacity-100');
         b.classList.add('opacity-75');
+        b.setAttribute('aria-pressed', 'false');
     });
     btn.classList.remove('opacity-75');
     btn.classList.add('opacity-100');
+    btn.setAttribute('aria-pressed', 'true');
 }
 </script>
 {% endblock %}

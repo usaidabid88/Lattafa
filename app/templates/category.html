@@ -34,8 +34,8 @@
             {% if sub_slug %}<input type="hidden" name="sub" value="{{ sub_slug }}">{% endif %}
             <div class="input-group input-group-sm">
                 <input type="text" class="form-control" name="q" value="{{ search_q }}" placeholder="Search in {{ current_cat.name }}" style="border-color: var(--border-hairline);">
-                <button type="submit" class="btn btn-outline-craft">
-                    <i class="bi bi-search"></i>
+                <button type="submit" class="btn btn-outline-craft" aria-label="Search">
+                    <i class="bi bi-search" aria-hidden="true"></i>
                 </button>
             </div>
         </form>
@@ -126,7 +126,7 @@
                     <!-- Aspect-Ratio Image Container -->
                     <a href="{{ url_for('product_detail', product_id=p.product_id) }}" class="d-block overflow-hidden position-relative" style="aspect-ratio: 4/3; background-color: var(--bg-raised);">
                         <img src="/{{ p.primary_image }}" 
-                             alt="{{ p.product_name }}" 
+                             alt="{{ p.product_name }} by {{ p.brand_name or 'verified store' }}" 
                              loading="lazy" 
                              class="w-100 h-100" 
                              style="object-fit: cover;"
@@ -178,8 +178,8 @@
                             <form method="POST" action="{{ url_for('cart_add') }}" class="d-inline">
                                 <input type="hidden" name="product_id" value="{{ p.product_id }}">
                                 <input type="hidden" name="quantity" value="1">
-                                <button type="submit" class="btn btn-sm btn-outline-craft py-1 px-2" title="Add to bag">
-                                    <i class="bi bi-bag-plus"></i>
+                                <button type="submit" class="btn btn-sm btn-outline-craft py-1 px-2" title="Add to bag" aria-label="Add {{ p.product_name }} to bag">
+                                    <i class="bi bi-bag-plus" aria-hidden="true"></i>
                                 </button>
                             </form>
                             {% else %}
@@ -200,7 +200,7 @@
             <ul class="pagination pagination-sm">
                 {% if page > 1 %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ url_for('category_view', slug=current_cat.slug, page=page-1, brand=brand_filter, min_price=min_price, max_price=max_price, sort=sort_by, q=search_q, sub=sub_slug) }}">
+                    <a class="page-link" href="{{ url_for('category_view', slug=current_cat.slug, page=page-1, brand=brand_filter, min_price=min_price, max_price=max_price, sort=sort_by, q=search_q, sub=sub_slug) }}" aria-label="Previous page">
                         &laquo; Prev
                     </a>
                 </li>
@@ -208,7 +208,7 @@
                 
                 {% for p_num in range(1, total_pages + 1) %}
                 <li class="page-item {% if p_num == page %}active{% endif %}">
-                    <a class="page-link" href="{{ url_for('category_view', slug=current_cat.slug, page=p_num, brand=brand_filter, min_price=min_price, max_price=max_price, sort=sort_by, q=search_q, sub=sub_slug) }}">
+                    <a class="page-link" href="{{ url_for('category_view', slug=current_cat.slug, page=p_num, brand=brand_filter, min_price=min_price, max_price=max_price, sort=sort_by, q=search_q, sub=sub_slug) }}" aria-label="Page {{ p_num }}" {% if p_num == page %}aria-current="page"{% endif %}>
                         {{ p_num }}
                     </a>
                 </li>
@@ -216,7 +216,7 @@
 
                 {% if page < total_pages %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ url_for('category_view', slug=current_cat.slug, page=page+1, brand=brand_filter, min_price=min_price, max_price=max_price, sort=sort_by, q=search_q, sub=sub_slug) }}">
+                    <a class="page-link" href="{{ url_for('category_view', slug=current_cat.slug, page=page+1, brand=brand_filter, min_price=min_price, max_price=max_price, sort=sort_by, q=search_q, sub=sub_slug) }}" aria-label="Next page">
                         Next &raquo;
                     </a>
                 </li>

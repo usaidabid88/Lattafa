@@ -23,6 +23,7 @@
             --text-muted: #82786c;
             --accent-indigo: #1b365d;
             --accent-indigo-hover: #142846;
+            --accent-gold: #c59b27;
             --radius-sm: 6px;
             --radius-md: 10px;
             --radius-lg: 14px;
@@ -40,6 +41,44 @@
         }
 
         main { flex: 1; }
+
+        /* Accessibility & Focus Rings */
+        :focus-visible {
+            outline: 2px solid var(--accent-indigo);
+            outline-offset: 2px;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 16px;
+            background: var(--accent-indigo);
+            color: #ffffff;
+            padding: 8px 16px;
+            z-index: 9999;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: top 0.15s ease-out;
+        }
+        .skip-link:focus {
+            top: 12px;
+            color: #ffffff;
+        }
+
+        button, a, input[type="submit"], input[type="checkbox"], input[type="radio"], select {
+            cursor: pointer;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
 
         /* Typography & Tabular Figures */
         .tabular-nums {
@@ -74,7 +113,10 @@
             color: #cbd5e1;
             font-size: 0.88rem;
             font-weight: 500;
-            padding: 6px 12px;
+            padding: 8px 12px;
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
             border-radius: var(--radius-sm);
             transition: color 0.12s ease-out, background-color 0.12s ease-out;
         }
@@ -103,6 +145,10 @@
             font-weight: 500;
             font-size: 0.88rem;
             padding: 8px 16px;
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             border-radius: var(--radius-sm);
             transition: background-color 0.12s ease-out, border-color 0.12s ease-out;
         }
@@ -119,6 +165,10 @@
             font-weight: 500;
             font-size: 0.88rem;
             padding: 8px 16px;
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             border-radius: var(--radius-sm);
             transition: background-color 0.12s ease-out, border-color 0.12s ease-out;
         }
@@ -210,13 +260,16 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    <!-- Skip to main content landmark -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Top Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top" aria-label="Main Navigation">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
                 MUET Shop <span>Sindh Marketplace</span>
             </a>
-            <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mainNav">
@@ -235,7 +288,7 @@
                     {% if session.get('role') in ['admin', 'staff'] %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('admin_dashboard') }}">
-                            <i class="bi bi-shield-lock me-1 text-white-50"></i> Admin Console
+                            <i class="bi bi-shield-lock me-1 text-white-50" aria-hidden="true"></i> Admin Console
                         </a>
                     </li>
                     {% endif %}
@@ -265,21 +318,21 @@
     </nav>
 
     <!-- Flash Alerts -->
-    <div class="container mt-3">
+    <div class="container mt-3" aria-live="polite">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
                 <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show border-0 shadow-sm" role="alert">
                     {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
     </div>
 
-    <!-- Main Workspace -->
-    <main class="container my-4">
+    <!-- Main Workspace Landmark -->
+    <main id="main-content" class="container my-4" tabindex="-1">
         {% block content %}{% endblock %}
     </main>
 
