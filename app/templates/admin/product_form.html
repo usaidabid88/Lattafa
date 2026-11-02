@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-{% block title %}{{ 'Edit Product #' ~ product.product_id if product else 'New Catalog Item' }} - MUET Shop Admin{% endblock %}
+{% block title %}{{ 'Edit Product #' ~ product.product_id if product else 'New Catalog Item' }} – MUET Shop Admin{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="card-craft p-0 overflow-hidden mb-4">
-            <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
+            <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: var(--bg-raised); border-bottom: 1px solid var(--border-hairline);">
                 <div>
                     <h1 class="h5 fw-semibold mb-0" style="color: var(--text-primary); letter-spacing: -0.01em;">
-                        {{ 'Edit Product #' ~ product.product_id if product else 'Add New Catalog Product' }}
+                        {{ 'Edit product #' ~ product.product_id if product else 'Add new product' }}
                     </h1>
-                    <div class="text-craft-muted small">Specify inventory parameters, brand affiliation, and verified specimen images</div>
+                    <div class="text-muted small">Specify inventory parameters, brand affiliation, and verified specimen images</div>
                 </div>
                 <a href="{{ url_for('admin_products') }}" class="btn btn-sm btn-outline-craft">
                     <i class="bi bi-x-lg me-1"></i> Close
@@ -20,15 +20,15 @@
             <div class="p-4">
                 <form method="POST" action="{{ form_action }}" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="name" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Product Name *</label>
+                        <label for="name" class="form-label small fw-medium" style="color: var(--text-secondary); font-size: 0.8rem;">Product name *</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ product.name if product else '' }}" placeholder="e.g. Dell Inspiron 15 Core i5" style="border-color: var(--border-hairline);" required>
                     </div>
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-4">
-                            <label for="brand_id" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Brand Provenance</label>
-                            <select class="form-select" id="brand_id" name="brand_id" style="border-color: var(--border-hairline);">
-                                <option value="">Select Brand...</option>
+                            <label for="brand_id" class="form-label small fw-medium" style="color: var(--text-secondary); font-size: 0.8rem;">Brand</label>
+                            <select class="form-select form-select-sm" id="brand_id" name="brand_id" style="border-color: var(--border-hairline);">
+                                <option value="">Select brand...</option>
                                 {% for b in brands %}
                                 <option value="{{ b.brand_id }}" {% if product and product.brand_id == b.brand_id %}selected{% endif %}>
                                     {{ b.name }}
@@ -37,9 +37,9 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="category_id" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Department Category *</label>
-                            <select class="form-select" id="category_id" name="category_id" style="border-color: var(--border-hairline);" required>
-                                <option value="">Select Category...</option>
+                            <label for="category_id" class="form-label small fw-medium" style="color: var(--text-secondary); font-size: 0.8rem;">Department *</label>
+                            <select class="form-select form-select-sm" id="category_id" name="category_id" style="border-color: var(--border-hairline);" required>
+                                <option value="">Select category...</option>
                                 {% for cat in categories %}
                                 <option value="{{ cat.category_id }}" {% if product and product.category_id == cat.category_id %}selected{% endif %}>
                                     {{ cat.name }}
@@ -48,9 +48,9 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="supplier_id" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Verified Supplier *</label>
-                            <select class="form-select" id="supplier_id" name="supplier_id" style="border-color: var(--border-hairline);" required>
-                                <option value="">Select Supplier...</option>
+                            <label for="supplier_id" class="form-label small fw-medium" style="color: var(--text-secondary); font-size: 0.8rem;">Verified supplier *</label>
+                            <select class="form-select form-select-sm" id="supplier_id" name="supplier_id" style="border-color: var(--border-hairline);" required>
+                                <option value="">Select supplier...</option>
                                 {% for sup in suppliers %}
                                 <option value="{{ sup.supplier_id }}" {% if product and product.supplier_id == sup.supplier_id %}selected{% endif %}>
                                     {{ sup.name }}
@@ -62,39 +62,39 @@
 
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
-                            <label for="price" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Retail Price (PKR) *</label>
-                            <input type="number" step="0.01" min="0" class="form-control tabular-nums" id="price" name="price" value="{{ product.price if product else '0.00' }}" style="border-color: var(--border-hairline);" required>
+                            <label for="price" class="form-label small fw-medium" style="color: var(--text-secondary); font-size: 0.8rem;">Retail price (PKR) *</label>
+                            <input type="number" step="0.01" min="0" class="form-control form-control-sm tabular-nums" id="price" name="price" value="{{ product.price if product else '0.00' }}" style="border-color: var(--border-hairline);" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="stock_quantity" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Warehouse Stock *</label>
-                            <input type="number" min="0" class="form-control tabular-nums" id="stock_quantity" name="stock_quantity" value="{{ product.stock_quantity if product else '0' }}" style="border-color: var(--border-hairline);" required>
+                            <label for="stock_quantity" class="form-label small fw-medium" style="color: var(--text-secondary); font-size: 0.8rem;">Warehouse stock *</label>
+                            <input type="number" min="0" class="form-control form-control-sm tabular-nums" id="stock_quantity" name="stock_quantity" value="{{ product.stock_quantity if product else '0' }}" style="border-color: var(--border-hairline);" required>
                         </div>
                     </div>
 
                     <!-- Image Upload (Sub-Phase 11F) -->
                     <div class="mb-3">
-                        <label for="image" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Upload Specimen Image (JPEG, PNG, WebP &le; 2 MB)</label>
-                        <input type="file" class="form-control" id="image" name="image" accept=".jpg,.jpeg,.png,.webp" style="border-color: var(--border-hairline);">
-                        <div class="form-text small">Uploaded image is validated for size/format, sanitized, and set as the primary catalog picture.</div>
+                        <label for="image" class="form-label small fw-medium" style="color: var(--text-secondary); font-size: 0.8rem;">Upload specimen image (JPEG, PNG, WebP &le; 2 MB)</label>
+                        <input type="file" class="form-control form-control-sm" id="image" name="image" accept=".jpg,.jpeg,.png,.webp" style="border-color: var(--border-hairline);">
+                        <div class="form-text small text-muted">Uploaded image is validated for size/format, sanitized, and set as the primary catalog picture.</div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="description" class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Item Description & Provenance</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Detail materials, origins, and technical specifications..." style="border-color: var(--border-hairline);">{{ product.description if product else '' }}</textarea>
+                        <label for="description" class="form-label small fw-medium" style="color: var(--text-secondary); font-size: 0.8rem;">Item description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="Detail materials, origins, and technical specifications" style="border-color: var(--border-hairline);">{{ product.description if product else '' }}</textarea>
                     </div>
 
-                    <div class="form-check p-3 rounded mb-4" style="background-color: #faf9f6; border: 1px solid var(--border-hairline);">
+                    <div class="form-check p-3 rounded mb-4" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
                         <input class="form-check-input ms-0 me-2" type="checkbox" id="is_active" name="is_active" value="1" {% if not product or product.is_active %}checked{% endif %}>
                         <label class="form-check-label fw-medium small" for="is_active" style="color: var(--text-primary);">
                             Visible in public marketplace catalog
                         </label>
-                        <div class="text-craft-muted small ms-4">When unchecked, this item will be hidden from storefront queries without breaking orders.</div>
+                        <div class="text-muted small ms-4">When unchecked, this item will be hidden from storefront queries without breaking historic orders.</div>
                     </div>
 
-                    <div class="d-flex justify-content-end align-items-center gap-2 pt-3 border-top">
+                    <div class="d-flex justify-content-end align-items-center gap-2 pt-3 border-top" style="border-color: var(--border-hairline) !important;">
                         <a href="{{ url_for('admin_products') }}" class="btn btn-outline-craft">Discard</a>
                         <button type="submit" class="btn btn-indigo px-4">
-                            Save Product Listing
+                            Save product
                         </button>
                     </div>
                 </form>

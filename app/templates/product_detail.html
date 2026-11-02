@@ -22,12 +22,12 @@
     <div class="col-lg-6">
         <div class="card-craft p-3 mb-3 overflow-hidden">
             <!-- Main Featured Image -->
-            <div class="position-relative overflow-hidden rounded" style="aspect-ratio: 1/1; background-color: #faf9f6;">
+            <div class="position-relative overflow-hidden rounded" style="aspect-ratio: 1/1; background-color: var(--bg-raised);">
                 <img id="mainGalleryImage" 
                      src="/{{ product.primary_image if product.primary_image else (images[0].image_path if images else 'static/images/placeholder.svg') }}" 
                      alt="{{ product.product_name or product.name }}" 
                      class="w-100 h-100" 
-                     style="object-fit: contain; transition: opacity 0.2s ease;"
+                     style="object-fit: contain; transition: opacity 0.12s ease-out;"
                      onerror="this.onerror=null; this.src='/static/images/placeholder.svg';">
             </div>
 
@@ -36,8 +36,8 @@
             <div class="d-flex gap-2 mt-3 overflow-x-auto pb-1">
                 {% for img in images %}
                 <button type="button" 
-                        class="p-1 rounded border-0 bg-transparent cursor-pointer thumbnail-btn {% if loop.first %}opacity-100 ring-2{% else %}opacity-75{% endif %}"
-                        style="width: 70px; height: 70px; flex-shrink: 0;"
+                        class="p-1 rounded border-0 bg-transparent cursor-pointer thumbnail-btn {% if loop.first %}opacity-100{% else %}opacity-75{% endif %}"
+                        style="width: 68px; height: 68px; flex-shrink: 0;"
                         onclick="switchMainImage('/{{ img.image_path }}', this)">
                     <img src="/{{ img.image_path }}" 
                          alt="Thumbnail {{ loop.index }}" 
@@ -52,13 +52,13 @@
 
         <!-- Provenance & Source Note -->
         {% if product.source_store %}
-        <div class="card-craft p-3" style="background-color: #faf9f6; font-size: 0.8rem;">
-            <div class="d-flex align-items-center gap-2 text-craft-muted">
+        <div class="card-craft p-3" style="background-color: var(--bg-raised); font-size: 0.8rem;">
+            <div class="d-flex align-items-center gap-2 text-muted">
                 <i class="bi bi-info-circle text-secondary"></i>
                 <span>Educational specimen sourced from <strong>{{ product.source_store }}</strong>.</span>
                 {% if product.source_url %}
                 <a href="{{ product.source_url }}" target="_blank" rel="noopener noreferrer" class="ms-auto text-decoration-none" style="color: var(--accent-indigo);">
-                    View Source Store <i class="bi bi-box-arrow-up-right small"></i>
+                    Source store <i class="bi bi-box-arrow-up-right small"></i>
                 </a>
                 {% endif %}
             </div>
@@ -70,77 +70,77 @@
     <div class="col-lg-6">
         <div class="card-craft p-4 mb-4">
             <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="badge-craft badge-neutral text-uppercase" style="letter-spacing: 0.05em;">
+                <span class="badge-craft badge-neutral">
                     {{ product.brand_name or 'Artisan / Verified' }}
                 </span>
                 
                 {% if product.stock_quantity > 5 %}
-                <span class="badge-craft badge-stock-in">{{ product.stock_quantity }} units in stock</span>
+                <span class="badge-craft badge-stock-in">{{ product.stock_quantity }} in stock</span>
                 {% elif product.stock_quantity >= 1 %}
-                <span class="badge-craft badge-stock-low">Low reserve: {{ product.stock_quantity }} units</span>
+                <span class="badge-craft badge-stock-low">Low stock: {{ product.stock_quantity }} units</span>
                 {% else %}
                 <span class="badge-craft badge-stock-out">Out of stock</span>
                 {% endif %}
             </div>
 
-            <h1 class="h3 fw-bold mb-2" style="color: var(--text-primary); letter-spacing: -0.02em;">
+            <h1 class="h3 fw-semibold mb-2" style="color: var(--text-primary); letter-spacing: -0.02em;">
                 {{ product.product_name or product.name }}
             </h1>
 
             <!-- Ratings -->
             <div class="d-flex align-items-center gap-2 mb-3">
-                <div class="text-warning small">
+                <div class="small" style="color: #c59b27;">
                     {% set rating_int = product.avg_rating|int if product.avg_rating is defined else 0 %}
                     {% for i in range(5) %}
                         {% if i < rating_int %}&#9733;{% else %}&#9734;{% endif %}
                     {% endfor %}
                 </div>
                 <span class="small tabular-nums text-secondary">
-                    {{ "{:.1f}".format(product.avg_rating) if product.avg_rating is defined else '0.0' }} ({{ reviews|length }} customer reviews)
+                    {{ "{:.1f}".format(product.avg_rating) if product.avg_rating is defined else '0.0' }} ({{ reviews|length }} review{% if reviews|length != 1 %}s{% endif %})
                 </span>
             </div>
 
             <!-- Price -->
-            <div class="p-3 rounded mb-4" style="background-color: #faf9f6; border: 1px solid var(--border-hairline);">
-                <span class="small text-craft-muted text-uppercase fw-semibold d-block" style="letter-spacing: 0.05em;">Retail Price</span>
-                <span class="fs-2 fw-bold tabular-nums" style="color: var(--accent-indigo);">
+            <div class="p-3 rounded mb-4" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+                <span class="small text-muted d-block" style="font-size: 0.8rem;">Retail price</span>
+                <span class="fs-3 fw-semibold tabular-nums" style="color: var(--accent-indigo);">
                     PKR {{ "{:,.2f}".format(product.price) }}
                 </span>
-                <span class="text-craft-muted small d-block">Includes regional duties and standard university packaging</span>
+                <span class="text-muted small d-block mt-1">Includes regional duties and standard university fulfillment</span>
             </div>
 
-            <!-- Add to Bag Form -->
+            <!-- Add to Cart Form -->
             {% if product.stock_quantity > 0 %}
             <form method="POST" action="{{ url_for('cart_add') }}" class="mb-4">
                 <input type="hidden" name="product_id" value="{{ product.product_id }}">
-                <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-end gap-3">
                     <div style="width: 100px;">
-                        <label class="form-label small fw-semibold text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary); font-size: 0.75rem;">Quantity</label>
+                        <label class="form-label small fw-medium mb-1" style="color: var(--text-secondary); font-size: 0.8rem;">Quantity</label>
                         <input type="number" name="quantity" class="form-control tabular-nums text-center" value="1" min="1" max="{{ product.stock_quantity }}" style="border-color: var(--border-hairline);">
                     </div>
-                    <div class="flex-grow-1 pt-4">
+                    <div class="flex-grow-1">
                         {% if session.get('user') %}
                         <button type="submit" class="btn btn-indigo w-100 py-2">
-                            <i class="bi bi-bag-plus me-1"></i> Add to Shopping Bag
+                            <i class="bi bi-bag-plus me-1"></i> Add to cart
                         </button>
                         {% else %}
                         <a href="{{ url_for('login') }}" class="btn btn-indigo w-100 py-2">
-                            Sign In to Purchase
+                            Sign in to purchase
                         </a>
                         {% endif %}
                     </div>
                 </div>
             </form>
             {% else %}
-            <div class="alert alert-warning py-2 mb-4 small" role="alert">
-                <i class="bi bi-exclamation-triangle me-1"></i> This product is currently out of stock. Warehouse replenishment is underway.
+            <div class="alert alert-warning py-2 mb-4 small border-0" role="alert">
+                <i class="bi bi-info-circle me-1"></i> This product is currently out of stock. Warehouse replenishment is underway.
             </div>
             {% endif %}
 
             <!-- Description -->
             <div>
-                <h2 class="h6 fw-semibold text-uppercase mb-2" style="letter-spacing: 0.05em; color: var(--text-secondary); font-size: 0.8rem;">Catalog Overview</h2>
-                <p class="small text-craft-muted leading-relaxed mb-0" style="font-size: 0.9rem; line-height: 1.6;">
+                <h2 class="h6 fw-semibold mb-2" style="color: var(--text-secondary); font-size: 0.85rem;">Overview</h2>
+                <p class="small text-muted mb-0" style="font-size: 0.88rem; line-height: 1.6;">
                     {{ product.description or product.short_description or 'No catalog description recorded.' }}
                 </p>
             </div>
@@ -150,10 +150,10 @@
 
 <!-- Verified Customer Reviews Section -->
 <div class="card-craft p-4 mb-4">
-    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
         <div>
-            <h2 class="h5 fw-bold mb-0" style="color: var(--text-primary);">Customer Evaluations</h2>
-            <span class="text-craft-muted small">Only customers with confirmed delivered orders may submit reviews (enforced via database trigger)</span>
+            <h2 class="h5 fw-semibold mb-0" style="color: var(--text-primary);">Customer reviews</h2>
+            <span class="text-muted small">Only customers with confirmed delivered orders may submit reviews (enforced via database trigger)</span>
         </div>
         <span class="badge-craft badge-neutral">{{ reviews|length }} verified</span>
     </div>
@@ -161,27 +161,27 @@
     {% if reviews %}
     <div class="d-flex flex-column gap-3 mb-4">
         {% for r in reviews %}
-        <div class="p-3 rounded" style="background-color: #faf9f6; border: 1px solid var(--border-hairline);">
+        <div class="p-3 rounded" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
             <div class="d-flex justify-content-between align-items-center mb-1">
                 <strong>{{ r.customer_name or r.full_name }}</strong>
-                <span class="text-warning small">
+                <span class="small" style="color: #c59b27;">
                     {% for i in range(r.rating) %}&#9733;{% endfor %}
-                    <span class="text-craft-muted tabular-nums">({{ r.rating }}/5)</span>
+                    <span class="text-muted tabular-nums">({{ r.rating }}/5)</span>
                 </span>
             </div>
-            <p class="small text-craft-secondary mb-1">{{ r.comment }}</p>
-            <span class="text-craft-muted small tabular-nums" style="font-size: 0.75rem;">{{ r.created_at }}</span>
+            <p class="small text-secondary mb-1">{{ r.comment }}</p>
+            <span class="text-muted small tabular-nums" style="font-size: 0.75rem;">{{ r.created_at }}</span>
         </div>
         {% endfor %}
     </div>
     {% else %}
-    <p class="text-craft-muted small mb-4">No reviews recorded yet for this product specimen.</p>
+    <p class="text-muted small mb-4">No reviews recorded yet for this product specimen.</p>
     {% endif %}
 
     <!-- Leave Review Form -->
     {% if session.get('user') and session.get('role') == 'customer' %}
-    <div class="pt-3 border-top">
-        <h3 class="h6 fw-bold mb-2">Submit Verified Review</h3>
+    <div class="pt-3 border-top" style="border-color: var(--border-hairline) !important;">
+        <h3 class="h6 fw-semibold mb-2">Submit verified review</h3>
         <form method="POST" action="{{ url_for('review_add') }}">
             <input type="hidden" name="product_id" value="{{ product.product_id }}">
             <div class="row g-2 mb-2">
@@ -199,7 +199,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-sm btn-outline-craft">
-                Post Review
+                Post review
             </button>
         </form>
     </div>
@@ -211,11 +211,11 @@
 <script>
 function switchMainImage(src, btn) {
     const mainImg = document.getElementById('mainGalleryImage');
-    mainImg.style.opacity = '0.4';
+    mainImg.style.opacity = '0.3';
     setTimeout(() => {
         mainImg.src = src;
         mainImg.style.opacity = '1';
-    }, 120);
+    }, 100);
 
     document.querySelectorAll('.thumbnail-btn').forEach(b => {
         b.classList.remove('opacity-100');

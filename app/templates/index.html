@@ -2,31 +2,31 @@
 {% block title %}MUET Storefront – Pakistani Regional Marketplace{% endblock %}
 
 {% block content %}
-<!-- Editorial Asymmetric Hero -->
-<div class="card-craft p-4 p-md-5 mb-5" style="background: linear-gradient(180deg, #ffffff 0%, #fbf9f5 100%);">
+<!-- Asymmetric Editorial Hero -->
+<div class="card-craft p-4 p-md-5 mb-5" style="background-color: var(--bg-card);">
     <div class="row align-items-center g-4">
         <div class="col-lg-7">
-            <div class="d-inline-flex align-items-center gap-2 px-2 py-1 rounded mb-3" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline); font-size: 0.8rem;">
-                <span class="badge bg-dark font-mono text-uppercase" style="font-size: 0.7rem;">Verified</span>
-                <span class="text-secondary">MUET SE Department DBMS Complex Engineering Problem</span>
+            <div class="d-inline-flex align-items-center gap-2 px-2 py-1 rounded mb-3" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+                <span class="font-mono text-muted" style="font-size: 0.75rem;">Academic demonstration</span>
+                <span class="text-secondary" style="font-size: 0.8rem;">DBMS Project &bull; Sindh Regional Marketplace</span>
             </div>
-            <h1 class="display-6 fw-bold mb-3" style="color: var(--text-primary); line-height: 1.2; letter-spacing: -0.02em;">
+            <h1 class="display-6 fw-bold mb-3" style="color: var(--text-primary); line-height: 1.25; letter-spacing: -0.02em;">
                 Regional merchants, transparent pricing in PKR, tracked delivery.
             </h1>
-            <p class="lead mb-4" style="color: var(--text-secondary); font-size: 1.05rem; max-width: 38rem;">
-                A normalized relational marketplace connecting verified vendors in Karachi, Hyderabad, and Islamabad with university students. Built on strict ACID transactions with real-time inventory synchronization.
+            <p class="lead mb-4" style="color: var(--text-secondary); font-size: 1rem; max-width: 38rem;">
+                A normalized relational marketplace connecting verified vendors in Karachi, Hyderabad, and Islamabad with university buyers. Built on strict ACID transactions with real-time inventory synchronization.
             </p>
             <div class="d-flex flex-wrap gap-2">
                 <a href="{{ url_for('products') }}" class="btn btn-indigo">
-                    Browse Catalog
+                    Browse catalog
                 </a>
                 {% if not session.get('user') %}
                 <a href="{{ url_for('register') }}" class="btn btn-outline-craft">
-                    Register Customer Account
+                    Create account
                 </a>
                 {% else %}
                 <a href="{{ url_for('my_orders') }}" class="btn btn-outline-craft">
-                    View My Orders
+                    View my orders
                 </a>
                 {% endif %}
             </div>
@@ -34,20 +34,20 @@
 
         <div class="col-lg-5">
             <!-- Featured Product Preview (Real Material Moment) -->
-            <div class="card-craft p-3" style="background-color: #ffffff; border-color: rgba(27, 54, 93, 0.15);">
+            <div class="card-craft p-3" style="background-color: var(--bg-card); border-color: var(--border-hairline);">
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="text-uppercase text-muted font-mono" style="font-size: 0.75rem;">Featured Specimen</span>
-                    <span class="badge badge-craft badge-stock-in">In Stock (14 units)</span>
+                    <span class="text-muted font-mono" style="font-size: 0.75rem;">Featured specimen</span>
+                    <span class="badge badge-craft badge-stock-in">In stock (14 units)</span>
                 </div>
-                <h5 class="fw-bold mb-1" style="color: var(--text-primary);">Dell Inspiron 15 Core i5</h5>
-                <p class="text-muted small mb-3">FHD Anti-Glare &bull; TechZone Distribution Karachi</p>
+                <h5 class="fw-semibold mb-1" style="color: var(--text-primary); font-size: 1.05rem;">Dell Inspiron 15 Core i5</h5>
+                <p class="text-muted small mb-3">FHD Anti-Glare &bull; TechZone Distribution, Karachi</p>
                 <div class="d-flex justify-content-between align-items-end pt-2 border-top" style="border-color: var(--border-hairline) !important;">
                     <div>
-                        <span class="text-muted small d-block">Retail Price</span>
-                        <span class="fs-5 fw-bold tabular-nums" style="color: var(--accent-indigo);">PKR 148,000.00</span>
+                        <span class="text-muted small d-block">Retail price</span>
+                        <span class="fs-5 fw-semibold tabular-nums" style="color: var(--accent-indigo);">PKR 148,000.00</span>
                     </div>
                     <a href="{{ url_for('product_detail', product_id=1) }}" class="btn btn-sm btn-outline-craft">
-                        View Product
+                        View product
                     </a>
                 </div>
             </div>
@@ -56,22 +56,22 @@
 </div>
 
 <!-- 5 Department Showcase Cards -->
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="d-flex justify-content-between align-items-baseline mb-3">
     <div>
-        <h2 class="h5 fw-bold mb-0" style="color: var(--text-primary); letter-spacing: -0.01em;">Explore Store Departments</h2>
-        <span class="text-craft-muted small">Select a department to view sub-categories, filter by brand, and browse real product photos</span>
+        <h2 class="h6 fw-semibold mb-0" style="color: var(--text-primary);">Explore store departments</h2>
+        <span class="text-muted small">Select a department to browse products, filter by brand, and inspect verified specifications</span>
     </div>
-    <a href="{{ url_for('products') }}" class="text-decoration-none small fw-semibold" style="color: var(--accent-indigo);">
-        Full Catalog &rarr;
+    <a href="{{ url_for('products') }}" class="text-decoration-none small fw-medium" style="color: var(--accent-indigo);">
+        Full catalog &rarr;
     </a>
 </div>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 mb-5">
     {% for dept in departments %}
     <div class="col">
-        <a href="{{ url_for('category_view', slug=dept.category_slug) }}" class="card-craft h-100 text-decoration-none d-flex flex-column overflow-hidden" style="transition: transform 0.15s ease, box-shadow 0.15s ease;">
+        <a href="{{ url_for('category_view', slug=dept.category_slug) }}" class="card-craft h-100 text-decoration-none d-flex flex-column overflow-hidden">
             <!-- Category Image Container -->
-            <div class="position-relative overflow-hidden" style="aspect-ratio: 4/3; background-color: #faf9f6;">
+            <div class="position-relative overflow-hidden" style="aspect-ratio: 4/3; background-color: var(--bg-raised);">
                 <img src="/{{ dept.image_path if dept.image_path else 'static/images/placeholder.svg' }}" 
                      alt="{{ dept.category_name }}" 
                      class="w-100 h-100" 
@@ -80,10 +80,10 @@
             </div>
             <!-- Category Text -->
             <div class="p-3 d-flex flex-column flex-grow-1">
-                <h3 class="h6 fw-semibold mb-1" style="color: var(--text-primary); font-size: 0.95rem;">
+                <h3 class="h6 fw-semibold mb-1" style="color: var(--text-primary); font-size: 0.92rem;">
                     {{ dept.category_name }}
                 </h3>
-                <span class="text-craft-muted small mt-auto tabular-nums">
+                <span class="text-muted small mt-auto tabular-nums">
                     {{ dept.active_product_count }} products
                 </span>
             </div>
@@ -96,27 +96,27 @@
 <div class="row g-3">
     <div class="col-md-4">
         <div class="card-craft p-4 h-100">
-            <span class="text-muted small d-block mb-1">Catalog Inventory</span>
+            <span class="text-muted small d-block mb-1">Catalog inventory</span>
             <div class="d-flex align-items-baseline gap-2">
-                <h3 class="fw-bold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_products }}</h3>
+                <h3 class="fw-semibold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_products }}</h3>
                 <span class="text-secondary small">active products across 14 categories</span>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card-craft p-4 h-100">
-            <span class="text-muted small d-block mb-1">Orders Dispatched</span>
+            <span class="text-muted small d-block mb-1">Orders dispatched</span>
             <div class="d-flex align-items-baseline gap-2">
-                <h3 class="fw-bold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_orders }}</h3>
+                <h3 class="fw-semibold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_orders }}</h3>
                 <span class="text-secondary small">fulfilled via TCS, Leopards &amp; M&amp;P</span>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card-craft p-4 h-100">
-            <span class="text-muted small d-block mb-1">Registered Accounts</span>
+            <span class="text-muted small d-block mb-1">Registered accounts</span>
             <div class="d-flex align-items-baseline gap-2">
-                <h3 class="fw-bold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_users }}</h3>
+                <h3 class="fw-semibold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_users }}</h3>
                 <span class="text-secondary small">authenticated with salted hashes</span>
             </div>
         </div>

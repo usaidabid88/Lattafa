@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Manage Orders - MUET Shop Admin{% endblock %}
+{% block title %}Manage Orders – MUET Shop Admin{% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4 pb-2 border-bottom">
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
     <div>
-        <h1 class="h3 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Order Administration</h1>
-        <p class="text-craft-muted mb-0 small">Audit customer transactions, update fulfillment status, and trigger cancellation rollback procedures</p>
+        <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Order administration</h1>
+        <p class="text-muted mb-0 small">Audit customer transactions, update fulfillment status, and trigger cancellation rollback procedures</p>
     </div>
     <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-craft btn-sm">
         <i class="bi bi-arrow-left me-1"></i> Dashboard
@@ -19,10 +19,10 @@
                 <tr>
                     <th style="width: 75px;">Ref</th>
                     <th>Customer</th>
-                    <th>Date Placed</th>
-                    <th class="text-end">Total Amount</th>
-                    <th>Current Status</th>
-                    <th style="min-width: 170px;">State Transition</th>
+                    <th>Date placed</th>
+                    <th class="text-end">Total amount</th>
+                    <th>Current status</th>
+                    <th style="min-width: 170px;">State transition</th>
                     <th class="text-end" style="width: 140px;">Operations</th>
                 </tr>
             </thead>
@@ -71,18 +71,18 @@
                             </button>
                         </form>
                         {% else %}
-                        <span class="text-craft-muted small" style="font-size: 0.8rem;">Terminal State</span>
+                        <span class="text-muted small" style="font-size: 0.8rem;">Terminal state</span>
                         {% endif %}
                     </td>
                     <td class="text-end">
                         <div class="d-inline-flex align-items-center gap-1">
-                            <a href="{{ url_for('order_detail', order_id=o.order_id) }}" class="btn btn-sm btn-outline-craft py-1 px-2" style="font-size: 0.8rem;" title="View Invoice">
+                            <a href="{{ url_for('order_detail', order_id=o.order_id) }}" class="btn btn-sm btn-outline-craft py-1 px-2" style="font-size: 0.8rem;" title="View invoice">
                                 <i class="bi bi-eye"></i>
                             </a>
                             {% if o.status not in ['delivered', 'cancelled'] %}
                             <form method="POST" action="{{ url_for('admin_order_cancel') }}" onsubmit="return confirm('Execute sp_cancel_order: cancel order and roll back product inventory?');" class="d-inline">
                                 <input type="hidden" name="order_id" value="{{ o.order_id }}">
-                                <button type="submit" class="btn btn-sm text-danger border-0 p-1" title="Cancel order (triggers stored procedure rollback)">
+                                <button type="submit" class="btn btn-sm text-secondary border-0 p-1" title="Cancel order (triggers stored procedure rollback)">
                                     <span class="small">Cancel</span>
                                 </button>
                             </form>

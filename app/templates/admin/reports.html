@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Executive Analytics & Views - MUET Shop Admin{% endblock %}
+{% block title %}Analytics & Reports – MUET Shop Admin{% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4 pb-2 border-bottom">
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
     <div>
-        <h1 class="h3 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Database Analytics & Analytical Views</h1>
-        <p class="text-craft-muted mb-0 small">Live aggregated views from MySQL 8.0 schema covering category revenue, low inventory triggers, and cart abandonment</p>
+        <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Database analytics &amp; views</h1>
+        <p class="text-muted mb-0 small">Aggregated views from MySQL schema covering category revenue, low inventory triggers, and cart abandonment</p>
     </div>
     <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-craft btn-sm">
         <i class="bi bi-arrow-left me-1"></i> Dashboard
@@ -14,21 +14,21 @@
 
 <!-- Section 1: Sales by Category (v_sales_by_category) -->
 <div class="card-craft p-0 overflow-hidden mb-4">
-    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
+    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: var(--bg-raised); border-bottom: 1px solid var(--border-hairline);">
         <div>
-            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Departmental Sales Summary</h2>
-            <div class="small text-craft-muted font-monospace" style="font-size: 0.75rem;">View: v_sales_by_category</div>
+            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Departmental sales summary</h2>
+            <div class="small text-muted font-mono" style="font-size: 0.75rem;">View: v_sales_by_category</div>
         </div>
-        <span class="badge-craft badge-neutral">Gross Revenue</span>
+        <span class="badge-craft badge-neutral">Gross revenue</span>
     </div>
     <div class="table-responsive">
         <table class="table table-craft align-middle">
             <thead>
                 <tr>
-                    <th>Department Category</th>
-                    <th class="text-center" style="width: 140px;">Completed Orders</th>
-                    <th class="text-center" style="width: 130px;">Units Sold</th>
-                    <th class="text-end" style="width: 200px;">Gross Revenue</th>
+                    <th>Department</th>
+                    <th class="text-center" style="width: 140px;">Completed orders</th>
+                    <th class="text-center" style="width: 130px;">Units sold</th>
+                    <th class="text-end" style="width: 200px;">Gross revenue</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,23 +51,23 @@
 
 <!-- Section 2: Low Stock Alerts (v_low_stock) -->
 <div class="card-craft p-0 overflow-hidden mb-4">
-    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
+    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: var(--bg-raised); border-bottom: 1px solid var(--border-hairline);">
         <div>
-            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Inventory Replenishment Thresholds</h2>
-            <div class="small text-craft-muted font-monospace" style="font-size: 0.75rem;">View: v_low_stock (Threshold &le; 5 units)</div>
+            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Inventory replenishment</h2>
+            <div class="small text-muted font-mono" style="font-size: 0.75rem;">View: v_low_stock (Threshold &le; 5 units)</div>
         </div>
-        <span class="badge-craft badge-stock-low">Replenishment Action</span>
+        <span class="badge-craft badge-stock-low">Replenishment action</span>
     </div>
     <div class="table-responsive">
         <table class="table table-craft align-middle">
             <thead>
                 <tr>
                     <th style="width: 75px;">Ref</th>
-                    <th>Product Title</th>
+                    <th>Product title</th>
                     <th>Category</th>
-                    <th class="text-center" style="width: 150px;">Physical Reserve</th>
-                    <th>Assigned Supplier</th>
-                    <th class="text-end" style="width: 180px;">Supplier Contact</th>
+                    <th class="text-center" style="width: 150px;">Physical reserve</th>
+                    <th>Assigned supplier</th>
+                    <th class="text-end" style="width: 180px;">Supplier contact</th>
                 </tr>
             </thead>
             <tbody>
@@ -98,23 +98,23 @@
 
 <!-- Section 3: Best Sellers (v_best_sellers) -->
 <div class="card-craft p-0 overflow-hidden mb-4">
-    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
+    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: var(--bg-raised); border-bottom: 1px solid var(--border-hairline);">
         <div>
-            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Catalog Volume Leaders</h2>
-            <div class="small text-craft-muted font-monospace" style="font-size: 0.75rem;">View: v_best_sellers</div>
+            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Best sellers</h2>
+            <div class="small text-muted font-mono" style="font-size: 0.75rem;">View: v_best_sellers</div>
         </div>
-        <span class="badge-craft badge-stock-in">Ranked by Volume</span>
+        <span class="badge-craft badge-stock-in">Ranked by volume</span>
     </div>
     <div class="table-responsive">
         <table class="table table-craft align-middle">
             <thead>
                 <tr>
                     <th class="text-center" style="width: 60px;">Rank</th>
-                    <th>Product Title</th>
+                    <th>Product title</th>
                     <th>Category</th>
-                    <th class="text-center" style="width: 130px;">Units Sold</th>
-                    <th class="text-end" style="width: 180px;">Total Revenue</th>
-                    <th class="text-center" style="width: 130px;">Current Reserve</th>
+                    <th class="text-center" style="width: 130px;">Units sold</th>
+                    <th class="text-end" style="width: 180px;">Total revenue</th>
+                    <th class="text-center" style="width: 130px;">Current reserve</th>
                 </tr>
             </thead>
             <tbody>
@@ -141,23 +141,23 @@
 
 <!-- Section 4: Abandoned Carts (v_abandoned_carts) -->
 <div class="card-craft p-0 overflow-hidden mb-4">
-    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
+    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: var(--bg-raised); border-bottom: 1px solid var(--border-hairline);">
         <div>
-            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Dormant Baskets & Recovery Prospects</h2>
-            <div class="small text-craft-muted font-monospace" style="font-size: 0.75rem;">View: v_abandoned_carts (Inactivity &ge; 7 Days)</div>
+            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Abandoned shopping carts</h2>
+            <div class="small text-muted font-mono" style="font-size: 0.75rem;">View: v_abandoned_carts (Inactivity &ge; 7 days)</div>
         </div>
-        <span class="badge-craft badge-stock-low">Recovery Pipeline</span>
+        <span class="badge-craft badge-stock-low">Recovery pipeline</span>
     </div>
     <div class="table-responsive">
         <table class="table table-craft align-middle">
             <thead>
                 <tr>
                     <th style="width: 75px;">Cart</th>
-                    <th>Customer Name</th>
-                    <th>Email Address</th>
+                    <th>Customer name</th>
+                    <th>Email address</th>
                     <th>Phone</th>
                     <th class="text-center" style="width: 120px;">Dormancy</th>
-                    <th class="text-end" style="width: 180px;">Estimated Basket</th>
+                    <th class="text-end" style="width: 180px;">Estimated basket</th>
                 </tr>
             </thead>
             <tbody>

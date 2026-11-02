@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Invoice #{{ order.order_id }} - MUET Shop{% endblock %}
+{% block title %}Invoice #{{ order.order_id }} – MUET Shop{% endblock %}
 
 {% block content %}
 <nav aria-label="breadcrumb" class="mb-3">
     <ol class="breadcrumb small">
-        <li class="breadcrumb-item"><a href="{{ url_for('my_orders') }}" class="text-decoration-none" style="color: var(--accent-indigo);">Order History</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('my_orders') }}" class="text-decoration-none" style="color: var(--accent-indigo);">Order history</a></li>
         <li class="breadcrumb-item active" style="color: var(--text-muted);">Invoice #{{ order.order_id }}</li>
     </ol>
 </nav>
@@ -14,11 +14,11 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
         <div>
             <div class="d-flex align-items-center gap-3 mb-1">
-                <h1 class="h3 fw-semibold mb-0" style="color: var(--text-primary); letter-spacing: -0.02em;">Order #{{ order.order_id }}</h1>
+                <h1 class="h4 fw-semibold mb-0" style="color: var(--text-primary); letter-spacing: -0.02em;">Order #{{ order.order_id }}</h1>
                 {% if order.status == 'pending' %}
-                <span class="badge-craft badge-status-pending"><i class="bi bi-clock"></i> Pending Settlement</span>
+                <span class="badge-craft badge-status-pending"><i class="bi bi-clock"></i> Pending settlement</span>
                 {% elif order.status == 'paid' %}
-                <span class="badge-craft badge-status-paid"><i class="bi bi-check-circle"></i> Payment Settled</span>
+                <span class="badge-craft badge-status-paid"><i class="bi bi-check-circle"></i> Payment settled</span>
                 {% elif order.status == 'shipped' %}
                 <span class="badge-craft badge-status-shipped"><i class="bi bi-truck"></i> Dispatched</span>
                 {% elif order.status == 'delivered' %}
@@ -29,15 +29,15 @@
                 <span class="badge-craft badge-neutral">{{ order.status }}</span>
                 {% endif %}
             </div>
-            <div class="text-craft-muted small">
+            <div class="text-muted small">
                 <span>Placed on <strong class="tabular-nums" style="color: var(--text-secondary);">{{ order.order_date }}</strong></span>
                 <span class="mx-2">&bull;</span>
-                <span>Customer Account: <strong style="color: var(--text-secondary);">{{ order.customer_name }}</strong></span>
+                <span>Customer account: <strong style="color: var(--text-secondary);">{{ order.customer_name }}</strong></span>
             </div>
         </div>
         <div class="text-md-end">
-            <div class="text-craft-muted small text-uppercase fw-semibold" style="letter-spacing: 0.05em;">Total Invoiced</div>
-            <div class="fs-3 fw-bold tabular-nums" style="color: var(--accent-indigo);">PKR {{ "{:,.2f}".format(order.total_amount) }}</div>
+            <div class="text-muted small" style="font-size: 0.8rem;">Total invoiced</div>
+            <div class="fs-4 fw-semibold tabular-nums" style="color: var(--accent-indigo);">PKR {{ "{:,.2f}".format(order.total_amount) }}</div>
         </div>
     </div>
 </div>
@@ -47,9 +47,9 @@
     <!-- Destination -->
     <div class="col-md-4">
         <div class="card-craft p-3 h-100">
-            <div class="d-flex align-items-center gap-2 mb-2 pb-2 border-bottom">
-                <i class="bi bi-geo-alt text-craft-muted"></i>
-                <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Destination Address</h2>
+            <div class="d-flex align-items-center gap-2 mb-2 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+                <i class="bi bi-geo-alt text-muted"></i>
+                <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Destination address</h2>
             </div>
             <div class="small" style="color: var(--text-secondary); line-height: 1.5;">
                 {{ order.address }}
@@ -60,15 +60,15 @@
     <!-- Payment -->
     <div class="col-md-4">
         <div class="card-craft p-3 h-100">
-            <div class="d-flex align-items-center gap-2 mb-2 pb-2 border-bottom">
-                <i class="bi bi-wallet2 text-craft-muted"></i>
-                <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Settlement Details</h2>
+            <div class="d-flex align-items-center gap-2 mb-2 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+                <i class="bi bi-wallet2 text-muted"></i>
+                <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Settlement details</h2>
             </div>
             <div class="small" style="color: var(--text-secondary); line-height: 1.6;">
-                <div><span class="text-craft-muted">Method:</span> <span class="fw-medium text-capitalize">{{ order.payment_method }}</span></div>
-                <div><span class="text-craft-muted">Status:</span> <span class="fw-medium text-capitalize">{{ order.payment_status }}</span></div>
+                <div><span class="text-muted">Method:</span> <span class="fw-medium text-capitalize">{{ order.payment_method }}</span></div>
+                <div><span class="text-muted">Status:</span> <span class="fw-medium text-capitalize">{{ order.payment_status }}</span></div>
                 {% if order.paid_at %}
-                <div><span class="text-craft-muted">Settled:</span> <span class="tabular-nums">{{ order.paid_at }}</span></div>
+                <div><span class="text-muted">Settled:</span> <span class="tabular-nums">{{ order.paid_at }}</span></div>
                 {% endif %}
             </div>
         </div>
@@ -77,22 +77,22 @@
     <!-- Logistics -->
     <div class="col-md-4">
         <div class="card-craft p-3 h-100">
-            <div class="d-flex align-items-center gap-2 mb-2 pb-2 border-bottom">
-                <i class="bi bi-truck text-craft-muted"></i>
-                <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Logistics & Dispatch</h2>
+            <div class="d-flex align-items-center gap-2 mb-2 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+                <i class="bi bi-truck text-muted"></i>
+                <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Logistics &amp; dispatch</h2>
             </div>
             <div class="small" style="color: var(--text-secondary); line-height: 1.6;">
                 {% if order.courier %}
-                <div><span class="text-craft-muted">Courier:</span> <span class="fw-medium">{{ order.courier }}</span></div>
-                <div><span class="text-craft-muted">Tracking:</span> <span class="tabular-nums fw-medium" style="color: var(--accent-indigo);">{{ order.tracking_number }}</span></div>
+                <div><span class="text-muted">Courier:</span> <span class="fw-medium">{{ order.courier }}</span></div>
+                <div><span class="text-muted">Tracking:</span> <span class="tabular-nums fw-medium font-mono" style="color: var(--accent-indigo);">{{ order.tracking_number }}</span></div>
                 {% if order.shipped_at %}
-                <div><span class="text-craft-muted">Dispatched:</span> <span class="tabular-nums">{{ order.shipped_at }}</span></div>
+                <div><span class="text-muted">Dispatched:</span> <span class="tabular-nums">{{ order.shipped_at }}</span></div>
                 {% endif %}
                 {% if order.delivered_at %}
-                <div><span class="text-craft-muted">Delivered:</span> <span class="tabular-nums text-success">{{ order.delivered_at }}</span></div>
+                <div><span class="text-muted">Delivered:</span> <span class="tabular-nums text-success">{{ order.delivered_at }}</span></div>
                 {% endif %}
                 {% else %}
-                <div class="text-craft-muted italic">Shipment tracking has not been assigned yet.</div>
+                <div class="text-muted">Shipment tracking has not been assigned yet.</div>
                 {% endif %}
             </div>
         </div>
@@ -101,17 +101,17 @@
 
 <!-- Order Line Items -->
 <div class="card-craft p-0 overflow-hidden mb-4">
-    <div class="p-3" style="background-color: #faf9f6; border-bottom: 1px solid var(--border-hairline);">
-        <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Line Items Specification</h2>
+    <div class="p-3" style="background-color: var(--bg-raised); border-bottom: 1px solid var(--border-hairline);">
+        <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Line items specification</h2>
     </div>
     <div class="table-responsive">
         <table class="table table-craft align-middle">
             <thead>
                 <tr>
-                    <th style="min-width: 250px;">Item Description</th>
+                    <th style="min-width: 250px;">Item description</th>
                     <th class="text-center" style="width: 80px;">Qty</th>
-                    <th class="text-end" style="width: 140px;">Unit Price</th>
-                    <th class="text-end" style="width: 150px;">Line Subtotal</th>
+                    <th class="text-end" style="width: 140px;">Unit price</th>
+                    <th class="text-end" style="width: 150px;">Line subtotal</th>
                 </tr>
             </thead>
             <tbody>
@@ -119,18 +119,18 @@
                 <tr>
                     <td>
                         <div class="fw-medium" style="color: var(--text-primary);">{{ item.product_name }}</div>
-                        <div class="small text-craft-muted">Recorded snapshot at transaction commit</div>
+                        <div class="small text-muted">Immutable snapshot at checkout commit</div>
                     </td>
                     <td class="text-center tabular-nums" style="color: var(--text-secondary);">{{ item.quantity }}</td>
-                    <td class="text-end tabular-nums text-craft-muted">PKR {{ "{:,.2f}".format(item.unit_price) }}</td>
+                    <td class="text-end tabular-nums text-muted">PKR {{ "{:,.2f}".format(item.unit_price) }}</td>
                     <td class="text-end tabular-nums fw-semibold" style="color: var(--text-primary);">PKR {{ "{:,.2f}".format(item.quantity * item.unit_price) }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
             <tfoot>
-                <tr style="background-color: #faf9f6; border-top: 2px solid var(--border-hairline);">
-                    <td colspan="3" class="text-end fw-semibold small text-uppercase" style="letter-spacing: 0.05em; color: var(--text-secondary);">Grand Total:</td>
-                    <td class="text-end fw-bold tabular-nums fs-5" style="color: var(--accent-indigo);">PKR {{ "{:,.2f}".format(order.total_amount) }}</td>
+                <tr style="background-color: var(--bg-raised); border-top: 1px solid var(--border-hairline);">
+                    <td colspan="3" class="text-end fw-medium small" style="color: var(--text-secondary);">Grand total</td>
+                    <td class="text-end fw-semibold tabular-nums fs-5" style="color: var(--accent-indigo);">PKR {{ "{:,.2f}".format(order.total_amount) }}</td>
                 </tr>
             </tfoot>
         </table>
@@ -139,7 +139,7 @@
 
 <div>
     <a href="{{ url_for('my_orders') }}" class="btn btn-outline-craft">
-        <i class="bi bi-arrow-left me-1"></i> Back to Orders
+        <i class="bi bi-arrow-left me-1"></i> Back to orders
     </a>
 </div>
 {% endblock %}

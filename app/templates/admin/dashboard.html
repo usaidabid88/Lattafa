@@ -1,46 +1,46 @@
 {% extends "base.html" %}
-{% block title %}Admin & Staff Dashboard – MUET Shop{% endblock %}
+{% block title %}Admin Dashboard – MUET Shop{% endblock %}
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
     <div>
-        <h3 class="fw-bold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Admin & Staff Dashboard</h3>
-        <p class="text-muted small mb-0">Real-time inventory thresholds, order statuses, and financial settlement.</p>
+        <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Admin & Staff Dashboard</h1>
+        <p class="text-muted small mb-0">Real-time inventory thresholds, order statuses, and financial settlement</p>
     </div>
     <div class="d-flex align-items-center gap-2">
-        <span class="badge bg-light text-dark border font-mono text-uppercase" style="font-size: 0.75rem;">Role: {{ session.get('role') }}</span>
-        <a href="{{ url_for('admin_reports') }}" class="btn btn-sm btn-indigo">View Analytical Reports</a>
+        <span class="badge-craft badge-neutral font-mono" style="font-size: 0.75rem;">Role: {{ session.get('role') }}</span>
+        <a href="{{ url_for('admin_reports') }}" class="btn btn-sm btn-indigo">View reports</a>
     </div>
 </div>
 
-<!-- 4 Elevated, Non-Saturated Metric Cards -->
+<!-- 4 Quiet Stat Cards -->
 <div class="row g-3 mb-4">
     <div class="col-md-3">
-        <div class="card-craft p-3 h-100" style="border-top: 3px solid #16a34a;">
-            <span class="text-muted small d-block mb-1">Gross Revenue (Settled)</span>
-            <h4 class="fw-bold mb-1 tabular-nums" style="color: var(--text-primary);">PKR {{ "{:,.2f}".format(total_sales) }}</h4>
-            <span class="text-secondary small font-mono" style="font-size: 0.75rem;">Paid, Shipped &amp; Delivered</span>
+        <div class="card-craft p-3 h-100">
+            <span class="text-muted small d-block mb-1">Gross revenue (settled)</span>
+            <h4 class="fw-semibold mb-1 tabular-nums" style="color: var(--text-primary);">PKR {{ "{:,.2f}".format(total_sales) }}</h4>
+            <span class="text-muted small font-mono" style="font-size: 0.75rem;">Paid, shipped &amp; delivered</span>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card-craft p-3 h-100" style="border-top: 3px solid #d97706;">
-            <span class="text-muted small d-block mb-1">Pending Orders</span>
-            <h4 class="fw-bold mb-1 tabular-nums" style="color: var(--text-primary);">{{ pending_orders }}</h4>
-            <span class="text-secondary small font-mono" style="font-size: 0.75rem;">Awaiting warehouse dispatch</span>
+        <div class="card-craft p-3 h-100">
+            <span class="text-muted small d-block mb-1">Pending orders</span>
+            <h4 class="fw-semibold mb-1 tabular-nums" style="color: var(--text-primary);">{{ pending_orders }}</h4>
+            <span class="text-muted small font-mono" style="font-size: 0.75rem;">Awaiting warehouse dispatch</span>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card-craft p-3 h-100" style="border-top: 3px solid #dc2626;">
+        <div class="card-craft p-3 h-100">
             <span class="text-muted small d-block mb-1">Low Stock Alerts</span>
-            <h4 class="fw-bold mb-1 tabular-nums" style="color: #dc2626;">{{ low_stock }}</h4>
-            <span class="text-secondary small font-mono" style="font-size: 0.75rem;">Inventory threshold &le; 5 units</span>
+            <h4 class="fw-semibold mb-1 tabular-nums" style="color: #991b1b;">{{ low_stock }}</h4>
+            <span class="text-muted small font-mono" style="font-size: 0.75rem;">Inventory threshold &le; 5 units</span>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card-craft p-3 h-100" style="border-top: 3px solid var(--accent-indigo);">
-            <span class="text-muted small d-block mb-1">Customer Accounts</span>
-            <h4 class="fw-bold mb-1 tabular-nums" style="color: var(--text-primary);">{{ total_customers }}</h4>
-            <span class="text-secondary small font-mono" style="font-size: 0.75rem;">Active authenticated profiles</span>
+        <div class="card-craft p-3 h-100">
+            <span class="text-muted small d-block mb-1">Customer accounts</span>
+            <h4 class="fw-semibold mb-1 tabular-nums" style="color: var(--text-primary);">{{ total_customers }}</h4>
+            <span class="text-muted small font-mono" style="font-size: 0.75rem;">Active authenticated profiles</span>
         </div>
     </div>
 </div>
@@ -49,31 +49,31 @@
 <div class="row g-3">
     <div class="col-md-4">
         <div class="card-craft p-4 h-100 d-flex flex-column">
-            <h5 class="fw-bold mb-2">Catalog &amp; Products</h5>
+            <h5 class="fw-semibold mb-2" style="font-size: 1rem;">Catalog &amp; products</h5>
             <p class="text-secondary small mb-4">Add new items, adjust stock levels, modify retail prices, and manage category listings.</p>
             <div class="mt-auto d-flex gap-2">
-                <a href="{{ url_for('admin_products') }}" class="btn btn-sm btn-outline-craft">Manage Catalog</a>
-                <a href="{{ url_for('admin_product_add') }}" class="btn btn-sm btn-indigo">Add Product</a>
+                <a href="{{ url_for('admin_products') }}" class="btn btn-sm btn-outline-craft">Manage catalog</a>
+                <a href="{{ url_for('admin_product_add') }}" class="btn btn-sm btn-indigo">Add product</a>
             </div>
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="card-craft p-4 h-100 d-flex flex-column">
-            <h5 class="fw-bold mb-2">Fulfillment &amp; Orders</h5>
+            <h5 class="fw-semibold mb-2" style="font-size: 1rem;">Fulfillment &amp; orders</h5>
             <p class="text-secondary small mb-4">Advance order lifecycle stages, review customer delivery addresses, or initiate transactional cancellations.</p>
             <div class="mt-auto">
-                <a href="{{ url_for('admin_orders') }}" class="btn btn-sm btn-outline-craft">Review Orders</a>
+                <a href="{{ url_for('admin_orders') }}" class="btn btn-sm btn-outline-craft">Review orders</a>
             </div>
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="card-craft p-4 h-100 d-flex flex-column">
-            <h5 class="fw-bold mb-2">Executive Reports</h5>
+            <h5 class="fw-semibold mb-2" style="font-size: 1rem;">Executive reports</h5>
             <p class="text-secondary small mb-4">Access dedicated database views: departmental sales contribution, replenishment alerts, and abandoned carts.</p>
             <div class="mt-auto">
-                <a href="{{ url_for('admin_reports') }}" class="btn btn-sm btn-outline-craft">Open Reports View</a>
+                <a href="{{ url_for('admin_reports') }}" class="btn btn-sm btn-outline-craft">Open reports</a>
             </div>
         </div>
     </div>
