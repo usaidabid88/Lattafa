@@ -14,19 +14,20 @@ Current phase: ALL PHASES COMPLETE (100% Ready for Submission & Viva)
 - [x] Phase 8  – Web UI (Flask)  ← DONE. Complete Flask app built with 15 Bootstrap 5 Jinja templates. All parameterized queries. Automated test suite verified 18/18 test cases (Auth, Catalog, Cart, Checkout via sp_place_order, Admin Views, RBAC).
 - [x] Phase 9  – Testing  ← DONE. Automated test suite sql/07_tests.sql executed on MySQL 8. 10/10 tests passed (duplicate email, negative price/stock, invalid rating, oversell rollback, stock triggers, audit logging, review triggers, FK restrict/cascade). Test matrix added to report_outline.md.
 - [x] Phase 10 – Report, presentation, and viva  ← DONE. Comprehensive academic report written (docs/FINAL_REPORT.md answering all 9 assignment questions), 10-minute live demonstration script created (docs/demo_guide.md), and viva preparation notes complete for all 3 members (docs/viva_notes.md).
-- [x] Phase 11A – Database Schema Expansion  ← DONE. mysqldump backup created (backups/backup_phase11_pre.sql). Executed sql/08_catalog_expansion.sql (brands table, product_images table, category tree and slugs, single-primary-image triggers and sp_set_product_primary_image, v_product_catalog and v_category_counts views, performance indexes). Zero rows lost across existing orders, users, and carts. Verified 18/18 Flask tests pass. Viva notes updated.
-- [ ] Phase 11B – Catalog Data Pipeline (data/products_manifest.csv & import_catalog.py)
-- [ ] Phase 11C – Image Acquisition (Option B polite fetcher script)
-- [ ] Phase 11D – Storefront Category Browsing UI
-- [ ] Phase 11E – Product Card & Detail Gallery UI
-- [ ] Phase 11F – Admin Catalog Management & File Uploads
-- [ ] Phase 11G – Testing, Demo Queries, Report & Viva Finalization
+- [x] Phase 11A – Database Schema Expansion  ← DONE. mysqldump backup created (backups/pre_phase11_20261103_0147.sql). Executed sql/08_catalog_expansion.sql (brands table, product_images table, category tree and slugs, single-primary-image triggers and sp_set_product_primary_image, v_product_catalog and v_category_counts views, performance indexes). Zero rows lost across existing orders, users, and carts. AUDIT_11A: PASS.
+- [x] Phase 11B – Catalog Data Pipeline  ← DONE. Authored data/products_manifest.csv (51 verified products across 9 subcategories) and app/scripts/import_catalog.py. Idempotent upsert by product name; imported 51 products across 14 brands with 0 duplicates. AUDIT_11B: PASS.
+- [x] Phase 11C – Image Acquisition & Pipeline  ← DONE. Created static/images/placeholder.svg. Authored app/scripts/fetch_images.py implementing Option B with robots.txt parser, >=3.2s per-domain delay, and graceful local specimen fallback. 0 broken images on disk. images_report.json generated. AUDIT_11C: PASS.
+- [x] Phase 11D – Storefront Category Browsing UI  ← DONE. Created app/templates/category.html with breadcrumbs, subcategory chips, brand filter, price range slider/inputs, sort dropdown, and pagination. Updated index.html with 5 department cards showing dynamic counts from v_category_counts. AUDIT_11D_11F: PASS.
+- [x] Phase 11E – Product Card & Detail Gallery UI  ← DONE. Updated products.html and product_detail.html with aspect-ratio locked cards, multi-image gallery thumbnail switcher, brand attribution, and verified reviews. AUDIT_11D_11F: PASS.
+- [x] Phase 11F – Admin Catalog Management & File Uploads  ← DONE. Enhanced admin product form with brand dropdown, multi-category selector, and secure image file upload (validates MIME, rejects >2MB). AUDIT_11D_11F: PASS.
+- [x] Phase 11G – Testing, Demo Queries, Report & Viva Finalization  ← DONE. Executed sql/07_tests.sql (15/15 PASS), test_app.py (25/25 PASS), sql/06_demo_queries.sql Section 9 (0 errors). Updated docs/er_diagram.md, docs/viva_notes.md, docs/FINAL_REPORT.md. Captured 6 Playwright screenshots (390px and 1280px). AUDIT_11G: PASS.
 
 ## Known issues
-- None yet
+- Pakistani retail domains (Khaadi, Dawlance, etc.) returned 403 / anti-bot challenge during automated image retrieval; all 49 affected products use high-fidelity local specimen assets so no 404s exist; list logged to `data/images_report.json`.
 
 ## Decisions changed from the roadmap
-- None yet
+- Stored single primary image constraint via BEFORE INSERT trigger validation + transactional stored procedure sp_set_product_primary_image to avoid MySQL Error 1442 trigger re-entrancy.
+- v_category_counts rolls up active product counts from child subcategories for top-level department headers.
 
 ## Group details
 - Member A: Member A (Users and Access)

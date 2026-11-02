@@ -1,0 +1,302 @@
+{
+  "total_manifest_items": 51,
+  "downloaded_or_verified": 2,
+  "skipped_by_policy": 0,
+  "manual_needed_count": 49,
+  "manual_needed_items": [
+    {
+      "index": 1,
+      "name": "Dell Inspiron 15 3520 Core i5 12th Gen",
+      "file": "static/images/products/laptops/dell-i5-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 2,
+      "name": "HP 15s-fq5000 Core i5 12th Gen Laptop",
+      "file": "static/images/products/laptops/hp-i5-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 3,
+      "name": "Lenovo IdeaPad 3 15IAU7 Core i5 12th Gen",
+      "file": "static/images/products/laptops/lenovo-ideapad-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 4,
+      "name": "Asus Vivobook 15 X1504 Core i5 13th Gen",
+      "file": "static/images/products/laptops/asus-vivobook-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 5,
+      "name": "Acer Aspire 3 A315 Core i5 12th Gen",
+      "file": "static/images/products/laptops/acer-aspire-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 6,
+      "name": "Asus TUF Gaming A15 Ryzen 7 RTX 4060",
+      "file": "static/images/products/laptops/gaming-a-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 7,
+      "name": "HP Victus 15 Core i7 RTX 4050 Gaming Laptop",
+      "file": "static/images/products/laptops/gaming-b-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 8,
+      "name": "Apple MacBook Air M2 13.6-Inch Midnight",
+      "file": "static/images/products/laptops/macbook-air-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 9,
+      "name": "Dell OptiPlex 7010 Small Form Factor Desktop",
+      "file": "static/images/products/computers/desktop-pc-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 10,
+      "name": "Dell SE2422H 24-Inch Full HD Monitor",
+      "file": "static/images/products/computers/monitor-24-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 11,
+      "name": "Logitech M185 Wireless Optical Mouse",
+      "file": "static/images/products/accessories/wireless-mouse-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 12,
+      "name": "Redragon K552 Kumara Mechanical Gaming Keyboard",
+      "file": "static/images/products/accessories/keyboard-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 13,
+      "name": "Sony WH-CH520 Wireless Bluetooth Headphones",
+      "file": "static/images/products/accessories/headset-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 15,
+      "name": "Kingston DataTraveler Exodia 64GB USB 3.2 Flash Drive",
+      "file": "static/images/products/accessories/usb-drive-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 16,
+      "name": "Lenovo ThinkPad 15.6-Inch Basic Backpack",
+      "file": "static/images/products/accessories/laptop-bag-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 17,
+      "name": "Logitech C920 HD Pro Webcam",
+      "file": "static/images/products/accessories/webcam-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 19,
+      "name": "Samsung Galaxy Tab A9 Plus 11-Inch 64GB",
+      "file": "static/images/products/tablets-gadgets/tablet-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 20,
+      "name": "Haylou Solar Plus RT3 AMOLED Smartwatch",
+      "file": "static/images/products/tablets-gadgets/smartwatch-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 21,
+      "name": "Xiaomi Redmi 20000mAh 18W Fast Charge Power Bank",
+      "file": "static/images/products/tablets-gadgets/power-bank-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 22,
+      "name": "Anker Soundcore 2 Portable Bluetooth Speaker",
+      "file": "static/images/products/tablets-gadgets/bt-speaker-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 23,
+      "name": "Khaadi 3-Piece Printed Lawn Suit A",
+      "file": "static/images/products/women-unstitched/khaadi-lawn-a-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 24,
+      "name": "Khaadi 3-Piece Embroidered Lawn Suit B",
+      "file": "static/images/products/women-unstitched/khaadi-lawn-b-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 25,
+      "name": "Alkaram Studio Festive Unstitched Lawn Suit A",
+      "file": "static/images/products/women-unstitched/alkaram-lawn-a-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 26,
+      "name": "Alkaram Studio Daily Wear 2-Piece Lawn Suit B",
+      "file": "static/images/products/women-unstitched/alkaram-lawn-b-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 27,
+      "name": "Bonanza Satrangi Printed Unstitched Lawn Suit A",
+      "file": "static/images/products/women-unstitched/bonanza-unstitched-a-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 28,
+      "name": "Bonanza Satrangi Embroidered Luxury Lawn Suit B",
+      "file": "static/images/products/women-unstitched/bonanza-unstitched-b-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 29,
+      "name": "Khaadi Classic Stitched Casual Kurta",
+      "file": "static/images/products/women-ready-to-wear/khaadi-kurta-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 30,
+      "name": "Alkaram Studio Stitched 3-Piece Pret Suit",
+      "file": "static/images/products/women-ready-to-wear/alkaram-stitched-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 31,
+      "name": "Bonanza Satrangi Ready to Wear Printed Kurti",
+      "file": "static/images/products/women-ready-to-wear/bonanza-kurta-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 32,
+      "name": "Bonanza Satrangi Stitched Embroidered 3-Piece Suit",
+      "file": "static/images/products/women-ready-to-wear/bonanza-stitched-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 33,
+      "name": "Alkaram Studio Contemporary Short Kurti",
+      "file": "static/images/products/women-ready-to-wear/alkaram-kurti-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 34,
+      "name": "J. Classic Men Embroidered Kurta",
+      "file": "static/images/products/men-wear/men-kurta-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 35,
+      "name": "J. Men Stitched Cotton Shalwar Kameez Suit",
+      "file": "static/images/products/men-wear/men-shalwar-kameez-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 36,
+      "name": "Bonanza Satrangi Men Jamawar Waistcoat",
+      "file": "static/images/products/men-wear/men-waistcoat-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 37,
+      "name": "Diners Men Classic Pique Polo Shirt",
+      "file": "static/images/products/men-wear/men-polo-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 38,
+      "name": "Oxford Men Slim Fit Casual Cotton Shirt",
+      "file": "static/images/products/men-wear/men-casual-shirt-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 39,
+      "name": "Khaadi Girls Floral Printed Summer Frock",
+      "file": "static/images/products/kids-wear/girls-frock-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 40,
+      "name": "J. Boys Stitched Festive Kurta",
+      "file": "static/images/products/kids-wear/boys-kurta-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 41,
+      "name": "Alkaram Studio Kids Boys Shalwar Kameez",
+      "file": "static/images/products/kids-wear/kids-shalwar-kameez-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 42,
+      "name": "Dawlance 9178 LF Avante Refrigerator",
+      "file": "static/images/products/kitchen-appliances/refrigerator-1.jpg",
+      "reason": "HTTP 403"
+    },
+    {
+      "index": 43,
+      "name": "Haier HMW-20MXP Solo Microwave Oven 20L",
+      "file": "static/images/products/kitchen-appliances/microwave-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 44,
+      "name": "Westpoint WF-6170 Electric Stainless Steel Kettle",
+      "file": "static/images/products/kitchen-appliances/kettle-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 45,
+      "name": "Anex AG-6034 3-in-1 Blender and Juicer",
+      "file": "static/images/products/kitchen-appliances/blender-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 46,
+      "name": "Westpoint WF-5256 Digital Air Fryer 5.5L",
+      "file": "static/images/products/kitchen-appliances/air-fryer-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 47,
+      "name": "Anex AG-2077 Deluxe Rice Cooker with Steamer",
+      "file": "static/images/products/kitchen-appliances/rice-cooker-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 48,
+      "name": "Westpoint WF-9214 Electric Hand Mixer with Beaters",
+      "file": "static/images/products/kitchen-appliances/hand-mixer-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 49,
+      "name": "Anex AG-1036 Sandwich Toaster 4-Slice",
+      "file": "static/images/products/kitchen-appliances/sandwich-maker-1.jpg",
+      "reason": "HTTP 404"
+    },
+    {
+      "index": 50,
+      "name": "Dawlance Built-In Tempered Glass Gas Hob",
+      "file": "static/images/products/kitchen-appliances/gas-hob-1.jpg",
+      "reason": "HTTP 403"
+    },
+    {
+      "index": 51,
+      "name": "Dawlance WD 1050 Water Dispenser Refrigerator",
+      "file": "static/images/products/kitchen-appliances/water-dispenser-1.jpg",
+      "reason": "Domain blocked/rate-limited"
+    }
+  ]
+}
