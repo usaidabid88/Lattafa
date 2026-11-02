@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Seller Verification – Admin Console{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-baseline mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+    <div>
+        <span class="badge bg-secondary-subtle text-secondary small font-mono">Marketplace Governance</span>
+        <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Seller Verification &amp; Auditing</h1>
+        <p class="text-muted small mb-0">Only products from verified sellers appear in public search and category listings (AC-06.2)</p>
+    </div>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-craft btn-sm">
+        <i class="bi bi-arrow-left me-1"></i> Admin Console
+    </a>
+</div>
+
+<div class="card-craft p-0 mb-4 overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-craft align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Seller ID</th>
+                    <th>Business Name</th>
+                    <th>Contact Person</th>
+                    <th>City &amp; Location</th>
+                    <th>Active Catalog</th>
+                    <th>Verification State</th>
+                    <th class="text-end">Verification Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in sellers %}
+                <tr>
+                    <td class="font-mono small text-muted">#{{ s.seller_id }}</td>
+                    <td>
+                        <div class="fw-semibold small" style="color: var(--text-primary);">{{ s.business_name }}</div>
+                        <div class="text-muted small font-mono">{{ s.email }}</div>
+                    </td>
+                    <td>
+                        <div class="small fw-medium">{{ s.contact_name }}</div>
+                        <div class="text-muted small font-mono">{{ s.phone }}</div>
+                    </td>
+                    <td>
+                        <div class="small">{{ s.city or 'Karachi' }}</div>
+                        <div class="text-muted small">{{ s.store_location or 'Main Branch' }}</div>
+                    </td>
+                    <td>
+                        <span class="badge-craft badge-neutral tabular-nums">{{ s.active_products_count }} products</span>
+                    </td>
+                    <td>
+                        <span class="badge {% if s.verification_status == 'verified' %}bg-success{% elif s.verification_status == 'rejected' %}bg-danger{% else %}bg-warning text-dark{% endif %} text-uppercase font-mono small">
+                            {{ s.verification_status }}
+                        </span>
+                    </td>
+                    <td class="text-end">
+                        <div class="d-inline-flex gap-1">
+                            {% if s.verification_status != 'verified' %}
+                            <form method="POST" action="{{ url_for('admin_seller_verify', seller_id=s.seller_id) }}" class="d-inline">
+                                <input type="hidden" name="status" value="verified">
+                                <button type="submit" class="btn btn-outline-success btn-sm px-2" title="Verify Seller">
+                                    <i class="bi bi-check2 me-1"></i> Verify
+                                </button>
+                            </form>
+                            {% endif %}
+
+                            {% if s.verification_status != 'rejected' %}
+                            <form method="POST" action="{{ url_for('admin_seller_verify', seller_id=s.seller_id) }}" class="d-inline">
+                                <input type="hidden" name="status" value="rejected">
+                                <button type="submit" class="btn btn-outline-danger btn-sm px-2" title="Reject / Delist Seller">
+                                    <i class="bi bi-ban me-1"></i> Reject
+                                </button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="text-center py-4 text-muted small">No sellers registered.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

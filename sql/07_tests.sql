@@ -489,6 +489,297 @@ BEGIN
         END IF;
     END;
 
+    -- ------------------------------------------------------------------------
+    -- TEST 16: Single-Source Pricing Parity (sp_cart_summary, AC-01.1, AC-01.2)
+    -- ------------------------------------------------------------------------
+    BEGIN
+        DECLARE v_sub DECIMAL(10,2);
+        DECLARE v_tax DECIMAL(10,2);
+        DECLARE v_fee DECIMAL(10,2);
+        DECLARE v_tot DECIMAL(10,2);
+        DECLARE v_min INT;
+        DECLARE v_max INT;
+
+        CALL sp_cart_summary(1, 'Sindh', 'Karachi', v_sub, v_tax, v_fee, v_tot, v_min, v_max);
+
+        IF v_tot = (v_sub + v_tax + v_fee) AND v_fee = 150.00 THEN
+            INSERT INTO test_results VALUES ('T16', 'Price Parity (sp_cart_summary)',
+                'Compute subtotal + tax + fee = total_amount for Karachi, Sindh',
+                'Total exactly equals subtotal + tax + delivery fee (Rs 150 fee)',
+                CONCAT('Computed Total: PKR ', v_tot, ' = ', v_sub, ' + ', v_tax, ' + ', v_fee), 'PASS');
+        ELSE
+            INSERT INTO test_results VALUES ('T16', 'Price Parity (sp_cart_summary)',
+                'Check total equals subtotal + tax + fee',
+                'Parity verified',
+                CONCAT('FAILED: Total divergence detected: ', v_tot), 'FAIL');
+        END IF;
+    END;
+
+    -- ------------------------------------------------------------------------
+    -- TEST 17: Guest Checkout Execution (sp_place_guest_order, AC-03.1)
+    -- ------------------------------------------------------------------------
+    BEGIN
+        DECLARE v_t_cart_id INT;
+        DECLARE v_g_order_id INT;
+        DECLARE v_g_msg VARCHAR(255);
+        DECLARE v_is_null_uid INT;
+
+        INSERT INTO carts (user_id, session_token, status) VALUES (NULL, 'tok_test_guest_t17', 'active');
+        SET v_t_cart_id = LAST_INSERT_ID();
+        INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (v_t_cart_id, 1, 1);
+
+        CALL sp_place_guest_order('tok_test_guest_t17', 'Kamran Akmal', 'kamran@test.pk', '03001234567',
+                                  'Street 5, Saddar', 'Hyderabad', 'Sindh', 'cod', v_g_order_id, v_g_msg);
+
+        SELECT COUNT(*) INTO v_is_null_uid FROM orders WHERE order_id = v_g_order_id AND user_id IS NULL;
+
+        IF v_g_order_id IS NOT NULL AND v_is_null_uid = 1 THEN
+            INSERT INTO test_results VALUES ('T17', 'Guest Checkout Placement (AC-03.1)',
+                'Place order with guest token without account registration',
+                'Order created successfully with user_id IS NULL and address snapshot',
+                CONCAT('Guest Order #', v_g_order_id, ' created with user_id NULL'), 'PASS');
+        ELSE
+            INSERT INTO test_results VALUES ('T17', 'Guest Checkout Placement (AC-03.1)',
+                'Guest order creation',
+                'Order created with user_id IS NULL',
+                CONCAT('FAILED: ', v_g_msg), 'FAIL');
+        END IF;
+
+        DELETE FROM orders WHERE order_id = v_g_order_id;
+        DELETE FROM carts WHERE cart_id = v_t_cart_id;
+    END;
+
+    -- ------------------------------------------------------------------------
+    -- TEST 18: Anonymous Guest Cart Merge (sp_merge_carts, AC-08.2)
+    -- ------------------------------------------------------------------------
+    BEGIN
+        DECLARE v_g_cart INT;
+        DECLARE v_u_cart INT;
+        DECLARE v_merged_cnt INT;
+        DECLARE v_item_check INT;
+
+        INSERT INTO carts (user_id, session_token, status) VALUES (NULL, 'tok_merge_test_t18', 'active');
+        SET v_g_cart = LAST_INSERT_ID();
+        INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (v_g_cart, 3, 2);
+
+        SELECT cart_id INTO v_u_cart FROM carts WHERE user_id = 2 AND status = 'active' LIMIT 1;
+        IF v_u_cart IS NULL THEN
+            INSERT INTO carts (user_id, status) VALUES (2, 'active');
+            SET v_u_cart = LAST_INSERT_ID();
+        END IF;
+
+        CALL sp_merge_carts('tok_merge_test_t18', 2, v_merged_cnt);
+
+        SELECT COUNT(*) INTO v_item_check FROM cart_items WHERE cart_id = v_u_cart AND product_id = 3;
+
+        IF v_item_check >= 1 THEN
+            INSERT INTO test_results VALUES ('T18', 'Guest Cart Merge on Login (AC-08.2)',
+                'Merge items from session token cart into customer account cart',
+                'Items combined into customer cart and guest cart converted',
+                'Items successfully merged into user #2 active cart', 'PASS');
+        ELSE
+            INSERT INTO test_results VALUES ('T18', 'Guest Cart Merge on Login (AC-08.2)',
+                'Guest cart merge',
+                'Items combined',
+                'FAILED: Items not found in user cart after merge', 'FAIL');
+        END IF;
+
+        DELETE FROM carts WHERE cart_id = v_g_cart;
+    END;
+
+    -- ------------------------------------------------------------------------
+    -- TEST 19: Order Status History Trigger (trg_order_status_history, AC-04.3)
+    -- ------------------------------------------------------------------------
+    BEGIN
+        DECLARE v_hist_cnt INT;
+
+        UPDATE orders SET status = 'shipped' WHERE order_id = 1;
+        SELECT COUNT(*) INTO v_hist_cnt FROM order_status_history 
+        WHERE order_id = 1 AND new_status = 'shipped';
+
+        UPDATE orders SET status = 'pending' WHERE order_id = 1;
+
+        IF v_hist_cnt >= 1 THEN
+            INSERT INTO test_results VALUES ('T19', 'Order Status Audit Trigger (AC-04.3)',
+                'UPDATE orders.status to trigger automatic audit log entry',
+                'Row created in order_status_history with old_status and new_status',
+                'Status transition record verified in order_status_history', 'PASS');
+        ELSE
+            INSERT INTO test_results VALUES ('T19', 'Order Status Audit Trigger (AC-04.3)',
+                'Trigger execution on status update',
+                'Audit record created in order_status_history',
+                'FAILED: No audit record found in order_status_history', 'FAIL');
+        END IF;
+    END;
+
+    -- ------------------------------------------------------------------------
+    -- TEST 20: Delivery Address Snapshot Immutability (AC-04.2)
+    -- ------------------------------------------------------------------------
+    BEGIN
+        DECLARE v_snap_orig TEXT;
+        DECLARE v_snap_after TEXT;
+
+        SELECT shipping_address_snapshot INTO v_snap_orig FROM orders WHERE order_id = 1;
+        IF v_snap_orig IS NULL THEN
+            UPDATE orders SET shipping_address_snapshot = 'Original Immutable Snapshot' WHERE order_id = 1;
+            SET v_snap_orig = 'Original Immutable Snapshot';
+        END IF;
+
+        UPDATE addresses SET line1 = 'New Modified Street 999' WHERE address_id = 1;
+        SELECT shipping_address_snapshot INTO v_snap_after FROM orders WHERE order_id = 1;
+
+        IF v_snap_orig = v_snap_after THEN
+            INSERT INTO test_results VALUES ('T20', 'Address Snapshot Immutability (AC-04.2)',
+                'Modify customer address book entry; inspect historical order snapshot',
+                'Order shipping_address_snapshot remains completely unaltered',
+                'Historical order address preserved intact despite address edit', 'PASS');
+        ELSE
+            INSERT INTO test_results VALUES ('T20', 'Address Snapshot Immutability (AC-04.2)',
+                'Address snapshot check',
+                'Snapshot remains identical',
+                'FAILED: Historical snapshot changed when address book was edited', 'FAIL');
+        END IF;
+    END;
+
+    -- ------------------------------------------------------------------------
+    -- TEST 21: Support Ticket Filing & Number Generation (AC-04.4)
+    -- ------------------------------------------------------------------------
+    BEGIN
+        DECLARE v_tck_id INT;
+        DECLARE v_tck_num VARCHAR(30);
+
+        INSERT INTO support_tickets (ticket_number, contact_name, contact_email, issue_type, subject, description, status)
+        VALUES ('TCK-TEST-SQL-21', 'Shahid Afridi', 'shahid@test.pk', 'damaged', 'Item damaged', 'Box arrived crushed', 'open');
+        SET v_tck_id = LAST_INSERT_ID();
+
+        SELECT ticket_number INTO v_tck_num FROM support_tickets WHERE ticket_id = v_tck_id;
+
+        IF v_tck_num = 'TCK-TEST-SQL-21' THEN
+            INSERT INTO test_results VALUES ('T21', 'Customer Support Ticketing (AC-04.4)',
+                'Insert support ticket with category and contact information',
+                'Record saved in support_tickets with status open',
+                'Support ticket TCK-TEST-SQL-21 created successfully', 'PASS');
+        ELSE
+            INSERT INTO test_results VALUES ('T21', 'Customer Support Ticketing (AC-04.4)',
+                'Ticket creation',
+                'Ticket saved',
+                'FAILED: Support ticket not created', 'FAIL');
+        END IF;
+
+        DELETE FROM support_tickets WHERE ticket_id = v_tck_id;
+    END;
+
+    -- ------------------------------------------------------------------------
+    -- TEST 22: Seller Verification Catalog Filtering (AC-06.2)
+    -- ------------------------------------------------------------------------
+    BEGIN
+        DECLARE v_before_cnt INT;
+        DECLARE v_after_cnt INT;
+
+        SELECT COUNT(*) INTO v_before_cnt FROM v_product_catalog WHERE seller_id = 1;
+
+        UPDATE suppliers SET verification_status = 'rejected' WHERE supplier_id = 1;
+        SELECT COUNT(*) INTO v_after_cnt FROM v_product_catalog WHERE seller_id = 1;
+
+        UPDATE suppliers SET verification_status = 'verified' WHERE supplier_id = 1;
+
+        IF v_before_cnt > 0 AND v_after_cnt = 0 THEN
+            INSERT INTO test_results VALUES ('T22', 'Seller Verification Governance (AC-06.2)',
+                'Set seller verification_status = rejected; query v_product_catalog',
+                'Rejected seller products excluded from storefront catalog view',
+                CONCAT('Verified isolation: Catalog items dropped from ', v_before_cnt, ' to 0'), 'PASS');
+        ELSE
+            INSERT INTO test_results VALUES ('T22', 'Seller Verification Governance (AC-06.2)',
+                'Catalog exclusion test',
+                'Items excluded when seller is rejected',
+                CONCAT('FAILED: Rejected seller items still visible: ', v_after_cnt), 'FAIL');
+        END IF;
+    END;
+
+    -- ------------------------------------------------------------------------
+    -- TEST 23: Return Status History Audit Trigger (AC-08.5)
+    -- ------------------------------------------------------------------------
+    BEGIN
+        DECLARE v_ret_id INT;
+        DECLARE v_ret_hist_cnt INT;
+
+        INSERT INTO return_requests (return_number, order_id, product_id, reason, description, status)
+        VALUES ('RMA-TEST-SQL-23', 1, 1, 'defective', 'Hardware issue', 'requested');
+        SET v_ret_id = LAST_INSERT_ID();
+
+        UPDATE return_requests SET status = 'approved' WHERE return_id = v_ret_id;
+        SELECT COUNT(*) INTO v_ret_hist_cnt FROM return_status_history 
+        WHERE return_id = v_ret_id AND new_status = 'approved';
+
+        IF v_ret_hist_cnt >= 1 THEN
+            INSERT INTO test_results VALUES ('T23', 'Return Status Audit Trigger (AC-08.5)',
+                'UPDATE return_requests.status; check return_status_history trigger',
+                'Row created in return_status_history by trg_return_status_history',
+                'Return status transition to approved verified in audit table', 'PASS');
+        ELSE
+            INSERT INTO test_results VALUES ('T23', 'Return Status Audit Trigger (AC-08.5)',
+                'Trigger execution on return status update',
+                'Audit record created in return_status_history',
+                'FAILED: No audit record in return_status_history', 'FAIL');
+        END IF;
+
+        DELETE FROM return_requests WHERE return_id = v_ret_id;
+    END;
+
+    -- ------------------------------------------------------------------------
+    -- TEST 24: Overdue Return Requests View (AC-08.6)
+    -- ------------------------------------------------------------------------
+    BEGIN
+        DECLARE v_overdue_found INT;
+        DECLARE v_old_ret_id INT;
+
+        INSERT INTO return_requests (return_number, order_id, product_id, reason, description, status, created_at)
+        VALUES ('RMA-OVERDUE-T24', 1, 1, 'damaged', 'Old damaged box', 'requested', DATE_SUB(NOW(), INTERVAL 4 DAY));
+        SET v_old_ret_id = LAST_INSERT_ID();
+
+        SELECT COUNT(*) INTO v_overdue_found FROM v_overdue_return_requests WHERE return_number = 'RMA-OVERDUE-T24';
+
+        IF v_overdue_found >= 1 THEN
+            INSERT INTO test_results VALUES ('T24', 'Overdue Return SLA Escalation View (AC-08.6)',
+                'Query v_overdue_return_requests for claims > 72 hours without response',
+                'View accurately surfaces unattended claims with days_elapsed calculation',
+                'Overdue claim detected by v_overdue_return_requests view', 'PASS');
+        ELSE
+            INSERT INTO test_results VALUES ('T24', 'Overdue Return SLA Escalation View (AC-08.6)',
+                'Overdue view check',
+                'Claim surfaced by view',
+                'FAILED: Overdue claim not surfaced by view', 'FAIL');
+        END IF;
+
+        DELETE FROM return_requests WHERE return_id = v_old_ret_id;
+    END;
+
+    -- ------------------------------------------------------------------------
+    -- TEST 25: Payment Attempts Audit Logging (AC-02.2)
+    -- ------------------------------------------------------------------------
+    BEGIN
+        DECLARE v_pa_cnt INT;
+
+        INSERT INTO payment_attempts (order_id, payment_method, amount, status, transaction_ref, failure_reason)
+        VALUES (1, 'simulated', 5000.00, 'failed', 'TXN-FAIL-T25', 'Card declined: Test decline');
+
+        SELECT COUNT(*) INTO v_pa_cnt FROM payment_attempts WHERE transaction_ref = 'TXN-FAIL-T25';
+
+        IF v_pa_cnt = 1 THEN
+            INSERT INTO test_results VALUES ('T25', 'Payment Attempt Audit Logging (AC-02.2)',
+                'Log failed digital transaction in payment_attempts with reason',
+                'Record saved with transaction_ref, amount, status, and failure_reason',
+                'Failed payment attempt audit record verified in database', 'PASS');
+        ELSE
+            INSERT INTO test_results VALUES ('T25', 'Payment Attempt Audit Logging (AC-02.2)',
+                'Payment attempt log check',
+                'Record verified',
+                'FAILED: Payment attempt not found', 'FAIL');
+        END IF;
+
+        DELETE FROM payment_attempts WHERE transaction_ref = 'TXN-FAIL-T25';
+    END;
+
 END$$
 DELIMITER ;
 

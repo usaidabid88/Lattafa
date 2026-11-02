@@ -277,14 +277,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('products') }}">Catalog</a>
                     </li>
-                    {% if session.get('user') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('cart') }}">Cart</a>
                     </li>
+                    {% if session.get('user') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('my_orders') }}">My Orders</a>
                     </li>
                     {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('support_page') }}">
+                            <i class="bi bi-life-preserver me-1 text-white-50" aria-hidden="true"></i> Support
+                        </a>
+                    </li>
                     {% if session.get('role') in ['admin', 'staff'] %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('admin_dashboard') }}">
@@ -346,8 +351,16 @@
                 MySQL 8.0 &bull; ACID Transactions &bull; RBAC
             </div>
         </div>
-        <div class="container text-center pt-2 border-top" style="border-color: var(--border-hairline) !important; font-size: 0.75rem; color: var(--text-muted);">
-            Product catalog references verified regional and national stores for educational DBMS study.
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2 pt-2 border-top" style="border-color: var(--border-hairline) !important; font-size: 0.78rem;">
+            <div class="text-muted">
+                Product catalog references verified regional and national stores for educational DBMS study.
+            </div>
+            <div class="d-flex gap-3">
+                <a href="{{ url_for('privacy_policy') }}" class="text-secondary text-decoration-none">Privacy Policy</a>
+                <a href="{{ url_for('terms_of_service') }}" class="text-secondary text-decoration-none">Terms of Service</a>
+                <a href="{{ url_for('returns_policy') }}" class="text-secondary text-decoration-none">Returns Policy</a>
+                <a href="{{ url_for('support_page') }}" class="text-secondary text-decoration-none">Customer Support</a>
+            </div>
         </div>
     </footer>
 

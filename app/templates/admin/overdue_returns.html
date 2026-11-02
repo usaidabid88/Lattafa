@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Overdue Return Claims – Admin Console{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-baseline mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+    <div>
+        <span class="badge bg-danger-subtle text-danger small font-mono">SLA Escalation</span>
+        <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Overdue Return Claims (&gt; 3 Days)</h1>
+        <p class="text-muted small mb-0">Surfaces claims awaiting seller response past 72 hours via database view <code>v_overdue_return_requests</code></p>
+    </div>
+    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-craft btn-sm">
+        <i class="bi bi-arrow-left me-1"></i> Admin Console
+    </a>
+</div>
+
+<div class="card-craft p-0 mb-4 overflow-hidden border-danger" style="border-width: 1px;">
+    <div class="table-responsive">
+        <table class="table table-craft align-middle mb-0">
+            <thead>
+                <tr class="table-danger">
+                    <th>Claim Ref</th>
+                    <th>Product</th>
+                    <th>Assigned Seller</th>
+                    <th>Reason</th>
+                    <th>Days Overdue</th>
+                    <th>Hours Elapsed</th>
+                    <th class="text-end">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for o in overdue %}
+                <tr>
+                    <td class="font-mono small fw-semibold text-danger">{{ o.return_number }}</td>
+                    <td>
+                        <div class="fw-medium small" style="color: var(--text-primary);">{{ o.product_name }}</div>
+                        <div class="text-muted small font-mono">Order #{{ o.order_id }}</div>
+                    </td>
+                    <td>
+                        <div class="fw-medium small">{{ o.seller_name }}</div>
+                        <div class="text-muted small font-mono">Seller #{{ o.seller_id }}</div>
+                    </td>
+                    <td>
+                        <span class="badge-craft badge-neutral text-capitalize">{{ o.reason|replace('_', ' ') }}</span>
+                    </td>
+                    <td class="tabular-nums fw-bold text-danger">{{ o.days_elapsed }} days</td>
+                    <td class="font-mono tabular-nums text-muted">{{ o.hours_elapsed }} hrs</td>
+                    <td class="text-end">
+                        <a href="{{ url_for('return_detail', return_id=o.return_id) }}" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-eye me-1"></i> Inspect
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="text-center py-4 text-success small">
+                        <i class="bi bi-check2-circle me-1"></i> Zero overdue claims! All sellers are within the 3-day SLA window.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

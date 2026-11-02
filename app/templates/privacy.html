@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Privacy Policy – MUET Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+            <span class="badge bg-secondary-subtle text-secondary small font-mono">Data Governance (NFR-02)</span>
+            <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Privacy Policy</h1>
+            <p class="text-muted small mb-0">Effective Date: November 2026 &bull; MUET Software Engineering DBMS Academic Project</p>
+        </div>
+
+        <div class="card-craft p-4 mb-4" style="line-height: 1.7; font-size: 0.92rem; color: var(--text-secondary);">
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">1. Data Minimization &amp; Academic Scope</h2>
+            <p class="mb-3">
+                This web platform operates strictly as an academic prototype for the Database Management Systems Complex Engineering Problem (DBMS CEP) at Mehran University of Engineering and Technology, Jamshoro. We collect only minimal essential information required to fulfill shopping workflow demonstrations: customer names, contact emails, delivery addresses, and order items.
+            </p>
+
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">2. Non-Storage of Payment Card Information</h2>
+            <p class="mb-3">
+                <strong>No real credit card numbers, debit card details, CVVs, or financial credentials are ever captured or stored on our servers or databases.</strong> All digital payments are routed through a simulated test gateway sandbox solely demonstrating ACID transactional workflows and payment attempt auditing.
+            </p>
+
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">3. Guest Session Tokens</h2>
+            <p class="mb-3">
+                Unregistered guest shoppers are issued a cryptographically signed cookie token storing a pseudo-anonymous session identifier. This token enables guest cart persistence across browsing sessions without mandatory registration and is automatically merged into account credentials upon voluntary registration or login.
+            </p>
+
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">4. Data Retention &amp; Security Measures</h2>
+            <p class="mb-0">
+                User passwords are encrypted using salted PBKDF2 / SHA-256 password hashing. All database queries utilize parameterized SQL statements to eliminate injection risks.
+            </p>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ url_for('products') }}" class="btn btn-indigo btn-sm px-4">
+                Return to Storefront
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Return Request {{ claim.return_number }} – MUET Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-baseline mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+            <div>
+                <span class="badge bg-secondary-subtle text-secondary small font-mono">{{ claim.return_number }}</span>
+                <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Return Claim Status</h1>
+                <p class="text-muted small mb-0">Order #{{ claim.order_id }} &bull; Filed on {{ claim.created_at.strftime('%Y-%m-%d %H:%M') if claim.created_at and claim.created_at.strftime is defined else claim.created_at }}</p>
+            </div>
+            <span class="badge {% if claim.status in ['approved', 'refunded', 'completed'] %}bg-success{% elif claim.status == 'rejected' %}bg-danger{% else %}bg-warning text-dark{% endif %} fs-6">
+                {{ claim.status|replace('_', ' ')|capitalize }}
+            </span>
+        </div>
+
+        <div class="card-craft p-4 mb-4">
+            <h2 class="h6 fw-semibold mb-3" style="color: var(--text-primary);">Claim breakdown</h2>
+            
+            <div class="p-3 rounded mb-3" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+                <div class="row g-2 small">
+                    <div class="col-sm-6">
+                        <span class="text-muted">Merchandise:</span>
+                        <strong class="ms-1" style="color: var(--text-primary);">{{ claim.product_name }}</strong>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted">Reason category:</span>
+                        <span class="ms-1 text-capitalize fw-semibold text-danger">{{ claim.reason|replace('_', ' ') }}</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted">Refund Settlement:</span>
+                        <span class="ms-1 font-mono text-capitalize">{{ claim.refund_method|replace('_', ' ') }}</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted">Linked Order:</span>
+                        <a href="{{ url_for('order_detail', order_id=claim.order_id) }}" class="ms-1 font-mono">#{{ claim.order_id }}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 rounded mb-3" style="background-color: var(--bg-card); border: 1px solid var(--border-hairline);">
+                <div class="small text-muted mb-1 fw-semibold">Customer explanation:</div>
+                <div style="white-space: pre-line; color: var(--text-primary); font-size: 0.9rem;">{{ claim.description }}</div>
+            </div>
+
+            {% if claim.proof_image_path %}
+            <div class="mb-3">
+                <div class="small text-muted mb-1 fw-semibold">Submitted photographic proof:</div>
+                <img src="/{{ claim.proof_image_path }}" alt="Return proof image" class="img-thumbnail rounded" style="max-height: 220px; object-fit: contain;">
+            </div>
+            {% endif %}
+
+            <!-- Seller / Staff Response -->
+            {% if claim.seller_response %}
+            <div class="alert alert-info border-0 p-3 mb-0" role="alert">
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <i class="bi bi-shop fs-5"></i>
+                    <strong class="small">Seller response &amp; dispatch instructions:</strong>
+                </div>
+                <div style="white-space: pre-line; font-size: 0.88rem;">{{ claim.seller_response }}</div>
+            </div>
+            {% else %}
+            <div class="p-3 text-center text-muted small rounded" style="background-color: var(--bg-raised); border: 1px dashed var(--border-hairline);">
+                <i class="bi bi-clock-history me-1"></i> Awaiting seller review. Under our SLA, sellers must respond within 3 business days.
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Return Status Audit Timeline -->
+        {% if history %}
+        <div class="card-craft p-4 mb-4">
+            <h3 class="h6 fw-semibold mb-3 pb-2 border-bottom" style="color: var(--text-primary); border-color: var(--border-hairline) !important;">
+                Audit transition history (FR-21, AC-08.5)
+            </h3>
+            <div class="timeline position-relative ps-4" style="border-left: 2px solid var(--border-hairline); margin-left: 10px;">
+                {% for h in history %}
+                <div class="timeline-item mb-3 position-relative">
+                    <span class="position-absolute rounded-circle d-flex align-items-center justify-content-center bg-secondary text-white"
+                          style="width: 20px; height: 20px; left: -34px; top: 2px; font-size: 0.6rem;">
+                        <i class="bi bi-check"></i>
+                    </span>
+                    <div class="d-flex justify-content-between align-items-baseline">
+                        <strong class="small text-capitalize" style="color: var(--text-primary);">{{ h.new_status|replace('_', ' ') }}</strong>
+                        <span class="text-muted small font-mono">{{ h.changed_at }}</span>
+                    </div>
+                    <div class="text-muted small">{{ h.notes }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('order_detail', order_id=claim.order_id) }}" class="btn btn-outline-craft btn-sm">
+                <i class="bi bi-arrow-left me-1"></i> Return to order
+            </a>
+            <a href="{{ url_for('products') }}" class="btn btn-outline-craft btn-sm">
+                Storefront catalog
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

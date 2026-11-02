@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Return Claims Queue – Seller Console{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-baseline mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+    <div>
+        <span class="badge bg-secondary-subtle text-secondary small font-mono">Seller Dashboard</span>
+        <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Merchandise Return Claims</h1>
+        <p class="text-muted small mb-0">Review claims filed by buyers, examine photographic proof, and issue return approvals</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="{{ url_for('admin_overdue_returns') }}" class="btn btn-outline-danger btn-sm">
+            <i class="bi bi-alarm me-1"></i> Overdue SLA view
+        </a>
+    </div>
+</div>
+
+<div class="card-craft p-0 mb-4 overflow-hidden">
+    <div class="table-responsive">
+        <table class="table table-craft align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Claim Ref</th>
+                    <th>Product</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Proof</th>
+                    <th>Filed</th>
+                    <th class="text-end">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in claims %}
+                <tr>
+                    <td class="font-mono small fw-semibold" style="color: var(--accent-indigo);">
+                        {{ r.return_number }}
+                    </td>
+                    <td>
+                        <div class="fw-medium small" style="color: var(--text-primary);">{{ r.product_name }}</div>
+                        <div class="text-muted small font-mono">Order #{{ r.order_id }}</div>
+                    </td>
+                    <td>
+                        <span class="badge-craft badge-neutral text-capitalize">{{ r.reason|replace('_', ' ') }}</span>
+                    </td>
+                    <td>
+                        <span class="badge {% if r.status in ['approved', 'refunded', 'completed'] %}bg-success{% elif r.status == 'rejected' %}bg-danger{% else %}bg-warning text-dark{% endif %}">
+                            {{ r.status|replace('_', ' ')|capitalize }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if r.proof_image_path %}
+                        <a href="/{{ r.proof_image_path }}" target="_blank" class="small text-decoration-none">
+                            <i class="bi bi-image me-1"></i> View photo
+                        </a>
+                        {% else %}
+                        <span class="text-muted small">None</span>
+                        {% endif %}
+                    </td>
+                    <td class="small font-mono text-muted">
+                        {{ r.created_at.strftime('%Y-%m-%d') if r.created_at and r.created_at.strftime is defined else r.created_at }}
+                    </td>
+                    <td class="text-end">
+                        <button type="button" class="btn btn-outline-craft btn-sm px-2" data-bs-toggle="collapse" data-bs-target="#claim_action_{{ r.return_id }}" aria-expanded="false">
+                            <i class="bi bi-pencil-square me-1"></i> Review
+                        </button>
+                    </td>
+                </tr>
+                <tr class="collapse" id="claim_action_{{ r.return_id }}" style="background-color: var(--bg-raised);">
+                    <td colspan="7" class="p-3">
+                        <form method="POST" action="{{ url_for('seller_return_update', return_id=r.return_id) }}">
+                            <div class="row g-2 align-items-center">
+                                <div class="col-md-3">
+                                    <label for="status_{{ r.return_id }}" class="form-label small fw-medium mb-1">Status decision:</label>
+                                    <select name="status" id="status_{{ r.return_id }}" class="form-select form-select-sm">
+                                        <option value="requested" {% if r.status == 'requested' %}selected{% endif %}>Requested</option>
+                                        <option value="approved" {% if r.status == 'approved' %}selected{% endif %}>Approve Return (RMA Issued)</option>
+                                        <option value="rejected" {% if r.status == 'rejected' %}selected{% endif %}>Reject Claim</option>
+                                        <option value="item_returned" {% if r.status == 'item_returned' %}selected{% endif %}>Item Received at Warehouse</option>
+                                        <option value="refunded" {% if r.status == 'refunded' %}selected{% endif %}>Refund Dispatched</option>
+                                        <option value="completed" {% if r.status == 'completed' %}selected{% endif %}>Claim Completed</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-7">
+                                    <label for="response_{{ r.return_id }}" class="form-label small fw-medium mb-1">Seller instructions / reason:</label>
+                                    <input type="text" name="seller_response" id="response_{{ r.return_id }}" class="form-control form-control-sm" value="{{ r.seller_response or '' }}" placeholder="Return pickup address, courier tracking, or rejection justification...">
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end pt-3">
+                                    <button type="submit" class="btn btn-indigo btn-sm w-100">Submit Decision</button>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="text-center py-4 text-muted small">No return claims registered.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

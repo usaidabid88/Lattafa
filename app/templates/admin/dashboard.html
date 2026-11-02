@@ -5,7 +5,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
     <div>
         <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Admin & Staff Dashboard</h1>
-        <p class="text-muted small mb-0">Real-time inventory thresholds, order statuses, and financial settlement</p>
+        <p class="text-muted small mb-0">Real-time inventory thresholds, order statuses, and marketplace governance</p>
     </div>
     <div class="d-flex align-items-center gap-2">
         <span class="badge-craft badge-neutral font-mono" style="font-size: 0.75rem;">Role: {{ session.get('role') }}</span>
@@ -45,37 +45,98 @@
     </div>
 </div>
 
-<!-- Core Management Actions -->
-<div class="row g-3">
-    <div class="col-md-4">
-        <div class="card-craft p-4 h-100 d-flex flex-column">
-            <h5 class="fw-semibold mb-2" style="font-size: 1rem;">Catalog &amp; products</h5>
-            <p class="text-secondary small mb-4">Add new items, adjust stock levels, modify retail prices, and manage category listings.</p>
+<!-- Core Management Actions (Catalog, Orders, Marketplace, Support) -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card-craft p-3 h-100 d-flex flex-column">
+            <h5 class="fw-semibold mb-1" style="font-size: 0.95rem;">Catalog &amp; Products</h5>
+            <p class="text-secondary small mb-3">Add items, adjust stock levels, and assign brand attributions.</p>
             <div class="mt-auto d-flex gap-2">
-                <a href="{{ url_for('admin_products') }}" class="btn btn-sm btn-outline-craft">Manage catalog</a>
-                <a href="{{ url_for('admin_product_add') }}" class="btn btn-sm btn-indigo">Add product</a>
+                <a href="{{ url_for('admin_products') }}" class="btn btn-sm btn-outline-craft">Manage</a>
+                <a href="{{ url_for('admin_product_add') }}" class="btn btn-sm btn-indigo">Add item</a>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="card-craft p-4 h-100 d-flex flex-column">
-            <h5 class="fw-semibold mb-2" style="font-size: 1rem;">Fulfillment &amp; orders</h5>
-            <p class="text-secondary small mb-4">Advance order lifecycle stages, review customer delivery addresses, or initiate transactional cancellations.</p>
+    <div class="col-md-3">
+        <div class="card-craft p-3 h-100 d-flex flex-column">
+            <h5 class="fw-semibold mb-1" style="font-size: 0.95rem;">Orders &amp; Fulfillment</h5>
+            <p class="text-secondary small mb-3">Review orders, update dispatch states, and track delivery SLA.</p>
             <div class="mt-auto">
                 <a href="{{ url_for('admin_orders') }}" class="btn btn-sm btn-outline-craft">Review orders</a>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="card-craft p-4 h-100 d-flex flex-column">
-            <h5 class="fw-semibold mb-2" style="font-size: 1rem;">Executive reports</h5>
-            <p class="text-secondary small mb-4">Access dedicated database views: departmental sales contribution, replenishment alerts, and abandoned carts.</p>
+    <div class="col-md-3">
+        <div class="card-craft p-3 h-100 d-flex flex-column">
+            <h5 class="fw-semibold mb-1" style="font-size: 0.95rem;">Seller Governance</h5>
+            <p class="text-secondary small mb-3">Audit merchant profiles and approve/reject marketplace sellers.</p>
             <div class="mt-auto">
-                <a href="{{ url_for('admin_reports') }}" class="btn btn-sm btn-outline-craft">Open reports</a>
+                <a href="{{ url_for('admin_sellers') }}" class="btn btn-sm btn-outline-craft">Verify sellers</a>
             </div>
         </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-craft p-3 h-100 d-flex flex-column">
+            <h5 class="fw-semibold mb-1" style="font-size: 0.95rem;">Support &amp; Returns</h5>
+            <p class="text-secondary small mb-3">Resolve customer support tickets and monitor SLA return claims.</p>
+            <div class="mt-auto d-flex gap-2">
+                <a href="{{ url_for('staff_tickets') }}" class="btn btn-sm btn-outline-craft">Tickets</a>
+                <a href="{{ url_for('admin_overdue_returns') }}" class="btn btn-sm btn-outline-danger">Overdue</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Abandoned Carts Table (SRS Focus: v_abandoned_carts) -->
+<div class="card-craft p-0 mb-4 overflow-hidden">
+    <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: var(--bg-raised); border-bottom: 1px solid var(--border-hairline);">
+        <div>
+            <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Abandoned Shopping Carts (SRS Recovery View)</h2>
+            <div class="text-muted small">Carts idle &ge; 7 days, tracked via database view <code>v_abandoned_carts</code></div>
+        </div>
+        <span class="badge-craft badge-neutral">{{ abandoned_carts|length if abandoned_carts is defined else 0 }} carts</span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-craft align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>Cart ID</th>
+                    <th>Customer Name</th>
+                    <th>Contact Email</th>
+                    <th>Items</th>
+                    <th>Estimated Value</th>
+                    <th>Days Idle</th>
+                    <th>Last Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ac in abandoned_carts %}
+                <tr>
+                    <td class="font-mono small">#{{ ac.cart_id }}</td>
+                    <td class="fw-medium small" style="color: var(--text-primary);">{{ ac.customer_name }}</td>
+                    <td class="font-mono small text-muted">{{ ac.customer_email }}</td>
+                    <td class="tabular-nums">{{ ac.item_count }} items</td>
+                    <td class="tabular-nums fw-semibold" style="color: var(--accent-indigo);">PKR {{ "{:,.2f}".format(ac.estimated_cart_value) }}</td>
+                    <td>
+                        <span class="badge bg-warning text-dark font-mono">{{ ac.days_idle }} days</span>
+                    </td>
+                    <td class="small font-mono text-muted">
+                        {{ ac.last_activity.strftime('%Y-%m-%d') if ac.last_activity and ac.last_activity.strftime is defined else ac.last_activity }}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" class="text-center py-4 text-muted small">
+                        <i class="bi bi-check2-circle text-success me-1"></i> No abandoned carts currently detected.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

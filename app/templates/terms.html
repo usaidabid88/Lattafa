@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Terms of Service – MUET Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+            <span class="badge bg-secondary-subtle text-secondary small font-mono">Service Agreement (FR-19)</span>
+            <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Terms of Service</h1>
+            <p class="text-muted small mb-0">Rules, disclaimers, and user obligations governing use of MUET Shop</p>
+        </div>
+
+        <div class="card-craft p-4 mb-4" style="line-height: 1.7; font-size: 0.92rem; color: var(--text-secondary);">
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">1. Platform Operation &amp; Educational Purpose</h2>
+            <p class="mb-3">
+                MUET Shop is a software engineering database laboratory application. Product listings, brands, and retail assets represent regional and national merchants used under academic fair-use guidelines to model real-world multi-vendor relational catalogs.
+            </p>
+
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">2. Order Placement &amp; Pricing Parity</h2>
+            <p class="mb-3">
+                All order transactions placed through checkout are binding demonstrations governed by atomic transaction procedures (ACID). Item subtotals, provincial sales taxes, and delivery fees computed during checkout via stored procedures are verified for strict parity.
+            </p>
+
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">3. Seller Governance &amp; Prohibited Actions</h2>
+            <p class="mb-3">
+                Sellers operating on the platform must undergo verification by administrative staff prior to catalog activation. Submitting fraudulent merchandise claims, malicious SQL payloads, or unverified returns is strictly prohibited and subject to automated audit logging.
+            </p>
+
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">4. Mandatory Consent</h2>
+            <p class="mb-0">
+                By ticking the consent checkbox during account registration or order checkout, users explicitly consent to these Terms of Service and our Privacy Policy. The timestamp of consent is recorded in the operational database.
+            </p>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ url_for('products') }}" class="btn btn-indigo btn-sm px-4">
+                Return to Storefront
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

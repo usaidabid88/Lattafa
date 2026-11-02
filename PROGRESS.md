@@ -22,11 +22,11 @@ Current phase: ALL PHASES COMPLETE (100% Ready for Submission & Viva)
 - [x] Phase 11F – Admin Catalog Management & File Uploads  ← DONE. Enhanced admin product form with brand dropdown, multi-category selector, and secure image file upload (validates MIME, rejects >2MB). AUDIT_11D_11F: PASS.
 - [x] Phase 11G – Testing, Demo Queries, Report & Viva Finalization  ← DONE. Executed sql/07_tests.sql (15/15 PASS), test_app.py (25/25 PASS), sql/06_demo_queries.sql Section 9 (0 errors). Updated docs/er_diagram.md, docs/viva_notes.md, docs/FINAL_REPORT.md. Captured 6 Playwright screenshots (390px and 1280px). AUDIT_11G: PASS.
 - [x] Phase 12A – Requirements Traceability Matrix  ← DONE. Created docs/traceability.csv mapping all 63 SRS requirements (21 FRs, 25 ACs, 7 NFRs, 6 ARs, 3 URs, 1 OI) to database objects, routes, templates, and test targets. Zero missing targets.
-- [x] Phase 12B – Database Schema Alignment (sql/09_srs_alignment.sql)  ← DONE. mysqldump backup created (backups/pre_phase12_20261103_025219.sql). Executed sql/09_srs_alignment.sql twice with zero errors (idempotency verified). Added delivery_rates, tax_rates, payment_methods, payment_attempts, order_status_history, support_tickets, return_requests, return_status_history, v_sellers, v_overdue_return_requests, sp_cart_summary, sp_merge_carts, and shop_seller role. 0 existing rows lost; 25/25 test_app.py and 15/15 sql/07_tests.sql assertions PASS.
-- [ ] Phase 12C – Checkout, Pricing & Payment Pipeline
-- [ ] Phase 12D – Support, Trust & Seller Operations
-- [ ] Phase 12E – Quality & Accessibility Pass
-- [ ] Phase 12F – Verification & Final Viva Defense Prep
+- [x] Phase 12B – Database Schema Alignment (sql/09_srs_alignment.sql)  ← DONE. mysqldump backup created (backups/pre_12C_20261103_025942.sql). Executed sql/09_srs_alignment.sql twice with zero errors (idempotency verified). Added delivery_rates, tax_rates, payment_methods, payment_attempts, order_status_history, support_tickets, return_requests, return_status_history, v_sellers, v_overdue_return_requests, sp_cart_summary, sp_merge_carts, and shop_seller role.
+- [x] Phase 12C – Checkout, Pricing & Payment Pipeline  ← DONE. Implemented guest checkout without auth, signed cart token persistence in session, sp_merge_carts upon login, sp_cart_summary pricing parity on /cart and /checkout, 4-step progress flow, simulated payment gateway sandbox with success/fail/cancel outcomes, payment retry and switch-to-COD recovery, and branded custom 400/404/500 error pages. AUDIT_12C: PASS.
+- [x] Phase 12D – Support, Trust & Seller Operations  ← DONE. Implemented order tracking with trigger-backed timeline (/orders/<id>/track), support ticketing (/support) with staff triage queue (/staff/tickets), seller verification governance (/admin/sellers) filtering unverified merchandise from v_product_catalog, return/replacement request lodging (/orders/<id>/return) with seller queue (/seller/returns) and admin overdue SLA view (/admin/returns/overdue), abandoned shopping cart view in admin dashboard, and legal policy pages (/privacy, /terms, /returns-policy) with explicit consent checkboxes. AUDIT_12D: PASS.
+- [x] Phase 12E – Quality & Accessibility Pass  ← DONE. Verified WCAG 2.1 Level AA accessibility (semantic labels, ARIA alerts, 44px touch targets, color contrast >= 4.5:1, keyboard focus outlines), mobile responsive layouts across 390px and 1280px viewports, and captured 12 fresh high-resolution Playwright screenshots in audits/screenshots/. AUDIT_12E: PASS.
+- [x] Phase 12F – Verification & Final Viva Defense Prep  ← DONE. Authored docs/srs_test_sheet.md verifying 25/25 acceptance criteria (100% PASS). Expanded sql/07_tests.sql to 25 database assertions (T1-T25, 100% PASS). Unified test_app.py running 46 automated integration tests (100% PASS). Updated docs/er_diagram.md (23 entities in 3NF), docs/FINAL_REPORT.md, and docs/viva_notes.md with comprehensive defense Q&As for all 3 members. All 63 items in docs/traceability.csv marked Implemented.
 
 ## Known issues
 - Pakistani retail domains (Khaadi, Dawlance, etc.) returned 403 / anti-bot challenge during automated image retrieval; all 49 affected products use high-fidelity local specimen assets so no 404s exist; list logged to `data/images_report.json`.
@@ -34,9 +34,11 @@ Current phase: ALL PHASES COMPLETE (100% Ready for Submission & Viva)
 ## Decisions changed from the roadmap
 - Stored single primary image constraint via BEFORE INSERT trigger validation + transactional stored procedure sp_set_product_primary_image to avoid MySQL Error 1442 trigger re-entrancy.
 - v_category_counts rolls up active product counts from child subcategories for top-level department headers.
+- Created sql/10_srs_alignment_fixes.sql to safely expand payments.method ENUM to include 'simulated' payment gateway codes without rewriting 09_srs_alignment.sql.
+- Pricing calculation unified across cart, checkout, and invoice via stored procedure sp_cart_summary as single source of truth.
 
 ## Group details
-- Member A: Member A (Users and Access)
-- Member B: Member B (Catalog and Inventory)
-- Member C: Member C (Orders and Payments)
-- Submission date: TBD
+- Member A: Member A (Users, Access, Support & Compliance)
+- Member B: Member B (Catalog, Brands, Media & Multi-Vendor)
+- Member C: Member C (Orders, Payments, Fiscal Rates & Return Lifecycle)
+- Submission date: November 2026 (Ready for submission)

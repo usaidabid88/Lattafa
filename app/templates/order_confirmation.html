@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}Order Confirmed – MUET Shop{% endblock %}
+
+{% block content %}
+<!-- 4-Step Checkout Breadcrumb (Step 4: Confirmation) -->
+<nav aria-label="Checkout Progress" class="mb-4">
+    <ol class="d-flex align-items-center list-unstyled gap-2 p-2 rounded small" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+        <li class="d-flex align-items-center gap-1 text-muted">
+            <span class="badge bg-secondary rounded-pill">1</span> Cart
+            <i class="bi bi-chevron-right ms-1 text-muted small" aria-hidden="true"></i>
+        </li>
+        <li class="d-flex align-items-center gap-1 text-muted">
+            <span class="badge bg-secondary rounded-pill">2</span> Delivery
+            <i class="bi bi-chevron-right ms-1 text-muted small" aria-hidden="true"></i>
+        </li>
+        <li class="d-flex align-items-center gap-1 text-muted">
+            <span class="badge bg-secondary rounded-pill">3</span> Payment
+            <i class="bi bi-chevron-right ms-1 text-muted small" aria-hidden="true"></i>
+        </li>
+        <li class="d-flex align-items-center gap-1 fw-semibold text-success" aria-current="step">
+            <span class="badge bg-success rounded-pill">4</span> Confirmed
+        </li>
+    </ol>
+</nav>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- Confirmation Success Header -->
+        <div class="card-craft p-4 mb-4 text-center">
+            <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success-subtle text-success mb-3 mx-auto" style="width: 56px; height: 56px;">
+                <i class="bi bi-check2-circle fs-2"></i>
+            </div>
+            <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Order placed successfully</h1>
+            <p class="text-muted small mb-3">
+                Thank you for your order! Your purchase has been recorded in the database under transaction reference:
+            </p>
+            <div class="d-inline-block p-2 px-3 rounded font-mono fw-bold fs-5 mb-3" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline); color: var(--accent-indigo);">
+                Order #{{ order.order_id }}
+            </div>
+            <div class="d-flex justify-content-center gap-2">
+                <a href="{{ url_for('order_track', order_id=order.order_id) }}" class="btn btn-indigo btn-sm px-3">
+                    <i class="bi bi-truck me-1"></i> Track status live
+                </a>
+                <a href="{{ url_for('products') }}" class="btn btn-outline-craft btn-sm px-3">
+                    <i class="bi bi-grid me-1"></i> Continue shopping
+                </a>
+            </div>
+        </div>
+
+        <!-- Order Summary & Financial Breakdown -->
+        <div class="card-craft p-0 mb-4 overflow-hidden">
+            <div class="p-3 d-flex justify-content-between align-items-center" style="background-color: var(--bg-raised); border-bottom: 1px solid var(--border-hairline);">
+                <h2 class="h6 mb-0 fw-semibold" style="color: var(--text-primary);">Order invoice summary</h2>
+                <span class="badge-craft badge-neutral font-mono">Date: {{ order.order_date.strftime('%Y-%m-%d %H:%M') if order.order_date else 'Just now' }}</span>
+            </div>
+
+            <!-- Items Table -->
+            <div class="table-responsive">
+                <table class="table table-craft align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Merchandise</th>
+                            <th class="text-center" style="width: 80px;">Qty</th>
+                            <th class="text-end">Unit price</th>
+                            <th class="text-end">Line total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>
+                                <div class="fw-medium" style="color: var(--text-primary);">{{ item.product_name }}</div>
+                                <div class="small text-muted font-mono">SKU #{{ item.product_id }}</div>
+                            </td>
+                            <td class="text-center tabular-nums">{{ item.quantity }}</td>
+                            <td class="text-end tabular-nums text-muted">PKR {{ "{:,.2f}".format(item.unit_price) }}</td>
+                            <td class="text-end tabular-nums fw-medium" style="color: var(--text-primary);">PKR {{ "{:,.2f}".format(item.line_total) }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot style="background-color: var(--bg-raised); border-top: 1px solid var(--border-hairline);">
+                        <tr>
+                            <td colspan="3" class="text-end small text-secondary">Items Subtotal</td>
+                            <td class="text-end tabular-nums fw-medium">PKR {{ "{:,.2f}".format(order.subtotal) }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-end small text-secondary">Provincial Sales Tax (GST)</td>
+                            <td class="text-end tabular-nums">PKR {{ "{:,.2f}".format(order.tax_amount) }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-end small text-secondary">Standard Courier Delivery</td>
+                            <td class="text-end tabular-nums">PKR {{ "{:,.2f}".format(order.delivery_fee) }}</td>
+                        </tr>
+                        <tr style="border-top: 2px solid var(--border-hairline);">
+                            <td colspan="3" class="text-end fw-semibold" style="color: var(--text-primary);">Total Charged</td>
+                            <td class="text-end fw-bold fs-5 tabular-nums" style="color: var(--accent-indigo);">PKR {{ "{:,.2f}".format(order.total_amount) }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- Logistics & Settlement Meta -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <div class="card-craft p-3 h-100">
+                    <h3 class="h6 fw-semibold mb-2" style="color: var(--text-primary);">Delivery Details</h3>
+                    <div class="small text-muted mb-1">Shipping destination snapshot:</div>
+                    <div class="small fw-medium p-2 rounded mb-2" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+                        {{ order.shipping_address_snapshot or (order.guest_address_line1 ~ ', ' ~ order.guest_city ~ ', ' ~ order.guest_province) }}
+                    </div>
+                    {% if order.expected_delivery_date %}
+                    <div class="small text-muted">Expected delivery date:</div>
+                    <div class="small fw-semibold text-success font-mono">
+                        {{ order.expected_delivery_date.strftime('%A, %d %B %Y') if order.expected_delivery_date.strftime is defined else order.expected_delivery_date }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card-craft p-3 h-100">
+                    <h3 class="h6 fw-semibold mb-2" style="color: var(--text-primary);">Payment Information</h3>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="small text-muted">Payment method:</span>
+                        <span class="small fw-semibold text-uppercase font-mono">{{ order.payment_method or order.method or 'COD' }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="small text-muted">Settlement status:</span>
+                        <span class="badge {% if order.status == 'paid' or order.payment_status == 'completed' %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                            {{ order.payment_status or ('Completed' if order.status == 'paid' else 'Pending') }}
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="small text-muted">Order state:</span>
+                        <span class="badge-craft badge-neutral">{{ order.status }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

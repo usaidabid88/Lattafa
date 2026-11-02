@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Customer Care &amp; Support – MUET Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-baseline mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+            <div>
+                <span class="badge bg-secondary-subtle text-secondary small font-mono">Helpdesk &amp; Support</span>
+                <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Submit a support ticket</h1>
+                <p class="text-muted small mb-0">Have an issue with delivery, damaged parcel, or wrong item? Our support team is here to assist.</p>
+            </div>
+            {% if session.get('user_id') %}
+            <a href="{{ url_for('my_tickets') }}" class="btn btn-outline-craft btn-sm">
+                <i class="bi bi-ticket-perforated me-1"></i> My tickets
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="card-craft p-4 mb-4">
+            <form method="POST" action="{{ url_for('support_page') }}">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="contact_name" class="form-label small fw-medium text-secondary">Your full name <span class="text-danger">*</span></label>
+                        <input type="text" id="contact_name" name="contact_name" class="form-control" value="{{ session.get('full_name', '') }}" required style="border-color: var(--border-hairline);">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="contact_email" class="form-label small fw-medium text-secondary">Contact email <span class="text-danger">*</span></label>
+                        <input type="email" id="contact_email" name="contact_email" class="form-control" value="{{ session.get('email', '') }}" required style="border-color: var(--border-hairline);">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="contact_phone" class="form-label small fw-medium text-secondary">Phone number</label>
+                        <input type="text" id="contact_phone" name="contact_phone" class="form-control" placeholder="+92 300 1234567" style="border-color: var(--border-hairline);">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="order_id" class="form-label small fw-medium text-secondary">Related Order ID (Optional)</label>
+                        <input type="number" id="order_id" name="order_id" class="form-control font-mono" value="{{ prefill_order_id or '' }}" placeholder="e.g. 1024" style="border-color: var(--border-hairline);">
+                    </div>
+
+                    <div class="col-12">
+                        <label for="issue_type" class="form-label small fw-medium text-secondary">Issue category <span class="text-danger">*</span></label>
+                        <select id="issue_type" name="issue_type" class="form-select" required style="border-color: var(--border-hairline);">
+                            <option value="delayed">Delayed Delivery (Parcel not arrived by expected date)</option>
+                            <option value="damaged">Damaged Goods (Package or item arrived broken)</option>
+                            <option value="wrong_item">Wrong Item Received (Different product delivered)</option>
+                            <option value="other">Other Inquiry / Billing Question</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="subject" class="form-label small fw-medium text-secondary">Subject summary <span class="text-danger">*</span></label>
+                        <input type="text" id="subject" name="subject" class="form-control" placeholder="Brief description of the problem" required style="border-color: var(--border-hairline);">
+                    </div>
+
+                    <div class="col-12">
+                        <label for="description" class="form-label small fw-medium text-secondary">Detailed explanation <span class="text-danger">*</span></label>
+                        <textarea id="description" name="description" rows="4" class="form-control" placeholder="Please provide specific details including courier tracking numbers or unboxing observations..." required style="border-color: var(--border-hairline);"></textarea>
+                    </div>
+
+                    <div class="col-12 pt-2">
+                        <button type="submit" class="btn btn-indigo px-4 py-2">
+                            <i class="bi bi-send me-1"></i> Submit ticket to support desk
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

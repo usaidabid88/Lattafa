@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Returns &amp; Replacement Policy – MUET Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+            <span class="badge bg-secondary-subtle text-secondary small font-mono">Buyer Protection (FR-20, FR-21)</span>
+            <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Returns &amp; Replacement Policy</h1>
+            <p class="text-muted small mb-0">Transparent guidelines for lodging return and refund requests</p>
+        </div>
+
+        <div class="card-craft p-4 mb-4" style="line-height: 1.7; font-size: 0.92rem; color: var(--text-secondary);">
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">1. 7-Day Hassle-Free Returns</h2>
+            <p class="mb-3">
+                Customers may initiate a return or replacement request within seven (7) days of parcel delivery for merchandise that arrives damaged, defective, materially different from the catalog description, or incorrect.
+            </p>
+
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">2. Photographic Proof Requirement</h2>
+            <p class="mb-3">
+                To protect marketplace integrity and assist seller verification, claims involving damage or wrong items require uploading clear photographic proof (JPEG, PNG, or WebP; maximum 2 MB) showing the packaging and defect.
+            </p>
+
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">3. Seller SLA &amp; Escalation Window</h2>
+            <p class="mb-3">
+                Sellers are required to review and respond to return claims within three (3) business days (72 hours). Claims remaining unanswered beyond this SLA threshold are automatically flagged on the administrative dashboard via database view <code>v_overdue_return_requests</code> for supervisory intervention.
+            </p>
+
+            <h2 class="h6 fw-bold mb-2" style="color: var(--text-primary);">4. Settlement Options</h2>
+            <p class="mb-0">
+                Approved returns may be settled via refund to the original payment channel, store credit voucher, or courier cash return upon pickup.
+            </p>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ url_for('products') }}" class="btn btn-indigo btn-sm px-4">
+                Return to Storefront
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

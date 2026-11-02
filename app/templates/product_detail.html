@@ -121,15 +121,9 @@
                         <input type="number" name="quantity" class="form-control tabular-nums text-center" value="1" min="1" max="{{ product.stock_quantity }}" style="border-color: var(--border-hairline);">
                     </div>
                     <div class="flex-grow-1">
-                        {% if session.get('user') %}
                         <button type="submit" class="btn btn-indigo w-100 py-2">
                             <i class="bi bi-bag-plus me-1"></i> Add to cart
                         </button>
-                        {% else %}
-                        <a href="{{ url_for('login') }}" class="btn btn-indigo w-100 py-2">
-                            Sign in to purchase
-                        </a>
-                        {% endif %}
                     </div>
                 </div>
             </form>

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Track Order #{{ order.order_id }} – MUET Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-baseline mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+            <div>
+                <span class="badge bg-secondary-subtle text-secondary small font-mono">Live Tracking</span>
+                <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Order #{{ order.order_id }} Status</h1>
+                <p class="text-muted small mb-0">Real-time status transitions tracked via database triggers</p>
+            </div>
+            <a href="{{ url_for('order_detail', order_id=order.order_id) }}" class="btn btn-outline-craft btn-sm">
+                <i class="bi bi-file-text me-1"></i> View invoice
+            </a>
+        </div>
+
+        <!-- Current Status Overview Banner -->
+        <div class="card-craft p-3 mb-4">
+            <div class="row g-3 align-items-center">
+                <div class="col-md-4">
+                    <div class="small text-muted">Current status:</div>
+                    <span class="fs-5 fw-bold text-uppercase" style="color: var(--accent-indigo);">{{ order.status }}</span>
+                </div>
+                <div class="col-md-4">
+                    <div class="small text-muted">Expected delivery:</div>
+                    <div class="fw-semibold text-success font-mono">
+                        {{ order.expected_delivery_date.strftime('%d %b %Y') if order.expected_delivery_date and order.expected_delivery_date.strftime is defined else (order.expected_delivery_date or 'Calculating...') }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="small text-muted">Courier &amp; tracking:</div>
+                    <div class="small fw-medium font-mono text-secondary">
+                        {{ shipment.courier or 'TCS Express' }} &bull; {{ shipment.tracking_number or ('PK-' ~ order.order_id ~ '-TRK') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Transition Timeline (Populated from order_status_history) -->
+        <div class="card-craft p-4 mb-4">
+            <h2 class="h6 fw-semibold mb-3 pb-2 border-bottom" style="color: var(--text-primary); border-color: var(--border-hairline) !important;">
+                Audit timeline history
+            </h2>
+
+            {% if history %}
+            <div class="timeline position-relative ps-4" style="border-left: 2px solid var(--border-hairline); margin-left: 10px;">
+                {% for event in history %}
+                <div class="timeline-item mb-4 position-relative">
+                    <!-- Timeline Node Icon -->
+                    <span class="position-absolute rounded-circle d-flex align-items-center justify-content-center {% if loop.first %}bg-primary text-white{% else %}bg-secondary text-white{% endif %}"
+                          style="width: 22px; height: 22px; left: -35px; top: 0; font-size: 0.65rem;">
+                        <i class="bi bi-check-lg"></i>
+                    </span>
+                    <div class="d-flex justify-content-between align-items-baseline">
+                        <div class="fw-semibold text-capitalize" style="color: var(--text-primary);">
+                            {{ event.new_status }}
+                            {% if loop.first %}<span class="badge bg-success-subtle text-success small ms-2">Latest</span>{% endif %}
+                        </div>
+                        <span class="text-muted small font-mono">
+                            {{ event.changed_at.strftime('%Y-%m-%d %H:%M:%S') if event.changed_at and event.changed_at.strftime is defined else event.changed_at }}
+                        </span>
+                    </div>
+                    <p class="text-muted small mb-0 mt-1">
+                        {{ event.notes or ("Transitioned to " ~ event.new_status) }}
+                        <span class="font-mono text-secondary">({{ event.changed_by }})</span>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-3 text-muted small">
+                Order status is currently pending courier dispatch.
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Actions / Support Footer -->
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="{{ url_for('support_page', order_id=order.order_id) }}" class="btn btn-outline-craft btn-sm">
+                <i class="bi bi-life-preserver me-1"></i> Report delivery issue
+            </a>
+            <a href="{{ url_for('order_return_request', order_id=order.order_id) }}" class="btn btn-outline-craft btn-sm">
+                <i class="bi bi-arrow-return-left me-1"></i> Request return / replacement
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

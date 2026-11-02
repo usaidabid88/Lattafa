@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Request Return / Replacement – MUET Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-baseline mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+            <div>
+                <span class="badge bg-secondary-subtle text-secondary small font-mono">Returns &amp; Warranty</span>
+                <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Request return / replacement</h1>
+                <p class="text-muted small mb-0">Lodge a return claim for Order #{{ order.order_id }} under our 7-day policy (FR-20)</p>
+            </div>
+            <a href="{{ url_for('order_detail', order_id=order.order_id) }}" class="btn btn-outline-craft btn-sm">
+                <i class="bi bi-arrow-left me-1"></i> Back to order
+            </a>
+        </div>
+
+        <div class="card-craft p-4 mb-4">
+            <form method="POST" action="{{ url_for('order_return_request', order_id=order.order_id) }}" enctype="multipart/form-data">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="product_id" class="form-label small fw-medium text-secondary">Select merchandise item <span class="text-danger">*</span></label>
+                        <select id="product_id" name="product_id" class="form-select" required style="border-color: var(--border-hairline);">
+                            {% for item in items %}
+                            <option value="{{ item.product_id }}">
+                                {{ item.product_name }} &mdash; Qty: {{ item.quantity }} (PKR {{ "{:,.2f}".format(item.unit_price) }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="reason" class="form-label small fw-medium text-secondary">Reason for return / replacement <span class="text-danger">*</span></label>
+                        <select id="reason" name="reason" class="form-select" required style="border-color: var(--border-hairline);">
+                            <option value="damaged">Damaged in Transit (Broken seal, cracked exterior)</option>
+                            <option value="defective">Defective / Malfunctioning (Hardware defect)</option>
+                            <option value="wrong_item">Wrong Item Sent (Mismatch with SKU)</option>
+                            <option value="not_as_described">Not as Described on Storefront</option>
+                            <option value="other">Other Valid Concern</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="refund_method" class="form-label small fw-medium text-secondary">Settlement preference <span class="text-danger">*</span></label>
+                        <select id="refund_method" name="refund_method" class="form-select" required style="border-color: var(--border-hairline);">
+                            <option value="original_payment">Refund via Original Payment Channel</option>
+                            <option value="store_credit">Store Credit / Replacement Item Voucher</option>
+                            <option value="cod_refund">Cash Refund via Courier Return Dispatch</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="description" class="form-label small fw-medium text-secondary">Detailed problem description <span class="text-danger">*</span></label>
+                        <textarea id="description" name="description" rows="4" class="form-control" placeholder="Describe the defect, damage, or discrepancy observed upon unboxing..." required style="border-color: var(--border-hairline);"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="proof_image" class="form-label small fw-medium text-secondary">Upload photographic proof (JPEG, PNG, WebP; Max 2 MB)</label>
+                        <input type="file" id="proof_image" name="proof_image" class="form-control" accept="image/jpeg,image/png,image/webp" style="border-color: var(--border-hairline);">
+                        <div class="form-text small" style="font-size: 0.75rem;">Clear unboxing photo or damage detail helps expedite seller verification.</div>
+                    </div>
+
+                    <div class="col-12 pt-2">
+                        <button type="submit" class="btn btn-indigo px-4 py-2">
+                            <i class="bi bi-arrow-return-left me-1"></i> Submit return request
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

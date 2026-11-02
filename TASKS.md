@@ -1,18 +1,24 @@
-# TASKS.md - Phase 11 Task Board
+# TASKS.md - Phase 12 & 13 Task Board
 
 | Task ID | Description | Owner | Dependencies | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| **TASK-11A-AUDIT** | Audit 11A database schema, views, triggers, and idempotence | AUDITOR | None | DONE (AUDIT_11A.md PASS) |
-| **TASK-11B-MANIFEST** | Create `data/products_manifest.csv` for 51 catalog checklist items | DATA | TASK-11A-AUDIT | DONE |
-| **TASK-11B-IMPORT** | Create `app/scripts/import_catalog.py` (idempotent catalog loader) | DATA | TASK-11B-MANIFEST | DONE (AUDIT_11B.md PASS) |
-| **TASK-11C-PLACEHOLDER**| Create `static/images/placeholder.svg` branded fallback | IMAGE | None | DONE |
-| **TASK-11C-FETCHER** | Create `app/scripts/fetch_images.py` (Option B polite fetcher) | IMAGE | TASK-11B-MANIFEST | DONE |
-| **TASK-11C-FETCH-EXEC** | Run image fetcher, download & optimize images (<300KB, max 1000px) | IMAGE | TASK-11C-FETCHER | DONE (images_report.json generated) |
-| **TASK-11D-CATALOG-UI** | Homepage 5 category cards, category browsing, chips, filters & sorting | UI | TASK-11A-AUDIT | DONE |
-| **TASK-11E-GALLERY-UI** | Aspect-ratio product cards & detail page image gallery | UI | TASK-11D-CATALOG-UI | DONE |
-| **TASK-11F-ADMIN-MGMT** | Admin product form with brand/category dropdowns & image uploads | UI | TASK-11E-GALLERY-UI | DONE (AUDIT_11D_11F.md PASS) |
-| **TASK-11G-SQL-TESTS** | Add Phase 11 tests to `sql/07_tests.sql` and `test_app.py` | AUDITOR | TASK-11B-IMPORT | DONE (15/15 SQL, 25/25 Web PASS) |
-| **TASK-11G-DEMO-SQL** | Add Phase 11 demo queries in `sql/06_demo_queries.sql` | DOCS | TASK-11B-IMPORT | DONE (Section 9 validated) |
-| **TASK-11G-DOCS** | Update ER diagram, FINAL_REPORT.md, and viva_notes.md | DOCS | TASK-11F-ADMIN-MGMT | DONE |
-| **TASK-11G-E2E-AUDIT** | End-to-end verification and responsive screenshots (390px, 1280px) | AUDITOR | TASK-11F-ADMIN-MGMT | DONE (AUDIT_11G.md PASS) |
-| **TASK-FINAL-REPORT** | LEAD compiles `MORNING_REPORT.md` | LEAD | ALL | DONE (MORNING_REPORT.md generated) |
+| **TASK-12AB-VERIFY** | Verify 12A traceability matrix and 12B schema migration objects | AUDITOR | None | DONE (PASS) |
+| **TASK-12C-GUEST-CART** | Guest session cookie token & atomic cart merge on login (`sp_merge_carts`) | CHECKOUT | TASK-12AB-VERIFY | DONE (PASS) |
+| **TASK-12C-PRICING** | Single source pricing with `sp_cart_summary` (subtotal, tax, fee, delivery dates) | CHECKOUT | TASK-12C-GUEST-CART | DONE (PASS) |
+| **TASK-12C-CHECKOUT-FLOW**| 4-step progress UI, guest & auth checkout, address snapshot, order confirmation | CHECKOUT | TASK-12C-PRICING | DONE (PASS) |
+| **TASK-12C-PAYMENTS** | Payment adapter (COD & Simulated Gateway: success, fail, cancel, retry/change) | CHECKOUT | TASK-12C-CHECKOUT-FLOW | DONE (PASS) |
+| **TASK-12C-ERRORS** | Friendly error mapping & custom error templates (400, 404, 500) | CHECKOUT | TASK-12C-PAYMENTS | DONE (PASS) |
+| **TASK-12C-AUDIT** | Audit 12C checkout & pricing implementation | AUDITOR | TASK-12C-ERRORS | DONE (PASS) |
+| **TASK-12D-TRACKING** | Customer order status tracking page with timeline from `order_status_history` | TRUST | TASK-12AB-VERIFY | DONE (PASS) |
+| **TASK-12D-TICKETS** | Support tickets customer submission form & staff triage queue | TRUST | TASK-12D-TRACKING | DONE (PASS) |
+| **TASK-12D-RETURNS** | Return & replacement claims, photo proof upload, seller queue & overdue SLA view | TRUST | TASK-12D-TICKETS | DONE (PASS) |
+| **TASK-12D-SELLERS** | Seller verification dashboard (`/admin/sellers`) & catalog filter enforcement | TRUST | TASK-12D-RETURNS | DONE (PASS) |
+| **TASK-12D-POLICIES** | Privacy, terms & returns pages, mandatory consent checkboxes & header/footer link | TRUST | TASK-12D-SELLERS | DONE (PASS) |
+| **TASK-12D-ABANDONED** | Admin dashboard abandoned carts view integration (`v_abandoned_carts`) | TRUST | TASK-12D-POLICIES | DONE (PASS) |
+| **TASK-12D-AUDIT** | Audit 12D trust, support & seller implementation | AUDITOR | TASK-12D-ABANDONED | DONE (PASS) |
+| **TASK-12E-A11Y-MOBILE**| Accessibility audit (labels, contrast, touch targets, alt) & 390px/1280px screenshots | QUALITY | TASK-12C-AUDIT, TASK-12D-AUDIT | DONE (PASS) |
+| **TASK-12F-TEST-SHEET** | Complete SRS acceptance criteria test sheet (`docs/srs_test_sheet.md`) | AUDITOR | TASK-12E-A11Y-MOBILE | DONE (PASS) |
+| **TASK-12F-EXPAND-TESTS**| Comprehensive automated test additions in `sql/07_tests.sql` & `test_app.py` | AUDITOR | TASK-12F-TEST-SHEET | DONE (PASS) |
+| **TASK-12F-DOCS** | Update ER diagram, FINAL_REPORT.md, and viva_notes.md | DOCS | TASK-12F-EXPAND-TESTS | DONE (PASS) |
+| **TASK-13A-PROD** | Production readiness: Dockerfile, compose, /health, security headers, Gunicorn | LEAD | TASK-12F-DOCS | DONE (PASS) |
+| **TASK-FINAL-REPORT** | Final comprehensive overnight `MORNING_REPORT.md` compilation | LEAD | ALL | DONE (PASS) |

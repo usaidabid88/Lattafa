@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Ticket {{ ticket.ticket_number }} – MUET Shop{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-baseline mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
+            <div>
+                <span class="badge bg-secondary-subtle text-secondary small font-mono">{{ ticket.ticket_number }}</span>
+                <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">{{ ticket.subject }}</h1>
+                <p class="text-muted small mb-0">Filed on {{ ticket.created_at.strftime('%Y-%m-%d %H:%M') if ticket.created_at and ticket.created_at.strftime is defined else ticket.created_at }}</p>
+            </div>
+            <span class="badge {% if ticket.status == 'resolved' or ticket.status == 'closed' %}bg-success{% elif ticket.status == 'in_progress' %}bg-info text-dark{% else %}bg-warning text-dark{% endif %} fs-6">
+                {{ ticket.status|replace('_', ' ')|capitalize }}
+            </span>
+        </div>
+
+        <div class="card-craft p-4 mb-4">
+            <h2 class="h6 fw-semibold mb-2" style="color: var(--text-primary);">Customer inquiry details</h2>
+            <div class="p-3 rounded mb-3" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+                <div class="row g-2 small">
+                    <div class="col-sm-6">
+                        <span class="text-muted">Issue category:</span>
+                        <strong class="text-capitalize ms-1 text-primary">{{ ticket.issue_type }}</strong>
+                    </div>
+                    {% if ticket.order_id %}
+                    <div class="col-sm-6">
+                        <span class="text-muted">Linked Order ID:</span>
+                        <a href="{{ url_for('order_detail', order_id=ticket.order_id) }}" class="ms-1 font-mono">#{{ ticket.order_id }}</a>
+                    </div>
+                    {% endif %}
+                    <div class="col-sm-6">
+                        <span class="text-muted">Contact Name:</span>
+                        <span class="ms-1">{{ ticket.contact_name }}</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-muted">Contact Email:</span>
+                        <span class="ms-1 font-mono">{{ ticket.contact_email }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 rounded mb-4" style="background-color: var(--bg-card); border: 1px solid var(--border-hairline);">
+                <div class="small text-muted mb-1 fw-semibold">Inquiry description:</div>
+                <div style="white-space: pre-line; color: var(--text-primary); font-size: 0.9rem;">{{ ticket.description }}</div>
+            </div>
+
+            <!-- Staff Resolution Section -->
+            {% if ticket.staff_notes %}
+            <div class="alert alert-info border-0 p-3 mb-0" role="alert">
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <i class="bi bi-person-check-fill fs-5"></i>
+                    <strong class="small">Support staff response / resolution notes:</strong>
+                </div>
+                <div style="white-space: pre-line; font-size: 0.88rem;">{{ ticket.staff_notes }}</div>
+            </div>
+            {% else %}
+            <div class="p-3 text-center text-muted small rounded" style="background-color: var(--bg-raised); border: 1px dashed var(--border-hairline);">
+                <i class="bi bi-hourglass-split me-1"></i> A support representative is currently reviewing your ticket. Updates will appear here.
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ url_for('support_page') }}" class="btn btn-outline-craft btn-sm">
+                <i class="bi bi-plus-circle me-1"></i> Submit new ticket
+            </a>
+            <a href="{{ url_for('products') }}" class="btn btn-outline-craft btn-sm">
+                Return to storefront
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
