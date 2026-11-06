@@ -23,59 +23,12 @@
       </feMerge>
     </filter>
   </defs>
-  <!-- Luxury Background -->
   <rect width="1920" height="800" fill="url(#bgG)"/>
-  
-  <!-- Subtle Islamic Geometric Lattice Overlay -->
   <g stroke="url(#goldH)" stroke-width="0.5" opacity="0.08">
     <pattern id="lattice" width="80" height="80" patternUnits="userSpaceOnUse">
       <path d="M40 0 L80 40 L40 80 L0 40 Z M40 10 L70 40 L40 70 L10 40 Z"/>
     </pattern>
     <rect width="1920" height="800" fill="url(#lattice)"/>
   </g>
-
-  <!-- Ambient Glow Behind Flacon -->
   <circle cx="1380" cy="400" r="280" fill="#c5a059" opacity="0.18" filter="url(#heroGlow)"/>
-
-  <!-- Luxury Perfume Flacon Showcase (Khamrah Crystal Bottle Art) -->
-  <g transform="translate(1180, 160)">
-    <!-- Shadow -->
-    <ellipse cx="200" cy="520" rx="180" ry="32" fill="#000000" opacity="0.6"/>
-    
-    <!-- Crystal Heavy Base -->
-    <rect x="70" y="180" width="260" height="310" rx="16" fill="url(#amberG)" stroke="url(#goldH)" stroke-width="4"/>
-    
-    <!-- Cut Crystal Facets -->
-    <g fill="none" stroke="#ffe8a8" stroke-width="1.5" opacity="0.45">
-      <line x1="70" y1="230" x2="330" y2="230"/>
-      <line x1="70" y1="290" x2="330" y2="290"/>
-      <line x1="70" y1="350" x2="330" y2="350"/>
-      <line x1="70" y1="410" x2="330" y2="410"/>
-      <line x1="120" y1="180" x2="120" y2="490"/>
-      <line x1="200" y1="180" x2="200" y2="490"/>
-      <line x1="280" y1="180" x2="280" y2="490"/>
-      <!-- Diagonal cuts -->
-      <line x1="70" y1="180" x2="330" y2="440"/>
-      <line x1="330" y1="180" x2="70" y2="440"/>
-    </g>
-
-    <!-- Liquid Hue Level -->
-    <rect x="85" y="220" width="230" height="255" rx="8" fill="#e59124" opacity="0.5"/>
-
-    <!-- Gold Crest Plate -->
-    <rect x="110" y="270" width="180" height="120" rx="6" fill="#18171c" stroke="url(#goldH)" stroke-width="2"/>
-    <circle cx="200" cy="305" r="14" fill="none" stroke="url(#goldH)" stroke-width="1.2"/>
-    <path d="M200 295 L203 303 L211 305 L203 307 L200 315 L197 307 L189 305 L197 303 Z" fill="url(#goldH)"/>
-    <text x="200" y="340" font-family="'Cinzel', serif" font-size="20" font-weight="700" letter-spacing="3" fill="url(#goldH)" text-anchor="middle">KHAMRAH</text>
-    <text x="200" y="360" font-family="'Inter', sans-serif" font-size="8" letter-spacing="3" fill="#cfc7b8" text-anchor="middle">EAU DE PARFUM</text>
-    <text x="200" y="374" font-family="'Inter', sans-serif" font-size="7" letter-spacing="4" fill="#a49377" text-anchor="middle">LATTAFA</text>
-
-    <!-- Golden Collar & Crystal Stopper -->
-    <rect x="150" y="145" width="100" height="35" rx="4" fill="url(#goldH)"/>
-    <!-- Crystal Crown Stopper -->
-    <path d="M110 50 L290 50 L260 145 L140 145 Z" fill="#2b2724" stroke="url(#goldH)" stroke-width="3" opacity="0.95"/>
-    <line x1="160" y1="50" x2="175" y2="145" stroke="#ffe8a8" stroke-width="1" opacity="0.6"/>
-    <line x1="200" y1="50" x2="200" y2="145" stroke="#ffe8a8" stroke-width="1.5" opacity="0.8"/>
-    <line x1="240" y1="50" x2="225" y2="145" stroke="#ffe8a8" stroke-width="1" opacity="0.6"/>
-  </g>
 </svg>

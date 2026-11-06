@@ -1,33 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
   <defs>
-    <radialGradient id="g_main" cx="50%" cy="40%" r="70%">
-      <stop offset="0%" stop-color="#281e28" stop-opacity="0.3"/>
-      <stop offset="50%" stop-color="#e3b375" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#130913"/>
+    <radialGradient id="g_main" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#d4af37" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#15161b"/>
     </radialGradient>
     <linearGradient id="textG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fff1d6"/>
-      <stop offset="60%" stop-color="#e3b375"/>
-      <stop offset="100%" stop-color="#8a6927"/>
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#8a631c"/>
     </linearGradient>
   </defs>
-  <rect width="800" height="600" fill="#130913"/>
+  <rect width="800" height="600" fill="#15161b"/>
   <rect width="800" height="600" fill="url(#g_main)"/>
-  <rect x="25" y="25" width="750" height="550" fill="none" stroke="#e3b375" stroke-width="1.5" opacity="0.35"/>
-  <rect x="35" y="35" width="730" height="530" fill="none" stroke="#e3b375" stroke-width="0.75" stroke-dasharray="6,4" opacity="0.25"/>
+  <rect x="25" y="25" width="750" height="550" fill="none" stroke="#d4af37" stroke-width="1.5" opacity="0.35"/>
+  <rect x="35" y="35" width="730" height="530" fill="none" stroke="#d4af37" stroke-width="0.75" stroke-dasharray="6,4" opacity="0.25"/>
   
-  <!-- Silhouette Flacon Art -->
   <g transform="translate(400, 240) scale(0.9)" opacity="0.85">
     <ellipse cx="0" cy="180" rx="90" ry="18" fill="#000" opacity="0.4"/>
-    <rect x="-65" y="-30" width="130" height="190" rx="16" fill="#130913" stroke="#e3b375" stroke-width="2.5"/>
-    <rect x="-30" y="-70" width="60" height="40" rx="6" fill="#e3b375"/>
-    <circle cx="0" cy="65" r="34" fill="none" stroke="#e3b375" stroke-width="1.5"/>
-    <path d="M0 45 L6 59 L20 65 L6 71 L0 85 L-6 71 L-20 65 L-6 59 Z" fill="#e3b375"/>
+    <rect x="-65" y="-30" width="130" height="190" rx="16" fill="#15161b" stroke="#d4af37" stroke-width="2.5"/>
+    <rect x="-30" y="-70" width="60" height="40" rx="6" fill="#d4af37"/>
+    <circle cx="0" cy="65" r="34" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+    <path d="M0 45 L6 59 L20 65 L6 71 L0 85 L-6 71 L-20 65 L-6 59 Z" fill="#d4af37"/>
   </g>
 
-  <!-- Typography -->
   <text x="400" y="465" font-family="'Cinzel', serif" font-size="28" font-weight="700" letter-spacing="4" fill="url(#textG)" text-anchor="middle">MAINLINE CLASSICS</text>
-  <text x="400" y="500" font-family="'Inter', sans-serif" font-size="13" font-weight="400" letter-spacing="3" fill="#cfc7b8" text-anchor="middle">Iconic Arabian Best Sellers</text>
-  <line x1="320" y1="525" x2="480" y2="525" stroke="#e3b375" stroke-width="1" opacity="0.6"/>
-  <text x="400" y="545" font-family="'Inter', sans-serif" font-size="10" font-weight="600" letter-spacing="4" fill="#e3b375" text-anchor="middle">EXPLORE COLLECTION</text>
+  <text x="400" y="500" font-family="'Inter', sans-serif" font-size="13" font-weight="400" letter-spacing="3" fill="#cfc7b8" text-anchor="middle">Timeless Arabian Formulations</text>
+  <line x1="320" y1="525" x2="480" y2="525" stroke="#d4af37" stroke-width="1" opacity="0.6"/>
+  <text x="400" y="545" font-family="'Inter', sans-serif" font-size="10" font-weight="600" letter-spacing="4" fill="#d4af37" text-anchor="middle">EXPLORE COLLECTION</text>
 </svg>

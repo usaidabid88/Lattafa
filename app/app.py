@@ -231,42 +231,42 @@ def index():
                 'name': 'Yara Collection',
                 'slug': 'yara-collection',
                 'subtitle': 'Sweet Gourmand & Ethereal Florals',
-                'image': 'static/images/collections/yara_collection.svg',
+                'image': 'static/images/perfume/collection-yara.jpg',
                 'count': 4
             },
             {
                 'name': 'Asad Collection',
                 'slug': 'asad-collection',
                 'subtitle': 'Masculine Power & Noble Woods',
-                'image': 'static/images/collections/asad_collection.svg',
+                'image': 'static/images/perfume/collection-asad.jpg',
                 'count': 3
             },
             {
                 'name': 'Khamrah Collection',
                 'slug': 'khamrah-collection',
                 'subtitle': 'Golden Spices & Date Gourmand',
-                'image': 'static/images/collections/khamrah_collection.svg',
+                'image': 'static/images/perfume/collection-khamrah.jpg',
                 'count': 3
             },
             {
                 'name': 'Badee Al Oud',
                 'slug': 'badee-al-oud',
                 'subtitle': 'Royal Agarwood & Opulent Blends',
-                'image': 'static/images/collections/badee_al_oud.svg',
+                'image': 'static/images/perfume/collection-oud.jpg',
                 'count': 5
             },
             {
                 'name': 'Lattafa Pride',
                 'slug': 'lattafa-pride',
                 'subtitle': 'Artisanal Haute Parfumerie',
-                'image': 'static/images/collections/lattafa_pride.svg',
+                'image': 'static/images/perfume/collection-pride.jpg',
                 'count': 11
             },
             {
                 'name': 'Maison Alhambra',
                 'slug': 'maison-alhambra',
                 'subtitle': 'Parisian Chic with Arabian Depth',
-                'image': 'static/images/collections/maison_alhambra.svg',
+                'image': 'static/images/perfume/collection-alhambra.jpg',
                 'count': 30
             }
         ]

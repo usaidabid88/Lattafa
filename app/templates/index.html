@@ -3,53 +3,38 @@
 
 {% block content %}
 <!-- SECTION 3: Hero Section -->
-<section class="position-relative overflow-hidden mb-5" style="background-color: var(--bg-charcoal); border-bottom: 1px solid var(--hairline-dark);">
-    <div class="container py-5">
-        <div class="row align-items-center g-5 py-lg-4">
+<section class="hero-shell mb-5">
+    <img class="hero-photo" src="{{ url_for('static', filename='images/perfume/hero-arabian-editorial.jpg') }}" alt="Amber fragrance bottle in a warm editorial still life">
+    <div class="container hero-content">
+        <div class="row w-100 align-items-center">
             <!-- Left Headline & CTAs -->
-            <div class="col-lg-6 z-1">
-                <span class="d-block text-secondary small mb-3 font-display" style="letter-spacing: 0.08em;">
-                    Authentic Royal UAE Scents
-                </span>
-                <h1 class="display-5 font-display mb-4" style="color: var(--text-on-dark-primary); line-height: 1.18; font-weight: 500;">
-                    A Fragrance That Defines Your Presence
-                </h1>
-                <p class="mb-4" style="color: var(--text-on-dark-secondary); font-size: 1rem; line-height: 1.7; max-width: 32rem;">
-                    Step into the realm of royal Arabian haute parfumerie. Handcrafted with precious agarwood, warm golden amber, sweet date praline, and Taif roses.
-                </p>
-                <div class="d-flex flex-wrap gap-3 pt-1">
-                    <a href="{{ url_for('products') }}" class="btn btn-gold">
+            <div class="col-lg-7 z-1">
+                <p class="eyebrow mb-3">Authentic Royal UAE Scents</p>
+                <h1 class="hero-title mb-4">A Fragrance That Defines Your Presence</h1>
+                <p class="hero-copy mb-4">Step into the realm of royal Arabian haute parfumerie. Handcrafted with precious agarwood, warm golden amber, sweet date praline, and Taif roses.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ url_for('products') }}" class="btn btn-indigo">
                         <i class="bi bi-grid-3x3-gap me-2"></i>View Catalog
                     </a>
-                    <a href="{{ url_for('products', sort='rating') }}" class="btn btn-outline-gold">
+                    <a href="{{ url_for('products', sort='rating') }}" class="btn btn-outline-craft text-light border-light">
                         Top Rated Scents
                     </a>
                 </div>
 
                 <!-- Micro-Highlights (Quiet, Factual) -->
-                <div class="row g-3 mt-4 pt-3 border-top" style="border-color: var(--hairline-dark) !important;">
+                <div class="row g-3 mt-4 pt-3 border-top" style="border-color: rgba(255,255,255,0.15) !important; max-width: 480px;">
                     <div class="col-4">
                         <span class="d-block text-white font-mono fs-6 fw-medium tabular-nums">100%</span>
-                        <span class="text-secondary small">Original flacons</span>
+                        <span class="text-white-50 small">Original flacons</span>
                     </div>
                     <div class="col-4">
                         <span class="d-block text-white font-mono fs-6 fw-medium tabular-nums">12h+</span>
-                        <span class="text-secondary small">Long sillage</span>
+                        <span class="text-white-50 small">Long sillage</span>
                     </div>
                     <div class="col-4">
                         <span class="d-block text-white font-mono fs-6 fw-medium tabular-nums">Nationwide</span>
-                        <span class="text-secondary small">Express delivery</span>
+                        <span class="text-white-50 small">Express delivery</span>
                     </div>
-                </div>
-            </div>
-
-            <!-- Right Hero Visual (Centered Khamrah Crystal Flacon Showcase) -->
-            <div class="col-lg-6 text-center position-relative">
-                <div class="p-2 d-flex justify-content-center align-items-center">
-                    <img src="{{ url_for('static', filename='images/hero/hero_flacon.svg') }}" 
-                         alt="Lattafa Khamrah Crystal Perfume Flacon" 
-                         class="img-fluid"
-                         style="max-height: 460px; width: auto; object-fit: contain;">
                 </div>
             </div>
         </div>
@@ -68,28 +53,52 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {% for col in featured_collections %}
             <div class="col">
-                <a href="{{ url_for('collection_view', slug=col.slug) }}" class="card-perfume h-100 text-decoration-none d-flex flex-column" style="background-color: var(--bg-charcoal); border-color: var(--hairline-dark);">
-                    <div class="position-relative overflow-hidden" style="aspect-ratio: 4/3; background-color: var(--bg-noir);">
-                        <img src="{{ url_for('static', filename=col.image.replace('static/', '')) }}" 
-                             alt="{{ col.name }}" 
-                             class="w-100 h-100" 
-                             style="object-fit: cover;">
-                        <span class="position-absolute top-0 end-0 m-3 badge badge-perfume badge-bestseller">
-                            {{ col.count }} Fragrances
-                        </span>
-                    </div>
-                    <div class="p-4 text-center flex-grow-1 d-flex flex-column justify-content-between">
-                        <div>
-                            <h3 class="font-display h6 text-white mb-1" style="font-weight: 500;">{{ col.name }}</h3>
-                            <p class="text-secondary small mb-3">{{ col.subtitle }}</p>
-                        </div>
-                        <span class="text-secondary font-mono small fw-medium">
-                            View collection
+                <a href="{{ url_for('collection_view', slug=col.slug) }}" class="collection-card h-100 text-decoration-none d-flex flex-column rounded-3 overflow-hidden shadow-sm">
+                    <img src="{{ url_for('static', filename=col.image.replace('static/', '')) }}" 
+                         alt="{{ col.name }}" 
+                         class="w-100 h-100" 
+                         style="object-fit: cover;"
+                         loading="lazy">
+                    <div class="collection-copy">
+                        <span class="badge badge-perfume badge-bestseller mb-2 d-inline-block">{{ col.count }} Fragrances</span>
+                        <h3 class="mb-1 text-white font-serif">{{ col.name }}</h3>
+                        <p class="text-white-50 small mb-3">{{ col.subtitle }}</p>
+                        <span class="eyebrow" style="color: var(--color-gold); font-size: 0.72rem;">
+                            Discover collection &rarr;
                         </span>
                     </div>
                 </a>
             </div>
             {% endfor %}
+        </div>
+    </section>
+
+    <!-- SECTION 4B: Editorial Metric Band -->
+    <section class="editorial-band section-space rounded-3 my-5 p-4 p-md-5">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+                <p class="section-kicker mb-2">A slower way to shop scent</p>
+                <h2 class="section-title mb-3 text-white">Made to be remembered.</h2>
+                <p class="mb-0 text-white-50" style="max-width: 520px; line-height: 1.8;">
+                    Every bottle begins with a mood: a warm evening, a clean white shirt, a room full of conversation. Browse our verified DBMS catalog, compare top, heart, and base notes, and choose a signature fragrance that stays with you.
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-4 text-center text-md-start">
+                    <div class="col-4 border-start border-warning ps-3 ps-md-4">
+                        <div class="stat-value tabular-nums">{{ total_products }}</div>
+                        <small class="text-uppercase text-white-50" style="letter-spacing:.1em; font-size: 0.72rem;">in catalog</small>
+                    </div>
+                    <div class="col-4 border-start border-warning ps-3 ps-md-4">
+                        <div class="stat-value tabular-nums">{{ total_orders }}</div>
+                        <small class="text-uppercase text-white-50" style="letter-spacing:.1em; font-size: 0.72rem;">orders placed</small>
+                    </div>
+                    <div class="col-4 border-start border-warning ps-3 ps-md-4">
+                        <div class="stat-value tabular-nums">{{ total_users }}</div>
+                        <small class="text-uppercase text-white-50" style="letter-spacing:.1em; font-size: 0.72rem;">members</small>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

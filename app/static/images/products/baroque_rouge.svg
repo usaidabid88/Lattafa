@@ -1,63 +1,85 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" width="600" height="750">
   <defs>
-    <radialGradient id="ambG" cx="50%" cy="45%" r="65%">
-      <stop offset="0%" stop-color="#b22222" stop-opacity="0.25"/>
-      <stop offset="70%" stop-color="#240404" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#0a0b0d"/>
+    <radialGradient id="ambG" cx="50%" cy="40%" r="68%">
+      <stop offset="0%" stop-color="#b22222" stop-opacity="0.32"/>
+      <stop offset="55%" stop-color="#240404" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#08080a"/>
     </radialGradient>
+    
     <linearGradient id="metalG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fbc3c3"/>
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
+      <stop offset="15%" stop-color="#fbc3c3"/>
       <stop offset="50%" stop-color="#b22222"/>
-      <stop offset="100%" stop-color="#4d3509"/>
+      <stop offset="85%" stop-color="#4a350b"/>
+      <stop offset="100%" stop-color="#fbc3c3"/>
     </linearGradient>
+
     <linearGradient id="bodyG" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#240404"/>
-      <stop offset="25%" stop-color="#b22222" stop-opacity="0.8"/>
-      <stop offset="50%" stop-color="#fbc3c3" stop-opacity="0.95"/>
-      <stop offset="75%" stop-color="#b22222" stop-opacity="0.8"/>
+      <stop offset="20%" stop-color="#b22222" stop-opacity="0.75"/>
+      <stop offset="48%" stop-color="#fbc3c3" stop-opacity="0.92"/>
+      <stop offset="52%" stop-color="#fbc3c3" stop-opacity="0.92"/>
+      <stop offset="80%" stop-color="#b22222" stop-opacity="0.75"/>
       <stop offset="100%" stop-color="#240404"/>
     </linearGradient>
-    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.75"/>
+
+    <linearGradient id="baseG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.8"/>
+      <stop offset="30%" stop-color="#fbc3c3" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#fbc3c3" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <filter id="flaconShadow" x="-30%" y="-20%" width="160%" height="150%">
+      <feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#000000" flood-opacity="0.85"/>
     </filter>
   </defs>
 
-  <!-- Background Canvas -->
   <rect width="600" height="750" fill="url(#ambG)"/>
-  
-  <!-- Subtle Framing -->
-  <rect x="25" y="25" width="550" height="700" fill="none" stroke="#b22222" stroke-width="0.75" opacity="0.3"/>
-  <rect x="35" y="35" width="530" height="680" fill="none" stroke="#b22222" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.2"/>
+  <rect x="25" y="25" width="550" height="700" fill="none" stroke="#b22222" stroke-width="0.75" opacity="0.32"/>
+  <rect x="33" y="33" width="534" height="684" fill="none" stroke="#b22222" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.2"/>
 
-  <!-- Bottle Silhouette & Construction -->
-  <g transform="translate(300, 360)" filter="url(#dropShadow)">
-    <!-- Flacon Pedestal / Shadow -->
-    <ellipse cx="0" cy="225" rx="140" ry="24" fill="#000000" opacity="0.6"/>
-
-    <!-- Bottle Main Body -->
-    <rect x="-105" y="-120" width="210" height="320" rx="20" fill="url(#bodyG)" stroke="url(#metalG)" stroke-width="3"/>
-
-    <!-- Inner Plate / Crest -->
-    <rect x="-85" y="-60" width="170" height="200" rx="8" fill="#14151a" stroke="url(#metalG)" stroke-width="1.8"/>
-    <circle cx="0" cy="-20" r="18" fill="none" stroke="url(#metalG)" stroke-width="1.2"/>
-    <polygon points="0,-30 4,-22 12,-20 4,-18 0,-10 -4,-18 -12,-20 -4,-22" fill="url(#metalG)"/>
+  <g transform="translate(300, 365)" filter="url(#flaconShadow)">
     
-    <!-- Product Label Typography -->
-    <text x="0" y="25" font-family="'Cinzel', 'Playfair Display', serif" font-size="16" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle">BAROQUE ROUGE 540</text>
-    <text x="0" y="52" font-family="'Inter', sans-serif" font-size="9" font-weight="600" letter-spacing="3" fill="#dfd8cb" text-anchor="middle">MAISON ALHAMBRA</text>
-    <line x1="-50" y1="68" x2="50" y2="68" stroke="url(#metalG)" stroke-width="0.8" opacity="0.6"/>
-    <text x="0" y="88" font-family="'Inter', sans-serif" font-size="8" letter-spacing="2" fill="#aea28e" text-anchor="middle">Eau de Parfum (EDP)</text>
-    <text x="0" y="108" font-family="'Inter', sans-serif" font-size="8" letter-spacing="3" fill="url(#metalG)" text-anchor="middle">100ml</text>
+        <ellipse cx="0" cy="210" rx="145" ry="22" fill="#000000" opacity="0.7"/>
+        <ellipse cx="0" cy="208" rx="105" ry="14" fill="#b22222" opacity="0.25"/>
 
-    <!-- Metallic Neck / Collar -->
-    <rect x="-42" y="-155" width="84" height="35" rx="4" fill="url(#metalG)"/>
-    <line x1="-42" y1="-138" x2="42" y2="-138" stroke="#121316" stroke-width="1.5"/>
+        <rect x="-110" y="-85" width="220" height="280" rx="14" fill="url(#bodyG)" stroke="url(#metalG)" stroke-width="3"/>
+        <rect x="-104" y="145" width="208" height="46" rx="8" fill="url(#baseG)" opacity="0.95"/>
+        <line x1="-104" y1="145" x2="104" y2="145" stroke="#fbc3c3" stroke-width="1.2" opacity="0.7"/>
 
-    <!-- Regal Cap / Stopper -->
-    <rect x="-55" y="-235" width="110" height="80" rx="12" fill="url(#metalG)" stroke="#fbc3c3" stroke-width="1.5"/>
-    <polygon points="0,-215 5,-195 18,-190 5,-185 0,-165 -5,-185 -18,-190 -5,-195" fill="#15161a"/>
+        <line x1="-96" y1="-75" x2="-96" y2="180" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.38"/>
+        
+        
+    <!-- Label Cartouche -->
+    <rect x="-86.0" y="-69.5" width="172" height="175" rx="8" fill="#111216" stroke="url(#metalG)" stroke-width="1.8"/>
+    <rect x="-81.0" y="-64.5" width="162" height="165" rx="5" fill="none" stroke="url(#metalG)" stroke-width="0.75" stroke-dasharray="4,2" opacity="0.6"/>
+    
+    <!-- Top Emblem / Star -->
+    <g transform="translate(0, -43.5)">
+      <circle cx="0" cy="0" r="11" fill="none" stroke="url(#metalG)" stroke-width="0.9"/>
+      <polygon points="0,-7 2,-2 7,0 2,2 0,7 -2,2 -7,0 -2,-2" fill="url(#metalG)"/>
+    </g>
+    
+    <!-- Brand Line -->
+    <text x="0" y="-21.5" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" letter-spacing="3" fill="#cfc7b8" text-anchor="middle">MAISON ALHAMBRA</text>
+    <line x1="-66.0" y1="-13.5" x2="66.0" y2="-13.5" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
+    
+    <!-- Perfume Name -->
+    <text x="0" y="15" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="12.5" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle"><tspan x="0" dy="0">BAROQUE ROUGE</tspan><tspan x="0" dy="16">540</tspan></text>
+    
+    <line x1="-62.0" y1="67.5" x2="62.0" y2="67.5" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
+    <!-- Concentration & Volume -->
+    <text x="0" y="82.5" font-family="'Inter', -apple-system, sans-serif" font-size="7" font-weight="500" letter-spacing="2" fill="#b0a594" text-anchor="middle">EAU DE PARFUM (EDP)</text>
+    <text x="0" y="95.5" font-family="'Inter', -apple-system, sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.5" fill="url(#metalG)" text-anchor="middle">100ML</text>
+    
+
+        <rect x="-40" y="-125" width="80" height="42" rx="3" fill="url(#metalG)"/>
+        <rect x="-56" y="-220" width="112" height="98" rx="8" fill="url(#metalG)" stroke="#fbc3c3" stroke-width="2"/>
+        <rect x="-46" y="-210" width="92" height="78" rx="4" fill="none" stroke="#121316" stroke-width="1.5"/>
+        
   </g>
 
-  <!-- Bottom Brand Subtitle -->
-  <text x="300" y="700" font-family="'Inter', sans-serif" font-size="10" font-weight="500" letter-spacing="5" fill="#b22222" opacity="0.8" text-anchor="middle">AMBER FLORAL WOODY</text>
+  <text x="300" y="705" font-family="'Inter', -apple-system, sans-serif" font-size="9.5" font-weight="600" letter-spacing="4.5" fill="#b22222" opacity="0.85" text-anchor="middle">AMBER FLORAL WOODY</text>
 </svg>
