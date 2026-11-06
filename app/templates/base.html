@@ -501,10 +501,10 @@
             <!-- Brand Logo Component with user asset check and luxury geometric fallback -->
             <a class="navbar-brand-lattafa d-flex align-items-center gap-2" href="{{ url_for('index') }}" aria-label="Lattafa Perfumes Home">
                 <img id="site-logo-img" 
-                     src="{{ url_for('static', filename='images/branding/site-logo.png') }}" 
+                     src="{{ url_for('static', filename='images/branding/logo.svg') }}" 
                      alt="Lattafa Logo" 
                      class="brand-logo-img"
-                     style="display: none;"
+                     style="display: none; height: 32px; width: auto;"
                      onload="this.style.display='inline-block'; var fb=document.getElementById('brand-fallback-badge'); if(fb) fb.style.display='none';"
                      onerror="this.style.display='none';">
                 <div id="brand-fallback-badge" class="brandmark-badge d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; background: rgba(197, 160, 89, 0.12); border: 1px solid rgba(197, 160, 89, 0.28); border-radius: var(--radius-tag);">

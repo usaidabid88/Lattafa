@@ -25,15 +25,15 @@ import pymysql
 from dotenv import load_dotenv
 
 # Ensure app package is importable
-app_dir = os.path.join(os.path.dirname(__file__), 'app')
-if app_dir not in sys.path:
-    sys.path.insert(0, app_dir)
+root_dir = os.path.dirname(__file__)
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
 
 # Load environment configuration
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
 # Target strictly the isolated test database
-TEST_DB_NAME = os.getenv('TEST_DB_NAME', 'online_shop_test')
+TEST_DB_NAME = os.getenv('TEST_DB_NAME', 'online_shop_perfume_test')
 
 
 def assert_safe_test_database(db_name):

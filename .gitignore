@@ -7,3 +7,5 @@ __pycache__/
 .agent/
 backups/
 *.log
+.manus/
+.playwright-mcp/
