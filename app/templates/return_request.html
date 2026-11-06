@@ -8,7 +8,7 @@
             <div>
                 <span class="badge bg-secondary-subtle text-secondary small font-mono">Returns &amp; Warranty</span>
                 <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Request return / replacement</h1>
-                <p class="text-muted small mb-0">Lodge a return claim for Order #{{ order.order_id }} under our 7-day policy (FR-20)</p>
+                <p class="text-muted small mb-0">Lodge a return claim for Order #{{ order.order_id }} under our 7-day policy</p>
             </div>
             <a href="{{ url_for('order_detail', order_id=order.order_id) }}" class="btn btn-outline-craft btn-sm">
                 <i class="bi bi-arrow-left me-1"></i> Back to order
@@ -17,6 +17,7 @@
 
         <div class="card-craft p-4 mb-4">
             <form method="POST" action="{{ url_for('order_return_request', order_id=order.order_id) }}" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="row g-3">
                     <div class="col-12">
                         <label for="product_id" class="form-label small fw-medium text-secondary">Select merchandise item <span class="text-danger">*</span></label>

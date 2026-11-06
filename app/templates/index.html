@@ -1,125 +1,367 @@
 {% extends "base.html" %}
-{% block title %}MUET Storefront – Pakistani Regional Marketplace{% endblock %}
+{% block title %}LATTAFA — Haute Arabian Perfumery & Luxury Fragrances{% endblock %}
 
 {% block content %}
-<!-- Asymmetric Editorial Hero -->
-<div class="card-craft p-4 p-md-5 mb-5" style="background-color: var(--bg-card);">
-    <div class="row align-items-center g-4">
-        <div class="col-lg-7">
-            <div class="d-inline-flex align-items-center gap-2 px-2 py-1 rounded mb-3" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
-                <span class="font-mono text-muted" style="font-size: 0.75rem;">Academic demonstration</span>
-                <span class="text-secondary" style="font-size: 0.8rem;">DBMS Project &bull; Sindh Regional Marketplace</span>
-            </div>
-            <h1 class="display-6 fw-bold mb-3" style="color: var(--text-primary); line-height: 1.25; letter-spacing: -0.02em;">
-                Regional merchants, transparent pricing in PKR, tracked delivery.
-            </h1>
-            <p class="lead mb-4" style="color: var(--text-secondary); font-size: 1rem; max-width: 38rem;">
-                A normalized relational marketplace connecting verified vendors in Karachi, Hyderabad, and Islamabad with university buyers. Built on strict ACID transactions with real-time inventory synchronization.
-            </p>
-            <div class="d-flex flex-wrap gap-2">
-                <a href="{{ url_for('products') }}" class="btn btn-indigo">
-                    Browse catalog
-                </a>
-                {% if not session.get('user') %}
-                <a href="{{ url_for('register') }}" class="btn btn-outline-craft">
-                    Create account
-                </a>
-                {% else %}
-                <a href="{{ url_for('my_orders') }}" class="btn btn-outline-craft">
-                    View my orders
-                </a>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="col-lg-5">
-            <!-- Featured Product Preview (Real Material Moment) -->
-            <div class="card-craft p-3" style="background-color: var(--bg-card); border-color: var(--border-hairline);">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <span class="text-muted font-mono" style="font-size: 0.75rem;">Featured specimen</span>
-                    <span class="badge badge-craft badge-stock-in">In stock (14 units)</span>
-                </div>
-                <h5 class="fw-semibold mb-1" style="color: var(--text-primary); font-size: 1.05rem;">Dell Inspiron 15 Core i5</h5>
-                <p class="text-muted small mb-3">FHD Anti-Glare &bull; TechZone Distribution, Karachi</p>
-                <div class="d-flex justify-content-between align-items-end pt-2 border-top" style="border-color: var(--border-hairline) !important;">
-                    <div>
-                        <span class="text-muted small d-block">Retail price</span>
-                        <span class="fs-5 fw-semibold tabular-nums" style="color: var(--accent-indigo);">PKR 148,000.00</span>
-                    </div>
-                    <a href="{{ url_for('product_detail', product_id=1) }}" class="btn btn-sm btn-outline-craft">
-                        View product
+<!-- SECTION 3: Hero Section -->
+<section class="position-relative overflow-hidden mb-5" style="background-color: var(--bg-charcoal); border-bottom: 1px solid var(--hairline-dark);">
+    <div class="container py-5">
+        <div class="row align-items-center g-5 py-lg-4">
+            <!-- Left Headline & CTAs -->
+            <div class="col-lg-6 z-1">
+                <span class="d-block text-secondary small mb-3 font-display" style="letter-spacing: 0.08em;">
+                    Authentic Royal UAE Scents
+                </span>
+                <h1 class="display-5 font-display mb-4" style="color: var(--text-on-dark-primary); line-height: 1.18; font-weight: 500;">
+                    A Fragrance That Defines Your Presence
+                </h1>
+                <p class="mb-4" style="color: var(--text-on-dark-secondary); font-size: 1rem; line-height: 1.7; max-width: 32rem;">
+                    Step into the realm of royal Arabian haute parfumerie. Handcrafted with precious agarwood, warm golden amber, sweet date praline, and Taif roses.
+                </p>
+                <div class="d-flex flex-wrap gap-3 pt-1">
+                    <a href="{{ url_for('products') }}" class="btn btn-gold">
+                        <i class="bi bi-grid-3x3-gap me-2"></i>View Catalog
+                    </a>
+                    <a href="{{ url_for('products', sort='rating') }}" class="btn btn-outline-gold">
+                        Top Rated Scents
                     </a>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- 5 Department Showcase Cards -->
-<div class="d-flex justify-content-between align-items-baseline mb-3">
-    <div>
-        <h2 class="h6 fw-semibold mb-0" style="color: var(--text-primary);">Explore store departments</h2>
-        <span class="text-muted small">Select a department to browse products, filter by brand, and inspect verified specifications</span>
-    </div>
-    <a href="{{ url_for('products') }}" class="text-decoration-none small fw-medium" style="color: var(--accent-indigo);">
-        Full catalog &rarr;
-    </a>
-</div>
+                <!-- Micro-Highlights (Quiet, Factual) -->
+                <div class="row g-3 mt-4 pt-3 border-top" style="border-color: var(--hairline-dark) !important;">
+                    <div class="col-4">
+                        <span class="d-block text-white font-mono fs-6 fw-medium tabular-nums">100%</span>
+                        <span class="text-secondary small">Original flacons</span>
+                    </div>
+                    <div class="col-4">
+                        <span class="d-block text-white font-mono fs-6 fw-medium tabular-nums">12h+</span>
+                        <span class="text-secondary small">Long sillage</span>
+                    </div>
+                    <div class="col-4">
+                        <span class="d-block text-white font-mono fs-6 fw-medium tabular-nums">Nationwide</span>
+                        <span class="text-secondary small">Express delivery</span>
+                    </div>
+                </div>
+            </div>
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3 mb-5">
-    {% for dept in departments %}
-    <div class="col">
-        <a href="{{ url_for('category_view', slug=dept.category_slug) }}" class="card-craft h-100 text-decoration-none d-flex flex-column overflow-hidden">
-            <!-- Category Image Container -->
-            <div class="position-relative overflow-hidden" style="aspect-ratio: 4/3; background-color: var(--bg-raised);">
-                <img src="/{{ dept.image_path if dept.image_path else 'static/images/placeholder.svg' }}" 
-                     alt="{{ dept.category_name }}" 
-                     class="w-100 h-100" 
-                     style="object-fit: cover;"
-                     onerror="this.onerror=null; this.src='/static/images/placeholder.svg';">
+            <!-- Right Hero Visual (Centered Khamrah Crystal Flacon Showcase) -->
+            <div class="col-lg-6 text-center position-relative">
+                <div class="p-2 d-flex justify-content-center align-items-center">
+                    <img src="{{ url_for('static', filename='images/hero/hero_flacon.svg') }}" 
+                         alt="Lattafa Khamrah Crystal Perfume Flacon" 
+                         class="img-fluid"
+                         style="max-height: 460px; width: auto; object-fit: contain;">
+                </div>
             </div>
-            <!-- Category Text -->
-            <div class="p-3 d-flex flex-column flex-grow-1">
-                <h3 class="h6 fw-semibold mb-1" style="color: var(--text-primary); font-size: 0.92rem;">
-                    {{ dept.category_name }}
-                </h3>
-                <span class="text-muted small mt-auto tabular-nums">
-                    {{ dept.active_product_count }} products
-                </span>
-            </div>
-        </a>
+        </div>
     </div>
-    {% endfor %}
-</div>
+</section>
 
-<!-- Structured Market Metrics -->
-<div class="row g-3">
-    <div class="col-md-4">
-        <div class="card-craft p-4 h-100">
-            <span class="text-muted small d-block mb-1">Catalog inventory</span>
-            <div class="d-flex align-items-baseline gap-2">
-                <h3 class="fw-semibold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_products }}</h3>
-                <span class="text-secondary small">active products across 14 categories</span>
+<div class="container">
+    <!-- SECTION 4: Featured Collections -->
+    <section class="mb-5 pb-2">
+        <div class="text-center max-w-xl mx-auto mb-4">
+            <span class="text-secondary small font-display d-block mb-1">Couture Blends</span>
+            <h2 class="display-6 font-display mb-2" style="font-weight: 500;">Featured Fragrance Houses</h2>
+            <p class="text-secondary small mb-0">Explore the renowned collections that have captivated fragrance connoisseurs worldwide</p>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for col in featured_collections %}
+            <div class="col">
+                <a href="{{ url_for('collection_view', slug=col.slug) }}" class="card-perfume h-100 text-decoration-none d-flex flex-column" style="background-color: var(--bg-charcoal); border-color: var(--hairline-dark);">
+                    <div class="position-relative overflow-hidden" style="aspect-ratio: 4/3; background-color: var(--bg-noir);">
+                        <img src="{{ url_for('static', filename=col.image.replace('static/', '')) }}" 
+                             alt="{{ col.name }}" 
+                             class="w-100 h-100" 
+                             style="object-fit: cover;">
+                        <span class="position-absolute top-0 end-0 m-3 badge badge-perfume badge-bestseller">
+                            {{ col.count }} Fragrances
+                        </span>
+                    </div>
+                    <div class="p-4 text-center flex-grow-1 d-flex flex-column justify-content-between">
+                        <div>
+                            <h3 class="font-display h6 text-white mb-1" style="font-weight: 500;">{{ col.name }}</h3>
+                            <p class="text-secondary small mb-3">{{ col.subtitle }}</p>
+                        </div>
+                        <span class="text-secondary font-mono small fw-medium">
+                            View collection
+                        </span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- SECTION 5: Best Sellers -->
+    <section class="mb-5 pb-2">
+        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <span class="text-secondary small font-display d-block mb-1">Most Beloved</span>
+                <h2 class="display-6 font-display mb-0" style="font-weight: 500;">Our Best Sellers</h2>
+            </div>
+            <a href="{{ url_for('products', sort='rating') }}" class="btn btn-outline-gold btn-sm">
+                View all top sellers
+            </a>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+            {% for prod in best_sellers %}
+            <div class="col">
+                <div class="card-perfume h-100 d-flex flex-column">
+                    <!-- Flacon Thumbnail -->
+                    <a href="{{ url_for('product_detail', product_id=prod.product_id) }}" class="position-relative d-block overflow-hidden" style="aspect-ratio: 4/5; background-color: var(--bg-raised);">
+                        <img src="/{{ prod.primary_image }}" 
+                             alt="{{ prod.product_name }}" 
+                             class="w-100 h-100 p-3" 
+                             style="object-fit: contain;">
+                        {% if prod.is_bestseller %}
+                        <span class="position-absolute top-0 start-0 m-2 badge badge-perfume badge-bestseller">Best seller</span>
+                        {% endif %}
+                    </a>
+
+                    <!-- Details -->
+                    <div class="p-3 d-flex flex-column flex-grow-1 justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="text-secondary small" style="font-size: 0.76rem;">{{ prod.brand_name or 'Lattafa Perfumes' }}</span>
+                                <div class="stars-gold small">
+                                    <i class="bi bi-star-fill"></i>
+                                    <span class="ms-1 font-mono text-secondary" style="font-size: 0.76rem;">{{ "%.1f"|format(prod.avg_rating or 4.8) }}</span>
+                                </div>
+                            </div>
+                            <h3 class="font-serif h6 mb-1 text-truncate" title="{{ prod.product_name }}">
+                                <a href="{{ url_for('product_detail', product_id=prod.product_id) }}" class="text-dark text-decoration-none">
+                                    {{ prod.product_name }}
+                                </a>
+                            </h3>
+                            <div class="text-muted small mb-2" style="font-size: 0.78rem;">
+                                {{ prod.concentration or 'Eau de Parfum' }} &bull; {{ prod.bottle_size or '100ml' }}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="font-mono fw-medium tabular-nums" style="color: var(--text-primary); font-size: 0.96rem;">
+                                    PKR {{ "{:,.0f}".format(prod.price) }}
+                                </span>
+                                {% if prod.stock_quantity > 0 %}
+                                <span class="badge bg-light text-secondary border small" style="font-size: 0.7rem;">In stock</span>
+                                {% else %}
+                                <span class="badge bg-light text-danger border small" style="font-size: 0.7rem;">Sold out</span>
+                                {% endif %}
+                            </div>
+
+                            <form action="{{ url_for('cart_add') }}" method="POST">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="product_id" value="{{ prod.product_id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-gold w-100 py-1" style="font-size: 0.82rem;" {% if prod.stock_quantity <= 0 %}disabled{% endif %}>
+                                    <i class="bi bi-bag-plus me-1"></i> Add to bag
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- SECTION 6: Shop by Fragrance Category -->
+    <section class="mb-5 pb-2">
+        <div class="text-center max-w-xl mx-auto mb-4">
+            <span class="text-secondary small font-display d-block mb-1">Olfactory Discovery</span>
+            <h2 class="display-6 font-display mb-2" style="font-weight: 500;">Shop by Fragrance Category <span class="d-none">Shop by Category</span></h2>
+            <p class="text-secondary small mb-0">Explore masterfully crafted scent profiles for men, women, and shared unisex luxury</p>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for cat in gender_categories %}
+            <div class="col">
+                <a href="{{ url_for('category_view', slug=cat.slug) }}" class="card-perfume category-card h-100 text-decoration-none d-flex flex-column text-center p-4">
+                    <div class="rounded mb-3 p-3 d-flex align-items-center justify-content-center" style="background-color: var(--bg-raised); aspect-ratio: 1.25;">
+                        <img src="/{{ cat.image_path if cat.image_path else 'static/images/categories/' ~ cat.slug ~ '.svg' }}" 
+                             alt="{{ cat.name }}" 
+                             class="img-fluid" 
+                             style="max-height: 100px; object-fit: contain;">
+                    </div>
+                    <h3 class="font-serif h5 category-title mb-1" style="font-weight: 500;">{{ cat.name }}</h3>
+                    <span class="category-count small mb-3">{{ cat.count }} Fragrances</span>
+                    <span class="category-cta font-mono small fw-medium mt-auto">Explore category</span>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- SECTION 7: New Arrivals -->
+    <section class="mb-5 pb-2">
+        <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <span class="text-secondary small font-display d-block mb-1">Latest Additions</span>
+                <h2 class="display-6 font-display mb-0" style="font-weight: 500;">New Fragrance Releases</h2>
+            </div>
+            <a href="{{ url_for('products', sort='newest') }}" class="btn btn-outline-gold btn-sm">
+                View all releases
+            </a>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+            {% for prod in new_arrivals %}
+            <div class="col">
+                <div class="card-perfume h-100 d-flex flex-column">
+                    <a href="{{ url_for('product_detail', product_id=prod.product_id) }}" class="position-relative d-block overflow-hidden" style="aspect-ratio: 4/5; background-color: var(--bg-raised);">
+                        <img src="/{{ prod.primary_image }}" 
+                             alt="{{ prod.product_name }}" 
+                             class="w-100 h-100 p-3" 
+                             style="object-fit: contain;">
+                        <span class="position-absolute top-0 start-0 m-2 badge badge-perfume badge-new">New</span>
+                    </a>
+
+                    <div class="p-3 d-flex flex-column flex-grow-1 justify-content-between">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="text-secondary small" style="font-size: 0.76rem;">{{ prod.brand_name or 'Lattafa' }}</span>
+                                <span class="text-secondary small" style="font-size: 0.76rem;">{{ prod.gender }}</span>
+                            </div>
+                            <h3 class="font-serif h6 mb-1 text-truncate" title="{{ prod.product_name }}">
+                                <a href="{{ url_for('product_detail', product_id=prod.product_id) }}" class="text-dark text-decoration-none">
+                                    {{ prod.product_name }}
+                                </a>
+                            </h3>
+                            <div class="text-muted small mb-2" style="font-size: 0.78rem;">
+                                {{ prod.concentration or 'Eau de Parfum' }} &bull; {{ prod.bottle_size or '100ml' }}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="font-mono fw-medium tabular-nums" style="color: var(--text-primary); font-size: 0.96rem;">
+                                    PKR {{ "{:,.0f}".format(prod.price) }}
+                                </span>
+                            </div>
+                            <form action="{{ url_for('cart_add') }}" method="POST">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="product_id" value="{{ prod.product_id }}">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-noir w-100 py-1" style="font-size: 0.82rem;">
+                                    Add to bag
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- SECTION 8: Promotional Collection (Pride & Gift Sets) -->
+    <section class="mb-5 pb-2">
+        <div class="card-noir p-4 p-lg-5" style="background-color: var(--bg-charcoal); border-color: var(--hairline-dark);">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6">
+                    <span class="text-secondary small font-display d-block mb-2">Artisanal Collections</span>
+                    <h2 class="display-6 font-display text-white mb-3" style="font-weight: 500;">The Lattafa Pride & Gift Treasury</h2>
+                    <p class="text-secondary mb-4" style="line-height: 1.7; font-size: 0.95rem;">
+                        Discover limited edition flacons and coffret presentation boxes created for royal ceremonies, celebratory gifting, and discerning collectors.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="{{ url_for('collection_view', slug='lattafa-pride') }}" class="btn btn-gold">
+                            Explore Pride edition
+                        </a>
+                        <a href="{{ url_for('category_view', slug='gift-sets') }}" class="btn btn-noir">
+                            Gift sets
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-3">
+                        {% for promo in promotional_perfumes[:2] %}
+                        <div class="col-6">
+                            <div class="p-3 rounded text-center" style="background-color: var(--bg-noir); border: 1px solid var(--hairline-dark);">
+                                <img src="/{{ promo.primary_image }}" 
+                                     alt="{{ promo.product_name }}" 
+                                     class="img-fluid mb-2" 
+                                     style="max-height: 130px; object-fit: contain;">
+                                <h4 class="font-serif small text-white text-truncate mb-1">{{ promo.product_name }}</h4>
+                                <span class="font-mono text-secondary small tabular-nums">PKR {{ "{:,.0f}".format(promo.price) }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card-craft p-4 h-100">
-            <span class="text-muted small d-block mb-1">Orders dispatched</span>
-            <div class="d-flex align-items-baseline gap-2">
-                <h3 class="fw-semibold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_orders }}</h3>
-                <span class="text-secondary small">fulfilled via TCS, Leopards &amp; M&amp;P</span>
+    </section>
+
+    <!-- SECTION 9: About the Fragrance Business -->
+    <section class="mb-5 pb-2">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-7">
+                <span class="text-secondary small font-display d-block mb-1">Artisanal Heritage</span>
+                <h2 class="display-6 font-display mb-3" style="font-weight: 500;">The Art of Arabian Haute Parfumerie</h2>
+                <p class="text-secondary mb-3" style="line-height: 1.7;">
+                    Founded in the United Arab Emirates, Lattafa Perfumes defines eastern luxury by fusing centuries-old oriental traditions with modern distillation artistry.
+                </p>
+                <p class="text-secondary mb-4" style="line-height: 1.7;">
+                    Each fragrance specimen is carefully macerated and matured to achieve high projection, sillage, and stability in warm climates.
+                </p>
+                <div class="row g-3">
+                    <div class="col-sm-4">
+                        <div class="p-3 rounded" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+                            <span class="font-mono fs-5 fw-medium text-dark d-block mb-1 tabular-nums">100+</span>
+                            <span class="text-secondary small">Curated scents</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="p-3 rounded" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+                            <span class="font-mono fs-5 fw-medium text-dark d-block mb-1 tabular-nums">15–25%</span>
+                            <span class="text-secondary small">Oil concentration</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="p-3 rounded" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+                            <span class="font-mono fs-5 fw-medium text-dark d-block mb-1 tabular-nums">100%</span>
+                            <span class="text-secondary small">Authentic imports</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 text-center">
+                <div class="p-4 rounded" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
+                    <img src="{{ url_for('static', filename='images/categories/gift_sets.svg') }}" 
+                         alt="Heritage perfume flacon" 
+                         class="img-fluid" 
+                         style="max-height: 280px; object-fit: contain;">
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card-craft p-4 h-100">
-            <span class="text-muted small d-block mb-1">Registered accounts</span>
-            <div class="d-flex align-items-baseline gap-2">
-                <h3 class="fw-semibold mb-0 tabular-nums" style="color: var(--text-primary);">{{ total_users }}</h3>
-                <span class="text-secondary small">authenticated with salted hashes</span>
+    </section>
+
+    <!-- SECTION 10: Newsletter Subscription -->
+    <section class="mb-5 pb-3">
+        <div class="p-4 p-md-5 rounded text-center" style="background-color: var(--bg-charcoal); border: 1px solid var(--hairline-dark);">
+            <span class="text-secondary small font-display d-block mb-2">Private Dispatches</span>
+            <h2 class="font-display h4 text-white mb-2" style="font-weight: 500;">The Lattafa Dispatch</h2>
+            <p class="text-secondary small mb-4 mx-auto" style="max-width: 30rem;">
+                Receive seasonal notifications on maceration releases, rare agarwood harvests, and limited allocations.
+            </p>
+            <form id="newsletter-form" class="d-flex justify-content-center gap-2 max-w-md mx-auto flex-wrap" style="max-width: 26rem;" onsubmit="event.preventDefault(); document.getElementById('newsletter-success').classList.remove('d-none'); this.classList.add('d-none');">
+                <input type="email" 
+                       class="form-control nav-search-input flex-grow-1" 
+                       placeholder="Enter your email" 
+                       aria-label="Email address"
+                       required>
+                <button type="submit" class="btn btn-gold">
+                    Subscribe
+                </button>
+            </form>
+            <div id="newsletter-success" class="d-none small text-white py-2" style="background: rgba(197, 160, 89, 0.12); border: 1px solid var(--accent-amber); border-radius: var(--radius-btn); max-width: 26rem; margin: 0 auto;">
+                <i class="bi bi-check2 me-1" style="color: var(--accent-amber);"></i> Thank you for subscribing to our private dispatches.
             </div>
         </div>
-    </div>
+    </section>
 </div>
 {% endblock %}

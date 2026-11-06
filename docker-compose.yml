@@ -1,4 +1,4 @@
-# docker-compose.yml - Production & Local Demonstration Stack (Phase 13A)
+﻿# docker-compose.yml - Production & Local Demonstration Stack (Phase 13A)
 # WHY: Orchestrates MySQL 8 database service and Flask WSGI web application
 #      with volume persistence, mutual networking, and automated health checks.
 
@@ -9,14 +9,14 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
-      MYSQL_DATABASE: ${DB_NAME:-online_shop}
+      MYSQL_DATABASE: ${DB_NAME:-online_shop_perfume_dev}
       MYSQL_USER: ${DB_USER:-shopuser}
       MYSQL_PASSWORD: ${DB_PASSWORD:-shoppass123}
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./sql:/docker-entrypoint-initdb.d:ro
+      - ./sql/init_perfume:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u${DB_USER:-shopuser}", "-p${DB_PASSWORD:-shoppass123}"]
       interval: 10s
@@ -40,8 +40,9 @@ services:
       DB_PORT: 3306
       DB_USER: ${DB_USER:-shopuser}
       DB_PASSWORD: ${DB_PASSWORD:-shoppass123}
-      DB_NAME: ${DB_NAME:-online_shop}
-      FLASK_SECRET_KEY: ${FLASK_SECRET_KEY:-muet-dbs-production-secret-2026}
+      DB_NAME: ${DB_NAME:-online_shop_perfume_dev}
+      APP_ENV: production
+      FLASK_SECRET_KEY: ${FLASK_SECRET_KEY}
       FLASK_ENV: production
       PORT: 5000
     ports:
@@ -58,3 +59,4 @@ volumes:
 networks:
   shop_net:
     driver: bridge
+

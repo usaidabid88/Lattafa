@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Perfume Houses & Collections — LATTAFA{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Header -->
+    <div class="text-center max-w-xl mx-auto mb-5">
+        <span class="text-secondary small font-display d-block mb-1">Artisanal Lineages</span>
+        <h1 class="display-5 font-display mb-2" style="font-weight: 500;">Our Fragrance Collections</h1>
+        <p class="text-secondary small">Explore signature perfume lineages curated by character, notes, and presentation flacons</p>
+    </div>
+
+    <!-- Collections Grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+        {% set col_meta = {
+            'Yara Collection': ('yara-collection', 'static/images/collections/yara_collection.svg', 'Sweet, playful marshmallow gourmands and tropical fruity florals.'),
+            'Asad Collection': ('asad-collection', 'static/images/collections/asad_collection.svg', 'Commanding masculine powerhouses with dark spices, woods, and marine notes.'),
+            'Khamrah Collection': ('khamrah-collection', 'static/images/collections/khamrah_collection.svg', 'Legendary warm spicy date-praline gourmands in cut crystal decanters.'),
+            'Badee Al Oud': ('badee-al-oud', 'static/images/collections/badee_al_oud.svg', 'Royal agarwood extractions, rose blends, and gourmand pineapple brûlée.'),
+            'Lattafa Pride': ('lattafa-pride', 'static/images/collections/lattafa_pride.svg', 'High-concentration prestige creations presented in sculpted presentation flacons.'),
+            'Maison Alhambra Luxury': ('maison-alhambra', 'static/images/collections/maison_alhambra.svg', 'French-inspired artisanal luxury flacons harmonized with Middle Eastern depth.'),
+            'Mainline Classics': ('mainline-classics', 'static/images/collections/mainline_classics.svg', 'The historic cornerstones of modern Arabian perfumery loved across Pakistan.')
+        } %}
+
+        {% for c in collections %}
+        {% set meta = col_meta.get(c.collection_name, (c.collection_name|lower|replace(' ', '-'), 'static/images/collections/mainline_classics.svg', 'Artisanal collection of luxury Arabian fragrances.')) %}
+        <div class="col">
+            <div class="card-perfume h-100 d-flex flex-column" style="background-color: var(--bg-charcoal); border-color: var(--hairline-dark);">
+                <div class="position-relative overflow-hidden" style="aspect-ratio: 4/3; background-color: var(--bg-noir);">
+                    <img src="/{{ meta[1] }}" alt="{{ c.collection_name }}" class="w-100 h-100" style="object-fit: cover;" onerror="this.src='/static/images/collections/mainline_classics.svg';">
+                    <span class="position-absolute top-0 end-0 m-3 badge badge-perfume badge-bestseller">
+                        {{ c.total_fragrances }} Scents
+                    </span>
+                </div>
+                <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                    <div>
+                        <h2 class="h6 font-display text-white mb-2" style="font-weight: 500;">{{ c.collection_name }}</h2>
+                        <p class="text-secondary small mb-3">{{ meta[2] }}</p>
+                        <div class="small text-muted font-mono mb-3 tabular-nums">
+                            PKR {{ "{:,.0f}".format(c.min_price) }} &ndash; {{ "{:,.0f}".format(c.max_price) }}
+                        </div>
+                    </div>
+                    <a href="{{ url_for('collection_view', slug=meta[0]) }}" class="btn btn-outline-gold btn-sm w-100">
+                        View collection
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

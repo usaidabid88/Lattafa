@@ -68,7 +68,8 @@
 Open a new terminal window to demonstrate database-level engine defense:
 1. **Connect to MySQL:**
    ```powershell
-   "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -p090078601 online_shop
+   mysql -u root -p online_shop
+   # When prompted, enter your database root password interactively
    ```
 2. **Attempt Overselling Checkout:**
    ```sql
@@ -99,7 +100,8 @@ Open a new terminal window to demonstrate database-level engine defense:
 Demonstrate that security is enforced at the database engine, not just the web app:
 1. **Login as Customer via MySQL CLI:**
    ```powershell
-   "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u test_customer -pCustomerPass123! online_shop
+   mysql -u test_customer -p online_shop
+   # When prompted, enter password interactively (CustomerPass123!)
    ```
 2. **Run Allowed Statement:**
    ```sql

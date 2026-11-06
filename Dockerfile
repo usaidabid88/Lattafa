@@ -5,6 +5,7 @@ FROM python:3.11-slim
 # Set environment flags
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
+    APP_ENV=production \
     FLASK_ENV=production
 
 # Install system dependencies (curl for healthchecks)

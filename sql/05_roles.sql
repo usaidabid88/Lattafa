@@ -80,4 +80,5 @@ SET DEFAULT ROLE 'shop_admin' TO 'test_admin'@'localhost';
 SET DEFAULT ROLE 'shop_staff' TO 'test_staff'@'localhost';
 SET DEFAULT ROLE 'shop_customer' TO 'test_customer'@'localhost';
 
-FLUSH PRIVILEGES;
+-- Note: FLUSH PRIVILEGES is intentionally omitted because MySQL 8 GRANT/SET DEFAULT ROLE
+-- statements take effect immediately without requiring RELOAD privileges on managed hosting.

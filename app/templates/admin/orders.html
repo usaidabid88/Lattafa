@@ -59,6 +59,7 @@
                     <td>
                         {% if o.status not in ['delivered', 'cancelled'] %}
                         <form method="POST" action="{{ url_for('admin_order_status') }}" class="d-flex align-items-center gap-1">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                             <input type="hidden" name="order_id" value="{{ o.order_id }}">
                             <select name="new_status" class="form-select form-select-sm" style="width: 110px; font-size: 0.8rem; border-color: var(--border-hairline);">
                                 <option value="pending" {% if o.status == 'pending' %}selected{% endif %}>Pending</option>
@@ -81,6 +82,7 @@
                             </a>
                             {% if o.status not in ['delivered', 'cancelled'] %}
                             <form method="POST" action="{{ url_for('admin_order_cancel') }}" onsubmit="return confirm('Execute sp_cancel_order: cancel order and roll back product inventory?');" class="d-inline">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                                 <input type="hidden" name="order_id" value="{{ o.order_id }}">
                                 <button type="submit" class="btn btn-sm text-secondary border-0 p-1" title="Cancel order (triggers stored procedure rollback)">
                                     <span class="small">Cancel</span>

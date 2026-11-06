@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}{{ collection_name }} — LATTAFA Fragrances{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb small">
+            <li class="breadcrumb-item"><a href="{{ url_for('index') }}" class="text-secondary text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('collections_index') }}" class="text-secondary text-decoration-none">Collections</a></li>
+            <li class="breadcrumb-item active font-serif text-dark" aria-current="page">{{ collection_name }}</li>
+        </ol>
+    </nav>
+
+    <!-- Collection Banner Card -->
+    <div class="card-noir p-4 p-md-5 mb-5 position-relative overflow-hidden" style="background-color: var(--bg-charcoal); border-color: var(--hairline-dark);">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-8">
+                <span class="badge badge-perfume badge-bestseller mb-3">Signature fragrance line</span>
+                <h1 class="display-5 font-display text-white mb-3" style="font-weight: 500;">{{ collection_name }}</h1>
+                <p class="text-secondary mb-4" style="line-height: 1.7; max-width: 36rem;">
+                    Discover every verified creation in the {{ collection_name }}. Each flacon embodies the distinct creative vision and luxury packaging standards of royal Arabian perfumery.
+                </p>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="badge badge-perfume badge-gender">{{ products|length }} Formulations</span>
+                    <span class="text-muted small">&bull; 100% Authentic UAE Distribution</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-5">
+        {% for product in products %}
+        <div class="col">
+            <div class="card-perfume h-100 d-flex flex-column">
+                <a href="{{ url_for('product_detail', product_id=product.product_id) }}" class="position-relative d-block overflow-hidden" style="aspect-ratio: 4/5; background-color: var(--bg-raised);">
+                    <img src="/{{ product.primary_image }}" 
+                         alt="{{ product.product_name }}" 
+                         class="w-100 h-100 p-3" 
+                         style="object-fit: contain;">
+                    
+                    <div class="position-absolute top-0 start-0 m-2 d-flex flex-column gap-1">
+                        {% if product.is_bestseller %}
+                        <span class="badge badge-perfume badge-bestseller">Top seller</span>
+                        {% endif %}
+                        <span class="badge badge-perfume badge-concentration">{{ product.concentration.split(' ')[0] if product.concentration else 'EDP' }}</span>
+                    </div>
+                </a>
+
+                <div class="p-3 d-flex flex-column flex-grow-1">
+                    <span class="small text-secondary mb-1" style="font-size: 0.74rem;">
+                        {{ product.brand_name }}
+                    </span>
+                    <h2 class="h6 font-serif mb-1" style="font-weight: 500;">
+                        <a href="{{ url_for('product_detail', product_id=product.product_id) }}" class="text-dark text-decoration-none">
+                            {{ product.product_name }}
+                        </a>
+                    </h2>
+                    <p class="text-secondary small mb-2 text-truncate" style="font-size: 0.78rem;">
+                        {{ product.fragrance_family }}
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-baseline mb-3 mt-auto">
+                        <span class="fs-5 fw-medium text-dark font-mono tabular-nums">
+                            PKR {{ "{:,.0f}".format(product.price) }}
+                        </span>
+                        <span class="text-secondary small">{{ product.bottle_size or '100ml' }}</span>
+                    </div>
+
+                    <div class="pt-2 border-top" style="border-color: var(--border-hairline) !important;">
+                        <form action="{{ url_for('cart_add') }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-noir w-100 btn-sm">
+                                <i class="bi bi-bag-plus me-1"></i> Add to bag
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

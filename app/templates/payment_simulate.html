@@ -80,6 +80,7 @@
                 </div>
                 <div class="d-flex flex-column gap-2">
                     <form method="POST" action="{{ url_for('payment_process', order_id=order.order_id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <input type="hidden" name="action" value="success">
                         <button type="submit" class="btn btn-success w-100 py-2 d-flex align-items-center justify-content-center gap-2">
                             <i class="bi bi-check-circle-fill"></i> Simulate Successful Authorization (HTTP 200)
@@ -87,6 +88,7 @@
                     </form>
 
                     <form method="POST" action="{{ url_for('payment_process', order_id=order.order_id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <input type="hidden" name="action" value="fail">
                         <button type="submit" class="btn btn-outline-danger w-100 py-2 d-flex align-items-center justify-content-center gap-2">
                             <i class="bi bi-x-circle-fill"></i> Simulate Gateway Rejection (Card Declined / No Funds)
@@ -94,6 +96,7 @@
                     </form>
 
                     <form method="POST" action="{{ url_for('payment_process', order_id=order.order_id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <input type="hidden" name="action" value="cancel">
                         <button type="submit" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center gap-2">
                             <i class="bi bi-slash-circle"></i> Cancel Transaction &amp; Choose Alternate Method

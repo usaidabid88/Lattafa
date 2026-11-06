@@ -15,23 +15,96 @@ import json
 from decimal import Decimal
 from flask import (
     Flask, render_template, request, redirect, url_for,
-    session, flash, g, abort, send_from_directory, jsonify
+    session, flash, g, abort, jsonify
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
-from db import get_connection
+from flask_wtf.csrf import CSRFProtect
+
+try:
+    from app.db import get_connection
+except ImportError:
+    from db import get_connection
 
 # Load .env from project root
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
+INSECURE_SECRET_PLACEHOLDERS = {
+    'default_dev_key',
+    'fallback-dev-secret-key',
+    'change_this_to_a_random_string',
+    'your_secret_key_here',
+    'secret',
+    'secret_key',
+    'changeme',
+    'admin',
+    'password',
+    '123456',
+    'flask_secret_key',
+    'muet-dbs-production-secret-2026',
+    'muet_secret_key',
+}
+
+def resolve_app_environment():
+    """Resolve active environment using APP_ENV, FLASK_ENV, or runtime indicators."""
+    app_env = os.getenv('APP_ENV')
+    if app_env:
+        return app_env.strip().lower()
+    flask_env = os.getenv('FLASK_ENV')
+    if flask_env:
+        return flask_env.strip().lower()
+    if os.getenv('PRODUCTION', '0') == '1':
+        return 'production'
+    if os.getenv('TESTING', '0') == '1':
+        return 'testing'
+    return 'development'
+
+def configure_secret_key(app_instance):
+    """Configure cryptographically secure secret key with strict environment enforcement."""
+    env = resolve_app_environment()
+    raw_key = os.getenv('FLASK_SECRET_KEY', '').strip()
+
+    if env == 'testing' or app_instance.config.get('TESTING'):
+        app_instance.secret_key = raw_key or 'test-isolated-secret-key-for-test-suite-only-never-use-in-prod'
+        return
+
+    if env in ('production', 'prod'):
+        if not raw_key:
+            raise RuntimeError(
+                "CRITICAL SECURITY CONFIGURATION ERROR: FLASK_SECRET_KEY is missing or empty in production mode. "
+                "A cryptographically secure secret key (min 16 characters) must be set in the deployment environment."
+            )
+        lowered = raw_key.lower()
+        if lowered in INSECURE_SECRET_PLACEHOLDERS or any(p in lowered for p in ('change_this', 'your_secret', 'placeholder')):
+            raise RuntimeError(
+                "CRITICAL SECURITY CONFIGURATION ERROR: FLASK_SECRET_KEY is set to a known insecure placeholder. "
+                "Provide a private, random secret key in production."
+            )
+        if len(raw_key) < 16:
+            raise RuntimeError(
+                f"CRITICAL SECURITY CONFIGURATION ERROR: FLASK_SECRET_KEY is too short ({len(raw_key)} chars) for "
+                f"production. Minimum required length is 16 characters."
+            )
+        app_instance.secret_key = raw_key
+        return
+
+    # Development mode: use key from .env if present, otherwise generate secure ephemeral key
+    if raw_key and raw_key.lower() not in INSECURE_SECRET_PLACEHOLDERS:
+        app_instance.secret_key = raw_key
+    else:
+        app_instance.secret_key = secrets.token_hex(32)
+
 app = Flask(__name__)
-app.secret_key = os.getenv('FLASK_SECRET_KEY', 'fallback-dev-secret-key')
+configure_secret_key(app)
+
+# Initialize CSRF protection across all forms (Work Package A)
+csrf = CSRFProtect(app)
 
 # Production security configuration (Phase 13A)
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-if os.getenv('FLASK_ENV') == 'production' or os.getenv('SESSION_COOKIE_SECURE', '0') == '1':
+if resolve_app_environment() == 'production' or os.getenv('SESSION_COOKIE_SECURE', '0') == '1':
     app.config['SESSION_COOKIE_SECURE'] = True
 
 @app.after_request
@@ -47,7 +120,7 @@ def add_security_headers(response):
 def get_db():
     """Return a per-request DB connection stored on Flask g."""
     if 'db' not in g:
-        g.db = get_connection()
+        g.db = get_connection(database=app.config.get('DB_NAME'))
     return g.db
 
 
@@ -99,7 +172,7 @@ def inject_user():
 
 @app.route('/')
 def index():
-    """Homepage with 5 department cards, featured specimen, and live stats."""
+    """Homepage for Arabian Luxury Perfumery with collections, bestsellers, new arrivals, and live stats."""
     conn = get_db()
     with conn.cursor() as cur:
         cur.execute("SELECT COUNT(*) AS cnt FROM products WHERE is_active = 1")
@@ -109,7 +182,107 @@ def index():
         cur.execute("SELECT COUNT(*) AS cnt FROM users WHERE role = 'customer'")
         total_users = cur.fetchone()['cnt']
 
-        # 5 Department Cards from v_category_counts
+        # Perfume Best Sellers
+        cur.execute("""
+            SELECT product_id, product_name, price, primary_image, brand_name,
+                   concentration, bottle_size, collection_name, avg_rating, review_count, stock_quantity
+            FROM v_perfume_catalog
+            WHERE is_bestseller = 1 AND is_active = 1
+            ORDER BY avg_rating DESC, product_id DESC
+            LIMIT 8
+        """)
+        best_sellers = cur.fetchall()
+        if not best_sellers:
+            cur.execute("""
+                SELECT product_id, product_name, price, primary_image, brand_name,
+                       concentration, bottle_size, collection_name, avg_rating, review_count, stock_quantity
+                FROM v_perfume_catalog
+                WHERE is_active = 1
+                ORDER BY product_id DESC
+                LIMIT 8
+            """)
+            best_sellers = cur.fetchall()
+
+        # Perfume New Arrivals
+        cur.execute("""
+            SELECT product_id, product_name, price, primary_image, brand_name,
+                   concentration, bottle_size, collection_name, avg_rating, review_count, stock_quantity
+            FROM v_perfume_catalog
+            WHERE is_new_arrival = 1 AND is_active = 1
+            ORDER BY product_id DESC
+            LIMIT 8
+        """)
+        new_arrivals = cur.fetchall()
+
+        # Promotional & Gift Sets
+        cur.execute("""
+            SELECT product_id, product_name, price, primary_image, brand_name,
+                   concentration, bottle_size, collection_name, avg_rating, review_count, stock_quantity
+            FROM v_perfume_catalog
+            WHERE is_featured = 1 AND is_active = 1
+            ORDER BY price DESC
+            LIMIT 4
+        """)
+        promotional_perfumes = cur.fetchall()
+
+        # Featured Collections Matrix
+        featured_collections = [
+            {
+                'name': 'Yara Collection',
+                'slug': 'yara-collection',
+                'subtitle': 'Sweet Gourmand & Ethereal Florals',
+                'image': 'static/images/collections/yara_collection.svg',
+                'count': 4
+            },
+            {
+                'name': 'Asad Collection',
+                'slug': 'asad-collection',
+                'subtitle': 'Masculine Power & Noble Woods',
+                'image': 'static/images/collections/asad_collection.svg',
+                'count': 3
+            },
+            {
+                'name': 'Khamrah Collection',
+                'slug': 'khamrah-collection',
+                'subtitle': 'Golden Spices & Date Gourmand',
+                'image': 'static/images/collections/khamrah_collection.svg',
+                'count': 3
+            },
+            {
+                'name': 'Badee Al Oud',
+                'slug': 'badee-al-oud',
+                'subtitle': 'Royal Agarwood & Opulent Blends',
+                'image': 'static/images/collections/badee_al_oud.svg',
+                'count': 5
+            },
+            {
+                'name': 'Lattafa Pride',
+                'slug': 'lattafa-pride',
+                'subtitle': 'Artisanal Haute Parfumerie',
+                'image': 'static/images/collections/lattafa_pride.svg',
+                'count': 11
+            },
+            {
+                'name': 'Maison Alhambra',
+                'slug': 'maison-alhambra',
+                'subtitle': 'Parisian Chic with Arabian Depth',
+                'image': 'static/images/collections/maison_alhambra.svg',
+                'count': 30
+            }
+        ]
+
+        # Perfume Gender Categories with accurate live perfume counts
+        cur.execute("""
+            SELECT c.category_id, c.name, c.slug, c.image_path, COUNT(p.product_id) AS count
+            FROM categories c
+            LEFT JOIN products p ON p.category_id = c.category_id AND p.is_active = 1
+            WHERE c.slug IN ('men', 'women', 'unisex')
+            GROUP BY c.category_id, c.name, c.slug, c.image_path
+            ORDER BY c.category_id
+        """)
+        gender_categories = cur.fetchall()
+
+        # Legacy department cards preserved for backward compatibility
         cur.execute("""
             SELECT category_id, category_name, category_slug, image_path, active_product_count
             FROM v_category_counts
@@ -122,7 +295,12 @@ def index():
                            total_products=total_products,
                            total_orders=total_orders,
                            total_users=total_users,
-                           departments=departments)
+                           departments=departments,
+                           featured_collections=featured_collections,
+                           best_sellers=best_sellers,
+                           new_arrivals=new_arrivals,
+                           promotional_perfumes=promotional_perfumes,
+                           gender_categories=gender_categories)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -218,6 +396,79 @@ def logout():
 
 
 # ─── PRODUCT CATALOG ──────────────────────────────────────────────────────────
+
+# ─── PERFUME COLLECTION & NAVIGATION ROUTES ───────────────────────────────────
+
+@app.route('/collections')
+def collections_index():
+    """Directory of all perfume collections with member counts and price ranges."""
+    conn = get_db()
+    with conn.cursor() as cur:
+        cur.execute("""
+            SELECT collection_name, total_fragrances, min_price, max_price, avg_price
+            FROM v_perfume_collections
+            ORDER BY total_fragrances DESC
+        """)
+        collections = cur.fetchall()
+    return render_template('collections.html', collections=collections)
+
+
+@app.route('/collection/<slug>')
+def collection_view(slug):
+    """View all perfumes in a designated collection."""
+    collection_name_map = {
+        'yara-collection': 'Yara Collection',
+        'asad-collection': 'Asad Collection',
+        'khamrah-collection': 'Khamrah Collection',
+        'badee-al-oud': 'Badee Al Oud',
+        'lattafa-pride': 'Lattafa Pride',
+        'maison-alhambra': 'Maison Alhambra Luxury',
+        'mainline-classics': 'Mainline Classics'
+    }
+    col_name = collection_name_map.get(slug)
+    if not col_name:
+        col_name = slug.replace('-', ' ').title()
+
+    conn = get_db()
+    with conn.cursor() as cur:
+        col_param = f"%{col_name}%"
+        cur.execute("""
+            SELECT * FROM v_perfume_catalog
+            WHERE collection_name LIKE %s AND is_active = 1
+            ORDER BY is_featured DESC, price ASC
+        """, (col_param,))
+        products = cur.fetchall()
+        if not products:
+            abort(404)
+    return render_template('collection_detail.html',
+                           collection_name=col_name,
+                           collection_slug=slug,
+                           products=products)
+
+
+@app.route('/men')
+def men_fragrances():
+    return redirect(url_for('category_view', slug='men'))
+
+
+@app.route('/women')
+def women_fragrances():
+    return redirect(url_for('category_view', slug='women'))
+
+
+@app.route('/unisex')
+def unisex_fragrances():
+    return redirect(url_for('category_view', slug='unisex'))
+
+
+@app.route('/bestsellers')
+def bestsellers_page():
+    return redirect(url_for('products', sort='rating'))
+
+
+@app.route('/new-arrivals')
+def new_arrivals_page():
+    return redirect(url_for('products', sort='newest'))
 
 @app.route('/category/<slug>')
 def category_view(slug):
@@ -376,40 +627,78 @@ def category_view(slug):
 
 @app.route('/products')
 def products():
-    """Product listing with search, category filter, brand filter, and price sort."""
+    """Product listing with search, category filter, brand filter, gender, collection, family, and price sort."""
     q = request.args.get('q', '').strip()
     category_id = request.args.get('category_id', '', type=str)
     brand_filter = request.args.get('brand', '').strip()
+    gender_filter = request.args.get('gender', '').strip()
+    collection_filter = request.args.get('collection', '').strip()
+    family_filter = request.args.get('family', '').strip()
+    min_price = request.args.get('min_price', '', type=str)
+    max_price = request.args.get('max_price', '', type=str)
     sort_by = request.args.get('sort', '').strip()
 
     conn = get_db()
     with conn.cursor() as cur:
         # Categories for filter
-        cur.execute("SELECT category_id, name, slug FROM categories ORDER BY name")
+        cur.execute("SELECT category_id, name, slug FROM categories ORDER BY (category_id >= 100) DESC, name ASC")
         categories = cur.fetchall()
 
         # Available brands for filter
-        cur.execute("SELECT DISTINCT brand_id, name AS brand_name FROM brands ORDER BY name")
+        cur.execute("SELECT DISTINCT brand_id, name AS brand_name FROM brands ORDER BY (brand_id >= 100) DESC, name ASC")
         brands = cur.fetchall()
 
-        # Query v_product_catalog
+        # Collections and Fragrance Families for filter
+        cur.execute("SELECT DISTINCT collection_name FROM product_perfume_details ORDER BY collection_name ASC")
+        collections = [r['collection_name'] for r in cur.fetchall()]
+
+        cur.execute("SELECT DISTINCT fragrance_family FROM product_perfume_details ORDER BY fragrance_family ASC")
+        families = [r['fragrance_family'] for r in cur.fetchall()]
+
+        # Query v_perfume_catalog
         sql = """
             SELECT product_id, product_name AS name, price, stock_quantity,
                    is_active, category_name, category_slug, brand_name,
-                   primary_image, short_description, avg_rating, review_count
-            FROM v_product_catalog
+                   primary_image, short_description, avg_rating, review_count,
+                   gender, concentration, bottle_size, fragrance_family,
+                   collection_name, is_featured, is_bestseller, is_new_arrival
+            FROM v_perfume_catalog
             WHERE is_active = 1
         """
         params = []
         if q:
-            sql += " AND (product_name LIKE %s OR description LIKE %s)"
-            params.extend([f'%{q}%', f'%{q}%'])
+            sql += " AND (product_name LIKE %s OR description LIKE %s OR collection_name LIKE %s OR top_notes LIKE %s)"
+            params.extend([f'%{q}%', f'%{q}%', f'%{q}%', f'%{q}%'])
+        else:
+            # When browsing general perfume storefront catalog, display genuine perfume formulations (id >= 100)
+            sql += " AND (product_id >= 100 OR collection_name IS NOT NULL)"
         if category_id:
             sql += " AND (category_id = %s OR parent_category_id = %s)"
             params.extend([int(category_id), int(category_id)])
         if brand_filter:
             sql += " AND brand_name = %s"
             params.append(brand_filter)
+        if gender_filter:
+            sql += " AND gender = %s"
+            params.append(gender_filter)
+        if collection_filter:
+            sql += " AND collection_name = %s"
+            params.append(collection_filter)
+        if family_filter:
+            sql += " AND fragrance_family = %s"
+            params.append(family_filter)
+        if min_price:
+            try:
+                sql += " AND price >= %s"
+                params.append(float(min_price))
+            except ValueError:
+                pass
+        if max_price:
+            try:
+                sql += " AND price <= %s"
+                params.append(float(max_price))
+            except ValueError:
+                pass
 
         if sort_by == 'price_asc':
             sql += " ORDER BY price ASC, product_id DESC"
@@ -417,8 +706,11 @@ def products():
             sql += " ORDER BY price DESC, product_id DESC"
         elif sort_by == 'rating':
             sql += " ORDER BY avg_rating DESC, review_count DESC, product_id DESC"
+        elif sort_by == 'newest':
+            sql += " ORDER BY is_new_arrival DESC, product_id DESC"
         else:
-            sql += " ORDER BY product_id DESC"
+            # Prioritizes perfume catalog records (id >= 100) on storefront
+            sql += " ORDER BY (product_id >= 100) DESC, product_id DESC"
 
         cur.execute(sql, params)
         prods = cur.fetchall()
@@ -427,20 +719,27 @@ def products():
                            products=prods,
                            categories=categories,
                            brands=brands,
+                           collections=collections,
+                           families=families,
                            q=q,
                            category_id=category_id,
                            brand_filter=brand_filter,
+                           gender_filter=gender_filter,
+                           collection_filter=collection_filter,
+                           family_filter=family_filter,
+                           min_price=min_price,
+                           max_price=max_price,
                            sort_by=sort_by)
 
 
 @app.route('/product/<int:product_id>')
 def product_detail(product_id):
-    """Single product page with multi-image gallery, brand specs, and reviews."""
+    """Single perfume page with fragrance notes pyramid, collection specs, gallery, and reviews."""
     conn = get_db()
     with conn.cursor() as cur:
         cur.execute("""
             SELECT p.*, s.name AS supplier_name
-            FROM v_product_catalog p
+            FROM v_perfume_catalog p
             JOIN products pr ON p.product_id = pr.product_id
             JOIN suppliers s ON pr.supplier_id = s.supplier_id
             WHERE p.product_id = %s
@@ -463,6 +762,16 @@ def product_detail(product_id):
         if not images:
             images = [{'image_id': 0, 'image_path': product['primary_image'], 'is_primary': 1, 'sort_order': 1}]
 
+        # Related perfumes from same collection or category
+        cur.execute("""
+            SELECT product_id, product_name, price, primary_image, brand_name,
+                   concentration, bottle_size, collection_name, avg_rating, review_count
+            FROM v_perfume_catalog
+            WHERE (collection_name = %s OR category_id = %s) AND product_id != %s AND is_active = 1
+            ORDER BY RAND() LIMIT 4
+        """, (product.get('collection_name'), product.get('category_id'), product_id))
+        related_products = cur.fetchall()
+
         # Verified reviews
         cur.execute("""
             SELECT r.rating, r.comment, r.created_at, u.full_name AS customer_name, u.full_name
@@ -476,7 +785,8 @@ def product_detail(product_id):
     return render_template('product_detail.html',
                            product=product,
                            images=images,
-                           reviews=reviews)
+                           reviews=reviews,
+                           related_products=related_products)
 
 
 
@@ -989,17 +1299,19 @@ def order_track(order_id):
     with conn.cursor() as cur:
         cur.execute("""
             SELECT o.order_id, o.order_date, o.status, o.expected_delivery_date,
-                   o.shipping_address_snapshot, o.total_amount
+                   o.shipping_address_snapshot, o.total_amount, o.user_id, o.guest_email
             FROM orders o WHERE o.order_id = %s
         """, (order_id,))
         order = cur.fetchone()
 
         if not order:
-            abort(404)
+            flash(f'Order #{order_id} could not be located. Please verify your reference number.', 'warning')
+            return redirect(url_for('track_order_lookup'))
 
         cur.execute("""
             SELECT courier, tracking_number, shipped_at, delivered_at
             FROM shipments WHERE order_id = %s
+            ORDER BY shipment_id DESC LIMIT 1
         """, (order_id,))
         shipment = cur.fetchone() or {}
 
@@ -1016,13 +1328,36 @@ def order_track(order_id):
 
 @app.route('/track-order', methods=['GET', 'POST'])
 def track_order_lookup():
-    """Allows guest shoppers to look up their order tracking by Order ID."""
+    """Allows guest and registered shoppers to look up order tracking securely."""
     if request.method == 'POST':
         order_id = request.form.get('order_id', '').strip()
-        if order_id.isdigit():
-            return redirect(url_for('order_track', order_id=int(order_id)))
-        flash('Please enter a valid numeric Order ID.', 'warning')
-    return render_template('order_track.html', order=None, history=[])
+        email = request.form.get('email', '').strip().lower()
+
+        if not order_id.isdigit():
+            flash('Please enter a valid numeric Order ID.', 'warning')
+            return render_template('order_track.html', order=None, history=[], shipment={})
+
+        order_id_int = int(order_id)
+        conn = get_db()
+        with conn.cursor() as cur:
+            if email:
+                cur.execute("""
+                    SELECT o.order_id
+                    FROM orders o
+                    LEFT JOIN users u ON o.user_id = u.user_id
+                    WHERE o.order_id = %s AND (LOWER(o.guest_email) = %s OR LOWER(u.email) = %s)
+                """, (order_id_int, email, email))
+            else:
+                cur.execute("SELECT o.order_id FROM orders o WHERE o.order_id = %s", (order_id_int,))
+            matched = cur.fetchone()
+
+        if not matched:
+            flash('No matching order was found for the details provided. Please check your confirmation email.', 'warning')
+            return render_template('order_track.html', order=None, history=[], shipment={})
+
+        return redirect(url_for('order_track', order_id=order_id_int))
+
+    return render_template('order_track.html', order=None, history=[], shipment={})
 
 
 # ─── ORDER HISTORY ────────────────────────────────────────────────────────────
@@ -1186,11 +1521,13 @@ def admin_products():
         cur.execute("""
             SELECT p.product_id, p.name, c.name AS category_name, b.name AS brand_name,
                    p.price, p.stock_quantity, p.is_active,
-                   COALESCE(pi.image_path, 'static/images/placeholder.svg') AS primary_image
+                   COALESCE(pi.image_path, 'static/images/placeholder.svg') AS primary_image,
+                   ppd.concentration, ppd.bottle_size, ppd.gender, ppd.collection_name, ppd.fragrance_family
             FROM products p
             JOIN categories c ON p.category_id = c.category_id
             LEFT JOIN brands b ON p.brand_id = b.brand_id
             LEFT JOIN product_images pi ON p.product_id = pi.product_id AND pi.is_primary = 1
+            LEFT JOIN product_perfume_details ppd ON p.product_id = ppd.product_id
             ORDER BY p.product_id DESC
         """)
         products = cur.fetchall()
@@ -1224,6 +1561,34 @@ def admin_product_add():
                     )
                 )
                 product_id = cur.lastrowid
+
+                # Save perfume details if provided
+                gender = request.form.get('gender')
+                concentration = request.form.get('concentration')
+                bottle_size = request.form.get('bottle_size')
+                fragrance_family = request.form.get('fragrance_family')
+                top_notes = request.form.get('top_notes')
+                heart_notes = request.form.get('heart_notes')
+                base_notes = request.form.get('base_notes')
+                collection_name = request.form.get('collection_name')
+                is_featured = 1 if request.form.get('is_featured') else 0
+                is_bestseller = 1 if request.form.get('is_bestseller') else 0
+                is_new_arrival = 1 if request.form.get('is_new_arrival') else 0
+
+                if fragrance_family or top_notes or collection_name:
+                    cur.execute("""
+                        INSERT INTO product_perfume_details 
+                        (product_id, gender, concentration, bottle_size, fragrance_family, 
+                         top_notes, heart_notes, base_notes, collection_name, is_featured, is_bestseller, is_new_arrival)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        ON DUPLICATE KEY UPDATE
+                        gender=VALUES(gender), concentration=VALUES(concentration), bottle_size=VALUES(bottle_size),
+                        fragrance_family=VALUES(fragrance_family), top_notes=VALUES(top_notes), heart_notes=VALUES(heart_notes),
+                        base_notes=VALUES(base_notes), collection_name=VALUES(collection_name),
+                        is_featured=VALUES(is_featured), is_bestseller=VALUES(is_bestseller), is_new_arrival=VALUES(is_new_arrival)
+                    """, (product_id, gender or 'Unisex', concentration or 'Eau de Parfum (EDP)', bottle_size or '100ml',
+                          fragrance_family or 'Oriental', top_notes or '', heart_notes or '', base_notes or '',
+                          collection_name or 'Mainline Classics', is_featured, is_bestseller, is_new_arrival))
 
                 # Image upload handling
                 file = request.files.get('image')
@@ -1304,6 +1669,34 @@ def admin_product_edit(product_id):
                     )
                 )
 
+                # Update or insert perfume details
+                gender = request.form.get('gender')
+                concentration = request.form.get('concentration')
+                bottle_size = request.form.get('bottle_size')
+                fragrance_family = request.form.get('fragrance_family')
+                top_notes = request.form.get('top_notes')
+                heart_notes = request.form.get('heart_notes')
+                base_notes = request.form.get('base_notes')
+                collection_name = request.form.get('collection_name')
+                is_featured = 1 if request.form.get('is_featured') else 0
+                is_bestseller = 1 if request.form.get('is_bestseller') else 0
+                is_new_arrival = 1 if request.form.get('is_new_arrival') else 0
+
+                if fragrance_family or top_notes or collection_name:
+                    cur.execute("""
+                        INSERT INTO product_perfume_details 
+                        (product_id, gender, concentration, bottle_size, fragrance_family, 
+                         top_notes, heart_notes, base_notes, collection_name, is_featured, is_bestseller, is_new_arrival)
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        ON DUPLICATE KEY UPDATE
+                        gender=VALUES(gender), concentration=VALUES(concentration), bottle_size=VALUES(bottle_size),
+                        fragrance_family=VALUES(fragrance_family), top_notes=VALUES(top_notes), heart_notes=VALUES(heart_notes),
+                        base_notes=VALUES(base_notes), collection_name=VALUES(collection_name),
+                        is_featured=VALUES(is_featured), is_bestseller=VALUES(is_bestseller), is_new_arrival=VALUES(is_new_arrival)
+                    """, (product_id, gender or 'Unisex', concentration or 'Eau de Parfum (EDP)', bottle_size or '100ml',
+                          fragrance_family or 'Oriental', top_notes or '', heart_notes or '', base_notes or '',
+                          collection_name or 'Mainline Classics', is_featured, is_bestseller, is_new_arrival))
+
                 # Image upload handling
                 file = request.files.get('image')
                 if file and file.filename:
@@ -1343,7 +1736,14 @@ def admin_product_edit(product_id):
             flash(f'Error: {e}', 'danger')
 
     with conn.cursor() as cur:
-        cur.execute("SELECT * FROM products WHERE product_id = %s", (product_id,))
+        cur.execute("""
+            SELECT p.*, ppd.gender, ppd.concentration, ppd.bottle_size, ppd.fragrance_family,
+                   ppd.top_notes, ppd.heart_notes, ppd.base_notes, ppd.collection_name,
+                   ppd.is_featured, ppd.is_bestseller, ppd.is_new_arrival
+            FROM products p
+            LEFT JOIN product_perfume_details ppd ON p.product_id = ppd.product_id
+            WHERE p.product_id = %s
+        """, (product_id,))
         product = cur.fetchone()
         cur.execute("SELECT category_id, name FROM categories ORDER BY name")
         categories = cur.fetchall()
@@ -1596,10 +1996,14 @@ def order_return_request(order_id):
                 ext = file.filename.rsplit('.', 1)[-1].lower()
                 if ext in ('jpg', 'jpeg', 'png', 'webp'):
                     sec_name = f"return_{order_id}_{int(time.time())}.{ext}"
-                    save_dir = os.path.join(os.path.dirname(__file__), '..', 'static', 'images', 'returns')
-                    os.makedirs(save_dir, exist_ok=True)
-                    full_save = os.path.join(save_dir, sec_name)
-                    file.save(full_save)
+                    root_save_dir = os.path.join(os.path.dirname(__file__), '..', 'static', 'images', 'returns')
+                    app_save_dir = os.path.join(os.path.dirname(__file__), 'static', 'images', 'returns')
+                    os.makedirs(root_save_dir, exist_ok=True)
+                    os.makedirs(app_save_dir, exist_ok=True)
+                    full_save_app = os.path.join(app_save_dir, sec_name)
+                    full_save_root = os.path.join(root_save_dir, sec_name)
+                    file.save(full_save_app)
+                    shutil.copyfile(full_save_app, full_save_root)
                     proof_path = f"static/images/returns/{sec_name}"
 
         return_number = f"RMA-{int(time.time())}-{secrets.token_hex(2).upper()}"

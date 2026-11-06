@@ -68,6 +68,7 @@
                 <tr class="collapse" id="claim_action_{{ r.return_id }}" style="background-color: var(--bg-raised);">
                     <td colspan="7" class="p-3">
                         <form method="POST" action="{{ url_for('seller_return_update', return_id=r.return_id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                             <div class="row g-2 align-items-center">
                                 <div class="col-md-3">
                                     <label for="status_{{ r.return_id }}" class="form-label small fw-medium mb-1">Status decision:</label>

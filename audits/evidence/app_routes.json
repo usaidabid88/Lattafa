@@ -1,0 +1,339 @@
+[
+  {
+    "endpoint": "index",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/"
+  },
+  {
+    "endpoint": "admin_dashboard",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/admin"
+  },
+  {
+    "endpoint": "admin_order_cancel",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/admin/order/cancel"
+  },
+  {
+    "endpoint": "admin_order_status",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/admin/order/status"
+  },
+  {
+    "endpoint": "admin_orders",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/admin/orders"
+  },
+  {
+    "endpoint": "admin_product_add",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "rule": "/admin/product/add"
+  },
+  {
+    "endpoint": "admin_product_edit",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "rule": "/admin/product/edit/<int:product_id>"
+  },
+  {
+    "endpoint": "admin_products",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/admin/products"
+  },
+  {
+    "endpoint": "admin_reports",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/admin/reports"
+  },
+  {
+    "endpoint": "admin_overdue_returns",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/admin/returns/overdue"
+  },
+  {
+    "endpoint": "admin_sellers",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/admin/sellers"
+  },
+  {
+    "endpoint": "admin_seller_verify",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/admin/sellers/<int:seller_id>/verify"
+  },
+  {
+    "endpoint": "cart",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/cart"
+  },
+  {
+    "endpoint": "cart_add",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/cart/add"
+  },
+  {
+    "endpoint": "cart_remove",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/cart/remove"
+  },
+  {
+    "endpoint": "cart_update",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/cart/update"
+  },
+  {
+    "endpoint": "category_view",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/category/<slug>"
+  },
+  {
+    "endpoint": "checkout",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "rule": "/checkout"
+  },
+  {
+    "endpoint": "health_check",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/health"
+  },
+  {
+    "endpoint": "login",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "rule": "/login"
+  },
+  {
+    "endpoint": "logout",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/logout"
+  },
+  {
+    "endpoint": "my_orders",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/my-orders"
+  },
+  {
+    "endpoint": "my_tickets",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/my-tickets"
+  },
+  {
+    "endpoint": "order_detail",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/order/<int:order_id>"
+  },
+  {
+    "endpoint": "order_confirmation",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/order/confirmation/<int:order_id>"
+  },
+  {
+    "endpoint": "order_return_request",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "rule": "/orders/<int:order_id>/return"
+  },
+  {
+    "endpoint": "order_track",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/orders/<int:order_id>/track"
+  },
+  {
+    "endpoint": "payment_process",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/payment/process/<int:order_id>"
+  },
+  {
+    "endpoint": "payment_retry",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/payment/retry/<int:order_id>"
+  },
+  {
+    "endpoint": "payment_simulate",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/payment/simulate/<int:order_id>"
+  },
+  {
+    "endpoint": "payment_switch_cod",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/payment/switch-cod/<int:order_id>"
+  },
+  {
+    "endpoint": "privacy_policy",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/privacy"
+  },
+  {
+    "endpoint": "product_detail",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/product/<int:product_id>"
+  },
+  {
+    "endpoint": "products",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/products"
+  },
+  {
+    "endpoint": "register",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "rule": "/register"
+  },
+  {
+    "endpoint": "returns_policy",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/returns-policy"
+  },
+  {
+    "endpoint": "return_detail",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/returns/<int:return_id>"
+  },
+  {
+    "endpoint": "review_add",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/review/add"
+  },
+  {
+    "endpoint": "seller_returns",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/seller/returns"
+  },
+  {
+    "endpoint": "seller_return_update",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/seller/returns/<int:return_id>/update"
+  },
+  {
+    "endpoint": "staff_tickets",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/staff/tickets"
+  },
+  {
+    "endpoint": "staff_ticket_update",
+    "methods": [
+      "POST"
+    ],
+    "rule": "/staff/tickets/<int:ticket_id>/update"
+  },
+  {
+    "endpoint": "static",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/static/<path:filename>"
+  },
+  {
+    "endpoint": "support_page",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "rule": "/support"
+  },
+  {
+    "endpoint": "ticket_detail",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/support/ticket/<int:ticket_id>"
+  },
+  {
+    "endpoint": "terms_of_service",
+    "methods": [
+      "GET"
+    ],
+    "rule": "/terms"
+  },
+  {
+    "endpoint": "track_order_lookup",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "rule": "/track-order"
+  }
+]

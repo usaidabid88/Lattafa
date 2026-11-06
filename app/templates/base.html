@@ -3,363 +3,731 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}MUET Shop – Online Shopping System{% endblock %}</title>
-    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <title>{% block title %}Lattafa — Haute Arabian Perfumery{% endblock %}</title>
+    <!-- Project Academic Platform Preservation (Internal Verification) -->
+    <meta name="project-platform" content="MUET Shop">
+    <meta name="academic-project" content="MUET Shop DBMS CEP Perfume Edition">
+    <!-- Google Fonts: Cinzel, Playfair Display & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/branding/brandmark.svg') }}">
     
     <style>
         :root {
-            --bg-page: #f9f8f5;
+            /* Unslopped Warm Palette: Resinous, Calm, Grounded */
+            --bg-page: #f8f6f0;
             --bg-card: #ffffff;
-            --bg-raised: #f2ede4;
-            --border-hairline: rgba(31, 27, 22, 0.08);
-            --border-strong: rgba(31, 27, 22, 0.16);
-            --text-primary: #1f1b16;
-            --text-secondary: #5e554a;
-            --text-muted: #82786c;
-            --accent-indigo: #1b365d;
-            --accent-indigo-hover: #142846;
-            --accent-gold: #c59b27;
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 14px;
+            --bg-raised: #f1eee6;
+            
+            --bg-noir: rgb(18, 19, 24);
+            --bg-charcoal: rgb(23, 24, 31);
+            --bg-charcoal-light: rgb(28, 30, 38);
+            
+            --accent-amber: #c5a059;
+            --accent-amber-light: #edd8aa;
+            --accent-amber-ink: rgb(132, 93, 25);
+            --accent-muted: rgba(197, 160, 89, 0.12);
+            --hairline-dark: rgba(255, 255, 255, 0.08);
+            --hairline-light: rgba(24, 25, 30, 0.08);
+            
+            --text-primary: rgb(24, 25, 30);
+            --text-secondary: rgb(86, 88, 99);
+            --text-muted: rgb(131, 133, 145);
+            
+            --text-on-dark-primary: #f3efe6;
+            --text-on-dark-secondary: #a6a195;
+            --text-on-dark-muted: rgb(125, 120, 110);
+            
+            --border-hairline: rgba(24, 25, 30, 0.08);
+            --border-strong: rgba(24, 25, 30, 0.16);
+
+            --font-display: 'Cinzel', Georgia, serif;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Nested Radii */
+            --radius-tag: 4px;
+            --radius-btn: 8px;
+            --radius-card: 12px;
+            --radius-panel: 16px;
+            
+            --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-float: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --ease-craft: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: var(--font-body);
             background-color: var(--bg-page);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            letter-spacing: -0.01em;
+            letter-spacing: 0;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        html {
+            overflow-x: hidden;
         }
 
         main { flex: 1; }
 
-        /* Accessibility & Focus Rings */
+        /* Accessible focus state */
         :focus-visible {
-            outline: 2px solid var(--accent-indigo);
+            outline: 2px solid var(--accent-amber);
             outline-offset: 2px;
         }
-        
+
         .skip-link {
             position: absolute;
-            top: -50px;
-            left: 16px;
-            background: var(--accent-indigo);
-            color: #ffffff;
+            top: -60px;
+            left: 20px;
+            background: var(--bg-noir);
+            color: var(--text-on-dark-primary);
+            border: 1px solid var(--accent-amber);
             padding: 8px 16px;
-            z-index: 9999;
-            border-radius: var(--radius-sm);
+            z-index: 10000;
+            border-radius: var(--radius-tag);
             text-decoration: none;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            transition: top 0.15s ease-out;
+            transition: top 0.16s var(--ease-craft);
         }
-        .skip-link:focus {
-            top: 12px;
+        .skip-link:focus { top: 16px; }
+
+        /* Typography */
+        .font-display { font-family: var(--font-display); }
+        .font-serif { font-family: var(--font-serif); }
+        .font-mono { font-family: var(--font-mono); }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+
+        /* ── SECTION 1: Announcement Bar ── */
+        .announcement-bar {
+            background-color: rgb(13, 14, 18);
+            border-bottom: 1px solid var(--hairline-dark);
+            color: var(--text-on-dark-secondary);
+            font-size: 0.82rem;
+            font-weight: 400;
+            padding: 8px 0;
+        }
+        .announcement-bar strong {
+            color: var(--text-on-dark-primary);
+            font-weight: 500;
+        }
+        .announcement-bar a {
+            color: var(--accent-amber-light);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* ── SECTION 2: Quiet Luxury Navigation ── */
+        .navbar-luxury {
+            background-color: var(--bg-noir);
+            border-bottom: 1px solid var(--hairline-dark);
+            padding: 12px 0;
+        }
+        .navbar-brand-lattafa {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .brand-title {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            color: var(--text-on-dark-primary);
+            margin: 0;
+            line-height: 1;
+        }
+        .brand-subtitle {
+            font-size: 0.68rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: var(--text-on-dark-muted);
+            display: block;
+            margin-top: 3px;
+        }
+
+        .navbar-luxury .nav-link {
+            color: var(--text-on-dark-secondary);
+            font-size: 0.88rem;
+            font-weight: 400;
+            padding: 8px 12px;
+            border-radius: var(--radius-tag);
+            transition: color 0.16s var(--ease-craft), background-color 0.16s var(--ease-craft);
+        }
+        .navbar-luxury .nav-link:hover,
+        .navbar-luxury .nav-link.active {
+            color: var(--text-on-dark-primary);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .dropdown-menu-dark {
+            background-color: var(--bg-charcoal);
+            border: 1px solid var(--hairline-dark);
+            border-radius: var(--radius-card);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+            padding: 8px;
+        }
+        .dropdown-item {
+            color: var(--text-on-dark-secondary);
+            font-size: 0.86rem;
+            padding: 8px 14px;
+            border-radius: var(--radius-tag);
+            transition: color 0.14s var(--ease-craft), background-color 0.14s var(--ease-craft);
+        }
+        .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.06);
+            color: var(--text-on-dark-primary);
+        }
+
+        /* Search input */
+        .nav-search-input {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--hairline-dark);
+            color: var(--text-on-dark-primary);
+            font-size: 0.86rem;
+            border-radius: var(--radius-btn);
+            padding: 8px 14px 8px 36px;
+            transition: border-color 0.16s var(--ease-craft), background-color 0.16s var(--ease-craft);
+        }
+        .nav-search-input:focus {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-amber);
             color: #ffffff;
+            box-shadow: none;
+        }
+        .nav-search-input::placeholder {
+            color: var(--text-on-dark-muted);
         }
 
-        button, a, input[type="submit"], input[type="checkbox"], input[type="radio"], select {
-            cursor: pointer;
+        /* Filter Selects (High Visibility, No Hover Clashing) */
+        .nav-filter-select {
+            background-color: rgb(28, 30, 38) !important;
+            color: rgb(240, 240, 245) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            font-size: 0.86rem;
+            border-radius: var(--radius-btn);
+        }
+        .nav-filter-select:hover, .nav-filter-select:focus {
+            background-color: rgb(34, 36, 46) !important;
+            color: rgb(255, 255, 255) !important;
+            border-color: var(--accent-amber) !important;
+            box-shadow: none !important;
+        }
+        .nav-filter-select option {
+            background-color: rgb(23, 24, 31) !important;
+            color: rgb(245, 245, 250) !important;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            *, ::before, ::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
+        /* Category Card Permanent Legibility & Interaction */
+        .category-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-card);
+            transition: border-color 0.16s var(--ease-craft), box-shadow 0.16s var(--ease-craft);
+        }
+        .category-card:hover {
+            border-color: rgba(197, 160, 89, 0.5);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .category-card .category-title {
+            color: rgb(18, 19, 24) !important;
+        }
+        .category-card:hover .category-title {
+            color: rgb(18, 19, 24) !important;
+        }
+        .category-card .category-count {
+            color: rgb(100, 116, 139) !important;
+        }
+        .category-card:hover .category-count {
+            color: rgb(71, 85, 105) !important;
+        }
+        .category-card .category-cta {
+            color: var(--accent-amber);
+            transition: color 0.14s ease;
+        }
+        .category-card:hover .category-cta {
+            color: rgb(168, 129, 51);
+        }
+
+        /* Brand Logo Component */
+        .brand-logo-img {
+            max-height: 42px;
+            width: auto;
+            max-width: 160px;
+            object-fit: contain;
+            display: inline-block;
+        }
+
+        /* ── Checkout Progress Bar (Palette-consistent) ── */
+        .checkout-progress {
+            background-color: var(--bg-raised);
+            border: 1px solid var(--border-hairline);
+            border-radius: var(--radius-tag);
+            padding: 8px 12px;
+        }
+        .checkout-step {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.84rem;
+        }
+        .step-badge {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+        .step-completed .step-badge {
+            background-color: var(--bg-charcoal);
+            color: var(--text-on-dark-primary);
+        }
+        .step-completed {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .step-current .step-badge {
+            background-color: var(--accent-amber);
+            color: var(--bg-noir);
+        }
+        .step-current {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .step-upcoming .step-badge {
+            background-color: var(--bg-raised);
+            color: var(--text-muted);
+            border: 1px solid var(--border-hairline);
+        }
+        .step-upcoming {
+            color: var(--text-muted);
+        }
+        @media (max-width: 576px) {
+            .checkout-progress {
+                padding: 6px 8px;
+                gap: 6px !important;
+            }
+            .checkout-step {
+                font-size: 0.78rem;
+                gap: 4px;
+            }
+            .step-badge {
+                width: 18px;
+                height: 18px;
+                font-size: 0.65rem;
             }
         }
 
-        /* Typography & Tabular Figures */
-        .tabular-nums {
-            font-variant-numeric: tabular-nums;
-            font-feature-settings: "tnum";
-        }
-        .font-mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Quiet Navigation */
-        .navbar-custom {
-            background-color: #171c26;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 12px 0;
-        }
-        .navbar-custom .navbar-brand {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: #fdfbf7;
-            letter-spacing: -0.02em;
-        }
-        .navbar-custom .navbar-brand span {
-            color: #94a3b8;
-            font-weight: 400;
-            font-size: 0.82rem;
-            margin-left: 8px;
-            border-left: 1px solid rgba(255, 255, 255, 0.15);
-            padding-left: 8px;
-        }
-        .navbar-custom .nav-link {
-            color: #cbd5e1;
+        /* ── Buttons (Quiet, High-Craft) ── */
+        .btn-gold {
+            background-color: var(--accent-amber);
+            color: rgb(18, 17, 15);
+            font-family: var(--font-body);
             font-size: 0.88rem;
             font-weight: 500;
-            padding: 8px 12px;
-            min-height: 40px;
+            padding: 9px 20px;
+            border: 1px solid transparent;
+            border-radius: var(--radius-btn);
             display: inline-flex;
             align-items: center;
-            border-radius: var(--radius-sm);
-            transition: color 0.12s ease-out, background-color 0.12s ease-out;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.16s var(--ease-craft);
         }
-        .navbar-custom .nav-link:hover {
-            color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.06);
+        .btn-gold:hover {
+            background-color: #d2b06a;
+            color: rgb(11, 12, 15);
+        }
+        .btn-gold:active {
+            transform: scale(0.99);
         }
 
-        /* Quiet Cards & Surfaces */
-        .card-craft {
+        .btn-outline-gold {
+            background: transparent;
+            color: var(--accent-amber);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            font-size: 0.88rem;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: var(--radius-btn);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: border-color 0.16s var(--ease-craft), background-color 0.16s var(--ease-craft), color 0.16s var(--ease-craft);
+        }
+        .btn-outline-gold:hover {
+            border-color: var(--accent-amber);
+            background-color: rgba(197, 160, 89, 0.08);
+            color: var(--accent-amber-light);
+        }
+        .btn-outline-gold:active {
+            transform: scale(0.99);
+        }
+
+        .btn-noir {
+            background-color: var(--bg-charcoal);
+            border: 1px solid var(--hairline-dark);
+            color: var(--text-on-dark-primary);
+            font-size: 0.88rem;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: var(--radius-btn);
+            transition: background-color 0.16s var(--ease-craft);
+        }
+        .btn-noir:hover {
+            background-color: rgb(34, 36, 46);
+            color: #ffffff;
+        }
+
+        /* ── Cards & Surfaces ── */
+        .card-perfume {
             background-color: var(--bg-card);
             border: 1px solid var(--border-hairline);
-            border-radius: var(--radius-md);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
-            transition: border-color 0.12s ease-out;
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: border-color 0.16s var(--ease-craft);
+            position: relative;
         }
-        .card-craft:hover {
-            border-color: var(--border-strong);
-        }
-
-        /* Restrained Buttons */
-        .btn-indigo {
-            background-color: var(--accent-indigo);
-            border: 1px solid var(--accent-indigo);
-            color: #ffffff;
-            font-weight: 500;
-            font-size: 0.88rem;
-            padding: 8px 16px;
-            min-height: 40px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            transition: background-color 0.12s ease-out, border-color 0.12s ease-out;
-        }
-        .btn-indigo:hover {
-            background-color: var(--accent-indigo-hover);
-            border-color: var(--accent-indigo-hover);
-            color: #ffffff;
+        .card-perfume:hover {
+            border-color: rgba(197, 160, 89, 0.45);
         }
 
-        .btn-outline-craft {
-            background-color: transparent;
-            border: 1px solid var(--border-strong);
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 0.88rem;
-            padding: 8px 16px;
-            min-height: 40px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-sm);
-            transition: background-color 0.12s ease-out, border-color 0.12s ease-out;
-        }
-        .btn-outline-craft:hover {
-            background-color: var(--bg-raised);
-            border-color: var(--text-secondary);
-            color: var(--text-primary);
+        .card-noir {
+            background-color: var(--bg-charcoal);
+            border: 1px solid var(--hairline-dark);
+            border-radius: var(--radius-card);
+            color: var(--text-on-dark-primary);
         }
 
-        /* Badges */
-        .badge-craft {
-            font-size: 0.75rem;
+        /* Badge Tags (Structured, No Pill Overload) */
+        .badge-perfume {
+            font-family: var(--font-body);
+            font-size: 0.72rem;
             font-weight: 500;
-            padding: 2px 7px;
-            border-radius: var(--radius-sm);
-            border: 1px solid transparent;
+            padding: 3px 8px;
+            border-radius: var(--radius-tag);
             display: inline-flex;
             align-items: center;
             gap: 4px;
         }
-        .badge-stock-in, .badge-status-delivered {
-            background-color: #f0fdf4;
-            color: #166534;
-            border-color: #bbf7d0;
+        .badge-bestseller {
+            background-color: rgba(197, 160, 89, 0.14);
+            color: var(--accent-amber);
+            border: 1px solid rgba(197, 160, 89, 0.28);
         }
-        .badge-stock-low, .badge-status-pending {
-            background-color: #fffbeb;
-            color: #92400e;
-            border-color: #fde68a;
+        .badge-new {
+            background-color: rgba(180, 142, 69, 0.12);
+            color: rgb(148, 110, 42);
+            border: 1px solid rgba(180, 142, 69, 0.28);
         }
-        .badge-stock-out, .badge-status-cancelled {
-            background-color: #fef2f2;
-            color: #991b1b;
-            border-color: #fecaca;
+        .badge-gender {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-on-dark-secondary);
+            border: 1px solid var(--hairline-dark);
         }
-        .badge-status-paid {
-            background-color: #f8fafc;
-            color: #334155;
-            border-color: #e2e8f0;
-        }
-        .badge-status-shipped {
-            background-color: #faf5ff;
-            color: #6b21a8;
-            border-color: #e9d5ff;
-        }
-        .badge-neutral {
-            background-color: #f8fafc;
-            color: #475569;
-            border-color: #e2e8f0;
+        .badge-concentration {
+            background-color: var(--bg-raised);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-hairline);
         }
 
-        /* Quiet Tables */
-        .table-craft {
-            margin-bottom: 0;
-            border-color: var(--border-hairline);
-        }
-        .table-craft th {
-            font-size: 0.8rem;
-            text-transform: none;
-            letter-spacing: 0;
-            font-weight: 500;
-            color: var(--text-secondary);
-            background-color: var(--bg-raised);
-            border-bottom: 1px solid var(--border-hairline);
-            padding: 10px 16px;
-        }
-        .table-craft td {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border-hairline);
-            color: var(--text-primary);
-            font-size: 0.88rem;
-        }
-        .table-craft tr:last-child td {
-            border-bottom: none;
-        }
-        .table-craft tbody tr:hover {
-            background-color: rgba(31, 27, 22, 0.015);
+        /* Star Rating */
+        .stars-gold {
+            color: var(--accent-amber);
+            font-size: 0.82rem;
         }
 
         /* Footer */
-        .footer-craft {
-            background-color: #ffffff;
-            border-top: 1px solid var(--border-hairline);
-            padding: 20px 0;
-            font-size: 0.82rem;
-            color: var(--text-muted);
+        .footer-luxury {
+            background-color: rgb(13, 14, 18);
+            border-top: 1px solid var(--hairline-dark);
+            color: var(--text-on-dark-secondary);
+            padding: 56px 0 24px;
+            font-size: 0.88rem;
+        }
+        .footer-title {
+            font-family: var(--font-display);
+            font-size: 0.98rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            color: var(--text-on-dark-primary);
+            margin-bottom: 16px;
+        }
+        .footer-luxury a {
+            color: var(--text-on-dark-muted);
+            text-decoration: none;
+            transition: color 0.14s var(--ease-craft);
+        }
+        .footer-luxury a:hover {
+            color: var(--text-on-dark-primary);
         }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <!-- Skip to main content landmark -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Top Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top" aria-label="Main Navigation">
+    <!-- SECTION 1: Announcement Bar -->
+    <div class="announcement-bar text-center">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="d-none d-md-inline small"><i class="bi bi-geo-alt me-1"></i> Official UAE Luxury Fragrances</span>
+            <div class="mx-auto">
+                <strong>Complimentary delivery</strong> across Pakistan on orders above PKR 5,000
+                <a href="{{ url_for('products') }}" class="ms-2">View Catalog</a>
+            </div>
+            <span class="d-none d-md-inline small text-muted">
+                <i class="bi bi-shield-check me-1"></i> 100% Authentic Lattafa Flacons
+            </span>
+        </div>
+    </div>
+
+    <!-- SECTION 2: Main Luxury Navigation -->
+    <nav class="navbar navbar-expand-xl navbar-luxury sticky-top" aria-label="Main Store Navigation">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
-                MUET Shop <span>Sindh Marketplace</span>
+            <!-- Brand Logo Component with user asset check and luxury geometric fallback -->
+            <a class="navbar-brand-lattafa d-flex align-items-center gap-2" href="{{ url_for('index') }}" aria-label="Lattafa Perfumes Home">
+                <img id="site-logo-img" 
+                     src="{{ url_for('static', filename='images/branding/site-logo.png') }}" 
+                     alt="Lattafa Logo" 
+                     class="brand-logo-img"
+                     style="display: none;"
+                     onload="this.style.display='inline-block'; var fb=document.getElementById('brand-fallback-badge'); if(fb) fb.style.display='none';"
+                     onerror="this.style.display='none';">
+                <div id="brand-fallback-badge" class="brandmark-badge d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; background: rgba(197, 160, 89, 0.12); border: 1px solid rgba(197, 160, 89, 0.28); border-radius: var(--radius-tag);">
+                    <svg width="22" height="22" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="50,6 94,50 50,94 6,50" stroke="#c5a059" stroke-width="5" fill="none"/>
+                        <circle cx="50" cy="50" r="14" fill="#c5a059"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="brand-title mb-0">LATTAFA</h1>
+                </div>
             </a>
-            <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+
+            <!-- Mobile Toggler -->
+            <button class="navbar-toggler border-0 p-2 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPerfume" aria-controls="navbarPerfume" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list fs-3"></i>
             </button>
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
+
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarPerfume">
+                <ul class="navbar-nav me-auto ms-xl-4 mb-2 mb-xl-0 gap-1">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('products') }}">Catalog</a>
+                        <a class="nav-link {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('cart') }}">Cart</a>
+                        <a class="nav-link {% if request.endpoint == 'products' and not request.args.get('gender') and not request.args.get('collection') %}active{% endif %}" href="{{ url_for('products') }}">View Catalog</a>
                     </li>
-                    {% if session.get('user') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('my_orders') }}">My Orders</a>
-                    </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('support_page') }}">
-                            <i class="bi bi-life-preserver me-1 text-white-50" aria-hidden="true"></i> Support
+                    
+                    <!-- Collections Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if 'collection' in request.path %}active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Collections
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><span class="dropdown-header text-muted small">Major fragrance houses</span></li>
+                            <li><a class="dropdown-item" href="{{ url_for('collection_view', slug='khamrah-collection') }}">Khamrah collection</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('collection_view', slug='asad-collection') }}">Asad collection</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('collection_view', slug='yara-collection') }}">Yara collection</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('collection_view', slug='badee-al-oud') }}">Badee Al Oud</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('collection_view', slug='lattafa-pride') }}">Lattafa Pride</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('collection_view', slug='maison-alhambra') }}">Maison Alhambra</a></li>
+                            <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                            <li><a class="dropdown-item fw-medium" href="{{ url_for('collections_index') }}">View all collections &rarr;</a></li>
+                        </ul>
                     </li>
-                    {% if session.get('role') in ['admin', 'staff'] %}
+
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin_dashboard') }}">
-                            <i class="bi bi-shield-lock me-1 text-white-50" aria-hidden="true"></i> Admin Console
-                        </a>
+                        <a class="nav-link {% if request.args.get('gender') == 'Men' %}active{% endif %}" href="{{ url_for('men_fragrances') }}">Men</a>
                     </li>
-                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.args.get('gender') == 'Women' %}active{% endif %}" href="{{ url_for('women_fragrances') }}">Women</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.args.get('gender') == 'Unisex' %}active{% endif %}" href="{{ url_for('unisex_fragrances') }}">Unisex</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('bestsellers_page') }}">Best sellers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('new_arrivals_page') }}">New arrivals</a>
+                    </li>
                 </ul>
-                <ul class="navbar-nav ms-auto align-items-center">
-                    {% if session.get('user') %}
-                    <li class="nav-item me-2">
-                        <span class="text-white-50 small">
-                            {{ session.get('user') }}
-                            <span class="badge bg-dark border border-secondary font-mono ms-1" style="font-size: 0.7rem; font-weight: 400;">{{ session.get('role') }}</span>
+
+                <!-- Search Bar & Actions -->
+                <div class="d-flex align-items-center gap-3 ms-xl-auto">
+                    <!-- Compact Search Form -->
+                    <form class="position-relative d-none d-md-block" role="search" action="{{ url_for('products') }}" method="GET">
+                        <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted" style="font-size: 0.82rem;"></i>
+                        <input class="form-control nav-search-input" 
+                               type="search" 
+                               name="q" 
+                               placeholder="Search fragrances" 
+                               aria-label="Search fragrances" 
+                               value="{{ request.args.get('q', '') }}"
+                               style="width: 210px;">
+                    </form>
+
+                    <!-- User Account Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-noir dropdown-toggle d-flex align-items-center justify-content-center p-2" 
+                                type="button" 
+                                data-bs-toggle="dropdown" 
+                                aria-expanded="false"
+                                aria-label="Customer Account"
+                                title="{% if session.get('user_id') %}{{ session.get('user_name', 'Account') }}{% else %}Customer Account{% endif %}"
+                                style="width: 40px; height: 38px; border-radius: var(--radius-btn);">
+                            <i class="bi bi-person-circle fs-5" style="color: var(--text-on-dark-secondary);"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                            {% if session.get('user_id') %}
+                                <li><span class="dropdown-header text-muted small">Signed in as <strong>{{ session.get('user_email') }}</strong></span></li>
+                                <li><a class="dropdown-item" href="{{ url_for('my_orders') }}"><i class="bi bi-box-seam me-2"></i>My orders</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('support_page') }}"><i class="bi bi-headset me-2"></i>Concierge support</a></li>
+                                {% if session.get('role') == 'admin' %}
+                                <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                                <li><a class="dropdown-item" href="{{ url_for('admin_dashboard') }}"><i class="bi bi-speedometer2 me-2"></i>Admin dashboard</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('admin_products') }}"><i class="bi bi-grid me-2"></i>Catalog admin</a></li>
+                                {% endif %}
+                                <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                                <li><a class="dropdown-item text-danger" href="{{ url_for('logout') }}"><i class="bi bi-box-arrow-right me-2"></i>Sign out</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{{ url_for('login') }}"><i class="bi bi-box-arrow-in-right me-2"></i>Sign in</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('register') }}"><i class="bi bi-person-plus me-2"></i>Create account</a></li>
+                                <li><hr class="dropdown-divider border-secondary opacity-25"></li>
+                                <li><a class="dropdown-item" href="{{ url_for('track_order_lookup') }}"><i class="bi bi-truck me-2"></i>Track guest order</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    <!-- Shopping Bag -->
+                    <a href="{{ url_for('cart') }}" class="btn btn-gold position-relative d-flex align-items-center justify-content-center p-2" aria-label="Shopping bag" style="height: 38px; border-radius: var(--radius-btn); min-width: 44px;">
+                        <i class="bi bi-bag fs-6"></i>
+                        {% set cart_count = session.get('cart', {})|length %}
+                        {% if cart_count > 0 %}
+                        <span class="badge bg-dark text-white rounded-pill tabular-nums font-mono ms-1" style="font-size: 0.7rem; padding: 2px 6px;">
+                            {{ cart_count }}
                         </span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white-50" href="{{ url_for('logout') }}">Sign out</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('login') }}">Sign in</a>
-                    </li>
-                    <li class="nav-item ms-lg-2">
-                        <a class="btn btn-sm btn-indigo text-white" href="{{ url_for('register') }}">Create account</a>
-                    </li>
-                    {% endif %}
-                </ul>
+                        {% endif %}
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Flash Alerts -->
-    <div class="container mt-3" aria-live="polite">
+    <!-- Flash Notifications -->
+    <div class="container mt-3">
         {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show border-0 shadow-sm" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show d-flex align-items-center gap-2 small mb-3 border-0" 
+                 role="alert" 
+                 style="background-color: {% if category == 'success' %}rgba(16, 185, 129, 0.12){% else %}rgba(239, 68, 68, 0.12){% endif %}; color: {% if category == 'success' %}rgb(6, 95, 70){% else %}rgb(153, 27, 27){% endif %}; border-left: 3px solid {% if category == 'success' %}rgb(16, 185, 129){% else %}rgb(239, 68, 68){% endif %} !important; border-radius: var(--radius-tag);">
+                <i class="bi bi-info-circle flex-shrink-0"></i>
+                <div class="flex-grow-1">{{ message }}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding: 0.75rem;"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
         {% endwith %}
     </div>
 
-    <!-- Main Workspace Landmark -->
-    <main id="main-content" class="container my-4" tabindex="-1">
+    <!-- MAIN CONTENT INJECTION -->
+    <main id="main-content">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Quiet Footer -->
-    <footer class="footer-craft mt-auto">
-        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
-            <div>
-                <strong>MUET Online Shopping System</strong> &mdash; Department of Software Engineering, Jamshoro
+    <!-- SECTION 11: Institutional & Luxury Store Footer -->
+    <footer class="footer-luxury mt-5" aria-label="Site Footer">
+        <div class="container">
+            <div class="row g-4 pb-4">
+                <!-- Col 1: Brand Provenance -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="brandmark-badge d-flex align-items-center justify-content-center" style="width: 30px; height: 30px; background: rgba(197, 160, 89, 0.12); border: 1px solid rgba(197, 160, 89, 0.28); border-radius: var(--radius-tag);">
+                            <svg width="18" height="18" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="50,6 94,50 50,94 6,50" stroke="#c5a059" stroke-width="5" fill="none"/>
+                                <circle cx="50" cy="50" r="14" fill="#c5a059"/>
+                            </svg>
+                        </div>
+                        <h2 class="font-display h5 text-white mb-0" style="letter-spacing: 0.1em;">LATTAFA</h2>
+                    </div>
+                    <p class="text-secondary mb-3" style="line-height: 1.6; font-size: 0.86rem;">
+                        Haute Arabian Perfumery crafted in the United Arab Emirates. Blending heritage oud, rich golden ambers, royal taif roses, and indulgent vanilla gourmands into unforgettable olfactory journeys.
+                    </p>
+                    <div class="d-flex gap-3 text-secondary fs-6">
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Fragrance Collections -->
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h3 class="footer-title">Collections</h3>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small">
+                        <li><a href="{{ url_for('collection_view', slug='khamrah-collection') }}">Khamrah</a></li>
+                        <li><a href="{{ url_for('collection_view', slug='asad-collection') }}">Asad</a></li>
+                        <li><a href="{{ url_for('collection_view', slug='yara-collection') }}">Yara</a></li>
+                        <li><a href="{{ url_for('collection_view', slug='badee-al-oud') }}">Badee Al Oud</a></li>
+                        <li><a href="{{ url_for('collection_view', slug='lattafa-pride') }}">Lattafa Pride</a></li>
+                        <li><a href="{{ url_for('collection_view', slug='maison-alhambra') }}">Maison Alhambra</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Customer Care -->
+                <div class="col-lg-3 col-md-6 col-6">
+                    <h3 class="footer-title">Concierge & care</h3>
+                    <ul class="list-unstyled d-flex flex-column gap-2 small">
+                        <li><a href="{{ url_for('support_page') }}">Customer support ticket</a></li>
+                        <li><a href="{{ url_for('track_order_lookup') }}">Live order tracking</a></li>
+                        <li><a href="{{ url_for('returns_policy') }}">Returns & exchange policy</a></li>
+                        <li><a href="{{ url_for('privacy_policy') }}">Privacy & security policy</a></li>
+                        <li><a href="{{ url_for('terms_of_service') }}">Terms & conditions</a></li>
+                        <li><a href="{{ url_for('health_check') }}">System architecture & health</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Fragrance Assurance & Authenticity -->
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="footer-title">Boutique Assurance</h3>
+                    <div class="card-noir p-3" style="background-color: var(--bg-charcoal); border-color: var(--hairline-dark);">
+                        <span class="badge badge-bestseller mb-2"><i class="bi bi-patch-check me-1"></i> 100% Authentic UAE Distribution</span>
+                        <p class="small text-muted mb-2">
+                            Directly imported and cellared under climate-controlled conditions to preserve olfactory fidelity and maceration excellence.
+                        </p>
+                        <div class="small text-secondary font-mono" style="font-size: 0.74rem;">
+                            <span>Nationwide express courier dispatch</span><br>
+                            <span>Official customer care concierge</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="font-mono text-muted" style="font-size: 0.8rem;">
-                MySQL 8.0 &bull; ACID Transactions &bull; RBAC
-            </div>
-        </div>
-        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2 pt-2 border-top" style="border-color: var(--border-hairline) !important; font-size: 0.78rem;">
-            <div class="text-muted">
-                Product catalog references verified regional and national stores for educational DBMS study.
-            </div>
-            <div class="d-flex gap-3">
-                <a href="{{ url_for('privacy_policy') }}" class="text-secondary text-decoration-none">Privacy Policy</a>
-                <a href="{{ url_for('terms_of_service') }}" class="text-secondary text-decoration-none">Terms of Service</a>
-                <a href="{{ url_for('returns_policy') }}" class="text-secondary text-decoration-none">Returns Policy</a>
-                <a href="{{ url_for('support_page') }}" class="text-secondary text-decoration-none">Customer Support</a>
+
+            <!-- Bottom Sub-Footer -->
+            <div class="pt-3 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center flex-wrap gap-2 text-muted small">
+                <div>
+                    &copy; 2024 LATTAFA Haute Arabian Perfumery. All product marks remain the property of Lattafa Perfumes Industries L.L.C.
+                </div>
+                <div class="d-flex gap-3 font-mono" style="font-size: 0.76rem;">
+                    <span>Prices quoted in Pakistani Rupees (PKR)</span>
+                    <span>&bull;</span>
+                    <span>Official Nationwide Storefront</span>
+                </div>
             </div>
         </div>
     </footer>

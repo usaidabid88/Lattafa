@@ -57,6 +57,7 @@
                     </div>
                     <p class="text-muted small mb-2">Change payment method to pay upon physical parcel delivery by courier.</p>
                     <form method="POST" action="{{ url_for('payment_switch_cod', order_id=order.order_id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                         <button type="submit" class="btn btn-outline-success btn-sm">
                             <i class="bi bi-cash-coin me-1"></i> Switch to Cash on Delivery
                         </button>

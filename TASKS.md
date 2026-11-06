@@ -22,3 +22,25 @@
 | **TASK-12F-DOCS** | Update ER diagram, FINAL_REPORT.md, and viva_notes.md | DOCS | TASK-12F-EXPAND-TESTS | DONE (PASS) |
 | **TASK-13A-PROD** | Production readiness: Dockerfile, compose, /health, security headers, Gunicorn | LEAD | TASK-12F-DOCS | DONE (PASS) |
 | **TASK-FINAL-REPORT** | Final comprehensive overnight `MORNING_REPORT.md` compilation | LEAD | ALL | DONE (PASS) |
+| **TASK-STAGE1-PREFLIGHT** | Pre-flight dump recovery point & git inspection | LEAD | TASK-FINAL-REPORT | DONE (PASS) |
+| **TASK-STAGE1-WPA-CSRF** | CSRF protection across 21 POST forms via Flask-WTF | SECURITY | TASK-STAGE1-PREFLIGHT | DONE (PASS) |
+| **TASK-STAGE1-WPB-TLS** | PyMySQL TLS/SSL support via DB_SSL_CA | DB_ENGINE | TASK-STAGE1-PREFLIGHT | DONE (PASS) |
+| **TASK-STAGE1-WPC-ISOLATION** | Test database isolation (`online_shop_test`) with safety guards | QA | TASK-STAGE1-PREFLIGHT | DONE (PASS) |
+| **TASK-STAGE1-WPD-WSGI** | Gunicorn root import path resolution (`app.app:app` & `app/__init__.py`) | DEVOPS | TASK-STAGE1-PREFLIGHT | DONE (PASS) |
+| **TASK-STAGE1-WPE-DOCKER-INIT** | Docker database init ordering (`sql/init/` 01-08 sequential) | DEVOPS | TASK-STAGE1-PREFLIGHT | DONE (PASS) |
+| **TASK-STAGE1-WPF-ROLES** | MySQL privilege compatibility (remove FLUSH PRIVILEGES;) | DB_ENGINE | TASK-STAGE1-PREFLIGHT | DONE (PASS) |
+| **TASK-STAGE1-WPG-RUNTIME** | Python runtime consistency (Dockerfile & requirements pinning) | DEVOPS | TASK-STAGE1-PREFLIGHT | DONE (PASS) |
+| **TASK-STAGE1-VERIFY** | End-to-end test suite execution & Stage 1 reporting | LEAD | ALL_STAGE1 | DONE (PASS) |
+| **TASK-STAGE1.5-WPA** | Database Object Count Reconciliation (49 vs 51 objects explained) | AUDITOR | TASK-STAGE1-VERIFY | DONE (PASS) |
+| **TASK-STAGE1.5-WPB** | Production Secret Key Hardening & Verification (`test_secret_key.py`) | SECURITY | TASK-STAGE1-VERIFY | DONE (PASS) |
+| **TASK-STAGE1.5-WPC** | Eradicate Hardcoded Credentials from Scripts & Docs | SECURITY | TASK-STAGE1-VERIFY | DONE (PASS) |
+| **TASK-STAGE2-INVENTORY** | Complete 529-file repository audit & categorization (`STAGE_2_FILE_INVENTORY.md`) | AUDITOR | ALL_STAGE1.5 | DONE (PASS) |
+| **TASK-STAGE2-CLEANUP** | Code quality polish, import cleanup, static parity & return upload path fix | LEAD | TASK-STAGE2-INVENTORY | DONE (PASS) |
+| **TASK-STAGE2-IMAGE-PIPELINE** | Recover Option B `fetch_images.py` from `agent/image` branch | DEV | TASK-STAGE2-CLEANUP | DONE (PASS) |
+| **TASK-STAGE2-STRUCTURE** | Purge 0-byte corrupt backup & freeze `FINAL_PROJECT_STRUCTURE.md` | DEVOPS | TASK-STAGE2-IMAGE-PIPELINE | DONE (PASS) |
+| **TASK-STAGE2-REPORTS** | Author `STAGE_2_CLEANUP_REPORT.md` and `STAGE_2_CHANGELOG.md` | LEAD | TASK-STAGE2-STRUCTURE | DONE (PASS) |
+| **TASK-STAGE3-REGRESSION** | Complete regression test run (49 app, 25 SQL, 7 key, 6 SSL = 87 tests) | QA | ALL_STAGE2 | DONE (PASS) |
+| **TASK-STAGE3-CLEAN-INIT** | Pristine database initialization on disposable DB (`online_shop_stage3_verify`) | DB_ENGINE | TASK-STAGE3-REGRESSION | DONE (PASS) |
+| **TASK-STAGE3-DEV-PRESERVE** | Verify zero modification or data drift on development DB (`online_shop`) | AUDITOR | TASK-STAGE3-CLEAN-INIT | DONE (PASS) |
+| **TASK-STAGE3-DOCKER-VERIFY** | Docker daemon status verification & static container configuration check | DEVOPS | TASK-STAGE3-DEV-PRESERVE | DONE (BLOCKED/PASS) |
+| **TASK-STAGE3-REPORTS** | Author `STAGE_3_TEST_RESULTS.md`, `STAGE_3_VERIFICATION_REPORT.md`, `FINAL_DEPLOYMENT_READINESS.md` | LEAD | ALL_STAGE3 | DONE (PASS) |

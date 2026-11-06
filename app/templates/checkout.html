@@ -1,34 +1,40 @@
 {% extends "base.html" %}
-{% block title %}Checkout – MUET Shop{% endblock %}
+{% block title %}Checkout — LATTAFA Fragrances{% endblock %}
 
 {% block content %}
-<!-- 4-Step Checkout Breadcrumb (Step 2 & 3: Delivery & Payment) (UR-05, FR-07) -->
+<div class="container py-4">
+<!-- 4-Step Checkout Breadcrumb (Step 2 & 3: Delivery & Payment) -->
 <nav aria-label="Checkout Progress" class="mb-4">
-    <ol class="d-flex align-items-center list-unstyled gap-2 p-2 rounded small" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline);">
-        <li class="d-flex align-items-center gap-1 text-muted">
-            <span class="badge bg-secondary rounded-pill">1</span> Cart
+    <ol class="checkout-progress d-flex align-items-center list-unstyled gap-2 gap-md-3 mb-0 flex-wrap">
+        <li class="checkout-step step-completed">
+            <span class="step-badge"><i class="bi bi-check-lg"></i></span>
+            <span class="step-label">Shopping Bag</span>
             <i class="bi bi-chevron-right ms-1 text-muted small" aria-hidden="true"></i>
         </li>
-        <li class="d-flex align-items-center gap-1 fw-semibold" style="color: var(--accent-indigo);" aria-current="step">
-            <span class="badge bg-primary rounded-pill">2</span> Delivery Details
+        <li class="checkout-step step-current" aria-current="step">
+            <span class="step-badge">2</span>
+            <span class="step-label">Delivery Details</span>
             <i class="bi bi-chevron-right ms-1 text-muted small" aria-hidden="true"></i>
         </li>
-        <li class="d-flex align-items-center gap-1 fw-semibold" style="color: var(--accent-indigo);">
-            <span class="badge bg-primary rounded-pill">3</span> Payment Method
+        <li class="checkout-step step-current">
+            <span class="step-badge">3</span>
+            <span class="step-label">Payment</span>
             <i class="bi bi-chevron-right ms-1 text-muted small" aria-hidden="true"></i>
         </li>
-        <li class="d-flex align-items-center gap-1 text-muted">
-            <span class="badge bg-light text-dark rounded-pill border">4</span> Confirmation
+        <li class="checkout-step step-upcoming">
+            <span class="step-badge">4</span>
+            <span class="step-label">Confirmation</span>
         </li>
     </ol>
 </nav>
 
 <div class="mb-4 pb-2 border-bottom" style="border-color: var(--border-hairline) !important;">
     <h1 class="h4 fw-semibold mb-1" style="color: var(--text-primary); letter-spacing: -0.02em;">Finalize order</h1>
-    <p class="text-muted mb-0 small">Enter your delivery address, select settlement method, and confirm your order (AC-01, AC-03)</p>
+    <p class="text-muted mb-0 small">Enter your delivery address, select settlement method, and confirm your order</p>
 </div>
 
 <form method="POST" action="{{ url_for('checkout') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <div class="row g-4">
         <!-- Order Summary & Itemized Breakdown -->
         <div class="col-lg-7">
@@ -51,31 +57,31 @@
                             {% for item in (cart_items or items) %}
                             <tr>
                                 <td>
-                                    <div class="fw-medium" style="color: var(--text-primary);">{{ item.product_name or item.name }}</div>
+                                    <div class="fw-medium text-break" style="color: var(--text-primary); max-width: 220px;">{{ item.product_name or item.name }}</div>
                                     <div class="small text-muted font-mono">SKU #{{ item.product_id }}</div>
                                 </td>
-                                <td class="text-center tabular-nums" style="color: var(--text-secondary);">{{ item.quantity }}</td>
-                                <td class="text-end tabular-nums text-muted">PKR {{ "{:,.2f}".format(item.unit_price or item.price) }}</td>
-                                <td class="text-end tabular-nums fw-medium" style="color: var(--text-primary);">PKR {{ "{:,.2f}".format(item.line_total) }}</td>
+                                <td class="text-center tabular-nums text-nowrap" style="color: var(--text-secondary);">{{ item.quantity }}</td>
+                                <td class="text-end tabular-nums text-muted text-nowrap">PKR {{ "{:,.2f}".format(item.unit_price or item.price) }}</td>
+                                <td class="text-end tabular-nums fw-medium text-nowrap" style="color: var(--text-primary);">PKR {{ "{:,.2f}".format(item.line_total) }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
                         <tfoot style="background-color: var(--bg-raised); border-top: 1px solid var(--border-hairline);">
                             <tr>
                                 <td colspan="3" class="text-end small text-secondary">Items Subtotal</td>
-                                <td class="text-end tabular-nums fw-medium">PKR {{ "{:,.2f}".format(pricing.subtotal) }}</td>
+                                <td class="text-end tabular-nums fw-medium text-nowrap">PKR {{ "{:,.2f}".format(pricing.subtotal) }}</td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="text-end small text-secondary">Provincial Sales Tax (5% GST)</td>
-                                <td class="text-end tabular-nums">PKR {{ "{:,.2f}".format(pricing.tax_amount) }}</td>
+                                <td class="text-end tabular-nums text-nowrap">PKR {{ "{:,.2f}".format(pricing.tax_amount) }}</td>
                             </tr>
                             <tr>
                                 <td colspan="3" class="text-end small text-secondary">Standard Courier Delivery ({{ selected_city or 'Karachi' }}, {{ selected_province or 'Sindh' }})</td>
-                                <td class="text-end tabular-nums">PKR {{ "{:,.2f}".format(pricing.delivery_fee) }}</td>
+                                <td class="text-end tabular-nums text-nowrap">PKR {{ "{:,.2f}".format(pricing.delivery_fee) }}</td>
                             </tr>
                             <tr style="border-top: 2px solid var(--border-hairline);">
                                 <td colspan="3" class="text-end fw-semibold small" style="color: var(--text-primary);">Total Payable</td>
-                                <td class="text-end fw-bold tabular-nums fs-5" style="color: var(--accent-indigo);">PKR {{ "{:,.2f}".format(pricing.total_amount) }}</td>
+                                <td class="text-end fw-bold tabular-nums fs-5 text-nowrap" style="color: rgb(18, 19, 24);">PKR {{ "{:,.2f}".format(pricing.total_amount) }}</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -92,8 +98,8 @@
             {% endif %}
 
             <div class="d-flex align-items-center gap-2 p-3 rounded" style="background-color: var(--bg-raised); border: 1px solid var(--border-hairline); font-size: 0.82rem; color: var(--text-secondary);">
-                <i class="bi bi-shield-check fs-5 text-secondary"></i>
-                <span>ACID transaction guarantees atomic order placement, inventory deduction, and instant invoice audit generation.</span>
+                <i class="bi bi-shield-check fs-5 text-success"></i>
+                <span>100% genuine fragrance guarantee &amp; verified door-to-door courier tracking across Pakistan.</span>
             </div>
         </div>
 
@@ -129,17 +135,23 @@
                         <input type="text" id="guest_address" name="guest_address" class="form-control form-control-sm" placeholder="House/Flat number, Street name, Sector" required style="border-color: var(--border-hairline);">
                     </div>
                     <div class="col-6">
-                        <label for="guest_city" class="form-label small fw-medium text-secondary">City <span class="text-danger">*</span></label>
-                        <input type="text" id="guest_city" name="guest_city" class="form-control form-control-sm" value="{{ selected_city or 'Karachi' }}" required style="border-color: var(--border-hairline);">
+                        <label for="guest_province" class="form-label small fw-medium text-secondary">Province / Territory <span class="text-danger">*</span></label>
+                        <select id="guest_province" name="guest_province" class="form-select form-select-sm" required style="border-color: var(--border-hairline);" onchange="updateCheckoutCity(this.value)">
+                            <optgroup label="Provinces">
+                                <option value="Sindh" {% if selected_province == 'Sindh' %}selected{% endif %}>Sindh</option>
+                                <option value="Punjab" {% if selected_province == 'Punjab' %}selected{% endif %}>Punjab</option>
+                                <option value="Khyber Pakhtunkhwa" {% if selected_province == 'Khyber Pakhtunkhwa' %}selected{% endif %}>Khyber Pakhtunkhwa</option>
+                                <option value="Balochistan" {% if selected_province == 'Balochistan' %}selected{% endif %}>Balochistan</option>
+                            </optgroup>
+                            <optgroup label="Federal Territory">
+                                <option value="Islamabad Capital Territory" {% if selected_province in ('Islamabad', 'Islamabad Capital Territory') %}selected{% endif %}>Islamabad Capital Territory</option>
+                            </optgroup>
+                        </select>
                     </div>
                     <div class="col-6">
-                        <label for="guest_province" class="form-label small fw-medium text-secondary">Province <span class="text-danger">*</span></label>
-                        <select id="guest_province" name="guest_province" class="form-select form-select-sm" required style="border-color: var(--border-hairline);">
-                            <option value="Sindh" {% if selected_province == 'Sindh' %}selected{% endif %}>Sindh</option>
-                            <option value="Punjab" {% if selected_province == 'Punjab' %}selected{% endif %}>Punjab</option>
-                            <option value="Islamabad" {% if selected_province == 'Islamabad' %}selected{% endif %}>Islamabad</option>
-                            <option value="Khyber Pakhtunkhwa" {% if selected_province == 'Khyber Pakhtunkhwa' %}selected{% endif %}>Khyber Pakhtunkhwa</option>
-                            <option value="Balochistan" {% if selected_province == 'Balochistan' %}selected{% endif %}>Balochistan</option>
+                        <label for="guest_city" class="form-label small fw-medium text-secondary">City <span class="text-danger">*</span></label>
+                        <select id="guest_city" name="guest_city" class="form-select form-select-sm" required style="border-color: var(--border-hairline);">
+                            <!-- Populated dynamically based on Province -->
                         </select>
                     </div>
                 </div>
@@ -199,10 +211,48 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-indigo w-100 py-2 fs-6">
+            <button type="submit" class="btn btn-gold w-100 py-2 fs-6">
                 Confirm and place order <i class="bi bi-arrow-right ms-1"></i>
             </button>
         </div>
     </div>
 </form>
+</div>
+
+{% block extra_js %}
+<script>
+const provinceCities = {
+    "Sindh": ["Karachi", "Hyderabad", "Sukkur", "Larkana", "Mirpur Khas", "Nawabshah"],
+    "Punjab": ["Lahore", "Rawalpindi", "Faisalabad", "Multan", "Gujranwala", "Sialkot", "Bahawalpur"],
+    "Khyber Pakhtunkhwa": ["Peshawar", "Mardan", "Abbottabad", "Mingora", "Kohat"],
+    "Balochistan": ["Quetta", "Gwadar", "Turbat", "Khuzdar"],
+    "Islamabad Capital Territory": ["Islamabad"],
+    "Islamabad": ["Islamabad"]
+};
+
+function updateCheckoutCity(prov, initialCity) {
+    const cityEl = document.getElementById('guest_city');
+    if (!cityEl) return;
+    const cities = provinceCities[prov] || ["Karachi"];
+    const targetCity = initialCity || cityEl.value || cities[0];
+    cityEl.innerHTML = '';
+    cities.forEach(function(c) {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        if (targetCity && c.toLowerCase() === targetCity.toLowerCase()) {
+            opt.selected = true;
+        }
+        cityEl.appendChild(opt);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const provEl = document.getElementById('guest_province');
+    if (provEl) {
+        updateCheckoutCity(provEl.value, '{{ selected_city or "Karachi" }}');
+    }
+});
+</script>
+{% endblock %}
 {% endblock %}

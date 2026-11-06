@@ -55,6 +55,7 @@
                         <div class="d-inline-flex gap-1">
                             {% if s.verification_status != 'verified' %}
                             <form method="POST" action="{{ url_for('admin_seller_verify', seller_id=s.seller_id) }}" class="d-inline">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                                 <input type="hidden" name="status" value="verified">
                                 <button type="submit" class="btn btn-outline-success btn-sm px-2" title="Verify Seller">
                                     <i class="bi bi-check2 me-1"></i> Verify
@@ -64,6 +65,7 @@
 
                             {% if s.verification_status != 'rejected' %}
                             <form method="POST" action="{{ url_for('admin_seller_verify', seller_id=s.seller_id) }}" class="d-inline">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                                 <input type="hidden" name="status" value="rejected">
                                 <button type="submit" class="btn btn-outline-danger btn-sm px-2" title="Reject / Delist Seller">
                                     <i class="bi bi-ban me-1"></i> Reject

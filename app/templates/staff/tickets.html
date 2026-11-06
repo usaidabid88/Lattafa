@@ -66,6 +66,7 @@
                 <tr class="collapse" id="edit_ticket_{{ t.ticket_id }}" style="background-color: var(--bg-raised);">
                     <td colspan="7" class="p-3">
                         <form method="POST" action="{{ url_for('staff_ticket_update', ticket_id=t.ticket_id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                             <div class="row g-2 align-items-center">
                                 <div class="col-md-3">
                                     <label for="status_{{ t.ticket_id }}" class="form-label small fw-medium mb-1">New Status:</label>

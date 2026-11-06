@@ -19,6 +19,7 @@
 
         <div class="card-craft p-4 mb-4">
             <form method="POST" action="{{ url_for('support_page') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label for="contact_name" class="form-label small fw-medium text-secondary">Your full name <span class="text-danger">*</span></label>

@@ -1,0 +1,649 @@
+{
+  "tables": {
+    "addresses": {
+      "row_count": 22,
+      "columns": [
+        "address_id",
+        "user_id",
+        "line1",
+        "city",
+        "province",
+        "postal_code",
+        "is_default"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "user_id",
+          "CONSTRAINT_NAME": "fk_addresses_user",
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "user_id"
+        }
+      ]
+    },
+    "audit_log": {
+      "row_count": 10,
+      "columns": [
+        "log_id",
+        "table_name",
+        "action",
+        "record_id",
+        "details",
+        "changed_at"
+      ],
+      "foreign_keys": []
+    },
+    "brands": {
+      "row_count": 25,
+      "columns": [
+        "brand_id",
+        "name",
+        "country",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "cart_items": {
+      "row_count": 44,
+      "columns": [
+        "cart_id",
+        "product_id",
+        "quantity"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "cart_id",
+          "CONSTRAINT_NAME": "fk_cart_items_cart",
+          "REFERENCED_TABLE_NAME": "carts",
+          "REFERENCED_COLUMN_NAME": "cart_id"
+        },
+        {
+          "COLUMN_NAME": "product_id",
+          "CONSTRAINT_NAME": "fk_cart_items_product",
+          "REFERENCED_TABLE_NAME": "products",
+          "REFERENCED_COLUMN_NAME": "product_id"
+        }
+      ]
+    },
+    "carts": {
+      "row_count": 42,
+      "columns": [
+        "cart_id",
+        "user_id",
+        "session_token",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "user_id",
+          "CONSTRAINT_NAME": "fk_carts_user",
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "user_id"
+        }
+      ]
+    },
+    "categories": {
+      "row_count": 14,
+      "columns": [
+        "category_id",
+        "name",
+        "slug",
+        "parent_category_id",
+        "image_path"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "parent_category_id",
+          "CONSTRAINT_NAME": "fk_categories_parent",
+          "REFERENCED_TABLE_NAME": "categories",
+          "REFERENCED_COLUMN_NAME": "category_id"
+        }
+      ]
+    },
+    "delivery_rates": {
+      "row_count": 19,
+      "columns": [
+        "rate_id",
+        "province",
+        "city",
+        "fee",
+        "min_days",
+        "max_days",
+        "is_active",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "order_items": {
+      "row_count": 70,
+      "columns": [
+        "order_id",
+        "product_id",
+        "quantity",
+        "unit_price"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "order_id",
+          "CONSTRAINT_NAME": "fk_order_items_order",
+          "REFERENCED_TABLE_NAME": "orders",
+          "REFERENCED_COLUMN_NAME": "order_id"
+        },
+        {
+          "COLUMN_NAME": "product_id",
+          "CONSTRAINT_NAME": "fk_order_items_product",
+          "REFERENCED_TABLE_NAME": "products",
+          "REFERENCED_COLUMN_NAME": "product_id"
+        }
+      ]
+    },
+    "order_status_history": {
+      "row_count": 21,
+      "columns": [
+        "history_id",
+        "order_id",
+        "old_status",
+        "new_status",
+        "changed_by",
+        "notes",
+        "changed_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "order_id",
+          "CONSTRAINT_NAME": "fk_order_status_history_order",
+          "REFERENCED_TABLE_NAME": "orders",
+          "REFERENCED_COLUMN_NAME": "order_id"
+        }
+      ]
+    },
+    "orders": {
+      "row_count": 54,
+      "columns": [
+        "order_id",
+        "user_id",
+        "address_id",
+        "order_date",
+        "subtotal",
+        "tax_amount",
+        "delivery_fee",
+        "expected_delivery_date",
+        "status",
+        "total_amount",
+        "guest_name",
+        "guest_email",
+        "guest_phone",
+        "guest_address_line1",
+        "guest_city",
+        "guest_province",
+        "shipping_address_snapshot",
+        "consent_terms_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "address_id",
+          "CONSTRAINT_NAME": "fk_orders_address",
+          "REFERENCED_TABLE_NAME": "addresses",
+          "REFERENCED_COLUMN_NAME": "address_id"
+        },
+        {
+          "COLUMN_NAME": "user_id",
+          "CONSTRAINT_NAME": "fk_orders_user",
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "user_id"
+        }
+      ]
+    },
+    "payment_attempts": {
+      "row_count": 25,
+      "columns": [
+        "attempt_id",
+        "order_id",
+        "payment_method",
+        "amount",
+        "status",
+        "transaction_ref",
+        "failure_reason",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "order_id",
+          "CONSTRAINT_NAME": "fk_payment_attempts_order",
+          "REFERENCED_TABLE_NAME": "orders",
+          "REFERENCED_COLUMN_NAME": "order_id"
+        }
+      ]
+    },
+    "payment_methods": {
+      "row_count": 2,
+      "columns": [
+        "method_id",
+        "code",
+        "name",
+        "description",
+        "is_enabled"
+      ],
+      "foreign_keys": []
+    },
+    "payments": {
+      "row_count": 54,
+      "columns": [
+        "payment_id",
+        "order_id",
+        "method",
+        "amount",
+        "status",
+        "paid_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "order_id",
+          "CONSTRAINT_NAME": "fk_payments_order",
+          "REFERENCED_TABLE_NAME": "orders",
+          "REFERENCED_COLUMN_NAME": "order_id"
+        }
+      ]
+    },
+    "product_images": {
+      "row_count": 81,
+      "columns": [
+        "image_id",
+        "product_id",
+        "image_path",
+        "alt_text",
+        "is_primary",
+        "sort_order",
+        "source_url",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "product_id",
+          "CONSTRAINT_NAME": "fk_images_product",
+          "REFERENCED_TABLE_NAME": "products",
+          "REFERENCED_COLUMN_NAME": "product_id"
+        }
+      ]
+    },
+    "products": {
+      "row_count": 81,
+      "columns": [
+        "product_id",
+        "category_id",
+        "brand_id",
+        "supplier_id",
+        "name",
+        "short_description",
+        "description",
+        "price",
+        "stock_quantity",
+        "source_store",
+        "source_url",
+        "is_active",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "brand_id",
+          "CONSTRAINT_NAME": "fk_products_brand",
+          "REFERENCED_TABLE_NAME": "brands",
+          "REFERENCED_COLUMN_NAME": "brand_id"
+        },
+        {
+          "COLUMN_NAME": "category_id",
+          "CONSTRAINT_NAME": "fk_products_category",
+          "REFERENCED_TABLE_NAME": "categories",
+          "REFERENCED_COLUMN_NAME": "category_id"
+        },
+        {
+          "COLUMN_NAME": "supplier_id",
+          "CONSTRAINT_NAME": "fk_products_supplier",
+          "REFERENCED_TABLE_NAME": "suppliers",
+          "REFERENCED_COLUMN_NAME": "supplier_id"
+        }
+      ]
+    },
+    "return_requests": {
+      "row_count": 5,
+      "columns": [
+        "return_id",
+        "return_number",
+        "order_id",
+        "product_id",
+        "user_id",
+        "guest_email",
+        "reason",
+        "description",
+        "proof_image_path",
+        "status",
+        "refund_method",
+        "seller_response",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "order_id",
+          "CONSTRAINT_NAME": "fk_return_requests_order",
+          "REFERENCED_TABLE_NAME": "orders",
+          "REFERENCED_COLUMN_NAME": "order_id"
+        },
+        {
+          "COLUMN_NAME": "product_id",
+          "CONSTRAINT_NAME": "fk_return_requests_product",
+          "REFERENCED_TABLE_NAME": "products",
+          "REFERENCED_COLUMN_NAME": "product_id"
+        },
+        {
+          "COLUMN_NAME": "user_id",
+          "CONSTRAINT_NAME": "fk_return_requests_user",
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "user_id"
+        }
+      ]
+    },
+    "return_status_history": {
+      "row_count": 5,
+      "columns": [
+        "history_id",
+        "return_id",
+        "old_status",
+        "new_status",
+        "changed_by",
+        "notes",
+        "changed_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "return_id",
+          "CONSTRAINT_NAME": "fk_return_status_history_return",
+          "REFERENCED_TABLE_NAME": "return_requests",
+          "REFERENCED_COLUMN_NAME": "return_id"
+        }
+      ]
+    },
+    "reviews": {
+      "row_count": 20,
+      "columns": [
+        "review_id",
+        "user_id",
+        "product_id",
+        "rating",
+        "comment",
+        "created_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "product_id",
+          "CONSTRAINT_NAME": "fk_reviews_product",
+          "REFERENCED_TABLE_NAME": "products",
+          "REFERENCED_COLUMN_NAME": "product_id"
+        },
+        {
+          "COLUMN_NAME": "user_id",
+          "CONSTRAINT_NAME": "fk_reviews_user",
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "user_id"
+        }
+      ]
+    },
+    "shipments": {
+      "row_count": 19,
+      "columns": [
+        "shipment_id",
+        "order_id",
+        "courier",
+        "tracking_number",
+        "shipped_at",
+        "delivered_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "order_id",
+          "CONSTRAINT_NAME": "fk_shipments_order",
+          "REFERENCED_TABLE_NAME": "orders",
+          "REFERENCED_COLUMN_NAME": "order_id"
+        }
+      ]
+    },
+    "suppliers": {
+      "row_count": 5,
+      "columns": [
+        "supplier_id",
+        "name",
+        "business_name",
+        "contact_name",
+        "email",
+        "phone",
+        "address",
+        "city",
+        "store_location",
+        "verification_status",
+        "verified_at",
+        "verified_by",
+        "created_at"
+      ],
+      "foreign_keys": []
+    },
+    "support_tickets": {
+      "row_count": 5,
+      "columns": [
+        "ticket_id",
+        "ticket_number",
+        "order_id",
+        "user_id",
+        "contact_name",
+        "contact_email",
+        "contact_phone",
+        "issue_type",
+        "subject",
+        "description",
+        "status",
+        "staff_notes",
+        "created_at",
+        "updated_at"
+      ],
+      "foreign_keys": [
+        {
+          "COLUMN_NAME": "order_id",
+          "CONSTRAINT_NAME": "fk_support_tickets_order",
+          "REFERENCED_TABLE_NAME": "orders",
+          "REFERENCED_COLUMN_NAME": "order_id"
+        },
+        {
+          "COLUMN_NAME": "user_id",
+          "CONSTRAINT_NAME": "fk_support_tickets_user",
+          "REFERENCED_TABLE_NAME": "users",
+          "REFERENCED_COLUMN_NAME": "user_id"
+        }
+      ]
+    },
+    "tax_rates": {
+      "row_count": 5,
+      "columns": [
+        "tax_rate_id",
+        "province",
+        "rate_percentage",
+        "description",
+        "is_active"
+      ],
+      "foreign_keys": []
+    },
+    "test_results": {
+      "row_count": 25,
+      "columns": [
+        "test_id",
+        "test_name",
+        "input_description",
+        "expected_result",
+        "actual_result",
+        "status"
+      ],
+      "foreign_keys": []
+    },
+    "users": {
+      "row_count": 17,
+      "columns": [
+        "user_id",
+        "full_name",
+        "email",
+        "password_hash",
+        "phone",
+        "role",
+        "consent_terms_at",
+        "created_at"
+      ],
+      "foreign_keys": []
+    }
+  },
+  "views": {
+    "v_abandoned_carts": {
+      "status": "VALID",
+      "row_count": 2
+    },
+    "v_best_sellers": {
+      "status": "VALID",
+      "row_count": 20
+    },
+    "v_category_counts": {
+      "status": "VALID",
+      "row_count": 14
+    },
+    "v_low_stock": {
+      "status": "VALID",
+      "row_count": 4
+    },
+    "v_order_summary": {
+      "status": "VALID",
+      "row_count": 45
+    },
+    "v_overdue_return_requests": {
+      "status": "VALID",
+      "row_count": 0
+    },
+    "v_product_catalog": {
+      "status": "VALID",
+      "row_count": 81
+    },
+    "v_sales_by_category": {
+      "status": "VALID",
+      "row_count": 14
+    },
+    "v_sellers": {
+      "status": "VALID",
+      "row_count": 5
+    }
+  },
+  "procedures": [
+    "sp_cancel_order",
+    "sp_cart_summary",
+    "sp_mark_abandoned_carts",
+    "sp_merge_carts",
+    "sp_place_guest_order",
+    "sp_place_order",
+    "sp_run_all_tests",
+    "sp_set_product_primary_image"
+  ],
+  "triggers": [
+    {
+      "TRIGGER_NAME": "trg_before_order_items_insert",
+      "EVENT_MANIPULATION": "INSERT",
+      "EVENT_OBJECT_TABLE": "order_items",
+      "ACTION_TIMING": "BEFORE"
+    },
+    {
+      "TRIGGER_NAME": "trg_after_order_items_insert",
+      "EVENT_MANIPULATION": "INSERT",
+      "EVENT_OBJECT_TABLE": "order_items",
+      "ACTION_TIMING": "AFTER"
+    },
+    {
+      "TRIGGER_NAME": "trg_before_reviews_insert",
+      "EVENT_MANIPULATION": "INSERT",
+      "EVENT_OBJECT_TABLE": "reviews",
+      "ACTION_TIMING": "BEFORE"
+    },
+    {
+      "TRIGGER_NAME": "trg_product_images_single_primary_bi",
+      "EVENT_MANIPULATION": "INSERT",
+      "EVENT_OBJECT_TABLE": "product_images",
+      "ACTION_TIMING": "BEFORE"
+    },
+    {
+      "TRIGGER_NAME": "trg_product_images_single_primary_bu",
+      "EVENT_MANIPULATION": "UPDATE",
+      "EVENT_OBJECT_TABLE": "product_images",
+      "ACTION_TIMING": "BEFORE"
+    },
+    {
+      "TRIGGER_NAME": "trg_after_orders_update_audit",
+      "EVENT_MANIPULATION": "UPDATE",
+      "EVENT_OBJECT_TABLE": "orders",
+      "ACTION_TIMING": "AFTER"
+    },
+    {
+      "TRIGGER_NAME": "trg_order_status_history",
+      "EVENT_MANIPULATION": "UPDATE",
+      "EVENT_OBJECT_TABLE": "orders",
+      "ACTION_TIMING": "AFTER"
+    },
+    {
+      "TRIGGER_NAME": "trg_order_initial_status_history",
+      "EVENT_MANIPULATION": "INSERT",
+      "EVENT_OBJECT_TABLE": "orders",
+      "ACTION_TIMING": "AFTER"
+    },
+    {
+      "TRIGGER_NAME": "trg_return_status_history",
+      "EVENT_MANIPULATION": "UPDATE",
+      "EVENT_OBJECT_TABLE": "return_requests",
+      "ACTION_TIMING": "AFTER"
+    },
+    {
+      "TRIGGER_NAME": "trg_return_initial_status_history",
+      "EVENT_MANIPULATION": "INSERT",
+      "EVENT_OBJECT_TABLE": "return_requests",
+      "ACTION_TIMING": "AFTER"
+    }
+  ],
+  "roles_and_users": [
+    {
+      "user": "full_access_role",
+      "host": "%"
+    },
+    {
+      "user": "read_only_role",
+      "host": "%"
+    },
+    {
+      "user": "shop_admin",
+      "host": "%"
+    },
+    {
+      "user": "shop_customer",
+      "host": "%"
+    },
+    {
+      "user": "shop_seller",
+      "host": "%"
+    },
+    {
+      "user": "shop_staff",
+      "host": "%"
+    },
+    {
+      "user": "mysql.infoschema",
+      "host": "localhost"
+    },
+    {
+      "user": "mysql.session",
+      "host": "localhost"
+    },
+    {
+      "user": "mysql.sys",
+      "host": "localhost"
+    }
+  ]
+}

@@ -11,6 +11,7 @@
             </div>
 
             <form method="POST" action="{{ url_for('register') }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <div class="mb-3">
                     <label for="full_name" class="form-label small fw-medium" style="color: var(--text-secondary); font-size: 0.8rem;">Full name *</label>
                     <input type="text" class="form-control form-control-sm" id="full_name" name="full_name" placeholder="e.g. Fatima Noor" style="border-color: var(--border-hairline);" required>
