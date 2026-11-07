@@ -244,6 +244,9 @@ def build_label_svg(name, brand, conc, size, accent, highlight, width=176, heigh
     safe_brand = xml.sax.saxutils.escape(brand.upper())
     safe_conc = xml.sax.saxutils.escape(conc.upper())
     safe_size = xml.sax.saxutils.escape(size.upper())
+    brand_font_size = 7 if len(brand) > 13 else 8
+    brand_letter_spacing = 1.8 if len(brand) > 13 else 3
+    conc_font_size = 6.4 if len(conc) > 18 else 7
     
     hw = width / 2
     hh = height / 2
@@ -268,8 +271,9 @@ def build_label_svg(name, brand, conc, size, accent, highlight, width=176, heigh
 
     return f"""
     <!-- Label Cartouche -->
-    <rect x="{-hw}" y="{top}" width="{width}" height="{height}" rx="8" fill="#111216" stroke="url(#metalG)" stroke-width="1.8"/>
+    <rect x="{-hw}" y="{top}" width="{width}" height="{height}" rx="8" fill="url(#labelG)" stroke="url(#metalG)" stroke-width="1.8"/>
     <rect x="{-hw+5}" y="{top+5}" width="{width-10}" height="{height-10}" rx="5" fill="none" stroke="url(#metalG)" stroke-width="0.75" stroke-dasharray="4,2" opacity="0.6"/>
+    <rect x="{-hw+8}" y="{top+8}" width="{width-16}" height="{height*0.34:.1f}" rx="4" fill="url(#labelSheen)" opacity="0.22"/>
     
     <!-- Top Emblem / Star -->
     <g transform="translate(0, {top + 26})">
@@ -278,7 +282,7 @@ def build_label_svg(name, brand, conc, size, accent, highlight, width=176, heigh
     </g>
     
     <!-- Brand Line -->
-    <text x="0" y="{top + 48}" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" letter-spacing="3" fill="#cfc7b8" text-anchor="middle">{safe_brand}</text>
+    <text x="0" y="{top + 48}" font-family="'Inter', -apple-system, sans-serif" font-size="{brand_font_size}" font-weight="600" letter-spacing="{brand_letter_spacing}" fill="#e8dcc4" text-anchor="middle">{safe_brand}</text>
     <line x1="{-hw+20}" y1="{top + 56}" x2="{hw-20}" y2="{top + 56}" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     
     <!-- Perfume Name -->
@@ -286,7 +290,7 @@ def build_label_svg(name, brand, conc, size, accent, highlight, width=176, heigh
     
     <line x1="{-hw+24}" y1="{top + height - 38}" x2="{hw-24}" y2="{top + height - 38}" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     <!-- Concentration & Volume -->
-    <text x="0" y="{top + height - 23}" font-family="'Inter', -apple-system, sans-serif" font-size="7" font-weight="500" letter-spacing="2" fill="#b0a594" text-anchor="middle">{safe_conc}</text>
+    <text x="0" y="{top + height - 23}" font-family="'Inter', -apple-system, sans-serif" font-size="{conc_font_size}" font-weight="500" letter-spacing="1.5" fill="#c8bba4" text-anchor="middle">{safe_conc}</text>
     <text x="0" y="{top + height - 10}" font-family="'Inter', -apple-system, sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.5" fill="url(#metalG)" text-anchor="middle">{safe_size}</text>
     """
 
@@ -559,28 +563,56 @@ def render_flacon_svg(name, brand, family, conc, size, accent, highlight, bg_col
     </linearGradient>
 
     <linearGradient id="bodyG" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="{bg_color}"/>
-      <stop offset="20%" stop-color="{accent}" stop-opacity="0.75"/>
-      <stop offset="48%" stop-color="{highlight}" stop-opacity="0.92"/>
-      <stop offset="52%" stop-color="{highlight}" stop-opacity="0.92"/>
-      <stop offset="80%" stop-color="{accent}" stop-opacity="0.75"/>
-      <stop offset="100%" stop-color="{bg_color}"/>
+      <stop offset="0%" stop-color="#050609"/>
+      <stop offset="8%" stop-color="{bg_color}"/>
+      <stop offset="22%" stop-color="{accent}" stop-opacity="0.62"/>
+      <stop offset="42%" stop-color="{highlight}" stop-opacity="0.78"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="53%" stop-color="{highlight}" stop-opacity="0.88"/>
+      <stop offset="74%" stop-color="{accent}" stop-opacity="0.64"/>
+      <stop offset="92%" stop-color="{bg_color}"/>
+      <stop offset="100%" stop-color="#050609"/>
     </linearGradient>
 
     <linearGradient id="baseG" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#000000" stop-opacity="0.8"/>
-      <stop offset="30%" stop-color="{highlight}" stop-opacity="0.4"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.6"/>
-      <stop offset="70%" stop-color="{highlight}" stop-opacity="0.4"/>
+      <stop offset="24%" stop-color="{accent}" stop-opacity="0.38"/>
+      <stop offset="46%" stop-color="{highlight}" stop-opacity="0.72"/>
+      <stop offset="54%" stop-color="#ffffff" stop-opacity="0.78"/>
+      <stop offset="76%" stop-color="{highlight}" stop-opacity="0.36"/>
       <stop offset="100%" stop-color="#000000" stop-opacity="0.8"/>
     </linearGradient>
 
+    <linearGradient id="labelG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2b2b31"/>
+      <stop offset="48%" stop-color="#111216"/>
+      <stop offset="100%" stop-color="#06070a"/>
+    </linearGradient>
+
+    <linearGradient id="labelSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <radialGradient id="bloomG" cx="50%" cy="45%" r="58%">
+      <stop offset="0%" stop-color="{highlight}" stop-opacity="0.24"/>
+      <stop offset="42%" stop-color="{accent}" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="{bg_color}" stop-opacity="0"/>
+    </radialGradient>
+
     <filter id="flaconShadow" x="-30%" y="-20%" width="160%" height="150%">
-      <feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#000000" flood-opacity="0.85"/>
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="28"/>
     </filter>
   </defs>
 
   <rect width="600" height="750" fill="url(#ambG)"/>
+  <circle cx="300" cy="300" r="245" fill="url(#bloomG)" filter="url(#softGlow)"/>
+  <ellipse cx="300" cy="584" rx="174" ry="26" fill="#000000" opacity="0.42" filter="url(#softGlow)"/>
+  <ellipse cx="300" cy="580" rx="126" ry="11" fill="{accent}" opacity="0.14"/>
   <rect x="25" y="25" width="550" height="700" fill="none" stroke="{accent}" stroke-width="0.75" opacity="0.32"/>
   <rect x="33" y="33" width="534" height="684" fill="none" stroke="{accent}" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.2"/>
 
