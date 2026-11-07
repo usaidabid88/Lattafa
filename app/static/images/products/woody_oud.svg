@@ -1,78 +1,126 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" width="600" height="750">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" width="1200" height="1500">
   <defs>
+    <!-- Studio Ambient Lighting & Radial Bloom -->
     <radialGradient id="ambG" cx="50%" cy="40%" r="68%">
-      <stop offset="0%" stop-color="#3b3630" stop-opacity="0.32"/>
-      <stop offset="55%" stop-color="#11100e" stop-opacity="0.95"/>
+      <stop offset="0%" stop-color="#3b3630" stop-opacity="0.36"/>
+      <stop offset="55%" stop-color="#11100e" stop-opacity="0.96"/>
       <stop offset="100%" stop-color="#08080a"/>
     </radialGradient>
+    
+    <!-- Polished Stone Pedestal Horizon Gradient -->
+    <linearGradient id="pedestalG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b3630" stop-opacity="0.22"/>
+      <stop offset="15%" stop-color="#121317" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#050608"/>
+    </linearGradient>
+
+    <!-- Metallic Specular Profile -->
     <linearGradient id="metalG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="18%" stop-color="#fff8df" stop-opacity="0.9"/>
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+      <stop offset="16%" stop-color="#fff8df" stop-opacity="0.92"/>
       <stop offset="35%" stop-color="#c5a059"/>
       <stop offset="65%" stop-color="#3b3630"/>
+      <stop offset="85%" stop-color="#2a1f0a"/>
       <stop offset="100%" stop-color="#c5a059"/>
     </linearGradient>
+
+    <!-- Glass Refraction & Body Material -->
     <linearGradient id="bodyG" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#050609"/>
-      <stop offset="15%" stop-color="#11100e"/>
-      <stop offset="35%" stop-color="#3b3630" stop-opacity="0.8"/>
-      <stop offset="50%" stop-color="#c5a059" stop-opacity="0.95"/>
-      <stop offset="65%" stop-color="#3b3630" stop-opacity="0.8"/>
-      <stop offset="85%" stop-color="#11100e"/>
+      <stop offset="12%" stop-color="#11100e"/>
+      <stop offset="32%" stop-color="#3b3630" stop-opacity="0.82"/>
+      <stop offset="50%" stop-color="#c5a059" stop-opacity="0.96"/>
+      <stop offset="68%" stop-color="#3b3630" stop-opacity="0.82"/>
+      <stop offset="88%" stop-color="#11100e"/>
       <stop offset="100%" stop-color="#050609"/>
     </linearGradient>
+
     <linearGradient id="baseG" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#000000" stop-opacity="0.8"/>
-      <stop offset="50%" stop-color="#c5a059" stop-opacity="0.75"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.8"/>
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#c5a059" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.85"/>
     </linearGradient>
+
     <linearGradient id="labelG" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#2b2b31"/>
-      <stop offset="50%" stop-color="#111216"/>
-      <stop offset="100%" stop-color="#06070a"/>
+      <stop offset="0%" stop-color="#2e2e34"/>
+      <stop offset="50%" stop-color="#121317"/>
+      <stop offset="100%" stop-color="#07080a"/>
     </linearGradient>
+
     <linearGradient id="labelSheen" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
+
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
     <filter id="flaconShadow" x="-30%" y="-20%" width="160%" height="150%">
-      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.8"/>
+      <feDropShadow dx="0" dy="28" stdDeviation="26" flood-color="#000000" flood-opacity="0.85"/>
+    </filter>
+    <filter id="plaqueShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.65"/>
     </filter>
   </defs>
-  <rect width="600" height="750" fill="url(#ambG)"/>
-  <rect x="25" y="25" width="550" height="700" fill="none" stroke="#3b3630" stroke-width="0.75" opacity="0.32"/>
-  <g transform="translate(300, 365)" filter="url(#flaconShadow)">
+
+  <!-- Studio Background Wall -->
+  <rect width="1200" height="1500" fill="url(#ambG)"/>
+  
+  <!-- Subtle Studio Pedestal Horizon Surface -->
+  <rect x="0" y="1100" width="1200" height="400" fill="url(#pedestalG)"/>
+  <line x1="0" y1="1100" x2="1200" y2="1100" stroke="#3b3630" stroke-width="0.8" opacity="0.35"/>
+
+  <!-- Multi-Tier Contact Shadows -->
+  <ellipse cx="600" cy="1150" rx="340" ry="42" fill="#000000" opacity="0.5" filter="url(#softShadow)"/>
+  <ellipse cx="600" cy="1142" rx="250" ry="20" fill="#000000" opacity="0.85"/>
+
+  <!-- Border Passepartout -->
+  <rect x="40" y="40" width="1120" height="1420" fill="none" stroke="#3b3630" stroke-width="1.2" opacity="0.28"/>
+  <rect x="52" y="52" width="1096" height="1396" fill="none" stroke="#3b3630" stroke-width="0.6" stroke-dasharray="6,4" opacity="0.18"/>
+
+  <!-- Centered Flacon Geometry (Scaled 1.85x into 1200x1500 frame) -->
+  <g transform="translate(600, 720) scale(1.85)" filter="url(#flaconShadow)">
     
             <ellipse cx="0" cy="210" rx="140" ry="20" fill="#000000" opacity="0.6"/>
-            <rect x="-100" y="-80" width="200" height="275" rx="10" fill="url(#bodyG)" stroke="url(#metalG)" stroke-width="2"/>
-            <rect x="-96" y="145" width="192" height="46" rx="6" fill="url(#baseG)" opacity="0.95"/>
-            <line x1="-88" y1="-70" x2="-88" y2="182" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+            <rect x="-100" y="-80" width="200" height="275" rx="12" fill="url(#bodyG)" stroke="url(#metalG)" stroke-width="2.4"/>
+            <rect x="-96" y="145" width="192" height="46" rx="8" fill="url(#baseG)" opacity="0.95"/>
+            <line x1="-88" y1="-70" x2="-88" y2="182" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.45"/>
             
-        <!-- Label Cartouche -->
-        <rect x="-81.0" y="-68.0" width="162" height="172" rx="8" fill="url(#labelG)" stroke="url(#metalG)" stroke-width="1.8"/>
-        <rect x="-76.0" y="-63.0" width="152" height="162" rx="5" fill="none" stroke="url(#metalG)" stroke-width="0.75" stroke-dasharray="4,2" opacity="0.6"/>
-        <rect x="-73.0" y="-60.0" width="146" height="58.5" rx="4" fill="url(#labelSheen)" opacity="0.22"/>
-        
-        <g transform="translate(0, -42.0)">
-          <circle cx="0" cy="0" r="11" fill="none" stroke="url(#metalG)" stroke-width="0.9"/>
-          <polygon points="0,-7 2,-2 7,0 2,2 0,7 -2,2 -7,0 -2,-2" fill="url(#metalG)"/>
+        <!-- Embossed Label Cartouche Plaque -->
+        <g filter="url(#plaqueShadow)">
+          <rect x="-82.0" y="-67.0" width="164" height="174" rx="10" fill="url(#labelG)" stroke="url(#metalG)" stroke-width="2.2"/>
+          <rect x="-77.0" y="-62.0" width="154" height="164" rx="7" fill="none" stroke="url(#metalG)" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.65"/>
+          <rect x="-74.0" y="-59.0" width="148" height="55.7" rx="5" fill="url(#labelSheen)" opacity="0.18"/>
+          
+          <!-- Crest Emblem -->
+          <g transform="translate(0, -43.0)">
+            <circle cx="0" cy="0" r="10" fill="none" stroke="url(#metalG)" stroke-width="0.9"/>
+            <polygon points="0,-6.5 2,-2 6.5,0 2,2 0,6.5 -2,2 -6.5,0 -2,-2" fill="url(#metalG)"/>
+          </g>
+          
+          <!-- Brand Header -->
+          <text x="0" y="-22.0" font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.2" fill="#e8dcc4" text-anchor="middle">MAISON ALHAMBRA</text>
+          <line x1="-64.0" y1="-14.0" x2="64.0" y2="-14.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.55"/>
+          
+          <!-- Perfume Name -->
+          <text x="0" y="31.0" font-family="'Cinzel', serif" font-size="13.0" font-weight="700" letter-spacing="1.8" fill="url(#metalG)" text-anchor="middle">WOODY OUD</text>
+          
+          <!-- Concentration & Volume Details -->
+          <line x1="-60.0" y1="71.0" x2="60.0" y2="71.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.55"/>
+          <text x="0" y="85.0" font-family="'Inter', sans-serif" font-size="6.2" font-weight="500" letter-spacing="1.6" fill="#c8bba4" text-anchor="middle">EAU DE PARFUM (EDP)</text>
+          <text x="0" y="98.0" font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.8" fill="url(#metalG)" text-anchor="middle">80ML</text>
         </g>
         
-        <text x="0" y="-20.0" font-family="'Inter', sans-serif" font-size="7" font-weight="600" letter-spacing="1.8" fill="#e8dcc4" text-anchor="middle">MAISON ALHAMBRA</text>
-        <line x1="-61.0" y1="-12.0" x2="61.0" y2="-12.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
-        <text x="0" y="30" font-family="'Cinzel', serif" font-size="14.5" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle">WOODY OUD</text>
-        <line x1="-57.0" y1="66.0" x2="57.0" y2="66.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
-        <text x="0" y="81.0" font-family="'Inter', sans-serif" font-size="6.4" font-weight="500" letter-spacing="1.5" fill="#c8bba4" text-anchor="middle">EAU DE PARFUM (EDP)</text>
-        <text x="0" y="94.0" font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.5" fill="url(#metalG)" text-anchor="middle">80ML</text>
-        
-            <rect x="-24" y="-115" width="48" height="36" rx="2" fill="url(#metalG)"/>
-            <rect x="-48" y="-215" width="96" height="102" rx="6" fill="url(#metalG)" stroke="#c5a059" stroke-width="1.5"/>
+            <rect x="-26" y="-118" width="52" height="38" rx="3" fill="url(#metalG)"/>
+            <rect x="-50" y="-218" width="100" height="104" rx="8" fill="url(#metalG)" stroke="#c5a059" stroke-width="1.8"/>
             
         <!-- Studio Specular Highlights -->
-        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" opacity="0.08"/>
-        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.22"/>
-        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linecap="round" opacity="0.8"/>
+        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" opacity="0.08"/>
+        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.24"/>
+        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/>
         
   </g>
-  <text x="300" y="705" font-family="'Inter', sans-serif" font-size="9.5" font-weight="600" letter-spacing="4.5" fill="#3b3630" opacity="0.85" text-anchor="middle">WOODY AMBER SMOKY</text>
+
+  <!-- Bottom Olfactory Classification Tagline -->
+  <text x="600" y="1410" font-family="'Inter', sans-serif" font-size="16" font-weight="600" letter-spacing="8" fill="#3b3630" opacity="0.85" text-anchor="middle">WOODY AMBER SMOKY</text>
 </svg>

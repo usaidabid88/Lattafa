@@ -244,7 +244,7 @@
       </div>
       <div class="metric-item">
         <div class="metric-val">13</div>
-        <div class="metric-label">Optimized Renders</div>
+        <div class="metric-label">Optimized Commercial Renders</div>
       </div>
       <div class="metric-item">
         <div class="metric-val">87</div>
@@ -263,9 +263,9 @@
 
   <div class="controls">
     <div class="filter-tabs">
-      <button class="tab-btn active" onclick="filterCards('all')">All Products (100)</button>
-      <button class="tab-btn" onclick="filterCards('optimized')">Optimized Commercial (13)</button>
-      <button class="tab-btn" onclick="filterCards('pending')">Architectural Flacons (87)</button>
+      <button class="tab-btn active" onclick="filterCards('all', this)">All Products (100)</button>
+      <button class="tab-btn" onclick="filterCards('optimized', this)">Optimized Commercial (13)</button>
+      <button class="tab-btn" onclick="filterCards('pending', this)">Architectural Flacons (87)</button>
     </div>
     <input type="text" class="search-box" id="searchInput" placeholder="Search perfume name, brand..." onkeyup="searchCards()" />
   </div>
@@ -2975,11 +2975,11 @@
   </main>
 
   <script>
-    function filterCards(type) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
-      const cards = document.querySelectorAll('.product-card');
-      cards.forEach(c => {
+    function filterCards(type, btnElement) {
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      if (btnElement) { btnElement.classList.add('active'); }
+      var cards = document.querySelectorAll('.product-card');
+      cards.forEach(function(c) {
         if (type === 'all' || c.getAttribute('data-status') === type) {
           c.style.display = 'flex';
         } else {
@@ -2988,11 +2988,11 @@
       });
     }
     function searchCards() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const cards = document.querySelectorAll('.product-card');
-      cards.forEach(c => {
-        const text = c.innerText.toLowerCase();
-        c.style.display = text.includes(query) ? 'flex' : 'none';
+      var query = document.getElementById('searchInput').value.toLowerCase();
+      var cards = document.querySelectorAll('.product-card');
+      cards.forEach(function(c) {
+        var text = c.innerText.toLowerCase();
+        c.style.display = text.indexOf(query) !== -1 ? 'flex' : 'none';
       });
     }
   </script>
