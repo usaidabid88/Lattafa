@@ -72,7 +72,7 @@
     <line x1="-65.0" y1="-16.5" x2="65.0" y2="-16.5" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     
     <!-- Perfume Name -->
-    <text x="0" y="12" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="12.5" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle"><tspan x="0" dy="0">KHAMRAH</tspan><tspan x="0" dy="16">DUKHAN</tspan></text>
+    <text x="0" y="27" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="13" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle">KHAMRAH DUKHAN</text>
     
     <line x1="-61.0" y1="64.5" x2="61.0" y2="64.5" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     <!-- Concentration & Volume -->

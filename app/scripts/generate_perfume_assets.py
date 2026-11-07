@@ -211,29 +211,32 @@ def generate_categories():
 
 # ── 5. Intelligent Text Splitting & Label Cartouche ──────────────────────────
 def split_perfume_name(name):
-    """Splits name cleanly into balanced lines so text never overflows bottle labels."""
+    """Wrap names into balanced label-safe lines, never exceeding three lines."""
     words = name.split()
     if len(name) <= 13:
         return [name]
-    if len(words) == 2:
-        return words
-    w_lower = [w.lower() for w in words]
-    if len(words) >= 4 and (w_lower[:3] in (['badee', 'al', 'oud'], ['ameer', 'al', 'oudh'], ['qaed', 'al', 'fursan'])):
-        return [' '.join(words[:3]), ' '.join(words[3:])]
-    if len(words) >= 3 and (w_lower[:2] in (['ana', 'abiyedh'], ['al', 'noble'], ['art', 'of'], ['jean', 'lowe'], ['maahir', 'black'], ['raghba', 'wood'])):
-        return [' '.join(words[:2]), ' '.join(words[2:])]
-    line1 = []
-    line2 = []
-    curr_len = 0
-    for w in words:
-        if curr_len + len(w) <= 14 and not line2:
-            line1.append(w)
-            curr_len += len(w) + 1
+
+    max_chars = 14
+    lines = []
+    current = []
+    current_len = 0
+    for word in words:
+        proposed = current_len + len(word) + (1 if current else 0)
+        if current and proposed > max_chars:
+            lines.append(' '.join(current))
+            current = [word]
+            current_len = len(word)
         else:
-            line2.append(w)
-    if not line2:
-        return [' '.join(line1)]
-    return [' '.join(line1), ' '.join(line2)]
+            current.append(word)
+            current_len = proposed
+    if current:
+        lines.append(' '.join(current))
+
+    # Keep small catalog names elegant and long names readable rather than forcing
+    # a two-line label whose second line runs outside the plaque.
+    if len(lines) > 3:
+        lines = [' '.join(words[:2]), ' '.join(words[2:4]), ' '.join(words[4:])]
+    return [line for line in lines if line]
 
 def build_label_svg(name, brand, conc, size, accent, highlight, width=176, height=185, y_offset=25):
     """Constructs a high-craft foil-stamped label plaque with perfectly wrapped typography."""
@@ -253,10 +256,10 @@ def build_label_svg(name, brand, conc, size, accent, highlight, width=176, heigh
         title_svg = f'<text x="0" y="{y_offset + 12}" font-family="\'Cinzel\', \'Playfair Display\', \'Georgia\', serif" font-size="{fs}" font-weight="700" letter-spacing="{ls}" fill="url(#metalG)" text-anchor="middle">{xml.sax.saxutils.escape(n.upper())}</text>'
     else:
         max_l = max(len(l) for l in lines)
-        fs = 11 if max_l > 13 else 12.5
-        ls = 1.5 if max_l > 13 else 2
-        line_spacing = int(fs * 1.35)
-        start_y = y_offset + 5 - (line_spacing // 2)
+        fs = 9.8 if len(lines) == 3 or max_l > 15 else (11.2 if max_l > 12 else 12.2)
+        ls = 0.8 if fs < 10 else (1.1 if fs < 12 else 1.6)
+        line_spacing = 12 if len(lines) == 3 else 14
+        start_y = y_offset - ((len(lines) - 1) * line_spacing / 2) + 7
         tspans = []
         for i, l in enumerate(lines):
             dy = "0" if i == 0 else f"{line_spacing}"

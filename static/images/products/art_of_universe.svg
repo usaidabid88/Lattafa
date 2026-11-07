@@ -67,7 +67,7 @@
     <line x1="-61.0" y1="5.0" x2="61.0" y2="5.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     
     <!-- Perfume Name -->
-    <text x="0" y="35" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="12.5" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle"><tspan x="0" dy="0">ART OF</tspan><tspan x="0" dy="16">UNIVERSE</tspan></text>
+    <text x="0" y="38.0" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="12.2" font-weight="700" letter-spacing="1.6" fill="url(#metalG)" text-anchor="middle"><tspan x="0" dy="0">ART OF</tspan><tspan x="0" dy="14">UNIVERSE</tspan></text>
     
     <line x1="-57.0" y1="89.0" x2="57.0" y2="89.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     <!-- Concentration & Volume -->

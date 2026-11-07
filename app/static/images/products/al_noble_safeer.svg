@@ -69,7 +69,7 @@
     <line x1="-63.0" y1="-12.0" x2="63.0" y2="-12.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     
     <!-- Perfume Name -->
-    <text x="0" y="19" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="12.5" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle"><tspan x="0" dy="0">AL NOBLE</tspan><tspan x="0" dy="16">SAFEER</tspan></text>
+    <text x="0" y="22.0" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="12.2" font-weight="700" letter-spacing="1.6" fill="url(#metalG)" text-anchor="middle"><tspan x="0" dy="0">AL NOBLE</tspan><tspan x="0" dy="14">SAFEER</tspan></text>
     
     <line x1="-59.0" y1="74.0" x2="59.0" y2="74.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     <!-- Concentration & Volume -->

@@ -4,7 +4,7 @@
 {% block content %}
 <!-- SECTION 3: Hero Section -->
 <section class="hero-shell mb-5">
-    <img class="hero-photo" src="{{ url_for('static', filename='images/perfume/hero-arabian-editorial.jpg') }}" alt="Amber fragrance bottle in a warm editorial still life">
+    <img class="hero-photo" src="{{ url_for('static', filename='images/perfume/hero-arabian-editorial.jpg') }}?v=20261107" alt="Amber fragrance bottle in a warm editorial still life">
     <div class="container hero-content">
         <div class="row w-100 align-items-center">
             <!-- Left Headline & CTAs -->
@@ -54,7 +54,7 @@
             {% for col in featured_collections %}
             <div class="col">
                 <a href="{{ url_for('collection_view', slug=col.slug) }}" class="collection-card h-100 text-decoration-none d-flex flex-column rounded-3 overflow-hidden shadow-sm">
-                    <img src="{{ url_for('static', filename=col.image.replace('static/', '')) }}" 
+                    <img src="{{ url_for('static', filename=col.image.replace('static/', '')) }}?v=20261107" 
                          alt="{{ col.name }}" 
                          class="w-100 h-100" 
                          style="object-fit: cover;"
@@ -188,16 +188,21 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for cat in gender_categories %}
             <div class="col">
-                <a href="{{ url_for('category_view', slug=cat.slug) }}" class="card-perfume category-card h-100 text-decoration-none d-flex flex-column text-center p-4">
-                    <div class="rounded mb-3 p-3 d-flex align-items-center justify-content-center" style="background-color: var(--bg-raised); aspect-ratio: 1.25;">
-                        <img src="/{{ cat.image_path if cat.image_path else 'static/images/categories/' ~ cat.slug ~ '.svg' }}" 
-                             alt="{{ cat.name }}" 
-                             class="img-fluid" 
-                             style="max-height: 100px; object-fit: contain;">
+                <a href="{{ url_for('category_view', slug=cat.slug) }}" class="fragrance-category-card h-100 text-decoration-none d-flex flex-column">
+                    <div class="fragrance-category-media">
+                        <img src="{{ url_for('static', filename='images/categories/' ~ cat.slug ~ '-editorial.jpg') }}?v=20261107"
+                             alt="{{ cat.name }} editorial fragrance still life"
+                             class="fragrance-category-image"
+                             loading="lazy">
+                        <span class="fragrance-category-kicker">Olfactory profile</span>
                     </div>
-                    <h3 class="font-serif h5 category-title mb-1" style="font-weight: 500;">{{ cat.name }}</h3>
-                    <span class="category-count small mb-3">{{ cat.count }} Fragrances</span>
-                    <span class="category-cta font-mono small fw-medium mt-auto">Explore category</span>
+                    <div class="fragrance-category-copy">
+                        <div>
+                            <h3 class="font-serif category-title mb-1">{{ cat.name }}</h3>
+                            <span class="category-count small">{{ cat.count }} Fragrances</span>
+                        </div>
+                        <span class="category-cta font-mono small fw-medium">Explore category <span aria-hidden="true">&rarr;</span></span>
+                    </div>
                 </a>
             </div>
             {% endfor %}

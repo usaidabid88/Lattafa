@@ -74,7 +74,7 @@
     <line x1="-62.0" y1="12.0" x2="62.0" y2="12.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     
     <!-- Perfume Name -->
-    <text x="0" y="42" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="12.5" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle"><tspan x="0" dy="0">BADEE AL OUD</tspan><tspan x="0" dy="16">HONOR &amp; GLORY</tspan></text>
+    <text x="0" y="45.0" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="11.2" font-weight="700" letter-spacing="1.1" fill="url(#metalG)" text-anchor="middle"><tspan x="0" dy="0">BADEE AL OUD</tspan><tspan x="0" dy="14">HONOR &amp; GLORY</tspan></text>
     
     <line x1="-58.0" y1="96.0" x2="58.0" y2="96.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     <!-- Concentration & Volume -->
