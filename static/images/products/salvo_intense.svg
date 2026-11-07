@@ -5,88 +5,74 @@
       <stop offset="55%" stop-color="#151518" stop-opacity="0.95"/>
       <stop offset="100%" stop-color="#08080a"/>
     </radialGradient>
-    
     <linearGradient id="metalG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
-      <stop offset="15%" stop-color="#faebc9"/>
-      <stop offset="50%" stop-color="#cca059"/>
-      <stop offset="85%" stop-color="#4a350b"/>
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="18%" stop-color="#fff8df" stop-opacity="0.9"/>
+      <stop offset="35%" stop-color="#faebc9"/>
+      <stop offset="65%" stop-color="#cca059"/>
       <stop offset="100%" stop-color="#faebc9"/>
     </linearGradient>
-
     <linearGradient id="bodyG" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#151518"/>
-      <stop offset="20%" stop-color="#cca059" stop-opacity="0.75"/>
-      <stop offset="48%" stop-color="#faebc9" stop-opacity="0.92"/>
-      <stop offset="52%" stop-color="#faebc9" stop-opacity="0.92"/>
-      <stop offset="80%" stop-color="#cca059" stop-opacity="0.75"/>
-      <stop offset="100%" stop-color="#151518"/>
+      <stop offset="0%" stop-color="#050609"/>
+      <stop offset="15%" stop-color="#151518"/>
+      <stop offset="35%" stop-color="#cca059" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#faebc9" stop-opacity="0.95"/>
+      <stop offset="65%" stop-color="#cca059" stop-opacity="0.8"/>
+      <stop offset="85%" stop-color="#151518"/>
+      <stop offset="100%" stop-color="#050609"/>
     </linearGradient>
-
     <linearGradient id="baseG" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#000000" stop-opacity="0.8"/>
-      <stop offset="30%" stop-color="#faebc9" stop-opacity="0.4"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.6"/>
-      <stop offset="70%" stop-color="#faebc9" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#faebc9" stop-opacity="0.75"/>
       <stop offset="100%" stop-color="#000000" stop-opacity="0.8"/>
     </linearGradient>
-
+    <linearGradient id="labelG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2b2b31"/>
+      <stop offset="50%" stop-color="#111216"/>
+      <stop offset="100%" stop-color="#06070a"/>
+    </linearGradient>
+    <linearGradient id="labelSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
     <filter id="flaconShadow" x="-30%" y="-20%" width="160%" height="150%">
-      <feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#000000" flood-opacity="0.85"/>
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.8"/>
     </filter>
   </defs>
-
   <rect width="600" height="750" fill="url(#ambG)"/>
   <rect x="25" y="25" width="550" height="700" fill="none" stroke="#cca059" stroke-width="0.75" opacity="0.32"/>
-  <rect x="33" y="33" width="534" height="684" fill="none" stroke="#cca059" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.2"/>
-
   <g transform="translate(300, 365)" filter="url(#flaconShadow)">
     
-        <ellipse cx="0" cy="210" rx="140" ry="20" fill="#000000" opacity="0.6"/>
-        <ellipse cx="0" cy="208" rx="100" ry="12" fill="#cca059" opacity="0.25"/>
-
-        <rect x="-100" y="-80" width="200" height="275" rx="10" fill="url(#bodyG)" stroke="url(#metalG)" stroke-width="2"/>
+            <ellipse cx="0" cy="210" rx="140" ry="20" fill="#000000" opacity="0.6"/>
+            <rect x="-100" y="-80" width="200" height="275" rx="10" fill="url(#bodyG)" stroke="url(#metalG)" stroke-width="2"/>
+            <rect x="-96" y="145" width="192" height="46" rx="6" fill="url(#baseG)" opacity="0.95"/>
+            <line x1="-88" y1="-70" x2="-88" y2="182" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+            
+        <!-- Label Cartouche -->
+        <rect x="-81.0" y="-68.0" width="162" height="172" rx="8" fill="url(#labelG)" stroke="url(#metalG)" stroke-width="1.8"/>
+        <rect x="-76.0" y="-63.0" width="152" height="162" rx="5" fill="none" stroke="url(#metalG)" stroke-width="0.75" stroke-dasharray="4,2" opacity="0.6"/>
+        <rect x="-73.0" y="-60.0" width="146" height="58.5" rx="4" fill="url(#labelSheen)" opacity="0.22"/>
         
-        <rect x="-96" y="145" width="192" height="46" rx="6" fill="url(#baseG)" opacity="0.95"/>
-        <line x1="-96" y1="145" x2="96" y2="145" stroke="#faebc9" stroke-width="1.2" opacity="0.7"/>
-
-        <line x1="-88" y1="-70" x2="-88" y2="182" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
-        <line x1="-80" y1="-65" x2="-80" y2="180" stroke="#faebc9" stroke-width="1" opacity="0.4"/>
-
+        <g transform="translate(0, -42.0)">
+          <circle cx="0" cy="0" r="11" fill="none" stroke="url(#metalG)" stroke-width="0.9"/>
+          <polygon points="0,-7 2,-2 7,0 2,2 0,7 -2,2 -7,0 -2,-2" fill="url(#metalG)"/>
+        </g>
         
-    <!-- Label Cartouche -->
-    <rect x="-81.0" y="-68.0" width="162" height="172" rx="8" fill="#111216" stroke="url(#metalG)" stroke-width="1.8"/>
-    <rect x="-76.0" y="-63.0" width="152" height="162" rx="5" fill="none" stroke="url(#metalG)" stroke-width="0.75" stroke-dasharray="4,2" opacity="0.6"/>
-    
-    <!-- Top Emblem / Star -->
-    <g transform="translate(0, -42.0)">
-      <circle cx="0" cy="0" r="11" fill="none" stroke="url(#metalG)" stroke-width="0.9"/>
-      <polygon points="0,-7 2,-2 7,0 2,2 0,7 -2,2 -7,0 -2,-2" fill="url(#metalG)"/>
-    </g>
-    
-    <!-- Brand Line -->
-    <text x="0" y="-20.0" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" letter-spacing="3" fill="#cfc7b8" text-anchor="middle">MAISON ALHAMBRA</text>
-    <line x1="-61.0" y1="-12.0" x2="61.0" y2="-12.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
-    
-    <!-- Perfume Name -->
-    <text x="0" y="30" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="13" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle">SALVO INTENSE</text>
-    
-    <line x1="-57.0" y1="66.0" x2="57.0" y2="66.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
-    <!-- Concentration & Volume -->
-    <text x="0" y="81.0" font-family="'Inter', -apple-system, sans-serif" font-size="7" font-weight="500" letter-spacing="2" fill="#b0a594" text-anchor="middle">EAU DE PARFUM (EDP)</text>
-    <text x="0" y="94.0" font-family="'Inter', -apple-system, sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.5" fill="url(#metalG)" text-anchor="middle">100ML</text>
-    
-
-        <rect x="-24" y="-115" width="48" height="36" rx="2" fill="url(#metalG)"/>
-        <line x1="-24" y1="-95" x2="24" y2="-95" stroke="#121316" stroke-width="1.2"/>
-
-        <rect x="-48" y="-215" width="96" height="102" rx="6" fill="url(#metalG)" stroke="#faebc9" stroke-width="1.5"/>
-        <line x1="-48" y1="-190" x2="48" y2="-190" stroke="#121316" stroke-width="1.5"/>
-        <line x1="-48" y1="-165" x2="48" y2="-165" stroke="#121316" stroke-width="1.5"/>
-        <line x1="-48" y1="-140" x2="48" y2="-140" stroke="#121316" stroke-width="1.5"/>
-        <rect x="-38" y="-222" width="76" height="8" rx="2" fill="url(#metalG)"/>
+        <text x="0" y="-20.0" font-family="'Inter', sans-serif" font-size="7" font-weight="600" letter-spacing="1.8" fill="#e8dcc4" text-anchor="middle">MAISON ALHAMBRA</text>
+        <line x1="-61.0" y1="-12.0" x2="61.0" y2="-12.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
+        <text x="0" y="30" font-family="'Cinzel', serif" font-size="13" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle">SALVO INTENSE</text>
+        <line x1="-57.0" y1="66.0" x2="57.0" y2="66.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
+        <text x="0" y="81.0" font-family="'Inter', sans-serif" font-size="6.4" font-weight="500" letter-spacing="1.5" fill="#c8bba4" text-anchor="middle">EAU DE PARFUM (EDP)</text>
+        <text x="0" y="94.0" font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.5" fill="url(#metalG)" text-anchor="middle">100ML</text>
+        
+            <rect x="-24" y="-115" width="48" height="36" rx="2" fill="url(#metalG)"/>
+            <rect x="-48" y="-215" width="96" height="102" rx="6" fill="url(#metalG)" stroke="#faebc9" stroke-width="1.5"/>
+            
+        <!-- Studio Specular Highlights -->
+        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" opacity="0.08"/>
+        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.22"/>
+        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linecap="round" opacity="0.8"/>
         
   </g>
-
-  <text x="300" y="705" font-family="'Inter', -apple-system, sans-serif" font-size="9.5" font-weight="600" letter-spacing="4.5" fill="#cca059" opacity="0.85" text-anchor="middle">AROMATIC FRESH SPICY</text>
+  <text x="300" y="705" font-family="'Inter', sans-serif" font-size="9.5" font-weight="600" letter-spacing="4.5" fill="#cca059" opacity="0.85" text-anchor="middle">AROMATIC FRESH SPICY</text>
 </svg>

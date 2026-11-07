@@ -5,130 +5,82 @@
       <stop offset="55%" stop-color="#120a05" stop-opacity="0.95"/>
       <stop offset="100%" stop-color="#08080a"/>
     </radialGradient>
-    
     <linearGradient id="metalG" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="9%" stop-color="#d6945e"/>
       <stop offset="18%" stop-color="#fff8df" stop-opacity="0.9"/>
-      <stop offset="31%" stop-color="#9c5825"/>
-      <stop offset="56%" stop-color="#4a350b"/>
-      <stop offset="72%" stop-color="#d6945e"/>
-      <stop offset="86%" stop-color="#17130c"/>
+      <stop offset="35%" stop-color="#d6945e"/>
+      <stop offset="65%" stop-color="#9c5825"/>
       <stop offset="100%" stop-color="#d6945e"/>
     </linearGradient>
-
     <linearGradient id="bodyG" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#050609"/>
-      <stop offset="8%" stop-color="#120a05"/>
-      <stop offset="22%" stop-color="#9c5825" stop-opacity="0.78"/>
-      <stop offset="42%" stop-color="#d6945e" stop-opacity="0.9"/>
-      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.38"/>
-      <stop offset="53%" stop-color="#d6945e" stop-opacity="0.98"/>
-      <stop offset="74%" stop-color="#9c5825" stop-opacity="0.82"/>
-      <stop offset="92%" stop-color="#120a05"/>
+      <stop offset="15%" stop-color="#120a05"/>
+      <stop offset="35%" stop-color="#9c5825" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#d6945e" stop-opacity="0.95"/>
+      <stop offset="65%" stop-color="#9c5825" stop-opacity="0.8"/>
+      <stop offset="85%" stop-color="#120a05"/>
       <stop offset="100%" stop-color="#050609"/>
     </linearGradient>
-
     <linearGradient id="baseG" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#000000" stop-opacity="0.8"/>
-      <stop offset="24%" stop-color="#9c5825" stop-opacity="0.38"/>
-      <stop offset="46%" stop-color="#d6945e" stop-opacity="0.72"/>
-      <stop offset="54%" stop-color="#ffffff" stop-opacity="0.78"/>
-      <stop offset="76%" stop-color="#d6945e" stop-opacity="0.36"/>
+      <stop offset="50%" stop-color="#d6945e" stop-opacity="0.75"/>
       <stop offset="100%" stop-color="#000000" stop-opacity="0.8"/>
     </linearGradient>
-
     <linearGradient id="labelG" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#2b2b31"/>
-      <stop offset="48%" stop-color="#111216"/>
+      <stop offset="50%" stop-color="#111216"/>
       <stop offset="100%" stop-color="#06070a"/>
     </linearGradient>
-
     <linearGradient id="labelSheen" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75"/>
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
-
-    <radialGradient id="bloomG" cx="50%" cy="45%" r="58%">
-      <stop offset="0%" stop-color="#d6945e" stop-opacity="0.24"/>
-      <stop offset="42%" stop-color="#9c5825" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#120a05" stop-opacity="0"/>
-    </radialGradient>
-
     <filter id="flaconShadow" x="-30%" y="-20%" width="160%" height="150%">
       <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.8"/>
     </filter>
-
-    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="28"/>
-    </filter>
   </defs>
-
   <rect width="600" height="750" fill="url(#ambG)"/>
-  <circle cx="300" cy="300" r="245" fill="url(#bloomG)" filter="url(#softGlow)"/>
-  <ellipse cx="300" cy="584" rx="174" ry="26" fill="#000000" opacity="0.42" filter="url(#softGlow)"/>
-  <ellipse cx="300" cy="580" rx="126" ry="11" fill="#9c5825" opacity="0.14"/>
   <rect x="25" y="25" width="550" height="700" fill="none" stroke="#9c5825" stroke-width="0.75" opacity="0.32"/>
-  <rect x="33" y="33" width="534" height="684" fill="none" stroke="#9c5825" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.2"/>
-
   <g transform="translate(300, 365)" filter="url(#flaconShadow)">
     
-        <ellipse cx="0" cy="210" rx="145" ry="22" fill="#000000" opacity="0.65"/>
-        <ellipse cx="0" cy="208" rx="110" ry="14" fill="#9c5825" opacity="0.18"/>
-        <rect x="-115" y="-85" width="230" height="280" rx="16" fill="url(#bodyG)" stroke="url(#metalG)" stroke-width="2.5"/>
-        <rect x="-110" y="150" width="220" height="40" rx="10" fill="url(#baseG)" opacity="0.9"/>
-        <line x1="-110" y1="150" x2="110" y2="150" stroke="#d6945e" stroke-width="1.2" opacity="0.6"/>
+            <ellipse cx="0" cy="210" rx="145" ry="22" fill="#000000" opacity="0.65"/>
+            <ellipse cx="0" cy="208" rx="110" ry="14" fill="#9c5825" opacity="0.18"/>
+            <rect x="-115" y="-85" width="230" height="280" rx="16" fill="url(#bodyG)" stroke="url(#metalG)" stroke-width="2.5"/>
+            <rect x="-110" y="150" width="220" height="40" rx="10" fill="url(#baseG)" opacity="0.9"/>
+            <line x1="-110" y1="150" x2="110" y2="150" stroke="#d6945e" stroke-width="1.2" opacity="0.6"/>
+            <path d="M-105,40 L-60,95 L-15,40 L30,95 L75,40 L105,75" fill="none" stroke="#d6945e" stroke-width="1.2" opacity="0.25"/>
+            <path d="M-105,95 L-60,40 L-15,95 L30,40 L75,95 L105,60" fill="none" stroke="#d6945e" stroke-width="1.2" opacity="0.25"/>
+            <path d="M-105,95 L-60,150 L-15,95 L30,150 L75,95 L105,130" fill="none" stroke="#d6945e" stroke-width="1.2" opacity="0.25"/>
+            <path d="M-105,150 L-60,95 L-15,150 L30,95 L75,150 L105,115" fill="none" stroke="#d6945e" stroke-width="1.2" opacity="0.25"/>
+            <line x1="-100" y1="-75" x2="-100" y2="180" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
+            
+        <!-- Label Cartouche -->
+        <rect x="-85.0" y="-72.5" width="170" height="175" rx="8" fill="url(#labelG)" stroke="url(#metalG)" stroke-width="1.8"/>
+        <rect x="-80.0" y="-67.5" width="160" height="165" rx="5" fill="none" stroke="url(#metalG)" stroke-width="0.75" stroke-dasharray="4,2" opacity="0.6"/>
+        <rect x="-77.0" y="-64.5" width="154" height="59.5" rx="4" fill="url(#labelSheen)" opacity="0.22"/>
         
-        <path d="M-105,40 L-60,95 L-15,40 L30,95 L75,40 L105,75" fill="none" stroke="#d6945e" stroke-width="1.2" opacity="0.25"/>
-        <path d="M-105,95 L-60,40 L-15,95 L30,40 L75,95 L105,60" fill="none" stroke="#d6945e" stroke-width="1.2" opacity="0.25"/>
-        <path d="M-105,95 L-60,150 L-15,95 L30,150 L75,95 L105,130" fill="none" stroke="#d6945e" stroke-width="1.2" opacity="0.25"/>
-        <path d="M-105,150 L-60,95 L-15,150 L30,95 L75,150 L105,115" fill="none" stroke="#d6945e" stroke-width="1.2" opacity="0.25"/>
-
-        <line x1="-100" y1="-75" x2="-100" y2="180" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.35"/>
-        <line x1="-93" y1="-70" x2="-93" y2="175" stroke="#d6945e" stroke-width="1" opacity="0.5"/>
-
+        <g transform="translate(0, -46.5)">
+          <circle cx="0" cy="0" r="11" fill="none" stroke="url(#metalG)" stroke-width="0.9"/>
+          <polygon points="0,-7 2,-2 7,0 2,2 0,7 -2,2 -7,0 -2,-2" fill="url(#metalG)"/>
+        </g>
         
-    <!-- Label Cartouche -->
-    <rect x="-85.0" y="-72.5" width="170" height="175" rx="8" fill="url(#labelG)" stroke="url(#metalG)" stroke-width="1.8"/>
-    <rect x="-80.0" y="-67.5" width="160" height="165" rx="5" fill="none" stroke="url(#metalG)" stroke-width="0.75" stroke-dasharray="4,2" opacity="0.6"/>
-    <rect x="-77.0" y="-64.5" width="154" height="59.5" rx="4" fill="url(#labelSheen)" opacity="0.22"/>
-    
-    <!-- Top Emblem / Star -->
-    <g transform="translate(0, -46.5)">
-      <circle cx="0" cy="0" r="11" fill="none" stroke="url(#metalG)" stroke-width="0.9"/>
-      <polygon points="0,-7 2,-2 7,0 2,2 0,7 -2,2 -7,0 -2,-2" fill="url(#metalG)"/>
-    </g>
-    
-    <!-- Brand Line -->
-    <text x="0" y="-24.5" font-family="'Inter', -apple-system, sans-serif" font-size="7" font-weight="600" letter-spacing="1.8" fill="#e8dcc4" text-anchor="middle">LATTAFA PERFUMES</text>
-    <line x1="-65.0" y1="-16.5" x2="65.0" y2="-16.5" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
-    
-    <!-- Perfume Name -->
-    <text x="0" y="27" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="13" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle">KHAMRAH DUKHAN</text>
-    
-    <line x1="-61.0" y1="64.5" x2="61.0" y2="64.5" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
-    <!-- Concentration & Volume -->
-    <text x="0" y="79.5" font-family="'Inter', -apple-system, sans-serif" font-size="6.4" font-weight="500" letter-spacing="1.5" fill="#c8bba4" text-anchor="middle">EAU DE PARFUM (EDP)</text>
-    <text x="0" y="92.5" font-family="'Inter', -apple-system, sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.5" fill="url(#metalG)" text-anchor="middle">100ML</text>
-    
-
-        <path d="M-60,-85 L-35,-120 L35,-120 L60,-85 Z" fill="url(#metalG)"/>
-        <rect x="-35" y="-135" width="70" height="20" rx="3" fill="url(#metalG)"/>
-        <line x1="-35" y1="-125" x2="35" y2="-125" stroke="#121316" stroke-width="1.5"/>
-
-        <polygon points="-55,-220 55,-220 68,-175 48,-135 -48,-135 -68,-175" fill="url(#metalG)" stroke="#d6945e" stroke-width="1.8"/>
-        <polygon points="-35,-220 35,-220 22,-200 -22,-200" fill="#ffffff" opacity="0.25"/>
-        <circle cx="0" cy="-175" r="14" fill="#14151a" stroke="url(#metalG)" stroke-width="1.2"/>
-        <polygon points="0,-182 3,-177 8,-175 3,-173 0,-168 -3,-173 -8,-175 -3,-177" fill="url(#metalG)"/>
+        <text x="0" y="-24.5" font-family="'Inter', sans-serif" font-size="7" font-weight="600" letter-spacing="1.8" fill="#e8dcc4" text-anchor="middle">LATTAFA PERFUMES</text>
+        <line x1="-65.0" y1="-16.5" x2="65.0" y2="-16.5" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
+        <text x="0" y="27" font-family="'Cinzel', serif" font-size="13" font-weight="700" letter-spacing="2" fill="url(#metalG)" text-anchor="middle">KHAMRAH DUKHAN</text>
+        <line x1="-61.0" y1="64.5" x2="61.0" y2="64.5" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
+        <text x="0" y="79.5" font-family="'Inter', sans-serif" font-size="6.4" font-weight="500" letter-spacing="1.5" fill="#c8bba4" text-anchor="middle">EAU DE PARFUM (EDP)</text>
+        <text x="0" y="92.5" font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.5" fill="url(#metalG)" text-anchor="middle">100ML</text>
         
-
-        <!-- Layered studio specular reflection: broad glass bloom plus a crisp edge catch -->
-        <path d="M-84,-62 C-101,8 -94,112 -76,169" fill="none" stroke="#ffffff" stroke-width="13" stroke-linecap="round" opacity="0.075"/>
-        <path d="M-84,-62 C-101,8 -94,112 -76,169" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.18"/>
-        <path d="M-84,-62 C-101,8 -94,112 -76,169" fill="none" stroke="#ffffff" stroke-width="1.15" stroke-linecap="round" opacity="0.78"/>
-        <path d="M-84,-62 C-101,8 -94,112 -76,169" fill="none" stroke="#d6945e" stroke-width="2.4" stroke-linecap="round" opacity="0.34" transform="translate(10,0)"/>
-    
+            <path d="M-60,-85 L-35,-120 L35,-120 L60,-85 Z" fill="url(#metalG)"/>
+            <rect x="-35" y="-135" width="70" height="20" rx="3" fill="url(#metalG)"/>
+            <polygon points="-55,-220 55,-220 68,-175 48,-135 -48,-135 -68,-175" fill="url(#metalG)" stroke="#d6945e" stroke-width="1.8"/>
+            <circle cx="0" cy="-175" r="14" fill="#14151a" stroke="url(#metalG)" stroke-width="1.2"/>
+            
+        <!-- Studio Specular Highlights -->
+        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" opacity="0.08"/>
+        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.22"/>
+        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="1.1" stroke-linecap="round" opacity="0.8"/>
+        
   </g>
-
-  <text x="300" y="705" font-family="'Inter', -apple-system, sans-serif" font-size="9.5" font-weight="600" letter-spacing="4.5" fill="#9c5825" opacity="0.85" text-anchor="middle">SMOKY AMBER WOODY</text>
+  <text x="300" y="705" font-family="'Inter', sans-serif" font-size="9.5" font-weight="600" letter-spacing="4.5" fill="#9c5825" opacity="0.85" text-anchor="middle">SMOKY AMBER WOODY</text>
 </svg>
