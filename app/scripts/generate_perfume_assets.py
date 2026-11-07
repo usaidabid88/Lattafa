@@ -546,6 +546,33 @@ def render_flacon_svg(name, brand, family, conc, size, accent, highlight, bg_col
         <circle cx="0" cy="-232" r="7" fill="url(#metalG)" stroke="{highlight}" stroke-width="1"/>
         """
 
+    # A controlled specular pass is applied after each silhouette is built. It
+    # gives every bottle a real studio-light response while keeping the gloss
+    # inside the left shoulder/body area instead of drawing a generic stripe
+    # across the label or cap.
+    gloss_paths = {
+        "crystal": "M-84,-62 C-101,8 -94,112 -76,169",
+        "cylinder": "M-70,-76 C-82,8 -78,116 -64,181",
+        "curve": "M-67,-62 C-83,18 -84,103 -68,164",
+        "faceted": "M-74,-78 L-88,130",
+        "minimalist_niche": "M-74,-56 C-84,24 -82,108 -70,170",
+        "frosted_niche": "M-74,-56 C-84,24 -82,108 -70,170",
+        "tall_luxury": "M-62,-92 C-72,8 -70,116 -58,182",
+        "heavy_square": "M-82,-60 C-94,22 -92,112 -78,166",
+        "shield": "M-76,-57 C-89,24 -84,104 -67,165",
+        "equine": "M-72,-72 L-90,132",
+        "sculpted": "M-72,-72 L-90,132",
+    }
+    gloss_path = gloss_paths.get(shape, "M-78,-70 C-90,18 -88,112 -74,172")
+    bottle_elements += f"""
+
+        <!-- Layered studio specular reflection: broad glass bloom plus a crisp edge catch -->
+        <path d="{gloss_path}" fill="none" stroke="#ffffff" stroke-width="13" stroke-linecap="round" opacity="0.075"/>
+        <path d="{gloss_path}" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.18"/>
+        <path d="{gloss_path}" fill="none" stroke="#ffffff" stroke-width="1.15" stroke-linecap="round" opacity="0.78"/>
+        <path d="{gloss_path}" fill="none" stroke="{highlight}" stroke-width="2.4" stroke-linecap="round" opacity="0.34" transform="translate(10,0)"/>
+    """
+
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" width="600" height="750">
   <defs>
     <radialGradient id="ambG" cx="50%" cy="40%" r="68%">
@@ -555,21 +582,24 @@ def render_flacon_svg(name, brand, family, conc, size, accent, highlight, bg_col
     </radialGradient>
     
     <linearGradient id="metalG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
-      <stop offset="15%" stop-color="{highlight}"/>
-      <stop offset="50%" stop-color="{accent}"/>
-      <stop offset="85%" stop-color="#4a350b"/>
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="9%" stop-color="{highlight}"/>
+      <stop offset="18%" stop-color="#fff8df" stop-opacity="0.9"/>
+      <stop offset="31%" stop-color="{accent}"/>
+      <stop offset="56%" stop-color="#4a350b"/>
+      <stop offset="72%" stop-color="{highlight}"/>
+      <stop offset="86%" stop-color="#17130c"/>
       <stop offset="100%" stop-color="{highlight}"/>
     </linearGradient>
 
     <linearGradient id="bodyG" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#050609"/>
       <stop offset="8%" stop-color="{bg_color}"/>
-      <stop offset="22%" stop-color="{accent}" stop-opacity="0.62"/>
-      <stop offset="42%" stop-color="{highlight}" stop-opacity="0.78"/>
-      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.28"/>
-      <stop offset="53%" stop-color="{highlight}" stop-opacity="0.88"/>
-      <stop offset="74%" stop-color="{accent}" stop-opacity="0.64"/>
+      <stop offset="22%" stop-color="{accent}" stop-opacity="0.78"/>
+      <stop offset="42%" stop-color="{highlight}" stop-opacity="0.9"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.38"/>
+      <stop offset="53%" stop-color="{highlight}" stop-opacity="0.98"/>
+      <stop offset="74%" stop-color="{accent}" stop-opacity="0.82"/>
       <stop offset="92%" stop-color="{bg_color}"/>
       <stop offset="100%" stop-color="#050609"/>
     </linearGradient>

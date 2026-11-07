@@ -7,36 +7,67 @@
     </radialGradient>
     
     <linearGradient id="metalG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
-      <stop offset="15%" stop-color="#fde2ea"/>
-      <stop offset="50%" stop-color="#df92a5"/>
-      <stop offset="85%" stop-color="#4a350b"/>
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="9%" stop-color="#fde2ea"/>
+      <stop offset="18%" stop-color="#fff8df" stop-opacity="0.9"/>
+      <stop offset="31%" stop-color="#df92a5"/>
+      <stop offset="56%" stop-color="#4a350b"/>
+      <stop offset="72%" stop-color="#fde2ea"/>
+      <stop offset="86%" stop-color="#17130c"/>
       <stop offset="100%" stop-color="#fde2ea"/>
     </linearGradient>
 
     <linearGradient id="bodyG" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#2d0c15"/>
-      <stop offset="20%" stop-color="#df92a5" stop-opacity="0.75"/>
-      <stop offset="48%" stop-color="#fde2ea" stop-opacity="0.92"/>
-      <stop offset="52%" stop-color="#fde2ea" stop-opacity="0.92"/>
-      <stop offset="80%" stop-color="#df92a5" stop-opacity="0.75"/>
-      <stop offset="100%" stop-color="#2d0c15"/>
+      <stop offset="0%" stop-color="#050609"/>
+      <stop offset="8%" stop-color="#2d0c15"/>
+      <stop offset="22%" stop-color="#df92a5" stop-opacity="0.78"/>
+      <stop offset="42%" stop-color="#fde2ea" stop-opacity="0.9"/>
+      <stop offset="48%" stop-color="#ffffff" stop-opacity="0.38"/>
+      <stop offset="53%" stop-color="#fde2ea" stop-opacity="0.98"/>
+      <stop offset="74%" stop-color="#df92a5" stop-opacity="0.82"/>
+      <stop offset="92%" stop-color="#2d0c15"/>
+      <stop offset="100%" stop-color="#050609"/>
     </linearGradient>
 
     <linearGradient id="baseG" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#000000" stop-opacity="0.8"/>
-      <stop offset="30%" stop-color="#fde2ea" stop-opacity="0.4"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.6"/>
-      <stop offset="70%" stop-color="#fde2ea" stop-opacity="0.4"/>
+      <stop offset="24%" stop-color="#df92a5" stop-opacity="0.38"/>
+      <stop offset="46%" stop-color="#fde2ea" stop-opacity="0.72"/>
+      <stop offset="54%" stop-color="#ffffff" stop-opacity="0.78"/>
+      <stop offset="76%" stop-color="#fde2ea" stop-opacity="0.36"/>
       <stop offset="100%" stop-color="#000000" stop-opacity="0.8"/>
     </linearGradient>
 
+    <linearGradient id="labelG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2b2b31"/>
+      <stop offset="48%" stop-color="#111216"/>
+      <stop offset="100%" stop-color="#06070a"/>
+    </linearGradient>
+
+    <linearGradient id="labelSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <radialGradient id="bloomG" cx="50%" cy="45%" r="58%">
+      <stop offset="0%" stop-color="#fde2ea" stop-opacity="0.24"/>
+      <stop offset="42%" stop-color="#df92a5" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#2d0c15" stop-opacity="0"/>
+    </radialGradient>
+
     <filter id="flaconShadow" x="-30%" y="-20%" width="160%" height="150%">
-      <feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#000000" flood-opacity="0.85"/>
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="28"/>
     </filter>
   </defs>
 
   <rect width="600" height="750" fill="url(#ambG)"/>
+  <circle cx="300" cy="300" r="245" fill="url(#bloomG)" filter="url(#softGlow)"/>
+  <ellipse cx="300" cy="584" rx="174" ry="26" fill="#000000" opacity="0.42" filter="url(#softGlow)"/>
+  <ellipse cx="300" cy="580" rx="126" ry="11" fill="#df92a5" opacity="0.14"/>
   <rect x="25" y="25" width="550" height="700" fill="none" stroke="#df92a5" stroke-width="0.75" opacity="0.32"/>
   <rect x="33" y="33" width="534" height="684" fill="none" stroke="#df92a5" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.2"/>
 
@@ -52,8 +83,9 @@
 
         
     <!-- Label Cartouche -->
-    <rect x="-80.0" y="-58.0" width="160" height="172" rx="8" fill="#111216" stroke="url(#metalG)" stroke-width="1.8"/>
+    <rect x="-80.0" y="-58.0" width="160" height="172" rx="8" fill="url(#labelG)" stroke="url(#metalG)" stroke-width="1.8"/>
     <rect x="-75.0" y="-53.0" width="150" height="162" rx="5" fill="none" stroke="url(#metalG)" stroke-width="0.75" stroke-dasharray="4,2" opacity="0.6"/>
+    <rect x="-72.0" y="-50.0" width="144" height="58.5" rx="4" fill="url(#labelSheen)" opacity="0.22"/>
     
     <!-- Top Emblem / Star -->
     <g transform="translate(0, -32.0)">
@@ -62,7 +94,7 @@
     </g>
     
     <!-- Brand Line -->
-    <text x="0" y="-10.0" font-family="'Inter', -apple-system, sans-serif" font-size="8" font-weight="600" letter-spacing="3" fill="#cfc7b8" text-anchor="middle">LATTAFA PERFUMES</text>
+    <text x="0" y="-10.0" font-family="'Inter', -apple-system, sans-serif" font-size="7" font-weight="600" letter-spacing="1.8" fill="#e8dcc4" text-anchor="middle">LATTAFA PERFUMES</text>
     <line x1="-60.0" y1="-2.0" x2="60.0" y2="-2.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     
     <!-- Perfume Name -->
@@ -70,7 +102,7 @@
     
     <line x1="-56.0" y1="76.0" x2="56.0" y2="76.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.5"/>
     <!-- Concentration & Volume -->
-    <text x="0" y="91.0" font-family="'Inter', -apple-system, sans-serif" font-size="7" font-weight="500" letter-spacing="2" fill="#b0a594" text-anchor="middle">EAU DE PARFUM (EDP)</text>
+    <text x="0" y="91.0" font-family="'Inter', -apple-system, sans-serif" font-size="6.4" font-weight="500" letter-spacing="1.5" fill="#c8bba4" text-anchor="middle">EAU DE PARFUM (EDP)</text>
     <text x="0" y="104.0" font-family="'Inter', -apple-system, sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.5" fill="url(#metalG)" text-anchor="middle">100ML</text>
     
 
@@ -80,6 +112,13 @@
         <path d="M-45,-138 Q-48,-225 0,-228 Q48,-225 45,-138 Z" fill="url(#metalG)" stroke="#fde2ea" stroke-width="1.5"/>
         <circle cx="0" cy="-233" r="6" fill="url(#metalG)"/>
         
+
+        <!-- Layered studio specular reflection: broad glass bloom plus a crisp edge catch -->
+        <path d="M-76,-57 C-89,24 -84,104 -67,165" fill="none" stroke="#ffffff" stroke-width="13" stroke-linecap="round" opacity="0.075"/>
+        <path d="M-76,-57 C-89,24 -84,104 -67,165" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.18"/>
+        <path d="M-76,-57 C-89,24 -84,104 -67,165" fill="none" stroke="#ffffff" stroke-width="1.15" stroke-linecap="round" opacity="0.78"/>
+        <path d="M-76,-57 C-89,24 -84,104 -67,165" fill="none" stroke="#fde2ea" stroke-width="2.4" stroke-linecap="round" opacity="0.34" transform="translate(10,0)"/>
+    
   </g>
 
   <text x="300" y="705" font-family="'Inter', -apple-system, sans-serif" font-size="9.5" font-weight="600" letter-spacing="4.5" fill="#df92a5" opacity="0.85" text-anchor="middle">FLORAL FRUITY</text>
