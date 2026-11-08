@@ -1,10 +1,19 @@
--- ============================================================================
+"""
+Reconciles database/init_perfume/02_sample_data.sql and 06_catalog_expansion.sql
+(and seeds/ counterparts) to eliminate obsolete marketplace data and align with
+the authentic Arabian Perfume catalog (Lattafa, Lattafa Pride, Maison Alhambra).
+"""
+
+import os
+
+NEW_SAMPLE_DATA_SQL = '''-- ============================================================================
 -- Script: 02_sample_data.sql
--- Description: Realistic Pakistani Sample Data for Online Shopping System
--- All prices in PKR. Realistic Pakistani names, cities, phone numbers.
+-- Description: Authentic Arabian Perfume Store Seed Data
+-- Target: online_shop_perfume_dev and online_shop_perfume_test
+-- All prices in PKR. Authentic perfume categories, suppliers, and customer orders.
 -- All user passwords are: password123
 -- ============================================================================
-USE online_shop;
+USE online_shop_perfume_dev;
 SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE shipments;
 TRUNCATE TABLE payments;
@@ -19,24 +28,20 @@ TRUNCATE TABLE categories;
 TRUNCATE TABLE audit_log;
 TRUNCATE TABLE addresses;
 TRUNCATE TABLE users;
-SET FOREIGN_KEY_CHECKS = 1;
 
--- Categories (Top-level and subcategories)
-INSERT INTO categories (category_id, name, parent_category_id) VALUES (1, 'Electronics', NULL);
-INSERT INTO categories (category_id, name, parent_category_id) VALUES (2, 'Laptops & Computers', 1);
-INSERT INTO categories (category_id, name, parent_category_id) VALUES (3, 'Mobile Phones & Tablets', 1);
-INSERT INTO categories (category_id, name, parent_category_id) VALUES (4, 'Fashion & Apparel', NULL);
-INSERT INTO categories (category_id, name, parent_category_id) VALUES (5, 'Men''s Clothing', 4);
-INSERT INTO categories (category_id, name, parent_category_id) VALUES (6, 'Women''s Clothing', 4);
-INSERT INTO categories (category_id, name, parent_category_id) VALUES (7, 'Home & Kitchen', NULL);
-INSERT INTO categories (category_id, name, parent_category_id) VALUES (8, 'Kitchen Appliances', 7);
+-- Categories (Fragrance Department Hierarchy)
+INSERT INTO categories (category_id, name, parent_category_id) VALUES (100, 'Fragrances', NULL);
+INSERT INTO categories (category_id, name, parent_category_id) VALUES (101, 'Men\\'s Fragrances', 100);
+INSERT INTO categories (category_id, name, parent_category_id) VALUES (102, 'Women\\'s Fragrances', 100);
+INSERT INTO categories (category_id, name, parent_category_id) VALUES (103, 'Unisex Fragrances', 100);
+INSERT INTO categories (category_id, name, parent_category_id) VALUES (104, 'Eau de Parfum', 100);
+INSERT INTO categories (category_id, name, parent_category_id) VALUES (105, 'Extrait de Parfum', 100);
+INSERT INTO categories (category_id, name, parent_category_id) VALUES (106, 'Perfume Oils & Attars', 100);
+INSERT INTO categories (category_id, name, parent_category_id) VALUES (107, 'Gift Sets & Collections', 100);
 
--- Suppliers
-INSERT INTO suppliers (supplier_id, name, email, phone) VALUES (1, 'TechZone Distribution Karachi', 'contact@techzone.pk', '021-34567890');
-INSERT INTO suppliers (supplier_id, name, email, phone) VALUES (2, 'Haier Pakistan Appliance Hub', 'info@haierpakistan.pk', '042-35789123');
-INSERT INTO suppliers (supplier_id, name, email, phone) VALUES (3, 'Al-Karam Textile Mills Ltd', 'sales@alkaram.com', '021-111555222');
-INSERT INTO suppliers (supplier_id, name, email, phone) VALUES (4, 'J. Junaid Jamshed Retailers', 'support@junaidjamshed.com', '021-111112111');
-INSERT INTO suppliers (supplier_id, name, email, phone) VALUES (5, 'MegaTech Electronics Islamabad', 'distro@megatech.com.pk', '051-2894567');
+-- Suppliers (Authorized UAE Distributors)
+INSERT INTO suppliers (supplier_id, name, email, phone) VALUES (101, 'Lattafa Perfumes Industries L.L.C.', 'distribution@lattafa.ae', '+971-4-885-7800');
+INSERT INTO suppliers (supplier_id, name, email, phone) VALUES (102, 'Al Fakhr Fragrances Trading', 'sales@alfakhrfragrances.com', '+971-4-226-5599');
 
 -- Users (Password for all accounts is: password123)
 INSERT INTO users (user_id, full_name, email, password_hash, phone, role) VALUES (1, 'Ali Raza', 'admin@muetshop.pk', 'pbkdf2:sha256:600000$E9sgUUnBfGEllYfS$f93a42d503076ed8a159e13dfecbd06322feb8fcfb819d98f4c457cf1a5b2c03', '03001234567', 'admin');
@@ -77,38 +82,6 @@ INSERT INTO addresses (address_id, user_id, line1, city, province, postal_code, 
 INSERT INTO addresses (address_id, user_id, line1, city, province, postal_code, is_default) VALUES (19, 6, 'North Nazimabad Block H', 'Karachi', 'Sindh', '74700', 0);
 INSERT INTO addresses (address_id, user_id, line1, city, province, postal_code, is_default) VALUES (20, 11, 'DHA Phase 6, Street 12', 'Lahore', 'Punjab', '54792', 0);
 
--- Products (30 items, PKR pricing, realistic stock levels)
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (1, 3, 1, 'Samsung Galaxy S24 Ultra', '512GB Titanium Black, 12GB RAM, 200MP Camera', 399999.00, 15, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (2, 3, 1, 'Infinix Note 40 Pro', '256GB Vintage Green, 70W Fast Charge, AMOLED Display', 69999.00, 25, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (3, 3, 5, 'Xiaomi Redmi Note 13', '128GB Midnight Black, 108MP Triple Camera', 49999.00, 4, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (4, 3, 1, 'Apple iPhone 15 Pro Max', '256GB Natural Titanium, A17 Pro Chip', 485000.00, 8, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (5, 3, 5, 'Tecno Camon 30 Premier', '512GB Alps Snowy White, 5G Dual SIM', 84999.00, 20, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (6, 2, 1, 'Dell XPS 15 9530', 'Intel Core i7 13th Gen, 16GB RAM, 1TB SSD, RTX 4050', 450000.00, 5, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (7, 2, 5, 'HP Pavilion 15', 'Intel Core i5 12th Gen, 8GB RAM, 512GB SSD, Silver', 165000.00, 12, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (8, 2, 1, 'Lenovo IdeaPad 3', 'AMD Ryzen 5 5500U, 8GB RAM, 512GB SSD', 135000.00, 3, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (9, 2, 5, 'Apple MacBook Air M2', '8GB Unified Memory, 256GB SSD, Space Gray', 315000.00, 10, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (10, 2, 1, 'Logitech MX Master 3S Mouse', 'Wireless Performance Mouse, 8K DPI Sensor', 28500.00, 30, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (11, 2, 5, 'Dell 27 Inch 4K Monitor', 'UltraSharp IPS Display, USB-C Hub, 60Hz', 125000.00, 7, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (12, 5, 4, 'J. Classic Cotton Kurta White', 'Premium stitched Egyptian cotton kurta for men', 6490.00, 40, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (13, 5, 4, 'J. Boski Unstitched Fabric', 'Traditional Pakistani pure Boski suit length', 18500.00, 15, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (14, 5, 4, 'J. Casual Linen Shirt Navy', 'Slim-fit summer linen casual shirt for men', 4290.00, 50, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (15, 5, 3, 'Al-Karam Men Formal Trousers', 'Wrinkle-free straight fit formal pants Charcoal', 5100.00, 2, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (16, 6, 3, 'Al-Karam 3-Piece Lawn Embroidered', 'Unstitched digital printed lawn suit with chiffon dupatta', 7950.00, 45, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (17, 6, 3, 'Al-Karam Pret Stitched Kurti', 'Embroidered cambric ready-to-wear daily shirt', 3850.00, 60, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (18, 6, 4, 'J. Silk Festive 3-Piece Suit', 'Luxury raw silk stitched formal wedding suit', 24500.00, 10, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (19, 6, 3, 'Al-Karam Chiffon Shawl Maroon', 'Winter warm embroidered Pashmina style shawl', 4500.00, 22, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (20, 8, 2, 'Dawlance Microwave Oven 20L', 'Digital display, Grill function, Defrost series', 26500.00, 18, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (21, 8, 2, 'Dawlance Food Processor 7-in-1', 'Multi-function kitchen chopper and blender', 19500.00, 25, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (22, 8, 2, 'Haier Electric Kettle 1.7L', 'Stainless steel rapid boil auto shut-off', 5800.00, 35, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (23, 8, 2, 'Haier Air Fryer 5.5L', 'Digital touchscreen oil-free healthy cooking', 24000.00, 14, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (24, 8, 2, 'Dawlance Automatic Citrus Juicer', 'Stainless steel electric orange juicer extractor', 8900.00, 3, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (25, 3, 1, 'Audionic Airbud 550 TWS', 'Wireless gaming earbuds with quad mic ENC', 6499.00, 50, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (26, 3, 5, 'Anker 20000mAh Power Bank', 'PowerIQ fast charging portable battery pack', 13999.00, 28, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (27, 2, 1, 'Redragon Mechanical Keyboard', 'RGB backlit blue switch gaming keyboard', 9500.00, 16, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (28, 5, 4, 'J. Leather Peshawari Chappal', 'Handmade traditional genuine leather footwear Mustard', 8200.00, 20, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (29, 6, 3, 'Al-Karam Velvet Winter Stole', 'Embossed floral velvet party wrap', 3200.00, 30, 1);
-INSERT INTO products (product_id, category_id, supplier_id, name, description, price, stock_quantity, is_active) VALUES (30, 8, 2, 'Haier Deep Fryer 3L', 'Non-stick adjustable temperature commercial fryer', 17500.00, 8, 1);
-
 -- Carts (active, converted, and abandoned carts for testing)
 INSERT INTO carts (cart_id, user_id, status, created_at, updated_at) VALUES (1, 5, 'active', NOW(), NOW());
 INSERT INTO carts (cart_id, user_id, status, created_at, updated_at) VALUES (2, 8, 'active', NOW(), NOW());
@@ -116,14 +89,14 @@ INSERT INTO carts (cart_id, user_id, status, created_at, updated_at) VALUES (3, 
 INSERT INTO carts (cart_id, user_id, status, created_at, updated_at) VALUES (4, 14, 'abandoned', DATE_SUB(NOW(), INTERVAL 20 DAY), DATE_SUB(NOW(), INTERVAL 12 DAY));
 INSERT INTO carts (cart_id, user_id, status, created_at, updated_at) VALUES (5, 7, 'converted', DATE_SUB(NOW(), INTERVAL 5 DAY), DATE_SUB(NOW(), INTERVAL 5 DAY));
 
--- Cart Items
-INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (1, 2, 1);
-INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (1, 25, 2);
-INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (2, 16, 1);
-INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (3, 1, 1);
-INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (3, 10, 1);
-INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (4, 20, 1);
-INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (5, 12, 2);
+-- Cart Items (referencing authentic perfume catalog IDs)
+INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (1, 102, 1);
+INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (1, 125, 2);
+INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (2, 116, 1);
+INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (3, 101, 1);
+INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (3, 110, 1);
+INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (4, 120, 1);
+INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (5, 112, 2);
 
 -- Orders (25 orders: delivered, shipped, paid, pending, cancelled)
 INSERT INTO orders (order_id, user_id, address_id, order_date, status, total_amount) VALUES (1, 5, 1, DATE_SUB(NOW(), INTERVAL 45 DAY), 'delivered', 19479.00);
@@ -152,46 +125,46 @@ INSERT INTO orders (order_id, user_id, address_id, order_date, status, total_amo
 INSERT INTO orders (order_id, user_id, address_id, order_date, status, total_amount) VALUES (24, 7, 4, DATE_SUB(NOW(), INTERVAL 1 DAY), 'pending', 11590.00);
 INSERT INTO orders (order_id, user_id, address_id, order_date, status, total_amount) VALUES (25, 8, 6, DATE_SUB(NOW(), INTERVAL 8 DAY), 'cancelled', 135000.00);
 
--- Order Items (exact subtotals match orders.total_amount)
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (1, 12, 2, 6490.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (1, 25, 1, 6499.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (2, 16, 2, 7950.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (3, 2, 1, 69999.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (3, 26, 1, 13999.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (4, 17, 3, 3850.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (5, 20, 1, 26500.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (5, 22, 1, 5800.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (6, 18, 1, 24500.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (7, 10, 1, 28500.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (7, 27, 1, 9500.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (8, 16, 1, 7950.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (8, 19, 2, 4500.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (9, 13, 1, 18500.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (9, 28, 1, 8200.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (10, 21, 1, 19500.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (11, 7, 1, 165000.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (12, 22, 2, 5800.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (12, 23, 1, 24000.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (13, 29, 3, 3200.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (14, 14, 2, 4290.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (14, 28, 1, 8200.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (15, 16, 1, 7950.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (15, 17, 1, 3850.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (16, 10, 2, 28500.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (17, 23, 1, 24000.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (17, 24, 1, 8900.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (18, 2, 1, 69999.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (19, 17, 2, 3850.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (19, 29, 1, 3200.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (20, 12, 1, 6490.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (20, 14, 1, 4290.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (21, 25, 2, 6499.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (22, 26, 1, 13999.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (22, 27, 1, 9500.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (23, 3, 1, 49999.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (24, 15, 1, 5100.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (24, 12, 1, 6490.00);
-INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (25, 8, 1, 135000.00);
+-- Order Items (exact subtotals matching genuine perfume catalog items)
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (1, 112, 2, 6490.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (1, 125, 1, 6499.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (2, 116, 2, 7950.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (3, 102, 1, 69999.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (3, 126, 1, 13999.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (4, 117, 3, 3850.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (5, 120, 1, 26500.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (5, 122, 1, 5800.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (6, 118, 1, 24500.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (7, 110, 1, 28500.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (7, 127, 1, 9500.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (8, 116, 1, 7950.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (8, 119, 2, 4500.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (9, 113, 1, 18500.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (9, 128, 1, 8200.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (10, 121, 1, 19500.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (11, 107, 1, 165000.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (12, 122, 2, 5800.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (12, 123, 1, 24000.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (13, 129, 3, 3200.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (14, 114, 2, 4290.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (14, 128, 1, 8200.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (15, 116, 1, 7950.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (15, 117, 1, 3850.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (16, 110, 2, 28500.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (17, 123, 1, 24000.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (17, 124, 1, 8900.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (18, 102, 1, 69999.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (19, 117, 2, 3850.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (19, 129, 1, 3200.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (20, 112, 1, 6490.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (20, 114, 1, 4290.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (21, 125, 2, 6499.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (22, 126, 1, 13999.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (22, 127, 1, 9500.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (23, 103, 1, 49999.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (24, 115, 1, 5100.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (24, 112, 1, 6490.00);
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (25, 108, 1, 135000.00);
 
 -- Payments (1:1 with orders)
 INSERT INTO payments (payment_id, order_id, method, amount, status, paid_at) VALUES (1, 1, 'card', 19479.00, 'completed', DATE_SUB(NOW(), INTERVAL 45 DAY));
@@ -241,24 +214,92 @@ INSERT INTO shipments (shipment_id, order_id, courier, tracking_number, shipped_
 INSERT INTO shipments (shipment_id, order_id, courier, tracking_number, shipped_at, delivered_at) VALUES (18, 18, 'M&P Express', 'PK-100018', DATE_SUB(NOW(), INTERVAL 5 DAY), NULL);
 INSERT INTO shipments (shipment_id, order_id, courier, tracking_number, shipped_at, delivered_at) VALUES (19, 19, 'Trax Logistics', 'PK-100019', DATE_SUB(NOW(), INTERVAL 4 DAY), NULL);
 
--- Reviews (20 realistic reviews from verified purchasers)
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (1, 5, 12, 5, 'Exceptional Egyptian cotton fabric. Very comfortable for Friday prayers.', DATE_SUB(NOW(), INTERVAL 1 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (2, 5, 25, 4, 'Good bass and fast Bluetooth connection. Battery lasts about 5 hours.', DATE_SUB(NOW(), INTERVAL 2 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (3, 6, 16, 5, 'Beautiful lawn print with delicate embroidery. Colors did not fade after washing.', DATE_SUB(NOW(), INTERVAL 3 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (4, 7, 2, 5, 'Infinix 70W charging is insane, charges to full in 40 minutes. Great screen.', DATE_SUB(NOW(), INTERVAL 4 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (5, 7, 26, 4, 'Solid power bank, charges my phone three full times during loadshedding.', DATE_SUB(NOW(), INTERVAL 5 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (6, 8, 17, 4, 'Stitching quality is neat and sizing is true to Pakistani standard.', DATE_SUB(NOW(), INTERVAL 6 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (7, 9, 20, 5, 'Heating is uniform and quick. Defrost function works well on frozen meat.', DATE_SUB(NOW(), INTERVAL 7 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (8, 9, 22, 4, 'Fast electric kettle, boils 1.5 liters in under 4 minutes.', DATE_SUB(NOW(), INTERVAL 8 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (9, 10, 18, 5, 'Royal fabric and luxurious embroidery. Perfect for my cousin''s wedding reception.', DATE_SUB(NOW(), INTERVAL 9 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (10, 11, 10, 5, 'Ergonomic mouse is life-changing for programming. Scroll wheel is magic.', DATE_SUB(NOW(), INTERVAL 10 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (11, 11, 27, 4, 'Crisp tactile clicks on blue switches. RGB lighting is bright and customizable.', DATE_SUB(NOW(), INTERVAL 11 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (12, 12, 16, 5, 'Received so many compliments at university. Al-Karam always delivers quality.', DATE_SUB(NOW(), INTERVAL 12 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (13, 12, 19, 4, 'Warm and cozy shawl for winter evenings in Hyderabad.', DATE_SUB(NOW(), INTERVAL 13 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (14, 13, 13, 5, 'Authentic Boski fabric with natural fall. Very satisfied with delivery.', DATE_SUB(NOW(), INTERVAL 14 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (15, 13, 28, 5, 'Mustard Peshawari chappal fits perfectly, soft leather that does not bite.', DATE_SUB(NOW(), INTERVAL 15 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (16, 14, 21, 4, 'Motor is powerful enough for onions, cabbage, and mint chutney.', DATE_SUB(NOW(), INTERVAL 16 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (17, 15, 7, 5, 'Fast boot with NVMe SSD. Handles software development and IDEs smoothly.', DATE_SUB(NOW(), INTERVAL 17 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (18, 5, 23, 5, 'Air fryer makes crispy samosas with just a spray of oil. Highly recommended.', DATE_SUB(NOW(), INTERVAL 18 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (19, 6, 29, 4, 'Plush velvet material with elegant borders. Looks expensive.', DATE_SUB(NOW(), INTERVAL 19 DAY));
-INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (20, 7, 14, 4, 'Breathable summer linen shirt. Color matches the product photo accurately.', DATE_SUB(NOW(), INTERVAL 20 DAY));
+-- Reviews (20 verified purchaser fragrance reviews)
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (1, 5, 101, 5, 'Khamrah is extraordinary. Warm cinnamon, sweet dates, and praline amber that lasts 12+ hours.', DATE_SUB(NOW(), INTERVAL 1 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (2, 5, 102, 4, 'Asad has incredible masculine projection. Smoky black pepper, coffee, and smooth vanilla.', DATE_SUB(NOW(), INTERVAL 2 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (3, 6, 103, 5, 'The viral pink Yara is heavenly! Fluffy marshmallow, tropical fruits, and vanilla cream.', DATE_SUB(NOW(), INTERVAL 3 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (4, 7, 104, 5, 'Yara Candy smells delicious. Effervescent candied berries and sparkling sugar fizz.', DATE_SUB(NOW(), INTERVAL 4 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (5, 7, 105, 5, 'Eclaire is the ultimate caramel waffle pastry perfume. Sweet, buttery, and long-lasting.', DATE_SUB(NOW(), INTERVAL 5 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (6, 8, 106, 4, 'Angham is so refined. French lavender and ginger praline that feels regal and calming.', DATE_SUB(NOW(), INTERVAL 6 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (7, 9, 107, 5, 'Khamrah Dukhan brings dark frankincense smoke to the iconic date sweetness. Sensational.', DATE_SUB(NOW(), INTERVAL 7 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (8, 9, 108, 5, 'Quentin Bisch outdid himself with Teriaq. Rhubarb, wild honey, and butter-soft leather.', DATE_SUB(NOW(), INTERVAL 8 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (9, 10, 109, 5, 'Badee Al Oud Noble Blush is pure lactonic luxury. Candied almonds and whipped rose petals.', DATE_SUB(NOW(), INTERVAL 9 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (10, 11, 110, 5, 'His Confession is dark, powdery, and magnetic. Fiery cinnamon and Tuscan iris.', DATE_SUB(NOW(), INTERVAL 10 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (11, 11, 111, 4, 'Victoria is a gorgeous royal bouquet. Fresh peony, red berries, and cashmeran.', DATE_SUB(NOW(), INTERVAL 11 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (12, 12, 112, 5, 'The Kingdom Men has a majestic mint-lavender aura with smooth tonka drydown.', DATE_SUB(NOW(), INTERVAL 12 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (13, 12, 113, 5, 'Liam Grey is the quintessential fig and black tea fragrance. Niche quality for sure.', DATE_SUB(NOW(), INTERVAL 13 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (14, 13, 114, 4, 'Asad Zanzibar is an oceanic spice bomb. Salted coconut water and incense.', DATE_SUB(NOW(), INTERVAL 14 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (15, 13, 115, 5, 'Atheeri is pure Arabian royalty. Saffron, Taif rose, and sunlit amber.', DATE_SUB(NOW(), INTERVAL 15 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (16, 14, 116, 5, 'Art Of Universe in Pride collection is magnificent. Blood orange and frankincense.', DATE_SUB(NOW(), INTERVAL 16 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (17, 15, 117, 4, 'Art Of Nature II has incredible green moss and forest accords. Very unique.', DATE_SUB(NOW(), INTERVAL 17 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (18, 5, 121, 5, 'Khamrah Qahwa with roasted Arabic coffee is unbelievable in cold weather.', DATE_SUB(NOW(), INTERVAL 18 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (19, 6, 122, 5, 'Oud For Glory is an absolute masterpiece. Rich saffron and smoky agarwood.', DATE_SUB(NOW(), INTERVAL 19 DAY));
+INSERT INTO reviews (review_id, user_id, product_id, rating, comment, created_at) VALUES (20, 7, 126, 5, 'Nebras is cozy hot chocolate and red berries in a bottle. Unmatched sillage.', DATE_SUB(NOW(), INTERVAL 20 DAY));
+
+SET FOREIGN_KEY_CHECKS = 1;
+'''
+
+def main():
+    root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    
+    # 1. Update database/init_perfume/02_sample_data.sql
+    init_sample_path = os.path.join(root, 'database', 'init_perfume', '02_sample_data.sql')
+    with open(init_sample_path, 'w', encoding='utf-8') as f:
+        f.write(NEW_SAMPLE_DATA_SQL)
+    print(f"Updated {init_sample_path}")
+
+    # 2. Update database/seeds/02_sample_data.sql
+    seed_sample_path = os.path.join(root, 'database', 'seeds', '02_sample_data.sql')
+    if os.path.exists(seed_sample_path):
+        with open(seed_sample_path, 'w', encoding='utf-8') as f:
+            f.write(NEW_SAMPLE_DATA_SQL)
+        print(f"Updated {seed_sample_path}")
+
+    # 3. Update database/init_perfume/06_catalog_expansion.sql
+    init_catalog_path = os.path.join(root, 'database', 'init_perfume', '06_catalog_expansion.sql')
+    with open(init_catalog_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Replace category hierarchy setup section
+    target_section_start = "-- 7. CATEGORY HIERARCHY SETUP & SLUG MAPPING"
+    target_section_end = "-- 8. ANALYTICAL VIEWS"
+
+    replacement_section = """-- 7. CATEGORY SLUG AND IMAGE ENRICHMENT
+-- WHY: Ensures category slugs and showcase image paths for fragrance hierarchy.
+-- ----------------------------------------------------------------------------
+UPDATE categories SET slug = 'fragrances', image_path = 'static/images/categories/fragrances.svg' WHERE category_id = 100;
+UPDATE categories SET slug = 'men', image_path = 'static/images/categories/men.svg' WHERE category_id = 101;
+UPDATE categories SET slug = 'women', image_path = 'static/images/categories/women.svg' WHERE category_id = 102;
+UPDATE categories SET slug = 'unisex', image_path = 'static/images/categories/unisex.svg' WHERE category_id = 103;
+UPDATE categories SET slug = 'eau-de-parfum', image_path = 'static/images/categories/edp.svg' WHERE category_id = 104;
+UPDATE categories SET slug = 'extrait-de-parfum', image_path = 'static/images/categories/extrait.svg' WHERE category_id = 105;
+UPDATE categories SET slug = 'perfume-oils', image_path = 'static/images/categories/attar.svg' WHERE category_id = 106;
+UPDATE categories SET slug = 'gift-sets', image_path = 'static/images/categories/gift_sets.svg' WHERE category_id = 107;
+
+
+-- ----------------------------------------------------------------------------
+"""
+
+    if target_section_start in content and target_section_end in content:
+        start_idx = content.find(target_section_start)
+        end_idx = content.find(target_section_end)
+        new_content = content[:start_idx] + replacement_section + content[end_idx:]
+        with open(init_catalog_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print(f"Updated {init_catalog_path}")
+
+    # 4. Update database/seeds/08_catalog_expansion.sql
+    seed_catalog_path = os.path.join(root, 'database', 'seeds', '08_catalog_expansion.sql')
+    if os.path.exists(seed_catalog_path):
+        with open(seed_catalog_path, 'r', encoding='utf-8') as f:
+            c = f.read()
+        if target_section_start in c and target_section_end in c:
+            s_idx = c.find(target_section_start)
+            e_idx = c.find(target_section_end)
+            new_c = c[:s_idx] + replacement_section + c[e_idx:]
+            with open(seed_catalog_path, 'w', encoding='utf-8') as f:
+                f.write(new_c)
+            print(f"Updated {seed_catalog_path}")
+
+if __name__ == '__main__':
+    main()

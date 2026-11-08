@@ -231,90 +231,17 @@ DELIMITER ;
 
 
 -- ----------------------------------------------------------------------------
--- 7. CATEGORY HIERARCHY SETUP & SLUG MAPPING
--- WHY: Configures the 5 top-level departments and their sub-categories
--- while preserving all existing product assignments (categories 2, 3, 5, 6, 8).
+-- 7. CATEGORY SLUG AND IMAGE ENRICHMENT
+-- WHY: Ensures category slugs and showcase image paths for fragrance hierarchy.
 -- ----------------------------------------------------------------------------
--- Update top-level category 1
-UPDATE categories SET 
-    name = 'Laptops and Computers', 
-    slug = 'laptops-computers', 
-    parent_category_id = NULL, 
-    image_path = 'static/images/categories/laptops-computers.jpg' 
-WHERE category_id = 1;
-
--- Subcategories under Laptops and Computers
-UPDATE categories SET 
-    name = 'Laptops', 
-    slug = 'laptops', 
-    parent_category_id = 1 
-WHERE category_id = 2;
-
-INSERT INTO categories (category_id, name, slug, parent_category_id, image_path)
-VALUES (9, 'Computers', 'computers', 1, NULL)
-ON DUPLICATE KEY UPDATE name = VALUES(name), slug = VALUES(slug), parent_category_id = VALUES(parent_category_id);
-
--- Top-level category: Accessories and Gadgets
-INSERT INTO categories (category_id, name, slug, parent_category_id, image_path)
-VALUES (10, 'Accessories and Gadgets', 'accessories-gadgets', NULL, 'static/images/categories/accessories-gadgets.jpg')
-ON DUPLICATE KEY UPDATE name = VALUES(name), slug = VALUES(slug), parent_category_id = VALUES(parent_category_id), image_path = VALUES(image_path);
-
-INSERT INTO categories (category_id, name, slug, parent_category_id, image_path)
-VALUES (11, 'Accessories', 'accessories', 10, NULL)
-ON DUPLICATE KEY UPDATE name = VALUES(name), slug = VALUES(slug), parent_category_id = VALUES(parent_category_id);
-
-UPDATE categories SET 
-    name = 'Tablets and Gadgets', 
-    slug = 'tablets-gadgets', 
-    parent_category_id = 10 
-WHERE category_id = 3;
-
--- Subcategories under Women's Clothing: rename category 6 first to free the name 'Women\'s Clothing'
-UPDATE categories SET 
-    name = 'Ready to Wear', 
-    slug = 'women-ready-to-wear', 
-    parent_category_id = 4 
-WHERE category_id = 6;
-
--- Top-level category: Women's Clothing
-UPDATE categories SET 
-    name = 'Women\'s Clothing', 
-    slug = 'womens-clothing', 
-    parent_category_id = NULL, 
-    image_path = 'static/images/categories/womens-clothing.jpg' 
-WHERE category_id = 4;
-
-INSERT INTO categories (category_id, name, slug, parent_category_id, image_path)
-VALUES (12, 'Unstitched', 'women-unstitched', 4, NULL)
-ON DUPLICATE KEY UPDATE name = VALUES(name), slug = VALUES(slug), parent_category_id = VALUES(parent_category_id);
-
--- Top-level category: Men's and Kids' Clothing
-INSERT INTO categories (category_id, name, slug, parent_category_id, image_path)
-VALUES (13, 'Men\'s and Kids\' Clothing', 'mens-kids-clothing', NULL, 'static/images/categories/mens-kids-clothing.jpg')
-ON DUPLICATE KEY UPDATE name = VALUES(name), slug = VALUES(slug), parent_category_id = VALUES(parent_category_id), image_path = VALUES(image_path);
-
-UPDATE categories SET 
-    name = 'Men', 
-    slug = 'men-wear', 
-    parent_category_id = 13 
-WHERE category_id = 5;
-
-INSERT INTO categories (category_id, name, slug, parent_category_id, image_path)
-VALUES (14, 'Kids', 'kids-wear', 13, NULL)
-ON DUPLICATE KEY UPDATE name = VALUES(name), slug = VALUES(slug), parent_category_id = VALUES(parent_category_id);
-
--- Top-level category: Kitchen Appliances
-UPDATE categories SET 
-    name = 'Kitchen Appliances', 
-    slug = 'kitchen-appliances', 
-    parent_category_id = NULL, 
-    image_path = 'static/images/categories/kitchen-appliances.jpg' 
-WHERE category_id = 8;
-
--- Retain category 7 as legacy/archive
-UPDATE categories SET 
-    slug = 'home-living'
-WHERE category_id = 7;
+UPDATE categories SET slug = 'fragrances', image_path = 'static/images/categories/fragrances.svg' WHERE category_id = 100;
+UPDATE categories SET slug = 'men', image_path = 'static/images/categories/men.svg' WHERE category_id = 101;
+UPDATE categories SET slug = 'women', image_path = 'static/images/categories/women.svg' WHERE category_id = 102;
+UPDATE categories SET slug = 'unisex', image_path = 'static/images/categories/unisex.svg' WHERE category_id = 103;
+UPDATE categories SET slug = 'eau-de-parfum', image_path = 'static/images/categories/edp.svg' WHERE category_id = 104;
+UPDATE categories SET slug = 'extrait-de-parfum', image_path = 'static/images/categories/extrait.svg' WHERE category_id = 105;
+UPDATE categories SET slug = 'perfume-oils', image_path = 'static/images/categories/attar.svg' WHERE category_id = 106;
+UPDATE categories SET slug = 'gift-sets', image_path = 'static/images/categories/gift_sets.svg' WHERE category_id = 107;
 
 
 -- ----------------------------------------------------------------------------

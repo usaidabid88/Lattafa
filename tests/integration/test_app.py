@@ -103,16 +103,16 @@ def reset_test_state():
         cur.execute("DELETE FROM support_tickets WHERE contact_email LIKE '%@example.pk' OR subject LIKE '%Screen glass cracked%'")
         cur.execute("DELETE FROM return_requests WHERE reason = 'damaged' AND description LIKE '%Item arrived damaged%'")
 
-        # 4. Replenish test stock quantities to baseline in online_shop_test
-        cur.execute("UPDATE products SET stock_quantity = 15 WHERE product_id = 12")
-        cur.execute("UPDATE products SET stock_quantity = 10 WHERE product_id = 1")
-        cur.execute("UPDATE products SET stock_quantity = 25 WHERE product_id = 2")
-        cur.execute("UPDATE products SET stock_quantity = 10 WHERE product_id = 3")
-        cur.execute("UPDATE products SET stock_quantity = 10 WHERE product_id = 10")
+        # 4. Replenish test stock quantities to baseline in online_shop_perfume_test
+        cur.execute("UPDATE products SET stock_quantity = 45 WHERE product_id = 112")
+        cur.execute("UPDATE products SET stock_quantity = 45 WHERE product_id = 101")
+        cur.execute("UPDATE products SET stock_quantity = 60 WHERE product_id = 102")
+        cur.execute("UPDATE products SET stock_quantity = 75 WHERE product_id = 103")
+        cur.execute("UPDATE products SET stock_quantity = 35 WHERE product_id = 110")
 
-        # 5. Restore baseline status for Order 1 and Supplier 1
+        # 5. Restore baseline status for Order 1 and Supplier 101
         cur.execute("UPDATE orders SET status = 'delivered' WHERE order_id = 1")
-        cur.execute("UPDATE suppliers SET verification_status = 'verified' WHERE supplier_id = 1")
+        cur.execute("UPDATE suppliers SET verification_status = 'verified' WHERE supplier_id = 101")
 
     conn.close()
 
@@ -189,15 +189,15 @@ def run_tests():
 
     # 2. Product Catalog
     res = client.get('/products')
-    assert_test("GET /products", res.status_code == 200 and b"Samsung Galaxy" in res.data)
+    assert_test("GET /products", res.status_code == 200 and b"Khamrah" in res.data)
 
     # 3. Product Search
-    res = client.get('/products?q=Samsung')
-    assert_test("GET /products?q=Samsung", res.status_code == 200 and b"Samsung Galaxy S24 Ultra" in res.data)
+    res = client.get('/products?q=Khamrah')
+    assert_test("GET /products?q=Khamrah", res.status_code == 200 and b"Khamrah" in res.data)
 
     # 4. Product Detail
-    res = client.get('/product/1')
-    assert_test("GET /product/1", res.status_code == 200 and b"Titanium Black" in res.data)
+    res = client.get('/product/101')
+    assert_test("GET /product/101", res.status_code == 200 and b"Khamrah" in res.data)
 
     # 5. Customer Login Page
     res = client.get('/login')
@@ -207,15 +207,15 @@ def run_tests():
         active_token = m.group(1)
 
     # -------------------------------------------------------------------------
-    # PART 2: AUTHENTICATED CUSTOMER FLOW (WITH CSRF TOKENS)
+    # PART 2: COMPREHENSIVE AUTHENTICATED CUSTOMER FLOW (WITH CSRF TOKENS)
     # -------------------------------------------------------------------------
     # 6. Customer Login Action (Zeeshan Ahmed)
     res = post_csrf('/login', data={'email': 'zeeshan@gmail.com', 'password': 'password123'}, follow_redirects=True)
     assert_test("POST /login (Customer Auth)", res.status_code == 200 and b"Zeeshan Ahmed" in res.data)
 
-    # 7. Add to Cart (Product 12: J. Classic Cotton Kurta)
-    res = post_csrf('/cart/add', data={'product_id': 12, 'quantity': 2}, follow_redirects=True)
-    assert_test("POST /cart/add (Auth User)", res.status_code == 200 and b"Classic Cotton Kurta" in res.data)
+    # 7. Add to Cart (Product 112: The Kingdom Men)
+    res = post_csrf('/cart/add', data={'product_id': 112, 'quantity': 2}, follow_redirects=True)
+    assert_test("POST /cart/add (Auth User)", res.status_code == 200 and b"The Kingdom Men" in res.data)
 
     # 8. View Cart
     res = client.get('/cart')
@@ -282,24 +282,24 @@ def run_tests():
     # PART 4: PHASE 11 CATALOG & MULTI-MEDIA EXTENSIONS
     # -------------------------------------------------------------------------
     # 20. Top-Level Department Browsing (11D)
-    res = client.get('/category/laptops-computers')
-    assert_test("GET /category/laptops-computers (11D)", res.status_code == 200 and b"Laptops and Computers" in res.data and b"Departments:" in res.data)
+    res = client.get('/category/fragrances')
+    assert_test("GET /category/fragrances (11D)", res.status_code == 200 and b"Fragrances" in res.data and b"Departments:" in res.data)
 
     # 21. Sub-Category Browsing (11D)
-    res = client.get('/category/women-unstitched')
-    assert_test("GET /category/women-unstitched (11D)", res.status_code == 200 and b"Unstitched" in res.data)
+    res = client.get('/category/women')
+    assert_test("GET /category/women (11D)", res.status_code == 200 and (b"Women" in res.data or b"Women's Fragrances" in res.data))
 
     # 22. Category Price Sorting (11D)
-    res = client.get('/category/laptops-computers?sort=price_asc')
-    assert_test("GET /category/laptops-computers?sort=price_asc (11D)", res.status_code == 200 and b"Price: Low to High" in res.data)
+    res = client.get('/category/fragrances?sort=price_asc')
+    assert_test("GET /category/fragrances?sort=price_asc (11D)", res.status_code == 200 and b"Price: Low to High" in res.data)
 
     # 23. Category Brand Filtering (11D)
-    res = client.get('/category/laptops-computers?brand=Dell')
-    assert_test("GET /category/laptops-computers?brand=Dell (11D)", res.status_code == 200 and b"Dell" in res.data)
+    res = client.get('/category/fragrances?brand=Lattafa+Perfumes')
+    assert_test("GET /category/fragrances?brand=Lattafa+Perfumes (11D)", res.status_code == 200 and b"Lattafa Perfumes" in res.data)
 
     # 24. Product Multi-Image Gallery (11E)
-    res = client.get('/product/1')
-    assert_test("GET /product/1 Gallery (11E)", res.status_code == 200 and b"mainGalleryImage" in res.data)
+    res = client.get('/product/101')
+    assert_test("GET /product/101 Gallery (11E)", res.status_code == 200 and b"mainGalleryImage" in res.data)
 
     # 25. Admin Image Upload Validation - Invalid Extension (11F)
     res_form = client.get('/admin/product/add')
@@ -308,7 +308,7 @@ def run_tests():
         active_token = m.group(1)
     fake_txt = (io.BytesIO(b'malicious script'), 'shell.txt')
     res = post_csrf('/admin/product/add', data={
-        'name': 'Test Upload Bad Ext', 'category_id': 1, 'supplier_id': 1,
+        'name': 'Test Upload Bad Ext', 'category_id': 101, 'supplier_id': 101,
         'price': '1000', 'stock_quantity': '10', 'image': fake_txt
     }, follow_redirects=True)
     assert_test("Admin Upload Format Check (11F)", b"Invalid image format" in res.data)
@@ -320,7 +320,7 @@ def run_tests():
         active_token = m.group(1)
     huge_file = (io.BytesIO(b'0' * (2 * 1024 * 1024 + 1024)), 'oversized.jpg')
     res = post_csrf('/admin/product/add', data={
-        'name': 'Test Upload Huge File', 'category_id': 1, 'supplier_id': 1,
+        'name': 'Test Upload Huge File', 'category_id': 101, 'supplier_id': 101,
         'price': '1000', 'stock_quantity': '10', 'image': huge_file
     }, follow_redirects=True)
     assert_test("Admin Upload Size Check (11F)", b"exceeds maximum limit" in res.data)
@@ -344,11 +344,11 @@ def run_tests():
     with client.session_transaction() as sess:
         sess.clear()
     active_token = None
-    res_prod = client.get('/product/1')
+    res_prod = client.get('/product/101')
     m = re.search(r'name="csrf_token"\s+value="([^"]+)"', res_prod.data.decode('utf-8'))
     if m:
         active_token = m.group(1)
-    res_guest_add = post_csrf('/cart/add', data={'product_id': 1, 'quantity': 1}, follow_redirects=True)
+    res_guest_add = post_csrf('/cart/add', data={'product_id': 101, 'quantity': 1}, follow_redirects=True)
     assert_test("POST /cart/add (Guest) allows adding without auth", res_guest_add.status_code == 200 and b"Item added to cart" in res_guest_add.data)
 
     # 32. Pricing breakdown via sp_cart_summary
@@ -374,11 +374,11 @@ def run_tests():
     assert_test("POST /checkout (Guest Order Placement) completes via sp_place_guest_order", res_guest_checkout.status_code == 200 and (b"Order placed successfully" in res_guest_checkout.data or b"Order #" in res_guest_checkout.data))
 
     # 34. Simulated Payment Gateway Sandbox & Fail Recovery (FR-06, FR-10, FR-11, AC-02.x)
-    res_prod = client.get('/product/2')
+    res_prod = client.get('/product/102')
     m = re.search(r'name="csrf_token"\s+value="([^"]+)"', res_prod.data.decode('utf-8'))
     if m:
         active_token = m.group(1)
-    post_csrf('/cart/add', data={'product_id': 2, 'quantity': 1}, follow_redirects=True)
+    post_csrf('/cart/add', data={'product_id': 102, 'quantity': 1}, follow_redirects=True)
 
     res_chk = client.get('/checkout')
     m = re.search(r'name="csrf_token"\s+value="([^"]+)"', res_chk.data.decode('utf-8'))
@@ -445,7 +445,7 @@ def run_tests():
         active_token = m.group(1)
 
     # 39. Toggle seller verification status
-    res_verify_toggle = post_csrf('/admin/sellers/1/verify', data={'status': 'verified'}, follow_redirects=True)
+    res_verify_toggle = post_csrf('/admin/sellers/101/verify', data={'status': 'verified'}, follow_redirects=True)
     assert_test("POST /admin/sellers/<id>/verify toggles seller verification status", res_verify_toggle.status_code == 200 and b"verification status changed" in res_verify_toggle.data)
 
     # 40. Return & Replacement Claims (FR-20, FR-21, AC-08.4)
@@ -455,7 +455,7 @@ def run_tests():
         if m:
             active_token = m.group(1)
         return_payload = {
-            'product_id': 2,
+            'product_id': 102,
             'reason': 'damaged',
             'refund_method': 'original_payment',
             'description': 'Item arrived damaged upon initial unboxing.'
@@ -484,11 +484,11 @@ def run_tests():
     with client.session_transaction() as sess:
         sess.clear()
     active_token = None
-    res_prod = client.get('/product/3')
+    res_prod = client.get('/product/103')
     m = re.search(r'name="csrf_token"\s+value="([^"]+)"', res_prod.data.decode('utf-8'))
     if m:
         active_token = m.group(1)
-    post_csrf('/cart/add', data={'product_id': 3, 'quantity': 1}, follow_redirects=True)
+    post_csrf('/cart/add', data={'product_id': 103, 'quantity': 1}, follow_redirects=True)
 
     res_log = client.get('/login')
     m = re.search(r'name="csrf_token"\s+value="([^"]+)"', res_log.data.decode('utf-8'))

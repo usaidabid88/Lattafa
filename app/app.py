@@ -1537,75 +1537,113 @@ def admin_products():
 @app.route('/admin/product/add', methods=['GET', 'POST'])
 @admin_required
 def admin_product_add():
-    """Add a new product with optional brand and image upload."""
+    """Add a new perfume product with olfactory pyramid details and image upload."""
     conn = get_db()
     if request.method == 'POST':
         try:
-            brand_id = int(request.form['brand_id']) if request.form.get('brand_id') else None
+            name = request.form.get('name', '').strip()
+            if not name:
+                flash('Fragrance name is required.', 'danger')
+                return redirect(request.url)
+
+            # Pre-validate image upload before touching database
+            file = request.files.get('image')
+            ext = None
+            if file and file.filename:
+                filename = secure_filename(file.filename).lower()
+                ext = os.path.splitext(filename)[1]
+                if ext not in ('.jpg', '.jpeg', '.png', '.webp'):
+                    flash('Invalid image format. Allowed: JPG, PNG, WebP.', 'danger')
+                    return redirect(request.url)
+
+                file.seek(0, os.SEEK_END)
+                file_size = file.tell()
+                file.seek(0)
+                if file_size > 2 * 1024 * 1024:
+                    flash('Image file exceeds maximum limit of 2 MB.', 'danger')
+                    return redirect(request.url)
+
+            category_id = int(request.form.get('category_id') or 103)
+            supplier_id = int(request.form.get('supplier_id') or 101)
+            brand_id = int(request.form['brand_id']) if request.form.get('brand_id') else 101
+            price = float(request.form.get('price', 0))
+            stock_quantity = int(request.form.get('stock_quantity', 0))
+            is_active = 1 if request.form.get('is_active') else 0
+
+            desc = request.form.get('description', '').strip()
+            short_desc = request.form.get('short_description', '').strip()
+            if not short_desc:
+                short_desc = (desc[:137] + '...') if len(desc) > 140 else (desc or f"{name} luxury fragrance.")
+
             with conn.cursor() as cur:
+                # Ensure category_id, supplier_id, and brand_id exist
+                cur.execute("SELECT category_id FROM categories WHERE category_id = %s", (category_id,))
+                if not cur.fetchone():
+                    cur.execute("SELECT category_id FROM categories ORDER BY category_id LIMIT 1")
+                    fallback_cat = cur.fetchone()
+                    category_id = fallback_cat['category_id'] if fallback_cat else 103
+
+                cur.execute("SELECT supplier_id FROM suppliers WHERE supplier_id = %s", (supplier_id,))
+                if not cur.fetchone():
+                    cur.execute("SELECT supplier_id FROM suppliers ORDER BY supplier_id LIMIT 1")
+                    fallback_sup = cur.fetchone()
+                    supplier_id = fallback_sup['supplier_id'] if fallback_sup else 101
+
+                cur.execute("SELECT brand_id FROM brands WHERE brand_id = %s", (brand_id,))
+                if not cur.fetchone():
+                    cur.execute("SELECT brand_id FROM brands ORDER BY brand_id LIMIT 1")
+                    fallback_brand = cur.fetchone()
+                    brand_id = fallback_brand['brand_id'] if fallback_brand else 101
+
                 cur.execute(
                     """
-                    INSERT INTO products (category_id, brand_id, supplier_id, name, description, 
-                                         price, stock_quantity, is_active) 
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    INSERT INTO products (category_id, brand_id, supplier_id, name, short_description,
+                                         description, price, stock_quantity, is_active) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                     """,
                     (
-                        int(request.form['category_id']),
+                        category_id,
                         brand_id,
-                        int(request.form['supplier_id']),
-                        request.form['name'].strip(),
-                        request.form.get('description', '').strip(),
-                        float(request.form['price']),
-                        int(request.form['stock_quantity']),
-                        1 if request.form.get('is_active') else 0
+                        supplier_id,
+                        name,
+                        short_desc,
+                        desc,
+                        price,
+                        stock_quantity,
+                        is_active
                     )
                 )
                 product_id = cur.lastrowid
 
-                # Save perfume details if provided
-                gender = request.form.get('gender')
-                concentration = request.form.get('concentration')
-                bottle_size = request.form.get('bottle_size')
-                fragrance_family = request.form.get('fragrance_family')
-                top_notes = request.form.get('top_notes')
-                heart_notes = request.form.get('heart_notes')
-                base_notes = request.form.get('base_notes')
-                collection_name = request.form.get('collection_name')
+                # Save perfume details with comprehensive defaults
+                gender = request.form.get('gender') or 'Unisex'
+                concentration = request.form.get('concentration') or 'Eau de Parfum (EDP)'
+                bottle_size = request.form.get('bottle_size') or '100ml'
+                fragrance_family = request.form.get('fragrance_family') or 'Warm Spicy Gourmand'
+                top_notes = request.form.get('top_notes') or 'Bergamot, Citrus, Fresh Spices'
+                heart_notes = request.form.get('heart_notes') or 'Amber, Rose, Warm Spices'
+                base_notes = request.form.get('base_notes') or 'Oud, Vanilla, Musk, Woods'
+                collection_name = request.form.get('collection_name') or 'Mainline Classics'
                 is_featured = 1 if request.form.get('is_featured') else 0
                 is_bestseller = 1 if request.form.get('is_bestseller') else 0
                 is_new_arrival = 1 if request.form.get('is_new_arrival') else 0
 
-                if fragrance_family or top_notes or collection_name:
-                    cur.execute("""
-                        INSERT INTO product_perfume_details 
-                        (product_id, gender, concentration, bottle_size, fragrance_family, 
-                         top_notes, heart_notes, base_notes, collection_name, is_featured, is_bestseller, is_new_arrival)
-                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                        ON DUPLICATE KEY UPDATE
-                        gender=VALUES(gender), concentration=VALUES(concentration), bottle_size=VALUES(bottle_size),
-                        fragrance_family=VALUES(fragrance_family), top_notes=VALUES(top_notes), heart_notes=VALUES(heart_notes),
-                        base_notes=VALUES(base_notes), collection_name=VALUES(collection_name),
-                        is_featured=VALUES(is_featured), is_bestseller=VALUES(is_bestseller), is_new_arrival=VALUES(is_new_arrival)
-                    """, (product_id, gender or 'Unisex', concentration or 'Eau de Parfum (EDP)', bottle_size or '100ml',
-                          fragrance_family or 'Oriental', top_notes or '', heart_notes or '', base_notes or '',
-                          collection_name or 'Mainline Classics', is_featured, is_bestseller, is_new_arrival))
+                cur.execute("""
+                    INSERT INTO product_perfume_details 
+                    (product_id, gender, concentration, bottle_size, fragrance_family, 
+                     top_notes, heart_notes, base_notes, collection_name, is_featured, is_bestseller, is_new_arrival)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                    ON DUPLICATE KEY UPDATE
+                    gender=VALUES(gender), concentration=VALUES(concentration), bottle_size=VALUES(bottle_size),
+                    fragrance_family=VALUES(fragrance_family), top_notes=VALUES(top_notes), heart_notes=VALUES(heart_notes),
+                    base_notes=VALUES(base_notes), collection_name=VALUES(collection_name),
+                    is_featured=VALUES(is_featured), is_bestseller=VALUES(is_bestseller), is_new_arrival=VALUES(is_new_arrival)
+                """, (product_id, gender, concentration, bottle_size, fragrance_family,
+                      top_notes, heart_notes, base_notes, collection_name,
+                      is_featured, is_bestseller, is_new_arrival))
 
                 # Image upload handling
-                file = request.files.get('image')
-                if file and file.filename:
-                    filename = secure_filename(file.filename).lower()
-                    ext = os.path.splitext(filename)[1]
-                    if ext not in ('.jpg', '.jpeg', '.png', '.webp'):
-                        flash('Invalid image format. Allowed: JPG, PNG, WebP.', 'danger')
-                        return redirect(request.url)
-
-                    file.seek(0, os.SEEK_END)
-                    file_size = file.tell()
-                    file.seek(0)
-                    if file_size > 2 * 1024 * 1024:
-                        flash('Image file exceeds maximum limit of 2 MB.', 'danger')
-                        return redirect(request.url)
-
+                if file and file.filename and ext:
                     safe_name = f"admin-{product_id}-{int(time.time())}{ext}"
                     rel_path = f"static/images/products/uploads/{safe_name}"
                     root_dest = os.path.join(os.path.dirname(__file__), '..', rel_path)
@@ -1619,9 +1657,14 @@ def admin_product_add():
                         "INSERT INTO product_images (product_id, image_path, is_primary, sort_order) VALUES (%s, %s, 1, 1)",
                         (product_id, rel_path)
                     )
+                else:
+                    cur.execute(
+                        "INSERT INTO product_images (product_id, image_path, is_primary, sort_order) VALUES (%s, %s, 1, 1)",
+                        (product_id, 'static/images/placeholder.svg')
+                    )
 
             conn.commit()
-            flash('Product added successfully.', 'success')
+            flash('Fragrance added to catalog successfully.', 'success')
             return redirect(url_for('admin_products'))
         except Exception as e:
             conn.rollback()
@@ -1648,23 +1691,71 @@ def admin_product_edit(product_id):
     conn = get_db()
     if request.method == 'POST':
         try:
-            brand_id = int(request.form['brand_id']) if request.form.get('brand_id') else None
+            # Pre-validate image upload before database update
+            file = request.files.get('image')
+            ext = None
+            if file and file.filename:
+                filename = secure_filename(file.filename).lower()
+                ext = os.path.splitext(filename)[1]
+                if ext not in ('.jpg', '.jpeg', '.png', '.webp'):
+                    flash('Invalid image format. Allowed: JPG, PNG, WebP.', 'danger')
+                    return redirect(request.url)
+
+                file.seek(0, os.SEEK_END)
+                file_size = file.tell()
+                file.seek(0)
+                if file_size > 2 * 1024 * 1024:
+                    flash('Image file exceeds maximum limit of 2 MB.', 'danger')
+                    return redirect(request.url)
+
+            category_id = int(request.form.get('category_id') or 103)
+            supplier_id = int(request.form.get('supplier_id') or 101)
+            brand_id = int(request.form['brand_id']) if request.form.get('brand_id') else 101
+            price = float(request.form.get('price', 0))
+            stock_quantity = int(request.form.get('stock_quantity', 0))
+            is_active = 1 if request.form.get('is_active') else 0
+
+            desc = request.form.get('description', '').strip()
+            short_desc = request.form.get('short_description', '').strip()
+            if not short_desc:
+                short_desc = (desc[:137] + '...') if len(desc) > 140 else (desc or f"{request.form.get('name', 'Perfume')} luxury fragrance.")
+
             with conn.cursor() as cur:
+                # Validate foreign keys
+                cur.execute("SELECT category_id FROM categories WHERE category_id = %s", (category_id,))
+                if not cur.fetchone():
+                    cur.execute("SELECT category_id FROM categories ORDER BY category_id LIMIT 1")
+                    fallback_cat = cur.fetchone()
+                    category_id = fallback_cat['category_id'] if fallback_cat else 103
+
+                cur.execute("SELECT supplier_id FROM suppliers WHERE supplier_id = %s", (supplier_id,))
+                if not cur.fetchone():
+                    cur.execute("SELECT supplier_id FROM suppliers ORDER BY supplier_id LIMIT 1")
+                    fallback_sup = cur.fetchone()
+                    supplier_id = fallback_sup['supplier_id'] if fallback_sup else 101
+
+                cur.execute("SELECT brand_id FROM brands WHERE brand_id = %s", (brand_id,))
+                if not cur.fetchone():
+                    cur.execute("SELECT brand_id FROM brands ORDER BY brand_id LIMIT 1")
+                    fallback_brand = cur.fetchone()
+                    brand_id = fallback_brand['brand_id'] if fallback_brand else 101
+
                 cur.execute(
                     """
-                    UPDATE products SET category_id=%s, brand_id=%s, supplier_id=%s, name=%s, 
+                    UPDATE products SET category_id=%s, brand_id=%s, supplier_id=%s, name=%s, short_description=%s,
                                         description=%s, price=%s, stock_quantity=%s, is_active=%s 
                     WHERE product_id=%s
                     """,
                     (
-                        int(request.form['category_id']),
+                        category_id,
                         brand_id,
-                        int(request.form['supplier_id']),
+                        supplier_id,
                         request.form['name'].strip(),
-                        request.form.get('description', '').strip(),
-                        float(request.form['price']),
-                        int(request.form['stock_quantity']),
-                        1 if request.form.get('is_active') else 0,
+                        short_desc,
+                        desc,
+                        price,
+                        stock_quantity,
+                        is_active,
                         product_id
                     )
                 )
@@ -1694,25 +1785,11 @@ def admin_product_edit(product_id):
                         base_notes=VALUES(base_notes), collection_name=VALUES(collection_name),
                         is_featured=VALUES(is_featured), is_bestseller=VALUES(is_bestseller), is_new_arrival=VALUES(is_new_arrival)
                     """, (product_id, gender or 'Unisex', concentration or 'Eau de Parfum (EDP)', bottle_size or '100ml',
-                          fragrance_family or 'Oriental', top_notes or '', heart_notes or '', base_notes or '',
+                          fragrance_family or 'Warm Spicy Gourmand', top_notes or '', heart_notes or '', base_notes or '',
                           collection_name or 'Mainline Classics', is_featured, is_bestseller, is_new_arrival))
 
                 # Image upload handling
-                file = request.files.get('image')
-                if file and file.filename:
-                    filename = secure_filename(file.filename).lower()
-                    ext = os.path.splitext(filename)[1]
-                    if ext not in ('.jpg', '.jpeg', '.png', '.webp'):
-                        flash('Invalid image format. Allowed: JPG, PNG, WebP.', 'danger')
-                        return redirect(request.url)
-
-                    file.seek(0, os.SEEK_END)
-                    file_size = file.tell()
-                    file.seek(0)
-                    if file_size > 2 * 1024 * 1024:
-                        flash('Image file exceeds maximum limit of 2 MB.', 'danger')
-                        return redirect(request.url)
-
+                if file and file.filename and ext:
                     safe_name = f"admin-{product_id}-{int(time.time())}{ext}"
                     rel_path = f"static/images/products/uploads/{safe_name}"
                     root_dest = os.path.join(os.path.dirname(__file__), '..', rel_path)

@@ -38,9 +38,6 @@ database/
 │   ├── 07_srs_alignment.sql
 │   ├── 08_srs_alignment_fixes.sql
 │   └── 09_perfume_transformation.sql
-│
-└── init_legacy/            # Preserved pre-perfume initialization scripts
-    └── ...
 ```
 
 ---

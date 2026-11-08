@@ -82,7 +82,6 @@ The system manages a complete luxury fragrance catalog of **100 verified commerc
 │   ├── migrations/             # Incremental schema evolution and SRS alignment
 │   ├── queries/                # Analytical KPI queries and SQL test scripts
 │   ├── init_perfume/           # Sequential automated container bootstrap (01 to 09)
-│   ├── init_legacy/            # Preserved pre-transformation baseline SQL
 │   └── README.md               # Detailed database documentation and restore guides
 │
 ├── tests/                      # Automated test harness (69 Tests)
