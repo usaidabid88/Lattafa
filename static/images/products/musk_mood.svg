@@ -1,126 +1,261 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" width="1200" height="1500">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 1500" width="1200" height="1500">
   <defs>
-    <!-- Studio Ambient Lighting & Radial Bloom -->
-    <radialGradient id="ambG" cx="50%" cy="40%" r="68%">
-      <stop offset="0%" stop-color="#d8ded8" stop-opacity="0.36"/>
-      <stop offset="55%" stop-color="#171c17" stop-opacity="0.96"/>
-      <stop offset="100%" stop-color="#08080a"/>
-    </radialGradient>
     
-    <!-- Polished Stone Pedestal Horizon Gradient -->
-    <linearGradient id="pedestalG" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#d8ded8" stop-opacity="0.22"/>
-      <stop offset="15%" stop-color="#121317" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#050608"/>
-    </linearGradient>
-
-    <!-- Metallic Specular Profile -->
+            <radialGradient id="ambG" cx="50%" cy="36%" r="72%">
+              <stop offset="0" stop-color="#eab308" stop-opacity="0.28"/><stop offset="0.4" stop-color="#15130b" stop-opacity="0.97"/><stop offset="1" stop-color="#060503" stop-opacity="1.0"/>
+            </radialGradient>
+            <linearGradient id="pedestalG" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0" stop-color="#eab308" stop-opacity="0.22"/><stop offset="0.2" stop-color="#0a0a06" stop-opacity="0.95"/><stop offset="1" stop-color="#060503" stop-opacity="1.0"/>
+            </linearGradient>
+            <radialGradient id="spotG" cx="50%" cy="30%" r="46%">
+              <stop offset="0" stop-color="#fef08a" stop-opacity="0.22"/><stop offset="0.55" stop-color="#eab308" stop-opacity="0.06"/><stop offset="1" stop-color="#eab308" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="floorG" gradientUnits="userSpaceOnUse" x1="0" y1="998.0" x2="0" y2="1500">
+              <stop offset="0" stop-color="#55430a" stop-opacity="0.98"/><stop offset="0.14" stop-color="#0f0d08" stop-opacity="1"/><stop offset="0.6" stop-color="#080704" stop-opacity="1"/><stop offset="1" stop-color="#060503" stop-opacity="1.0"/>
+            </linearGradient>
+            <radialGradient id="poolG" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stop-color="#fef08a" stop-opacity="0.34"/><stop offset="0.5" stop-color="#eab308" stop-opacity="0.1"/><stop offset="1" stop-color="#eab308" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="shaftG" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0" stop-color="#fef08a" stop-opacity="0.16"/><stop offset="1" stop-color="#fef08a" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="silkG" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0" stop-color="#eab308" stop-opacity="0"/><stop offset="0.35" stop-color="#fef08a" stop-opacity="0.16"/><stop offset="0.65" stop-color="#eab308" stop-opacity="0.1"/><stop offset="1" stop-color="#eab308" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="pilasterG" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0" stop-color="#eab308" stop-opacity="0.1"/><stop offset="0.5" stop-color="#fef08a" stop-opacity="0.05"/><stop offset="1" stop-color="#000000" stop-opacity="0.25"/>
+            </linearGradient>
+            <radialGradient id="nicheG" cx="50%" cy="62%" r="62%">
+              <stop offset="0" stop-color="#eab308" stop-opacity="0.34"/><stop offset="0.6" stop-color="#eab308" stop-opacity="0.08"/><stop offset="1" stop-color="#15130b" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="latticeFadeG" cx="50%" cy="46%" r="64%">
+              <stop offset="0.35" stop-color="#000000"/><stop offset="1" stop-color="#ffffff"/>
+            </radialGradient>
+            <mask id="latticeMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="998.0"><rect width="1200" height="998.0" fill="url(#latticeFadeG)"/></mask>
+            <pattern id="latticeP" width="64" height="64" patternUnits="userSpaceOnUse">
+              <path d="M32,2 L62,32 L32,62 L2,32 Z" fill="none" stroke="#f4d249" stroke-width="0.9"/>
+              <circle cx="32" cy="32" r="9" fill="none" stroke="#f4d249" stroke-width="0.7"/>
+              <path d="M32,23 L35,29 L41,32 L35,35 L32,41 L29,35 L23,32 L29,29 Z" fill="none" stroke="#f4d249" stroke-width="0.6"/>
+            </pattern>
+            <filter id="blur30" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="1100"><feGaussianBlur stdDeviation="26"/></filter>
+            <filter id="blur14" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="1100"><feGaussianBlur stdDeviation="14"/></filter>
+            <filter id="blur6" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="1100"><feGaussianBlur stdDeviation="6"/></filter>
+        
     <linearGradient id="metalG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
-      <stop offset="16%" stop-color="#fff8df" stop-opacity="0.92"/>
-      <stop offset="35%" stop-color="#ffffff"/>
-      <stop offset="65%" stop-color="#d8ded8"/>
-      <stop offset="85%" stop-color="#2a1f0a"/>
-      <stop offset="100%" stop-color="#ffffff"/>
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.98"/><stop offset="0.16" stop-color="#fef08a" stop-opacity="0.94"/><stop offset="0.4" stop-color="#eab308" stop-opacity="1.0"/><stop offset="0.62" stop-color="#755a04" stop-opacity="1.0"/><stop offset="0.82" stop-color="#eab308" stop-opacity="1.0"/><stop offset="1" stop-color="#fef08a" stop-opacity="1.0"/>
     </linearGradient>
-
-    <!-- Glass Refraction & Body Material -->
-    <linearGradient id="bodyG" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#050609"/>
-      <stop offset="12%" stop-color="#171c17"/>
-      <stop offset="32%" stop-color="#d8ded8" stop-opacity="0.82"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.96"/>
-      <stop offset="68%" stop-color="#d8ded8" stop-opacity="0.82"/>
-      <stop offset="88%" stop-color="#171c17"/>
-      <stop offset="100%" stop-color="#050609"/>
+    <linearGradient id="capMetalG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0" stop-color="#523f03" stop-opacity="1.0"/><stop offset="0.07" stop-color="#987405" stop-opacity="1.0"/><stop offset="0.2" stop-color="#fef8c4" stop-opacity="1.0"/><stop offset="0.33" stop-color="#f5d550" stop-opacity="1.0"/><stop offset="0.5" stop-color="#eab308" stop-opacity="1.0"/><stop offset="0.66" stop-color="#a88106" stop-opacity="1.0"/><stop offset="0.8" stop-color="#695104" stop-opacity="1.0"/><stop offset="0.92" stop-color="#efc228" stop-opacity="1.0"/><stop offset="1" stop-color="#594403" stop-opacity="1.0"/>
     </linearGradient>
-
-    <linearGradient id="baseG" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#000000" stop-opacity="0.85"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.85"/>
+    <linearGradient id="capMetalV" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0" stop-color="#fef08a" stop-opacity="1.0"/><stop offset="0.12" stop-color="#fef08a" stop-opacity="1.0"/><stop offset="0.5" stop-color="#eab308" stop-opacity="1.0"/><stop offset="0.88" stop-color="#816204" stop-opacity="1.0"/><stop offset="1" stop-color="#463602" stop-opacity="1.0"/>
     </linearGradient>
-
-    <linearGradient id="labelG" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#2e2e34"/>
-      <stop offset="50%" stop-color="#121317"/>
-      <stop offset="100%" stop-color="#07080a"/>
+    <radialGradient id="capLacquerG" cx="34%" cy="26%" r="88%">
+      <stop offset="0" stop-color="#fef7bf" stop-opacity="1.0"/><stop offset="0.2" stop-color="#fef08a" stop-opacity="1.0"/><stop offset="0.5" stop-color="#eab308" stop-opacity="1.0"/><stop offset="1" stop-color="#503d03" stop-opacity="1.0"/>
+    </radialGradient>
+    <linearGradient id="capGlassG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.6"/><stop offset="0.3" stop-color="#f4d249" stop-opacity="0.55"/><stop offset="0.62" stop-color="#eab308" stop-opacity="0.66"/><stop offset="1" stop-color="#755a04" stop-opacity="0.8"/>
     </linearGradient>
-
-    <linearGradient id="labelSheen" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    <radialGradient id="capTopG" cx="50%" cy="45%" r="60%">
+      <stop offset="0" stop-color="#fef8c4" stop-opacity="1.0"/><stop offset="1" stop-color="#f2cb3c" stop-opacity="1.0"/>
+    </radialGradient>
+    <radialGradient id="glossSpecG" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.92"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="foilG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0" stop-color="#f1ce5e" stop-opacity="1.0"/><stop offset="0.3" stop-color="#fffbde" stop-opacity="1.0"/><stop offset="0.55" stop-color="#ffffff" stop-opacity="1.0"/><stop offset="0.78" stop-color="#f1c836" stop-opacity="1.0"/><stop offset="1" stop-color="#f1ce5e" stop-opacity="1.0"/>
     </linearGradient>
-
-    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="24"/>
+    <linearGradient id="plateSheenG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.15"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="cartoucheG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0" stop-color="#242425" stop-opacity="0.96"/><stop offset="0.5" stop-color="#15161a" stop-opacity="0.96"/><stop offset="1" stop-color="#08090b" stop-opacity="0.97"/>
+    </linearGradient>
+    <linearGradient id="glassG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0" stop-color="#050608" stop-opacity="0.95"/><stop offset="0.14" stop-color="#15130b" stop-opacity="0.85"/><stop offset="0.35" stop-color="#eab308" stop-opacity="0.55"/><stop offset="0.5" stop-color="#fef08a" stop-opacity="0.75"/><stop offset="0.65" stop-color="#eab308" stop-opacity="0.55"/><stop offset="0.86" stop-color="#15130b" stop-opacity="0.85"/><stop offset="1" stop-color="#050608" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="iceBaseG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.95"/><stop offset="0.25" stop-color="#eab308" stop-opacity="0.6"/><stop offset="0.5" stop-color="#fef08a" stop-opacity="0.85"/><stop offset="0.75" stop-color="#eab308" stop-opacity="0.6"/><stop offset="1" stop-color="#000000" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="liquidG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0" stop-color="#0a0502" stop-opacity="0.92"/><stop offset="0.2" stop-color="#a16207" stop-opacity="0.88"/><stop offset="0.5" stop-color="#fef08a" stop-opacity="0.98"/><stop offset="0.8" stop-color="#a16207" stop-opacity="0.88"/><stop offset="1" stop-color="#0a0502" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="liquidMeniscusG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0" stop-color="#a16207" stop-opacity="0.4"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.9"/><stop offset="1" stop-color="#a16207" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="capG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0" stop-color="#fef08a" stop-opacity="1.0"/><stop offset="0.35" stop-color="#eab308" stop-opacity="1.0"/><stop offset="0.7" stop-color="#15130b" stop-opacity="1.0"/><stop offset="1" stop-color="#eab308" stop-opacity="1.0"/>
+    </linearGradient>
+    <linearGradient id="reflFadeG" gradientUnits="userSpaceOnUse" x1="0" y1="1148.0" x2="0" y2="1488.0">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+    <mask id="reflMask" maskUnits="userSpaceOnUse" x="0" y="1146.0" width="1200" height="354.0">
+      <rect x="0" y="1146.0" width="1200" height="400" fill="url(#reflFadeG)"/>
+    </mask>
+    <radialGradient id="vignetteG" cx="50%" cy="46%" r="76%">
+      <stop offset="0.55" stop-color="#000000" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity="0.58"/>
+    </radialGradient>
+    <filter id="softContact" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <filter id="shBlur22" filterUnits="userSpaceOnUse" x="0" y="988.0" width="1200" height="400"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="shBlur10" filterUnits="userSpaceOnUse" x="0" y="1048.0" width="1200" height="260"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="shBlur2" filterUnits="userSpaceOnUse" x="0" y="1108.0" width="1200" height="100"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="reflBlur" filterUnits="userSpaceOnUse" x="0" y="1146.0" width="1200" height="360"><feGaussianBlur stdDeviation="1.7"/></filter>
+    <filter id="plaqueDrop" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity="0.7"/>
     </filter>
     <filter id="flaconShadow" x="-30%" y="-20%" width="160%" height="150%">
-      <feDropShadow dx="0" dy="28" stdDeviation="26" flood-color="#000000" flood-opacity="0.85"/>
+      <feDropShadow dx="0" dy="26" stdDeviation="24" flood-color="#000000" flood-opacity="0.85"/>
     </filter>
-    <filter id="plaqueShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.65"/>
-    </filter>
+    <g id="bottleArt"><defs>
+        <clipPath id="bottleClip"><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z"/></clipPath>
+        <mask id="cavMask" maskUnits="userSpaceOnUse" x="-230" y="-320" width="460" height="580">
+          <path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="#ffffff"/>
+          <path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="#000000" stroke-width="18.00" stroke-linejoin="round"/>
+          <rect x="-230" y="140.0" width="460" height="80.0" fill="#000000"/>
+        </mask>
+        <mask id="bandRim" maskUnits="userSpaceOnUse" x="-230" y="-320" width="460" height="580"><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="#ffffff" stroke-width="5.20" stroke-linejoin="round"/></mask>
+        <mask id="bandSpec" maskUnits="userSpaceOnUse" x="-230" y="-320" width="460" height="580"><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="#ffffff" stroke-width="16.40" stroke-linejoin="round"/><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="#000000" stroke-width="13.20" stroke-linejoin="round"/></mask>
+        <mask id="bandWall" maskUnits="userSpaceOnUse" x="-230" y="-320" width="460" height="580"><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="#ffffff" stroke-width="19.80" stroke-linejoin="round"/><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="#000000" stroke-width="16.20" stroke-linejoin="round"/></mask>
+        <mask id="bandLiq" maskUnits="userSpaceOnUse" x="-230" y="-320" width="460" height="580"><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="#ffffff" stroke-width="26.40" stroke-linejoin="round"/><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="#000000" stroke-width="18.00" stroke-linejoin="round"/></mask>
+        <mask id="bandInlay" maskUnits="userSpaceOnUse" x="-230" y="-320" width="460" height="580"><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="#ffffff" stroke-width="27.80" stroke-linejoin="round"/><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="#000000" stroke-width="25.20" stroke-linejoin="round"/></mask>
+        <mask id="vFade" maskUnits="userSpaceOnUse" x="-230" y="-320" width="460" height="580"><rect x="-230" y="-320" width="460" height="580" fill="url(#vFadeG)"/></mask>
+        <linearGradient id="vFadeG" gradientUnits="userSpaceOnUse" x1="0" y1="-108" x2="0" y2="190.0">
+          <stop offset="0" stop-color="#000000"/><stop offset="0.2" stop-color="#ffffff"/>
+          <stop offset="0.8" stop-color="#ffffff"/><stop offset="1" stop-color="#000000"/>
+        </linearGradient>
+        <linearGradient id="glassBackG" gradientUnits="userSpaceOnUse" x1="0" y1="-104" x2="0" y2="190.0">
+          <stop offset="0" stop-color="#f4d249" stop-opacity="0.05"/><stop offset="0.55" stop-color="#eab308" stop-opacity="0.1"/><stop offset="1" stop-color="#8c6b05" stop-opacity="0.3"/>
+        </linearGradient>
+        <linearGradient id="frostG" gradientUnits="userSpaceOnUse" x1="-111.59225806451612" y1="0" x2="111.59225806451612" y2="0">
+          <stop offset="0" stop-color="#c79807" stop-opacity="0.55"/><stop offset="0.22" stop-color="#fef5b3" stop-opacity="0.32"/><stop offset="0.5" stop-color="#fff9d0" stop-opacity="0.38"/><stop offset="0.8" stop-color="#f2cb3c" stop-opacity="0.34"/><stop offset="1" stop-color="#a47d06" stop-opacity="0.6"/>
+        </linearGradient>
+        <linearGradient id="wallG" gradientUnits="userSpaceOnUse" x1="-111.59225806451612" y1="0" x2="111.59225806451612" y2="0">
+          <stop offset="0" stop-color="#695104" stop-opacity="0.86"/><stop offset="0.1" stop-color="#b08606" stop-opacity="0.56"/><stop offset="0.5" stop-color="#f4d249" stop-opacity="0.26"/><stop offset="0.9" stop-color="#a47d06" stop-opacity="0.56"/><stop offset="1" stop-color="#594403" stop-opacity="0.88"/>
+        </linearGradient>
+        <linearGradient id="slabG" gradientUnits="userSpaceOnUse" x1="0" y1="140.0" x2="0" y2="190.0">
+          <stop offset="0" stop-color="#fef08a" stop-opacity="0.62"/><stop offset="0.07" stop-color="#f4d249" stop-opacity="0.4"/><stop offset="0.5" stop-color="#eab308" stop-opacity="0.22"/><stop offset="1" stop-color="#5e4803" stop-opacity="0.62"/>
+        </linearGradient>
+        <radialGradient id="slabGlowG" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#d7b453" stop-opacity="0.78"/><stop offset="0.55" stop-color="#a16207" stop-opacity="0.28"/><stop offset="1" stop-color="#a16207" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="liquidBodyG" gradientUnits="userSpaceOnUse" x1="-111.59225806451612" y1="0" x2="111.59225806451612" y2="0">
+          <stop offset="0" stop-color="#2a1902" stop-opacity="0.96"/><stop offset="0.1" stop-color="#643d04" stop-opacity="0.93"/><stop offset="0.3" stop-color="#a16207" stop-opacity="0.88"/><stop offset="0.48" stop-color="#d7b453" stop-opacity="0.86"/><stop offset="0.7" stop-color="#a16207" stop-opacity="0.88"/><stop offset="0.9" stop-color="#643d04" stop-opacity="0.93"/><stop offset="1" stop-color="#2a1902" stop-opacity="0.96"/>
+        </linearGradient>
+        <linearGradient id="liquidDepthG" gradientUnits="userSpaceOnUse" x1="0" y1="-26.5" x2="0" y2="140.0">
+          <stop offset="0" stop-color="#fef08a" stop-opacity="0.22"/><stop offset="0.22" stop-color="#fef08a" stop-opacity="0.04"/><stop offset="0.6" stop-color="#000000" stop-opacity="0.0"/><stop offset="1" stop-color="#000000" stop-opacity="0.42"/>
+        </linearGradient>
+        <radialGradient id="liquidGlowG" gradientUnits="userSpaceOnUse" cx="-12.9" cy="64.8" r="102.2">
+          <stop offset="0" stop-color="#fef08a" stop-opacity="0.52"/><stop offset="0.55" stop-color="#fef08a" stop-opacity="0.13"/><stop offset="1" stop-color="#fef08a" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="liquidSurfG" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0" stop-color="#c19234" stop-opacity="0.62"/><stop offset="0.45" stop-color="#fff8ca" stop-opacity="0.96"/><stop offset="1" stop-color="#c19234" stop-opacity="0.62"/>
+        </linearGradient>
+        <linearGradient id="liquidEdgeG" gradientUnits="userSpaceOnUse" x1="-111.59225806451612" y1="0" x2="111.59225806451612" y2="0">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="0.14" stop-color="#fef08a" stop-opacity="0.32"/><stop offset="0.3" stop-color="#fef08a" stop-opacity="0.0"/><stop offset="0.7" stop-color="#fef08a" stop-opacity="0.0"/><stop offset="0.88" stop-color="#fef08a" stop-opacity="0.28"/><stop offset="1" stop-color="#fef08a" stop-opacity="0.5"/>
+        </linearGradient>
+        <linearGradient id="rimG" gradientUnits="userSpaceOnUse" x1="-111.59225806451612" y1="0" x2="111.59225806451612" y2="0">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0.78"/><stop offset="0.1" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="0.3" stop-color="#ffffff" stop-opacity="0.08"/><stop offset="0.55" stop-color="#fef08a" stop-opacity="0.05"/><stop offset="0.86" stop-color="#fef08a" stop-opacity="0.26"/><stop offset="1" stop-color="#fef08a" stop-opacity="0.6"/>
+        </linearGradient>
+        <linearGradient id="specG" gradientUnits="userSpaceOnUse" x1="-111.59225806451612" y1="0" x2="111.59225806451612" y2="0">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/><stop offset="0.2" stop-color="#ffffff" stop-opacity="0.5"/><stop offset="0.38" stop-color="#ffffff" stop-opacity="0.0"/><stop offset="0.62" stop-color="#ffffff" stop-opacity="0.0"/><stop offset="0.84" stop-color="#fef08a" stop-opacity="0.26"/><stop offset="1" stop-color="#fef08a" stop-opacity="0.55"/>
+        </linearGradient>
+        <linearGradient id="innerEdgeG" gradientUnits="userSpaceOnUse" x1="-111.59225806451612" y1="0" x2="111.59225806451612" y2="0">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0.48"/><stop offset="0.5" stop-color="#fef08a" stop-opacity="0.12"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.3"/>
+        </linearGradient>
+        <linearGradient id="topLightG" gradientUnits="userSpaceOnUse" x1="0" y1="-108" x2="0" y2="-56">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="baseLightG" gradientUnits="userSpaceOnUse" x1="0" y1="144.0" x2="0" y2="190.0">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.85"/>
+        </linearGradient>
+        <linearGradient id="softLeftG" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.5" stop-color="#ffffff" stop-opacity="0.3"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="softRightG" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0" stop-color="#fef08a" stop-opacity="0"/><stop offset="0.5" stop-color="#fef08a" stop-opacity="0.26"/><stop offset="1" stop-color="#fef08a" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="pearlG" cx="35%" cy="30%" r="70%">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0.34"/><stop offset="0.5" stop-color="#fef8c4" stop-opacity="0.12"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="leatherG" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0" stop-color="#1f0f07" stop-opacity="1.0"/><stop offset="0.18" stop-color="#4a2a16" stop-opacity="1.0"/><stop offset="0.4" stop-color="#7a4a28" stop-opacity="1.0"/><stop offset="0.6" stop-color="#5a321a" stop-opacity="1.0"/><stop offset="0.85" stop-color="#2b160a" stop-opacity="1.0"/><stop offset="1" stop-color="#170b05" stop-opacity="1.0"/>
+        </linearGradient>
+        <filter id="hlBlur" x="-80%" y="-5%" width="260%" height="110%"><feGaussianBlur stdDeviation="2.4"/></filter>
+        <filter id="capShadowBlur" x="-40%" y="-200%" width="180%" height="500%"><feGaussianBlur stdDeviation="3.2"/></filter>
+        </defs><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="url(#glassBackG)"/><g clip-path="url(#bottleClip)"><rect x="-111.6" y="140.0" width="223.2" height="56.0" fill="url(#slabG)"/><ellipse cx="0" cy="168.0" rx="71.0" ry="15.0" fill="url(#slabGlowG)"/><line x1="-111.6" y1="140.0" x2="111.6" y2="140.0" stroke="#fef08a" stroke-width="1.4" opacity="0.75"/><line x1="-111.6" y1="141.8" x2="111.6" y2="141.8" stroke="#000000" stroke-width="1.1" opacity="0.35"/></g><g mask="url(#cavMask)"><rect x="-111.6" y="-26.5" width="223.2" height="216.5" fill="#a16207" opacity="0.62"/><rect x="-111.6" y="-26.5" width="223.2" height="216.5" fill="url(#liquidBodyG)"/><rect x="-111.6" y="-26.5" width="223.2" height="216.5" fill="url(#liquidDepthG)"/><rect x="-111.6" y="-26.5" width="223.2" height="216.5" fill="url(#liquidGlowG)"/><g mask="url(#bandLiq)"><rect x="-111.6" y="-26.5" width="223.2" height="216.5" fill="url(#liquidEdgeG)"/></g><ellipse cx="0" cy="-26.5" rx="98.6" ry="7.5" fill="url(#liquidSurfG)"/><path d="M-98.6,-26.5 A98.6,7.5 0 0 1 98.6,-26.5" fill="none" stroke="#000000" stroke-width="1" opacity="0.28"/><path d="M-98.6,-26.5 A98.6,7.5 0 0 0 98.6,-26.5" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.88"/><path d="M-98.6,-26.5 A98.6,7.5 0 0 0 98.6,-23.9" fill="none" stroke="#fef08a" stroke-width="2.4" opacity="0.18"/><line x1="-98.6" y1="-31.5" x2="-98.6" y2="-22.5" stroke="#ffffff" stroke-width="1.6" opacity="0.6"/><line x1="98.6" y1="-31.5" x2="98.6" y2="-22.5" stroke="#fef08a" stroke-width="1.4" opacity="0.5"/><line x1="-1.4" y1="-98" x2="-1.4" y2="116.0" stroke="#ffffff" stroke-width="1.7" opacity="0.40"/><line x1="1.4" y1="-98" x2="1.4" y2="116.0" stroke="#000000" stroke-width="1.3" opacity="0.30"/><path d="M0,116.0 Q0,128.0 -11,131.0" fill="none" stroke="#ffffff" stroke-width="1.4" opacity="0.30"/></g><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="url(#wallG)" stroke-width="18.0" stroke-linejoin="round" clip-path="url(#bottleClip)"/><g clip-path="url(#bottleClip)"><rect x="-107.6" y="-96" width="22" height="286.0" fill="#ffffff" opacity="0.11"/><rect x="85.6" y="-96" width="22" height="286.0" fill="#000000" opacity="0.16"/><line x1="-85.6" y1="-96.0" x2="-85.6" y2="190.0" stroke="#fef08a" stroke-width="1.1" opacity="0.55"/><line x1="85.6" y1="-96.0" x2="85.6" y2="190.0" stroke="#fef08a" stroke-width="1.0" opacity="0.3"/><line x1="-107.6" y1="-52.0" x2="107.6" y2="-52.0" stroke="#fef08a" stroke-width="1.1" opacity="0.5"/></g><g clip-path="url(#bottleClip)"><rect x="-111.6" y="-112" width="223.2" height="308.0" fill="url(#innerEdgeG)" mask="url(#bandWall)"/><rect x="-111.6" y="-112" width="223.2" height="308.0" fill="url(#rimG)" mask="url(#bandRim)"/><g mask="url(#vFade)"><rect x="-111.6" y="-112" width="223.2" height="308.0" fill="url(#specG)" mask="url(#bandSpec)"/></g><rect x="-111.6" y="-112" width="223.2" height="58" fill="url(#topLightG)" mask="url(#bandRim)"/><rect x="-111.6" y="144.0" width="223.2" height="54" fill="url(#baseLightG)" mask="url(#bandRim)"/></g><g clip-path="url(#bottleClip)" mask="url(#vFade)"><rect x="-73.2" y="-112" width="18.3" height="308.0" fill="url(#softLeftG)" filter="url(#hlBlur)"/><rect x="53.8" y="-112" width="7.5" height="308.0" fill="url(#softRightG)" filter="url(#hlBlur)"/></g><path d="M-36.0,-104.0 L36.0,-104.0 L36.0,-96.0 L53.8,-92.0 Q99.0,-84.0 107.6,-56.0 L107.6,176.0 Q107.6,190.0 93.6,190.0 L-93.6,190.0 Q-107.6,190.0 -107.6,176.0 L-107.6,-56.0 Q-99.0,-84.0 -53.8,-92.0 L-36.0,-96.0 L-36.0,-104.0 Z" fill="none" stroke="url(#rimG)" stroke-width="1.2" stroke-linejoin="round" opacity="0.5"/>
+        <!-- Embossed Foil Cartouche -->
+        <g filter="url(#plaqueDrop)">
+          <rect x="-79.0" y="-42.0" width="158.0" height="140.0" rx="7" fill="url(#cartoucheG)" stroke="url(#metalG)" stroke-width="1.7"/>
+          <rect x="-74.5" y="-37.5" width="149.0" height="131.0" rx="4.5" fill="none" stroke="url(#foilG)" stroke-width="0.6" opacity="0.75"/>
+          <rect x="-72.0" y="-35.0" width="144.0" height="126.0" rx="3" fill="none" stroke="url(#foilG)" stroke-width="0.3" opacity="0.4"/>
+          <polygon points="-77.0,-40.0 77.0,-40.0 77.0,5.600000000000001 -77.0,36.400000000000006" fill="url(#plateSheenG)"/>
+          <polygon points="-69.5,-35.1 -66.9,-32.5 -69.5,-29.9 -72.1,-32.5" fill="url(#foilG)"/><polygon points="69.5,-35.1 72.1,-32.5 69.5,-29.9 66.9,-32.5" fill="url(#foilG)"/>
+          <polygon points="-69.5,85.9 -66.9,88.5 -69.5,91.1 -72.1,88.5" fill="url(#foilG)"/><polygon points="69.5,85.9 72.1,88.5 69.5,91.1 66.9,88.5" fill="url(#foilG)"/>
+
+          <!-- Crest Medallion -->
+          <g transform="translate(0, -23.0)">
+            <circle cx="0" cy="0" r="8" fill="none" stroke="url(#foilG)" stroke-width="0.8"/>
+            <circle cx="0" cy="0" r="6" fill="none" stroke="url(#foilG)" stroke-width="0.35" opacity="0.7"/>
+            <polygon points="0,-5 1.5,-1.5 5,0 1.5,1.5 0,5 -1.5,1.5 -5,0 -1.5,-1.5" fill="url(#foilG)"/>
+          </g>
+
+          <!-- Brand Eyebrow -->
+          <text x="0" y="-6.0" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="7.20" font-weight="600" letter-spacing="2.3" fill="#efe3c8" text-anchor="middle">LATTAFA PERFUMES</text>
+          <line x1="-63.0" y1="2.0" x2="-5" y2="2.0" stroke="url(#foilG)" stroke-width="0.5" opacity="0.65"/>
+          <line x1="5" y1="2.0" x2="63.0" y2="2.0" stroke="url(#foilG)" stroke-width="0.5" opacity="0.65"/>
+          <polygon points="0,-0.6000000000000001 2.6,2.0 0,4.6 -2.6,2.0" fill="url(#foilG)"/>
+
+          <!-- Perfume Title -->
+          <text x="0" y="34.9" font-family="'Cinzel', 'Trajan Pro', 'Times New Roman', serif" font-size="13.61" font-weight="700" letter-spacing="1.77" fill="#000000" opacity="0.55" text-anchor="middle">MUSK MOOD</text><text x="0" y="34.0" font-family="'Cinzel', 'Trajan Pro', 'Times New Roman', serif" font-size="13.61" font-weight="700" letter-spacing="1.77" fill="url(#foilG)" text-anchor="middle">MUSK MOOD</text>
+
+          <!-- Concentration & Volume Footer -->
+          <line x1="-61.0" y1="68.0" x2="61.0" y2="68.0" stroke="url(#foilG)" stroke-width="0.5" opacity="0.55"/>
+          <text x="0" y="81.0" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="6.3" font-weight="500" letter-spacing="1.7" fill="#d6c9ac" text-anchor="middle">EAU DE PARFUM</text>
+          <text x="0" y="89.5" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="6.8" font-weight="600" letter-spacing="2.2" fill="url(#foilG)" text-anchor="middle">100ML</text>
+        </g>
+        <g clip-path="url(#bottleClip)"><ellipse cx="0" cy="-91" rx="62.0" ry="8" fill="#000000" opacity="0.5" filter="url(#capShadowBlur)"/><ellipse cx="0" cy="-95" rx="44.0" ry="3.2" fill="#eab308" opacity="0.28" filter="url(#capShadowBlur)"/></g>
+            
+            <rect x="-38" y="-105" width="76" height="7" rx="2" fill="#0a0b0e" opacity="0.92"/>
+            <rect x="-34" y="-130" width="68" height="29" rx="2.5" fill="url(#capMetalG)"/>
+            <line x1="-33" y1="-127.8" x2="33" y2="-127.8" stroke="#ffffff" stroke-width="0.9" opacity="0.55"/>
+            <line x1="-33" y1="-106" x2="33" y2="-106" stroke="#000000" stroke-width="0.9" opacity="0.55"/>
+            <line x1="-33" y1="-116.0" x2="33" y2="-116.0" stroke="#000000" stroke-width="0.6" opacity="0.35"/>
+        
+            <rect x="-23" y="-150" width="46" height="22" fill="url(#capGlassG)" stroke="url(#metalG)" stroke-width="1"/>
+            <polygon points="-30,-148 30,-148 62,-198 48,-250.49032258064517 -48,-250.49032258064517 -62,-198" fill="url(#capGlassG)" stroke="url(#metalG)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon points="0,-200 -30,-148 30,-148" fill="#ffffff" opacity="0.12"/><polygon points="0,-200 -30,-148 30,-148" fill="#000000" opacity="0.0"/><polygon points="0,-200 30,-148 62,-198" fill="#ffffff" opacity="0.32"/><polygon points="0,-200 30,-148 62,-198" fill="#000000" opacity="0.0"/><polygon points="0,-200 62,-198 48,-250.49032258064517" fill="#ffffff" opacity="0.06"/><polygon points="0,-200 62,-198 48,-250.49032258064517" fill="#000000" opacity="0.22"/><polygon points="0,-200 48,-250.49032258064517 -48,-250.49032258064517" fill="#ffffff" opacity="0.4"/><polygon points="0,-200 48,-250.49032258064517 -48,-250.49032258064517" fill="#000000" opacity="0.0"/><polygon points="0,-200 -48,-250.49032258064517 -62,-198" fill="#ffffff" opacity="0.05"/><polygon points="0,-200 -48,-250.49032258064517 -62,-198" fill="#000000" opacity="0.24"/><polygon points="0,-200 -62,-198 -30,-148" fill="#ffffff" opacity="0.26"/><polygon points="0,-200 -62,-198 -30,-148" fill="#000000" opacity="0.04"/>
+            <polygon points="-48,-250.49032258064517 48,-250.49032258064517 30,-232.49032258064517 -30,-232.49032258064517" fill="#ffffff" opacity="0.34"/>
+            <line x1="0" y1="-200" x2="-30" y2="-148" stroke="#fef08a" stroke-width="0.9" opacity="0.55"/><line x1="0" y1="-200" x2="30" y2="-148" stroke="#fef08a" stroke-width="0.9" opacity="0.55"/><line x1="0" y1="-200" x2="62" y2="-198" stroke="#fef08a" stroke-width="0.9" opacity="0.55"/><line x1="0" y1="-200" x2="48" y2="-250.49032258064517" stroke="#fef08a" stroke-width="0.9" opacity="0.55"/><line x1="0" y1="-200" x2="-48" y2="-250.49032258064517" stroke="#fef08a" stroke-width="0.9" opacity="0.55"/><line x1="0" y1="-200" x2="-62" y2="-198" stroke="#fef08a" stroke-width="0.9" opacity="0.55"/>
+            <polygon points="-30,-232.49032258064517 30,-232.49032258064517 30,-230.49032258064517 -30,-230.49032258064517" fill="#ffffff" opacity="0.5"/>
+            <polygon points="-40,-242.49032258064517 -36,-236.49032258064517 -30,-234.49032258064517 -36,-232.49032258064517 -40,-226.49032258064517 -44,-232.49032258064517 -50,-234.49032258064517 -44,-236.49032258064517" fill="#ffffff" opacity="0.85"/>
+            <circle cx="0" cy="-200" r="10" fill="#0f1014" stroke="url(#metalG)" stroke-width="1"/>
+            <polygon points="0,-206 2.2,-202 6,-200 2.2,-198 0,-194 -2.2,-198 -6,-200 -2.2,-202" fill="url(#capMetalG)"/>
+            </g>
   </defs>
 
-  <!-- Studio Background Wall -->
-  <rect width="1200" height="1500" fill="url(#ambG)"/>
-  
-  <!-- Subtle Studio Pedestal Horizon Surface -->
-  <rect x="0" y="1100" width="1200" height="400" fill="url(#pedestalG)"/>
-  <line x1="0" y1="1100" x2="1200" y2="1100" stroke="#d8ded8" stroke-width="0.8" opacity="0.35"/>
+  <rect width="1200" height="1500" fill="url(#ambG)"/><rect width="1200" height="998.0" fill="url(#spotG)"/><circle cx="600" cy="540" r="390" fill="none" stroke="#fef08a" stroke-width="46" opacity="0.07" filter="url(#blur14)"/><circle cx="600" cy="540" r="310" fill="none" stroke="#eab308" stroke-width="1.6" opacity="0.14"/><circle cx="600" cy="540" r="318" fill="none" stroke="#eab308" stroke-width="0.6" opacity="0.10"/>
+  <rect x="0" y="998.0" width="1200" height="502.0" fill="url(#floorG)"/><line x1="0" y1="1038.0" x2="1200" y2="1038.0" stroke="#eab308" stroke-width="0.8" opacity="0.07"/><line x1="0" y1="1090.0" x2="1200" y2="1090.0" stroke="#eab308" stroke-width="0.8" opacity="0.07"/><line x1="0" y1="1142.0" x2="1200" y2="1142.0" stroke="#eab308" stroke-width="0.8" opacity="0.07"/><line x1="0" y1="1194.0" x2="1200" y2="1194.0" stroke="#eab308" stroke-width="0.8" opacity="0.07"/><line x1="0" y1="1246.0" x2="1200" y2="1246.0" stroke="#eab308" stroke-width="0.8" opacity="0.07"/><line x1="0" y1="1298.0" x2="1200" y2="1298.0" stroke="#eab308" stroke-width="0.8" opacity="0.07"/><line x1="0" y1="1350.0" x2="1200" y2="1350.0" stroke="#eab308" stroke-width="0.8" opacity="0.07"/><rect x="0" y="991.0" width="1200" height="14" fill="#fef08a" opacity="0.10" filter="url(#blur6)"/><line x1="0" y1="998.0" x2="1200" y2="998.0" stroke="#eab308" stroke-width="1.0" opacity="0.40"/><ellipse cx="600" cy="1156.0" rx="640" ry="190" fill="url(#poolG)"/>
 
-  <!-- Multi-Tier Contact Shadows -->
-  <ellipse cx="600" cy="1150" rx="340" ry="42" fill="#000000" opacity="0.5" filter="url(#softShadow)"/>
-  <ellipse cx="600" cy="1142" rx="250" ry="20" fill="#000000" opacity="0.85"/>
-
-  <!-- Border Passepartout -->
-  <rect x="40" y="40" width="1120" height="1420" fill="none" stroke="#d8ded8" stroke-width="1.2" opacity="0.28"/>
-  <rect x="52" y="52" width="1096" height="1396" fill="none" stroke="#d8ded8" stroke-width="0.6" stroke-dasharray="6,4" opacity="0.18"/>
-
-  <!-- Centered Flacon Geometry (Scaled 1.85x into 1200x1500 frame) -->
-  <g transform="translate(600, 720) scale(1.85)" filter="url(#flaconShadow)">
-    
-            <ellipse cx="0" cy="210" rx="140" ry="20" fill="#000000" opacity="0.6"/>
-            <rect x="-100" y="-80" width="200" height="275" rx="12" fill="url(#bodyG)" stroke="url(#metalG)" stroke-width="2.4"/>
-            <rect x="-96" y="145" width="192" height="46" rx="8" fill="url(#baseG)" opacity="0.95"/>
-            <line x1="-88" y1="-70" x2="-88" y2="182" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.45"/>
-            
-        <!-- Embossed Label Cartouche Plaque -->
-        <g filter="url(#plaqueShadow)">
-          <rect x="-82.0" y="-67.0" width="164" height="174" rx="10" fill="url(#labelG)" stroke="url(#metalG)" stroke-width="2.2"/>
-          <rect x="-77.0" y="-62.0" width="154" height="164" rx="7" fill="none" stroke="url(#metalG)" stroke-width="0.8" stroke-dasharray="4,2" opacity="0.65"/>
-          <rect x="-74.0" y="-59.0" width="148" height="55.7" rx="5" fill="url(#labelSheen)" opacity="0.18"/>
-          
-          <!-- Crest Emblem -->
-          <g transform="translate(0, -43.0)">
-            <circle cx="0" cy="0" r="10" fill="none" stroke="url(#metalG)" stroke-width="0.9"/>
-            <polygon points="0,-6.5 2,-2 6.5,0 2,2 0,6.5 -2,2 -6.5,0 -2,-2" fill="url(#metalG)"/>
-          </g>
-          
-          <!-- Brand Header -->
-          <text x="0" y="-22.0" font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.2" fill="#e8dcc4" text-anchor="middle">LATTAFA PERFUMES</text>
-          <line x1="-64.0" y1="-14.0" x2="64.0" y2="-14.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.55"/>
-          
-          <!-- Perfume Name -->
-          <text x="0" y="31.0" font-family="'Cinzel', serif" font-size="13.0" font-weight="700" letter-spacing="1.8" fill="url(#metalG)" text-anchor="middle">MUSK MOOD</text>
-          
-          <!-- Concentration & Volume Details -->
-          <line x1="-60.0" y1="71.0" x2="60.0" y2="71.0" stroke="url(#metalG)" stroke-width="0.6" opacity="0.55"/>
-          <text x="0" y="85.0" font-family="'Inter', sans-serif" font-size="6.2" font-weight="500" letter-spacing="1.6" fill="#c8bba4" text-anchor="middle">EAU DE PARFUM (EDP)</text>
-          <text x="0" y="98.0" font-family="'Inter', sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.8" fill="url(#metalG)" text-anchor="middle">100ML</text>
-        </g>
-        
-            <rect x="-26" y="-118" width="52" height="38" rx="3" fill="url(#metalG)"/>
-            <rect x="-50" y="-218" width="100" height="104" rx="8" fill="url(#metalG)" stroke="#ffffff" stroke-width="1.8"/>
-            
-        <!-- Studio Specular Highlights -->
-        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" opacity="0.08"/>
-        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" opacity="0.24"/>
-        <path d="M-78,-70 C-90,18 -88,112 -74,172" fill="none" stroke="#ffffff" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/>
-        
+  <!-- Glossy-surface reflection -->
+  <g mask="url(#reflMask)" opacity="0.3">
+    <g filter="url(#reflBlur)">
+      <use xlink:href="#bottleArt" transform="translate(600 1550.8) scale(2.12 -2.12)"/>
+    </g>
   </g>
 
-  <!-- Bottom Olfactory Classification Tagline -->
-  <text x="600" y="1410" font-family="'Inter', sans-serif" font-size="16" font-weight="600" letter-spacing="8" fill="#d8ded8" opacity="0.85" text-anchor="middle">CLEAN WHITE MUSK</text>
+  <!-- Contact, cast and transmitted-light shadows -->
+  <ellipse cx="668.4" cy="1158.0" rx="376.4" ry="44" fill="#000000" opacity="0.55" filter="url(#shBlur22)"/>
+  <ellipse cx="741.4" cy="1172.0" rx="216.7" ry="20" fill="#d9b756" opacity="0.34" filter="url(#shBlur10)"/>
+  <ellipse cx="622.8" cy="1151.0" rx="246.3" ry="17" fill="#000000" opacity="0.72" filter="url(#shBlur10)"/>
+  <ellipse cx="600" cy="1149.0" rx="225.8" ry="6.5" fill="#000000" opacity="0.93" filter="url(#shBlur2)"/>
+
+  <use xlink:href="#bottleArt" transform="translate(600 745.2) scale(2.12)"/>
+
+  <rect width="1200" height="1500" fill="url(#vignetteG)"/>
+  <rect x="44" y="44" width="1112" height="1412" fill="none" stroke="#eab308" stroke-width="1.2" opacity="0.25"/>
+  <rect x="56" y="56" width="1088" height="1388" fill="none" stroke="#eab308" stroke-width="0.6" stroke-dasharray="6,4" opacity="0.16"/>
+
+  <text x="600" y="1410" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="8" fill="#eab308" opacity="0.85" text-anchor="middle">CLEAN WHITE MUSK</text>
 </svg>

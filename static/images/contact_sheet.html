@@ -33,53 +33,53 @@
     }
     .eyebrow {
       font-size: 11px;
-      letter-spacing: 5px;
-      color: var(--gold);
+      letter-spacing: 3px;
       text-transform: uppercase;
+      color: var(--gold);
       font-weight: 600;
       margin-bottom: 8px;
     }
     h1 {
       font-family: 'Cinzel', serif;
       font-size: 32px;
-      letter-spacing: 2px;
       color: #ffffff;
-      margin-bottom: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
     }
     .metrics-bar {
       display: flex;
-      flex-wrap: wrap;
       gap: 24px;
       margin-top: 20px;
+      flex-wrap: wrap;
     }
     .metric-item {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      padding: 14px 20px;
       border-radius: 8px;
-      min-width: 170px;
+      padding: 12px 20px;
+      min-width: 150px;
     }
     .metric-val {
-      font-family: 'Cinzel', serif;
       font-size: 24px;
       font-weight: 700;
       color: var(--gold-light);
+      font-family: 'Cinzel', serif;
     }
     .metric-label {
       font-size: 11px;
       color: var(--muted);
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      margin-top: 4px;
     }
     .controls {
       max-width: 1400px;
-      margin: 0 auto 30px;
+      margin: 0 auto 28px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
     .filter-tabs {
       display: flex;
@@ -92,41 +92,44 @@
       padding: 8px 16px;
       border-radius: 6px;
       font-size: 12px;
-      letter-spacing: 1px;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
     }
-    .tab-btn.active, .tab-btn:hover {
+    .tab-btn:hover, .tab-btn.active {
       background: var(--gold);
-      color: #000000;
+      color: #0c0d10;
       border-color: var(--gold);
       font-weight: 600;
     }
     .search-box {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      color: #ffffff;
-      padding: 8px 14px;
+      color: #fff;
+      padding: 8px 16px;
       border-radius: 6px;
       font-size: 13px;
-      width: 260px;
+      min-width: 260px;
+    }
+    .search-box:focus {
       outline: none;
+      border-color: var(--gold);
     }
     .grid {
       max-width: 1400px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 24px;
     }
     .product-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 8px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.25s, border-color 0.25s;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
     .product-card:hover {
       transform: translateY(-4px);
@@ -176,6 +179,7 @@
     .badge-success { background: rgba(34, 197, 94, 0.85); color: #ffffff; }
     .badge-pending { background: rgba(234, 179, 8, 0.85); color: #000000; }
     .badge-mode-b { background: rgba(197, 160, 89, 0.9); color: #000000; }
+    .badge-mode-flacon { background: rgba(168, 85, 247, 0.9); color: #ffffff; }
     .badge-mode-a { background: rgba(59, 130, 246, 0.85); color: #ffffff; }
     .badge-fallback { background: rgba(100, 116, 139, 0.85); color: #ffffff; }
     .tech-specs {
@@ -235,7 +239,7 @@
     <div class="eyebrow">Haute Arabian Parfumerie &bull; Visual Quality Assurance</div>
     <h1>Fragrance Product Photography & Catalog Contact Sheet</h1>
     <p style="color: var(--muted); font-size: 13.5px; max-width: 800px;">
-      Centralized visual inspection interface for all 100 catalog fragrances. Displays high-resolution 4:5 commercial product still-lifes (WebP/JPEG) alongside distinct architectural vector flacons.
+      Centralized visual inspection interface for all 100 catalog fragrances. Displays high-resolution 4:5 commercial product still-lifes alongside procedural luxury flacon photography (1200x1500 WebP/JPEG).
     </p>
     <div class="metrics-bar">
       <div class="metric-item">
@@ -243,15 +247,15 @@
         <div class="metric-label">Total Catalog Products</div>
       </div>
       <div class="metric-item">
-        <div class="metric-val">13</div>
-        <div class="metric-label">Optimized Commercial Renders</div>
+        <div class="metric-val">100</div>
+        <div class="metric-label">Optimized Renders</div>
       </div>
       <div class="metric-item">
-        <div class="metric-val">87</div>
-        <div class="metric-label">Architectural Flacons</div>
+        <div class="metric-val">0</div>
+        <div class="metric-label">Pending Items</div>
       </div>
       <div class="metric-item">
-        <div class="metric-val">106.7 KB</div>
+        <div class="metric-val">54.5 KB</div>
         <div class="metric-label">Avg WebP Footprint</div>
       </div>
       <div class="metric-item">
@@ -264,8 +268,8 @@
   <div class="controls">
     <div class="filter-tabs">
       <button class="tab-btn active" onclick="filterCards('all', this)">All Products (100)</button>
-      <button class="tab-btn" onclick="filterCards('optimized', this)">Optimized Commercial (13)</button>
-      <button class="tab-btn" onclick="filterCards('pending', this)">Architectural Flacons (87)</button>
+      <button class="tab-btn" onclick="filterCards('optimized', this)">Optimized (100)</button>
+      <button class="tab-btn" onclick="filterCards('pending', this)">Pending (0)</button>
     </div>
     <input type="text" class="search-box" id="searchInput" placeholder="Search perfume name, brand..." onkeyup="searchCards()" />
   </div>
@@ -277,7 +281,7 @@
                 <img src="products/khamrah.webp" alt="Khamrah" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -304,7 +308,7 @@
                 <img src="products/asad.webp" alt="Asad" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -331,7 +335,7 @@
                 <img src="products/yara.webp" alt="Yara" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -353,18 +357,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Fruity Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Fruity Gourmand">
               <div class="card-media">
-                <img src="products/yara_candy.svg" alt="Yara Candy" loading="lazy" />
+                <img src="products/yara_candy.webp" alt="Yara Candy" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #104</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>48.1 KB</span>
                   </div>
                 </div>
               </div>
@@ -385,7 +389,7 @@
                 <img src="products/eclaire.webp" alt="Eclaire" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -407,18 +411,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Floral Amber Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Floral Amber Gourmand">
               <div class="card-media">
-                <img src="products/angham.svg" alt="Angham" loading="lazy" />
+                <img src="products/angham.webp" alt="Angham" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #106</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>47.7 KB</span>
                   </div>
                 </div>
               </div>
@@ -434,18 +438,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Smoky Amber Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Smoky Amber Woody">
               <div class="card-media">
-                <img src="products/khamrah_dukhan.svg" alt="Khamrah Dukhan" loading="lazy" />
+                <img src="products/khamrah_dukhan.webp" alt="Khamrah Dukhan" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #107</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>45.7 KB</span>
                   </div>
                 </div>
               </div>
@@ -466,7 +470,7 @@
                 <img src="products/teriaq.webp" alt="Teriaq" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -488,18 +492,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Sweet Floral Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Sweet Floral Gourmand">
               <div class="card-media">
-                <img src="products/noble_blush.svg" alt="Badee Al Oud Noble Blush" loading="lazy" />
+                <img src="products/noble_blush.webp" alt="Badee Al Oud Noble Blush" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #109</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>46.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -515,18 +519,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Warm Spicy Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Warm Spicy Woody">
               <div class="card-media">
-                <img src="products/his_confession.svg" alt="His Confession" loading="lazy" />
+                <img src="products/his_confession.webp" alt="His Confession" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #110</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>44.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -542,18 +546,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Fruity Floral Musk">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Fruity Floral Musk">
               <div class="card-media">
-                <img src="products/victoria.svg" alt="Victoria" loading="lazy" />
+                <img src="products/victoria.webp" alt="Victoria" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #111</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>47.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -569,18 +573,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Aromatic Woody Fresh">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Aromatic Woody Fresh">
               <div class="card-media">
-                <img src="products/the_kingdom_men.svg" alt="The Kingdom Men" loading="lazy" />
+                <img src="products/the_kingdom_men.webp" alt="The Kingdom Men" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #112</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>45.3 KB</span>
                   </div>
                 </div>
               </div>
@@ -596,18 +600,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Woody Spicy Aromatic">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Woody Spicy Aromatic">
               <div class="card-media">
-                <img src="products/liam_grey.svg" alt="Liam Grey" loading="lazy" />
+                <img src="products/liam_grey.webp" alt="Liam Grey" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #113</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>46.7 KB</span>
                   </div>
                 </div>
               </div>
@@ -623,18 +627,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Tropical Marine Aromatic">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Tropical Marine Aromatic">
               <div class="card-media">
-                <img src="products/asad_zanzibar.svg" alt="Asad Zanzibar" loading="lazy" />
+                <img src="products/asad_zanzibar.webp" alt="Asad Zanzibar" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #114</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>50.8 KB</span>
                   </div>
                 </div>
               </div>
@@ -650,18 +654,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Amber Floral Oriental">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Amber Floral Oriental">
               <div class="card-media">
-                <img src="products/atheeri.svg" alt="Atheeri" loading="lazy" />
+                <img src="products/atheeri.webp" alt="Atheeri" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #115</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>47.6 KB</span>
                   </div>
                 </div>
               </div>
@@ -677,18 +681,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Citrus Amber Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Citrus Amber Woody">
               <div class="card-media">
-                <img src="products/art_of_universe.svg" alt="Art Of Universe" loading="lazy" />
+                <img src="products/art_of_universe.webp" alt="Art Of Universe" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #116</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>44.6 KB</span>
                   </div>
                 </div>
               </div>
@@ -704,18 +708,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Herbal Woody Moss">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Herbal Woody Moss">
               <div class="card-media">
-                <img src="products/art_of_nature_ii.svg" alt="Art Of Nature II" loading="lazy" />
+                <img src="products/art_of_nature_ii.webp" alt="Art Of Nature II" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #117</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.5 KB</span>
                   </div>
                 </div>
               </div>
@@ -731,18 +735,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Tropical Floral Fruity">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Tropical Floral Fruity">
               <div class="card-media">
-                <img src="products/yara_tous.svg" alt="Yara Tous" loading="lazy" />
+                <img src="products/yara_tous.webp" alt="Yara Tous" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #118</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>51.2 KB</span>
                   </div>
                 </div>
               </div>
@@ -758,18 +762,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Amber Floral Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Amber Floral Gourmand">
               <div class="card-media">
-                <img src="products/yara_moi.svg" alt="Yara Moi" loading="lazy" />
+                <img src="products/yara_moi.webp" alt="Yara Moi" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #119</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.5 KB</span>
                   </div>
                 </div>
               </div>
@@ -785,18 +789,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Warm Amber Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Warm Amber Woody">
               <div class="card-media">
-                <img src="products/asad_bourbon.svg" alt="Asad Bourbon" loading="lazy" />
+                <img src="products/asad_bourbon.webp" alt="Asad Bourbon" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #120</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>44.5 KB</span>
                   </div>
                 </div>
               </div>
@@ -812,18 +816,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Gourmand Coffee Oriental">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Gourmand Coffee Oriental">
               <div class="card-media">
-                <img src="products/khamrah_qahwa.svg" alt="Khamrah Qahwa" loading="lazy" />
+                <img src="products/khamrah_qahwa.webp" alt="Khamrah Qahwa" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #121</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>47.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -844,7 +848,7 @@
                 <img src="products/oud_for_glory.webp" alt="Badee Al Oud Oud For Glory" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -866,18 +870,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Fruity Floral Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Fruity Floral Woody">
               <div class="card-media">
-                <img src="products/badee_sublime.svg" alt="Badee Al Oud Sublime" loading="lazy" />
+                <img src="products/badee_sublime.webp" alt="Badee Al Oud Sublime" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #123</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>76.2 KB</span>
                   </div>
                 </div>
               </div>
@@ -893,18 +897,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Gourmand Spicy Sweet">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Gourmand Spicy Sweet">
               <div class="card-media">
-                <img src="products/honor_and_glory.svg" alt="Badee Al Oud Honor &amp; Glory" loading="lazy" />
+                <img src="products/honor_and_glory.webp" alt="Badee Al Oud Honor &amp; Glory" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #124</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>82.0 KB</span>
                   </div>
                 </div>
               </div>
@@ -920,18 +924,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Floral Amber Oud">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Floral Amber Oud">
               <div class="card-media">
-                <img src="products/amethyst.svg" alt="Badee Al Oud Amethyst" loading="lazy" />
+                <img src="products/amethyst.webp" alt="Badee Al Oud Amethyst" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #125</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>83.1 KB</span>
                   </div>
                 </div>
               </div>
@@ -947,18 +951,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Sweet Vanilla Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Sweet Vanilla Gourmand">
               <div class="card-media">
-                <img src="products/nebras.svg" alt="Nebras" loading="lazy" />
+                <img src="products/nebras.webp" alt="Nebras" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #126</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>47.1 KB</span>
                   </div>
                 </div>
               </div>
@@ -974,18 +978,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Woody Fruity Aromatic">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Woody Fruity Aromatic">
               <div class="card-media">
-                <img src="products/vintage_radio.svg" alt="Vintage Radio" loading="lazy" />
+                <img src="products/vintage_radio.webp" alt="Vintage Radio" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #127</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>43.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -1001,18 +1005,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Nutty Floral Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Nutty Floral Gourmand">
               <div class="card-media">
-                <img src="products/affection.svg" alt="Affection" loading="lazy" />
+                <img src="products/affection.webp" alt="Affection" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #128</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.2 KB</span>
                   </div>
                 </div>
               </div>
@@ -1028,18 +1032,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Amber Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Amber Woody">
               <div class="card-media">
-                <img src="products/eternal_oud.svg" alt="Eternal Oud" loading="lazy" />
+                <img src="products/eternal_oud.webp" alt="Eternal Oud" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #129</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>79.0 KB</span>
                   </div>
                 </div>
               </div>
@@ -1055,18 +1059,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Citrus Spicy Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Citrus Spicy Woody">
               <div class="card-media">
-                <img src="products/art_of_arabia_i.svg" alt="Art of Arabia I" loading="lazy" />
+                <img src="products/art_of_arabia_i.webp" alt="Art of Arabia I" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #130</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>41.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -1082,18 +1086,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Fruity Mineral Leather">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Fruity Mineral Leather">
               <div class="card-media">
-                <img src="products/masa.svg" alt="Masa" loading="lazy" />
+                <img src="products/masa.webp" alt="Masa" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #131</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>43.2 KB</span>
                   </div>
                 </div>
               </div>
@@ -1109,18 +1113,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Warm Woody Spicy">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Warm Woody Spicy">
               <div class="card-media">
-                <img src="products/hala.svg" alt="Hala" loading="lazy" />
+                <img src="products/hala.webp" alt="Hala" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #132</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>41.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -1136,18 +1140,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Amber Fruity Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Amber Fruity Gourmand">
               <div class="card-media">
-                <img src="products/winners_trophy_gold.svg" alt="Winners Trophy Gold" loading="lazy" />
+                <img src="products/winners_trophy_gold.webp" alt="Winners Trophy Gold" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #133</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>43.8 KB</span>
                   </div>
                 </div>
               </div>
@@ -1163,18 +1167,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Fruity Sweet Amber">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Fruity Sweet Amber">
               <div class="card-media">
-                <img src="products/shaheen_gold.svg" alt="Shaheen Gold" loading="lazy" />
+                <img src="products/shaheen_gold.webp" alt="Shaheen Gold" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #134</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.2 KB</span>
                   </div>
                 </div>
               </div>
@@ -1190,18 +1194,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Pride" data-family="Citrus Woody Fresh">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Pride" data-family="Citrus Woody Fresh">
               <div class="card-media">
-                <img src="products/al_qiam_silver.svg" alt="Al Qiam Silver" loading="lazy" />
+                <img src="products/al_qiam_silver.webp" alt="Al Qiam Silver" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #135</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>41.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -1222,7 +1226,7 @@
                 <img src="products/fakhar_black.webp" alt="Fakhar Black" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -1244,18 +1248,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Floral Fruity">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Floral Fruity">
               <div class="card-media">
-                <img src="products/fakhar_rose.svg" alt="Fakhar Rose" loading="lazy" />
+                <img src="products/fakhar_rose.webp" alt="Fakhar Rose" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #137</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>46.8 KB</span>
                   </div>
                 </div>
               </div>
@@ -1271,18 +1275,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Aromatic Fruity Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Aromatic Fruity Woody">
               <div class="card-media">
-                <img src="products/qaed_al_fursan.svg" alt="Qaed Al Fursan" loading="lazy" />
+                <img src="products/qaed_al_fursan.webp" alt="Qaed Al Fursan" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #138</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>44.0 KB</span>
                   </div>
                 </div>
               </div>
@@ -1298,18 +1302,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Creamy Coconut Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Creamy Coconut Gourmand">
               <div class="card-media">
-                <img src="products/qaed_fursan_unlimited.svg" alt="Qaed Al Fursan Unlimited" loading="lazy" />
+                <img src="products/qaed_fursan_unlimited.webp" alt="Qaed Al Fursan Unlimited" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #139</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>43.7 KB</span>
                   </div>
                 </div>
               </div>
@@ -1330,7 +1334,7 @@
                 <img src="products/ameer_al_oudh.webp" alt="Ameer Al Oudh Intense Oud" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -1352,18 +1356,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Sweet Amber Oriental">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Sweet Amber Oriental">
               <div class="card-media">
-                <img src="products/raghba.svg" alt="Raghba" loading="lazy" />
+                <img src="products/raghba.webp" alt="Raghba" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #141</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>41.8 KB</span>
                   </div>
                 </div>
               </div>
@@ -1379,18 +1383,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Smoky Woody Amber">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Smoky Woody Amber">
               <div class="card-media">
-                <img src="products/raghba_wood_intense.svg" alt="Raghba Wood Intense" loading="lazy" />
+                <img src="products/raghba_wood_intense.webp" alt="Raghba Wood Intense" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #142</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>40.6 KB</span>
                   </div>
                 </div>
               </div>
@@ -1406,18 +1410,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Floral Amber Oriental">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Floral Amber Oriental">
               <div class="card-media">
-                <img src="products/maahir_gold.svg" alt="Maahir" loading="lazy" />
+                <img src="products/maahir_gold.webp" alt="Maahir" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #143</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>46.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -1438,7 +1442,7 @@
                 <img src="products/maahir_black.webp" alt="Maahir Black Edition" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -1460,18 +1464,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Aromatic Citrus Fresh">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Aromatic Citrus Fresh">
               <div class="card-media">
-                <img src="products/maahir_legacy.svg" alt="Maahir Legacy" loading="lazy" />
+                <img src="products/maahir_legacy.webp" alt="Maahir Legacy" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #145</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>43.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -1487,18 +1491,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Aquatic Aromatic Fresh">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Aquatic Aromatic Fresh">
               <div class="card-media">
-                <img src="products/najdia.svg" alt="Najdia" loading="lazy" />
+                <img src="products/najdia.webp" alt="Najdia" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #146</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>44.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -1514,18 +1518,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Woody Aromatic Sweet">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Woody Aromatic Sweet">
               <div class="card-media">
-                <img src="products/hayaati.svg" alt="Hayaati" loading="lazy" />
+                <img src="products/hayaati.webp" alt="Hayaati" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #147</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>47.7 KB</span>
                   </div>
                 </div>
               </div>
@@ -1541,18 +1545,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Floral Fruity Sweet">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Floral Fruity Sweet">
               <div class="card-media">
-                <img src="products/hayaati_florence.svg" alt="Hayaati Florence" loading="lazy" />
+                <img src="products/hayaati_florence.webp" alt="Hayaati Florence" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #148</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>48.5 KB</span>
                   </div>
                 </div>
               </div>
@@ -1568,18 +1572,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Amber Fruity Leather">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Amber Fruity Leather">
               <div class="card-media">
-                <img src="products/hayaati_gold_elixir.svg" alt="Hayaati Gold Elixir" loading="lazy" />
+                <img src="products/hayaati_gold_elixir.webp" alt="Hayaati Gold Elixir" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #149</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>48.0 KB</span>
                   </div>
                 </div>
               </div>
@@ -1595,18 +1599,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Sweet Fruity Floral">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Sweet Fruity Floral">
               <div class="card-media">
-                <img src="products/ajwad.svg" alt="Ajwad" loading="lazy" />
+                <img src="products/ajwad.webp" alt="Ajwad" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #150</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>48.1 KB</span>
                   </div>
                 </div>
               </div>
@@ -1622,18 +1626,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Fruity Leather Floral">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Fruity Leather Floral">
               <div class="card-media">
-                <img src="products/ajwad_pink.svg" alt="Ajwad Pink to Pink" loading="lazy" />
+                <img src="products/ajwad_pink.webp" alt="Ajwad Pink to Pink" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #151</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>48.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -1649,18 +1653,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Clean White Musk">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Clean White Musk">
               <div class="card-media">
-                <img src="products/musk_mood.svg" alt="Musk Mood" loading="lazy" />
+                <img src="products/musk_mood.webp" alt="Musk Mood" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #152</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>47.0 KB</span>
                   </div>
                 </div>
               </div>
@@ -1676,18 +1680,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Powdery White Musk">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Powdery White Musk">
               <div class="card-media">
-                <img src="products/pure_musk.svg" alt="Pure Musk" loading="lazy" />
+                <img src="products/pure_musk.webp" alt="Pure Musk" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #153</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>46.6 KB</span>
                   </div>
                 </div>
               </div>
@@ -1703,18 +1707,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Warm Spicy Oriental">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Warm Spicy Oriental">
               <div class="card-media">
-                <img src="products/opulent_red.svg" alt="Opulent Red" loading="lazy" />
+                <img src="products/opulent_red.webp" alt="Opulent Red" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #154</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>46.7 KB</span>
                   </div>
                 </div>
               </div>
@@ -1730,18 +1734,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Amber Woody Oud">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Amber Woody Oud">
               <div class="card-media">
-                <img src="products/opulent_oud.svg" alt="Opulent Oud" loading="lazy" />
+                <img src="products/opulent_oud.webp" alt="Opulent Oud" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #155</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>82.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -1757,18 +1761,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Aromatic Marine Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Aromatic Marine Woody">
               <div class="card-media">
-                <img src="products/suqraat.svg" alt="Suqraat" loading="lazy" />
+                <img src="products/suqraat.webp" alt="Suqraat" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #156</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>44.7 KB</span>
                   </div>
                 </div>
               </div>
@@ -1784,18 +1788,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Fruity Sweet Musky">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Fruity Sweet Musky">
               <div class="card-media">
-                <img src="products/ana_abiyedh.svg" alt="Ana Abiyedh" loading="lazy" />
+                <img src="products/ana_abiyedh.webp" alt="Ana Abiyedh" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #157</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>41.6 KB</span>
                   </div>
                 </div>
               </div>
@@ -1811,18 +1815,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Amber Floral Sweet">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Amber Floral Sweet">
               <div class="card-media">
-                <img src="products/ana_abiyedh_rouge.svg" alt="Ana Abiyedh Rouge" loading="lazy" />
+                <img src="products/ana_abiyedh_rouge.webp" alt="Ana Abiyedh Rouge" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #158</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>43.5 KB</span>
                   </div>
                 </div>
               </div>
@@ -1838,18 +1842,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Leather Spicy Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Leather Spicy Woody">
               <div class="card-media">
-                <img src="products/ana_abiyedh_leather.svg" alt="Ana Abiyedh Leather" loading="lazy" />
+                <img src="products/ana_abiyedh_leather.webp" alt="Ana Abiyedh Leather" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #159</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.0 KB</span>
                   </div>
                 </div>
               </div>
@@ -1865,18 +1869,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Fruity Floral Fresh">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Fruity Floral Fresh">
               <div class="card-media">
-                <img src="products/mayar.svg" alt="Mayar" loading="lazy" />
+                <img src="products/mayar.webp" alt="Mayar" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #160</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>46.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -1892,18 +1896,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Aquatic Fruity Green">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Aquatic Fruity Green">
               <div class="card-media">
-                <img src="products/mayar_natural_intense.svg" alt="Mayar Natural Intense" loading="lazy" />
+                <img src="products/mayar_natural_intense.webp" alt="Mayar Natural Intense" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #161</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>44.5 KB</span>
                   </div>
                 </div>
               </div>
@@ -1919,18 +1923,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Aromatic Woody Amber">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Aromatic Woody Amber">
               <div class="card-media">
-                <img src="products/ejaazi.svg" alt="Ejaazi" loading="lazy" />
+                <img src="products/ejaazi.webp" alt="Ejaazi" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #162</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>43.0 KB</span>
                   </div>
                 </div>
               </div>
@@ -1946,18 +1950,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Aromatic Marine Fresh">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Aromatic Marine Fresh">
               <div class="card-media">
-                <img src="products/ejaazi_silver.svg" alt="Ejaazi Intensive Silver" loading="lazy" />
+                <img src="products/ejaazi_silver.webp" alt="Ejaazi Intensive Silver" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #163</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>44.3 KB</span>
                   </div>
                 </div>
               </div>
@@ -1973,18 +1977,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Woody Spicy Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Woody Spicy Gourmand">
               <div class="card-media">
-                <img src="products/kismet_men.svg" alt="Kismet for Men" loading="lazy" />
+                <img src="products/kismet_men.webp" alt="Kismet for Men" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #164</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>44.8 KB</span>
                   </div>
                 </div>
               </div>
@@ -2000,18 +2004,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Warm Boozy Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Warm Boozy Gourmand">
               <div class="card-media">
-                <img src="products/kismet_magic.svg" alt="Kismet Magic" loading="lazy" />
+                <img src="products/kismet_magic.webp" alt="Kismet Magic" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #165</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>46.3 KB</span>
                   </div>
                 </div>
               </div>
@@ -2027,18 +2031,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Fruity Floral Sparkling">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Fruity Floral Sparkling">
               <div class="card-media">
-                <img src="products/haya.svg" alt="Haya" loading="lazy" />
+                <img src="products/haya.webp" alt="Haya" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #166</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>48.1 KB</span>
                   </div>
                 </div>
               </div>
@@ -2054,18 +2058,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Herbal Green Aromatic">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Herbal Green Aromatic">
               <div class="card-media">
-                <img src="products/al_noble_safeer.svg" alt="Al Noble Safeer" loading="lazy" />
+                <img src="products/al_noble_safeer.webp" alt="Al Noble Safeer" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #167</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>45.5 KB</span>
                   </div>
                 </div>
               </div>
@@ -2081,18 +2085,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Fruity Gourmand Woody">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Fruity Gourmand Woody">
               <div class="card-media">
-                <img src="products/al_noble_wazeer.svg" alt="Al Noble Wazeer" loading="lazy" />
+                <img src="products/al_noble_wazeer.webp" alt="Al Noble Wazeer" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #168</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>45.3 KB</span>
                   </div>
                 </div>
               </div>
@@ -2108,18 +2112,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Woody Spicy Oriental">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Woody Spicy Oriental">
               <div class="card-media">
-                <img src="products/al_noble_ameer.svg" alt="Al Noble Ameer" loading="lazy" />
+                <img src="products/al_noble_ameer.webp" alt="Al Noble Ameer" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #169</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>44.6 KB</span>
                   </div>
                 </div>
               </div>
@@ -2135,18 +2139,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Lattafa Perfumes" data-family="Warm Boozy Fruity">
+            <div class="product-card" data-status="optimized" data-brand="Lattafa Perfumes" data-family="Warm Boozy Fruity">
               <div class="card-media">
-                <img src="products/sutoor.svg" alt="Sutoor" loading="lazy" />
+                <img src="products/sutoor.webp" alt="Sutoor" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #170</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>47.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -2162,18 +2166,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Fruity Amber Boozy">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Fruity Amber Boozy">
               <div class="card-media">
-                <img src="products/bright_peach.svg" alt="Bright Peach" loading="lazy" />
+                <img src="products/bright_peach.webp" alt="Bright Peach" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #171</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>46.8 KB</span>
                   </div>
                 </div>
               </div>
@@ -2194,7 +2198,7 @@
                 <img src="products/woody_oud.webp" alt="Woody Oud" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -2216,18 +2220,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Warm Spicy Tobacco">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Warm Spicy Tobacco">
               <div class="card-media">
-                <img src="products/tobacco_touch.svg" alt="Tobacco Touch" loading="lazy" />
+                <img src="products/tobacco_touch.webp" alt="Tobacco Touch" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #173</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>39.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -2243,18 +2247,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Leather Aromatic Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Leather Aromatic Gourmand">
               <div class="card-media">
-                <img src="products/fabulo_intense.svg" alt="Fabulo Intense" loading="lazy" />
+                <img src="products/fabulo_intense.webp" alt="Fabulo Intense" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #174</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>30.2 KB</span>
                   </div>
                 </div>
               </div>
@@ -2270,18 +2274,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Citrus Aromatic Floral">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Citrus Aromatic Floral">
               <div class="card-media">
-                <img src="products/porto_neroli.svg" alt="Porto Neroli" loading="lazy" />
+                <img src="products/porto_neroli.webp" alt="Porto Neroli" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #175</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -2297,18 +2301,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Fruity Amber Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Fruity Amber Gourmand">
               <div class="card-media">
-                <img src="products/lovely_cherie.svg" alt="Lovely Chèrie" loading="lazy" />
+                <img src="products/lovely_cherie.webp" alt="Lovely Chèrie" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #176</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>36.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -2324,18 +2328,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Floral Spicy Rose">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Floral Spicy Rose">
               <div class="card-media">
-                <img src="products/rose_petals.svg" alt="Rose Petals" loading="lazy" />
+                <img src="products/rose_petals.webp" alt="Rose Petals" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #177</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>39.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -2351,18 +2355,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Leather Fruity Amber">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Leather Fruity Amber">
               <div class="card-media">
-                <img src="products/toscano_leather.svg" alt="Toscano Leather" loading="lazy" />
+                <img src="products/toscano_leather.webp" alt="Toscano Leather" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #178</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>36.1 KB</span>
                   </div>
                 </div>
               </div>
@@ -2378,18 +2382,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Aromatic Fresh Spicy">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Aromatic Fresh Spicy">
               <div class="card-media">
-                <img src="products/salvo_intense.svg" alt="Salvo Intense" loading="lazy" />
+                <img src="products/salvo_intense.webp" alt="Salvo Intense" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #179</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>41.5 KB</span>
                   </div>
                 </div>
               </div>
@@ -2410,7 +2414,7 @@
                 <img src="products/baroque_rouge.webp" alt="Baroque Rouge 540" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -2437,7 +2441,7 @@
                 <img src="products/delilah.webp" alt="Delilah Pour Femme" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -2459,18 +2463,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Aquatic Aromatic Citrus">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Aquatic Aromatic Citrus">
               <div class="card-media">
-                <img src="products/jorge_di_profondo.svg" alt="Jorge Di Profondo" loading="lazy" />
+                <img src="products/jorge_di_profondo.webp" alt="Jorge Di Profondo" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #182</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>41.2 KB</span>
                   </div>
                 </div>
               </div>
@@ -2491,7 +2495,7 @@
                 <img src="products/jean_lowe_immortal.webp" alt="Jean Lowe Immortal" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-mode-b">MODE B: CONCEPTUAL</span>
+                    <span class="badge badge-mode-b">COMMERCIAL AI STILL-LIFE</span>
                     <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
@@ -2513,18 +2517,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Leather Cocoa Oud">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Leather Cocoa Oud">
               <div class="card-media">
-                <img src="products/jean_lowe_nouveau.svg" alt="Jean Lowe Nouveau" loading="lazy" />
+                <img src="products/jean_lowe_nouveau.webp" alt="Jean Lowe Nouveau" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #184</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>77.0 KB</span>
                   </div>
                 </div>
               </div>
@@ -2540,18 +2544,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Smoky Oud Amber">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Smoky Oud Amber">
               <div class="card-media">
-                <img src="products/jean_lowe_ombre.svg" alt="Jean Lowe Ombre" loading="lazy" />
+                <img src="products/jean_lowe_ombre.webp" alt="Jean Lowe Ombre" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #185</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>78.1 KB</span>
                   </div>
                 </div>
               </div>
@@ -2567,18 +2571,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Marine Woody Fresh">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Marine Woody Fresh">
               <div class="card-media">
-                <img src="products/victorioso.svg" alt="Victorioso" loading="lazy" />
+                <img src="products/victorioso.webp" alt="Victorioso" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #186</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.4 KB</span>
                   </div>
                 </div>
               </div>
@@ -2594,18 +2598,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Amber Spicy Vanilla">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Amber Spicy Vanilla">
               <div class="card-media">
-                <img src="products/victorioso_victory.svg" alt="Victorioso Victory" loading="lazy" />
+                <img src="products/victorioso_victory.webp" alt="Victorioso Victory" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #187</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>41.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -2621,18 +2625,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Oriental Fougere">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Oriental Fougere">
               <div class="card-media">
-                <img src="products/glacier_homme.svg" alt="Glacier Pour Homme" loading="lazy" />
+                <img src="products/glacier_homme.webp" alt="Glacier Pour Homme" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #188</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>39.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -2648,18 +2652,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Sweet Aromatic Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Sweet Aromatic Gourmand">
               <div class="card-media">
-                <img src="products/glacier_ultra.svg" alt="Glacier Ultra" loading="lazy" />
+                <img src="products/glacier_ultra.webp" alt="Glacier Ultra" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #189</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>39.7 KB</span>
                   </div>
                 </div>
               </div>
@@ -2675,18 +2679,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Woody Spicy Tobacco">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Woody Spicy Tobacco">
               <div class="card-media">
-                <img src="products/hercules.svg" alt="Hercules" loading="lazy" />
+                <img src="products/hercules.webp" alt="Hercules" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #190</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.0 KB</span>
                   </div>
                 </div>
               </div>
@@ -2702,18 +2706,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Woody Spicy Floral">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Woody Spicy Floral">
               <div class="card-media">
-                <img src="products/cassius.svg" alt="Cassius" loading="lazy" />
+                <img src="products/cassius.webp" alt="Cassius" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #191</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>41.2 KB</span>
                   </div>
                 </div>
               </div>
@@ -2729,18 +2733,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Leather Fruity Herbal">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Leather Fruity Herbal">
               <div class="card-media">
-                <img src="products/galatea.svg" alt="Galatea" loading="lazy" />
+                <img src="products/galatea.webp" alt="Galatea" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #192</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>38.8 KB</span>
                   </div>
                 </div>
               </div>
@@ -2756,18 +2760,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Fruity Musky Sweet">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Fruity Musky Sweet">
               <div class="card-media">
-                <img src="products/philos_pura.svg" alt="Philos Pura" loading="lazy" />
+                <img src="products/philos_pura.webp" alt="Philos Pura" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #193</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>40.0 KB</span>
                   </div>
                 </div>
               </div>
@@ -2783,18 +2787,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Floral Amber Oriental">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Floral Amber Oriental">
               <div class="card-media">
-                <img src="products/philos_rosso.svg" alt="Philos Rosso" loading="lazy" />
+                <img src="products/philos_rosso.webp" alt="Philos Rosso" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #194</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>38.8 KB</span>
                   </div>
                 </div>
               </div>
@@ -2810,18 +2814,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Fresh Aromatic Oriental">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Fresh Aromatic Oriental">
               <div class="card-media">
-                <img src="products/versencia_oro.svg" alt="Versencia Oro" loading="lazy" />
+                <img src="products/versencia_oro.webp" alt="Versencia Oro" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #195</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>39.6 KB</span>
                   </div>
                 </div>
               </div>
@@ -2837,18 +2841,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Floral Aquatic Fresh">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Floral Aquatic Fresh">
               <div class="card-media">
-                <img src="products/versencia_crystal.svg" alt="Versencia Crystal" loading="lazy" />
+                <img src="products/versencia_crystal.webp" alt="Versencia Crystal" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #196</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.8 KB</span>
                   </div>
                 </div>
               </div>
@@ -2864,18 +2868,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Amber Floral Gourmand">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Amber Floral Gourmand">
               <div class="card-media">
-                <img src="products/bad_femme.svg" alt="B.A.D. Femme" loading="lazy" />
+                <img src="products/bad_femme.webp" alt="B.A.D. Femme" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #197</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>43.3 KB</span>
                   </div>
                 </div>
               </div>
@@ -2891,18 +2895,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Woody Floral Musk">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Woody Floral Musk">
               <div class="card-media">
-                <img src="products/dark_door_intense.svg" alt="Dark Door Intense" loading="lazy" />
+                <img src="products/dark_door_intense.webp" alt="Dark Door Intense" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #198</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.9 KB</span>
                   </div>
                 </div>
               </div>
@@ -2918,18 +2922,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Amber Fougere Floral">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Amber Fougere Floral">
               <div class="card-media">
-                <img src="products/libbra.svg" alt="Libbra" loading="lazy" />
+                <img src="products/libbra.webp" alt="Libbra" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #199</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>42.8 KB</span>
                   </div>
                 </div>
               </div>
@@ -2945,18 +2949,18 @@
               </div>
             </div>
             
-            <div class="product-card" data-status="pending" data-brand="Maison Alhambra" data-family="Aromatic Fruity Amber">
+            <div class="product-card" data-status="optimized" data-brand="Maison Alhambra" data-family="Aromatic Fruity Amber">
               <div class="card-media">
-                <img src="products/sceptre_malachite.svg" alt="Sceptre Malachite" loading="lazy" />
+                <img src="products/sceptre_malachite.webp" alt="Sceptre Malachite" loading="lazy" />
                 <div class="card-overlay">
                   <div class="badges-row">
-                    <span class="badge badge-fallback">ARCHITECTURAL FLACON</span>
-                    <span class="badge badge-pending">PENDING FLACON</span>
+                    <span class="badge badge-mode-flacon">PROCEDURAL LUXURY FLACON</span>
+                    <span class="badge badge-success">OPTIMIZED 4:5 (1200x1500)</span>
                   </div>
                   <div class="tech-specs">
                     <span>ID #200</span>
-                    <span>600x750</span>
-                    <span>Vector SVG</span>
+                    <span>1200x1500</span>
+                    <span>41.1 KB</span>
                   </div>
                 </div>
               </div>
@@ -2991,8 +2995,14 @@
       var query = document.getElementById('searchInput').value.toLowerCase();
       var cards = document.querySelectorAll('.product-card');
       cards.forEach(function(c) {
-        var text = c.innerText.toLowerCase();
-        c.style.display = text.indexOf(query) !== -1 ? 'flex' : 'none';
+        var title = c.querySelector('.product-title').innerText.toLowerCase();
+        var brand = c.querySelector('.brand-eyebrow').innerText.toLowerCase();
+        var coll = c.querySelector('.product-collection').innerText.toLowerCase();
+        if (title.indexOf(query) !== -1 || brand.indexOf(query) !== -1 || coll.indexOf(query) !== -1) {
+          c.style.display = 'flex';
+        } else {
+          c.style.display = 'none';
+        }
       });
     }
   </script>

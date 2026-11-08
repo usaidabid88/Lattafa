@@ -1,0 +1,536 @@
+{
+  "Batch A (Yara & Feminine Luxury)": [
+    {
+      "product_id": 104,
+      "name": "Yara Candy",
+      "collection": "Yara Collection",
+      "gender": "Women"
+    },
+    {
+      "product_id": 106,
+      "name": "Angham",
+      "collection": "Mainline Classics",
+      "gender": "Women"
+    },
+    {
+      "product_id": 109,
+      "name": "Badee Al Oud Noble Blush",
+      "collection": "Badee Al Oud",
+      "gender": "Women"
+    },
+    {
+      "product_id": 111,
+      "name": "Victoria",
+      "collection": "Mainline Classics",
+      "gender": "Women"
+    },
+    {
+      "product_id": 118,
+      "name": "Yara Tous",
+      "collection": "Yara Collection",
+      "gender": "Women"
+    },
+    {
+      "product_id": 119,
+      "name": "Yara Moi",
+      "collection": "Yara Collection",
+      "gender": "Women"
+    },
+    {
+      "product_id": 128,
+      "name": "Affection",
+      "collection": "Lattafa Pride",
+      "gender": "Women"
+    },
+    {
+      "product_id": 137,
+      "name": "Fakhar Rose",
+      "collection": "Mainline Classics",
+      "gender": "Women"
+    },
+    {
+      "product_id": 148,
+      "name": "Hayaati Florence",
+      "collection": "Mainline Classics",
+      "gender": "Women"
+    },
+    {
+      "product_id": 151,
+      "name": "Ajwad Pink to Pink",
+      "collection": "Mainline Classics",
+      "gender": "Women"
+    },
+    {
+      "product_id": 160,
+      "name": "Mayar",
+      "collection": "Mainline Classics",
+      "gender": "Women"
+    },
+    {
+      "product_id": 161,
+      "name": "Mayar Natural Intense",
+      "collection": "Mainline Classics",
+      "gender": "Women"
+    },
+    {
+      "product_id": 166,
+      "name": "Haya",
+      "collection": "Mainline Classics",
+      "gender": "Women"
+    },
+    {
+      "product_id": 176,
+      "name": "Lovely Ch\u00e8rie",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Women"
+    },
+    {
+      "product_id": 196,
+      "name": "Versencia Crystal",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Women"
+    }
+  ],
+  "Batch B (Asad & Masculine Woods/Spices)": [
+    {
+      "product_id": 110,
+      "name": "His Confession",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    },
+    {
+      "product_id": 112,
+      "name": "The Kingdom Men",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    },
+    {
+      "product_id": 114,
+      "name": "Asad Zanzibar",
+      "collection": "Asad Collection",
+      "gender": "Men"
+    },
+    {
+      "product_id": 120,
+      "name": "Asad Bourbon",
+      "collection": "Asad Collection",
+      "gender": "Men"
+    },
+    {
+      "product_id": 130,
+      "name": "Art of Arabia I",
+      "collection": "Lattafa Pride",
+      "gender": "Men"
+    },
+    {
+      "product_id": 135,
+      "name": "Al Qiam Silver",
+      "collection": "Lattafa Pride",
+      "gender": "Men"
+    },
+    {
+      "product_id": 142,
+      "name": "Raghba Wood Intense",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    },
+    {
+      "product_id": 145,
+      "name": "Maahir Legacy",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    },
+    {
+      "product_id": 146,
+      "name": "Najdia",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    },
+    {
+      "product_id": 147,
+      "name": "Hayaati",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    },
+    {
+      "product_id": 156,
+      "name": "Suqraat",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    },
+    {
+      "product_id": 159,
+      "name": "Ana Abiyedh Leather",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    },
+    {
+      "product_id": 162,
+      "name": "Ejaazi",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    },
+    {
+      "product_id": 163,
+      "name": "Ejaazi Intensive Silver",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    },
+    {
+      "product_id": 164,
+      "name": "Kismet for Men",
+      "collection": "Mainline Classics",
+      "gender": "Men"
+    }
+  ],
+  "Batch C (Khamrah & Amber/Spicy Gourmands)": [
+    {
+      "product_id": 107,
+      "name": "Khamrah Dukhan",
+      "collection": "Khamrah Collection",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 113,
+      "name": "Liam Grey",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 115,
+      "name": "Atheeri",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 116,
+      "name": "Art Of Universe",
+      "collection": "Lattafa Pride",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 121,
+      "name": "Khamrah Qahwa",
+      "collection": "Khamrah Collection",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 124,
+      "name": "Badee Al Oud Honor & Glory",
+      "collection": "Badee Al Oud",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 125,
+      "name": "Badee Al Oud Amethyst",
+      "collection": "Badee Al Oud",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 126,
+      "name": "Nebras",
+      "collection": "Lattafa Pride",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 129,
+      "name": "Eternal Oud",
+      "collection": "Lattafa Pride",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 132,
+      "name": "Hala",
+      "collection": "Lattafa Pride",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 133,
+      "name": "Winners Trophy Gold",
+      "collection": "Lattafa Pride",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 134,
+      "name": "Shaheen Gold",
+      "collection": "Lattafa Pride",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 139,
+      "name": "Qaed Al Fursan Unlimited",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 141,
+      "name": "Raghba",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    }
+  ],
+  "Batch D (Badee Al Oud, Ouds & Orientals)": [
+    {
+      "product_id": 123,
+      "name": "Badee Al Oud Sublime",
+      "collection": "Badee Al Oud",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 143,
+      "name": "Maahir",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 154,
+      "name": "Opulent Red",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 155,
+      "name": "Opulent Oud",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 165,
+      "name": "Kismet Magic",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 167,
+      "name": "Al Noble Safeer",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 168,
+      "name": "Al Noble Wazeer",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 169,
+      "name": "Al Noble Ameer",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 170,
+      "name": "Sutoor",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 184,
+      "name": "Jean Lowe Nouveau",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 185,
+      "name": "Jean Lowe Ombre",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 190,
+      "name": "Hercules",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 191,
+      "name": "Cassius",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 192,
+      "name": "Galatea",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 200,
+      "name": "Sceptre Malachite",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Unisex"
+    }
+  ],
+  "Batch E (Lattafa Pride & Maison Alhambra)": [
+    {
+      "product_id": 117,
+      "name": "Art Of Nature II",
+      "collection": "Lattafa Pride",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 127,
+      "name": "Vintage Radio",
+      "collection": "Lattafa Pride",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 131,
+      "name": "Masa",
+      "collection": "Lattafa Pride",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 171,
+      "name": "Bright Peach",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 173,
+      "name": "Tobacco Touch",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 174,
+      "name": "Fabulo Intense",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 175,
+      "name": "Porto Neroli",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 177,
+      "name": "Rose Petals",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 178,
+      "name": "Toscano Leather",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 179,
+      "name": "Salvo Intense",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 182,
+      "name": "Jorge Di Profondo",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 186,
+      "name": "Victorioso",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 187,
+      "name": "Victorioso Victory",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 188,
+      "name": "Glacier Pour Homme",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    }
+  ],
+  "Batch F (Mainline Classics & Niche)": [
+    {
+      "product_id": 138,
+      "name": "Qaed Al Fursan",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 149,
+      "name": "Hayaati Gold Elixir",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 150,
+      "name": "Ajwad",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 152,
+      "name": "Musk Mood",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 153,
+      "name": "Pure Musk",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 157,
+      "name": "Ana Abiyedh",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 158,
+      "name": "Ana Abiyedh Rouge",
+      "collection": "Mainline Classics",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 189,
+      "name": "Glacier Ultra",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 193,
+      "name": "Philos Pura",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 194,
+      "name": "Philos Rosso",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Unisex"
+    },
+    {
+      "product_id": 195,
+      "name": "Versencia Oro",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 197,
+      "name": "B.A.D. Femme",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Women"
+    },
+    {
+      "product_id": 198,
+      "name": "Dark Door Intense",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Men"
+    },
+    {
+      "product_id": 199,
+      "name": "Libbra",
+      "collection": "Maison Alhambra Luxury",
+      "gender": "Women"
+    }
+  ]
+}

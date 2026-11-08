@@ -105,11 +105,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/yara_candy.svg",
-    "fallback_image_path": "static/images/products/yara_candy.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/yara_candy.webp",
+    "fallback_image_path": "static/images/products/yara_candy.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Yara Candy fragrance (Fruity Gourmand). An original, sculpted sensual hourglass bottle concept crafted from soft blush pink and frosted pearl glass with rose-gold metallic shoulder trim, with a sculpted rounded blush crystal and rose-gold cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined soft ivory and cream luxury studio with delicate highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Candied Green Tangerine, Blackcurrant, heart of Strawberry Fizz, Gardenia, base of Vanilla Syrup, Amber, Musk, Sandalwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "4d8db5ada50c376b",
     "aspect_ratio": "4:5",
@@ -118,12 +118,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 48.1,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:04:01.187261",
+    "luminance": 39.4,
+    "sharpness": 387.1
   },
   "eclaire": {
     "product_id": 105,
@@ -167,11 +169,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/angham.svg",
-    "fallback_image_path": "static/images/products/angham.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/angham.webp",
+    "fallback_image_path": "static/images/products/angham.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Angham fragrance (Floral Amber Gourmand). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Ginger, Mandarin Orange, Pink Pepper, heart of Praline, French Lavender, Jasmine Sambac, base of Madagascar Vanilla, Amber, Warm Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "76d35265ba9a766b",
     "aspect_ratio": "4:5",
@@ -180,12 +182,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 47.7,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:04:15.757029",
+    "luminance": 39.0,
+    "sharpness": 395.4
   },
   "khamrah_dukhan": {
     "product_id": 107,
@@ -197,11 +201,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/khamrah_dukhan.svg",
-    "fallback_image_path": "static/images/products/khamrah_dukhan.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/khamrah_dukhan.webp",
+    "fallback_image_path": "static/images/products/khamrah_dukhan.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Khamrah Dukhan fragrance (Smoky Amber Woody). An original, faceted cut crystal whisky decanter concept crafted from heavy leaded crystal glass with warm cognac-amber liquid, with a geometric faceted crystal stopper with gold trim. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: warm amber studio with soft golden rim light and subtle dark wood surface reflections. Subtle olfactory nuances reflected in ambient warmth: top notes of Cinnamon, Bergamot, Pink Pepper, Frankincense Smoke, heart of Medjool Dates, Royal Incense, Atlas Cedar, Praline, base of Smoky Oud, Bourbon Vanilla, Benzoin, Rich Amber. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "fe9ab185732ba44b",
     "aspect_ratio": "4:5",
@@ -210,12 +214,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 45.7,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:04:30.147421",
+    "luminance": 30.7,
+    "sharpness": 541.1
   },
   "teriaq": {
     "product_id": 108,
@@ -259,11 +265,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/noble_blush.svg",
-    "fallback_image_path": "static/images/products/noble_blush.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/noble_blush.webp",
+    "fallback_image_path": "static/images/products/noble_blush.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Badee Al Oud Noble Blush fragrance (Sweet Floral Gourmand). An original, monolithic faceted obelisk bottle concept crafted from soft blush rose glass with rose-gold arabesque filigree detailing, with a faceted rose-gold finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: soft luxury studio setting with luminous rose-gold highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Rose Milk, Candied Almond, Italian Meringue, heart of Creamy Sandalwood, Jasmine Sambac, Vanilla Cream, base of White Musk, Ambergris, Sweet Cedar. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "4f66a6b34781cb31",
     "aspect_ratio": "4:5",
@@ -272,12 +278,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 46.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:04:43.958528",
+    "luminance": 42.8,
+    "sharpness": 606.1
   },
   "his_confession": {
     "product_id": 110,
@@ -289,11 +297,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/his_confession.svg",
-    "fallback_image_path": "static/images/products/his_confession.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/his_confession.webp",
+    "fallback_image_path": "static/images/products/his_confession.jpg",
     "prompt": "Professional commercial luxury perfume product photography of His Confession fragrance (Warm Spicy Woody). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Cinnamon, Mandarin Orange, French Lavender, heart of Iris Butter, Mahonial, Siam Benzoin, Cypress, base of Vanilla Pod, Tonka Bean, Atlas Cedar, Amber, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "ebd419de3209963c",
     "aspect_ratio": "4:5",
@@ -302,12 +310,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 44.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:04:50.484314",
+    "luminance": 37.2,
+    "sharpness": 544.9
   },
   "victoria": {
     "product_id": 111,
@@ -319,11 +329,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/victoria.svg",
-    "fallback_image_path": "static/images/products/victoria.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/victoria.webp",
+    "fallback_image_path": "static/images/products/victoria.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Victoria fragrance (Fruity Floral Musk). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Red Berries, Ripe Peach, Mandarin Orange, heart of Damask Rose, Pink Peony, Night Jasmine, base of White Musk, Cashmere Wood, Sweet Vanilla. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "f6a4b0dad20711ca",
     "aspect_ratio": "4:5",
@@ -332,12 +342,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 47.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:04:56.593482",
+    "luminance": 36.3,
+    "sharpness": 386.3
   },
   "the_kingdom_men": {
     "product_id": 112,
@@ -349,11 +361,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/the_kingdom_men.svg",
-    "fallback_image_path": "static/images/products/the_kingdom_men.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/the_kingdom_men.webp",
+    "fallback_image_path": "static/images/products/the_kingdom_men.jpg",
     "prompt": "Professional commercial luxury perfume product photography of The Kingdom Men fragrance (Aromatic Woody Fresh). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Crisp Mint, Bergamot, Clary Sage, heart of Lavender, Orange Blossom, Green Cardamom, base of Bourbon Vanilla, Tonka Bean, Virginia Cedar, Amber. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "198a137d246d288f",
     "aspect_ratio": "4:5",
@@ -362,12 +374,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 45.3,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:02.377744",
+    "luminance": 37.3,
+    "sharpness": 557.1
   },
   "liam_grey": {
     "product_id": 113,
@@ -379,11 +393,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/liam_grey.svg",
-    "fallback_image_path": "static/images/products/liam_grey.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/liam_grey.webp",
+    "fallback_image_path": "static/images/products/liam_grey.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Liam Grey fragrance (Woody Spicy Aromatic). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Green Cardamom, Black Fig, Black Tea, heart of Tuscan Iris, Vetiver, Rock Rose Labdanum, base of Mysore Sandalwood, Bourbon Vanilla, Tonka Bean, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "8b03665ed1fe11e7",
     "aspect_ratio": "4:5",
@@ -392,12 +406,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 46.7,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:07.880489",
+    "luminance": 41.8,
+    "sharpness": 499.0
   },
   "asad_zanzibar": {
     "product_id": 114,
@@ -409,11 +425,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/asad_zanzibar.svg",
-    "fallback_image_path": "static/images/products/asad_zanzibar.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/asad_zanzibar.webp",
+    "fallback_image_path": "static/images/products/asad_zanzibar.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Asad Zanzibar fragrance (Tropical Marine Aromatic). An original, fluted architectural column flacon concept crafted from heavy deep charcoal obsidian glass with polished gold metallic bands, with a grooved textured black and gold cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: dramatic dark luxury studio with crisp edge lighting and contact shadow. Subtle olfactory nuances reflected in ambient warmth: top notes of Black Pepper, Sea Water Accord, Lavender, heart of Salty Coconut Water, Tuscan Iris, base of Tahitian Vanilla, Somalian Incense, Sandalwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "90a08a59aa1f4367",
     "aspect_ratio": "4:5",
@@ -422,12 +438,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 50.8,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:13.635909",
+    "luminance": 42.1,
+    "sharpness": 574.1
   },
   "atheeri": {
     "product_id": 115,
@@ -439,11 +457,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/atheeri.svg",
-    "fallback_image_path": "static/images/products/atheeri.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/atheeri.webp",
+    "fallback_image_path": "static/images/products/atheeri.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Atheeri fragrance (Amber Floral Oriental). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Iranian Saffron, Taif Rose, Bergamot, heart of Indonesian Patchouli, Cedar, Jasmine Sambac, base of Golden Amber, White Musk, Soft Agarwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "391a842343dc0cb2",
     "aspect_ratio": "4:5",
@@ -452,12 +470,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 47.6,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:19.174567",
+    "luminance": 42.3,
+    "sharpness": 527.4
   },
   "art_of_universe": {
     "product_id": 116,
@@ -469,11 +489,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/art_of_universe.svg",
-    "fallback_image_path": "static/images/products/art_of_universe.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/art_of_universe.webp",
+    "fallback_image_path": "static/images/products/art_of_universe.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Art Of Universe fragrance (Citrus Amber Woody). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Sicilian Blood Orange, Bergamot, Elemi Resin, heart of French Geranium, Lavender, Frankincense, base of Virginian Cedarwood, Crystal Amber, Roasted Tonka. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "8154f040908681ee",
     "aspect_ratio": "4:5",
@@ -482,12 +502,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 44.6,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:24.630747",
+    "luminance": 41.7,
+    "sharpness": 614.0
   },
   "art_of_nature_ii": {
     "product_id": 117,
@@ -499,11 +521,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/art_of_nature_ii.svg",
-    "fallback_image_path": "static/images/products/art_of_nature_ii.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/art_of_nature_ii.webp",
+    "fallback_image_path": "static/images/products/art_of_nature_ii.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Art Of Nature II fragrance (Herbal Woody Moss). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Artemisia, Green Cardamom, Spearmint, heart of Clary Sage, Florentine Orris, Forest Oakmoss, base of Haitian Vetiver, Supple Leather, Ambergris, Dry Cedar. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "f68a05d16fe3979c",
     "aspect_ratio": "4:5",
@@ -512,12 +534,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.5,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:29.853452",
+    "luminance": 41.8,
+    "sharpness": 590.9
   },
   "yara_tous": {
     "product_id": 118,
@@ -529,11 +553,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/yara_tous.svg",
-    "fallback_image_path": "static/images/products/yara_tous.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/yara_tous.webp",
+    "fallback_image_path": "static/images/products/yara_tous.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Yara Tous fragrance (Tropical Floral Fruity). An original, sculpted sensual hourglass bottle concept crafted from soft blush pink and frosted pearl glass with rose-gold metallic shoulder trim, with a sculpted rounded blush crystal and rose-gold cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined soft ivory and cream luxury studio with delicate highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Ripe Mango, Coconut Milk, Passion Fruit, heart of Jasmine Sambac, Heliotrope, Orange Blossom, base of Vanilla, Cashmeran, White Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "b39ab31cd2b185a9",
     "aspect_ratio": "4:5",
@@ -542,12 +566,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 51.2,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:35.342469",
+    "luminance": 45.1,
+    "sharpness": 377.9
   },
   "yara_moi": {
     "product_id": 119,
@@ -559,11 +585,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/yara_moi.svg",
-    "fallback_image_path": "static/images/products/yara_moi.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/yara_moi.webp",
+    "fallback_image_path": "static/images/products/yara_moi.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Yara Moi fragrance (Amber Floral Gourmand). An original, sculpted sensual hourglass bottle concept crafted from soft blush pink and frosted pearl glass with rose-gold metallic shoulder trim, with a sculpted rounded blush crystal and rose-gold cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined soft ivory and cream luxury studio with delicate highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Juicy Peach, Jasmine, heart of Caramel, Warm Amber, base of Patchouli, Sandalwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "4d682430c1d47f5b",
     "aspect_ratio": "4:5",
@@ -572,12 +598,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.5,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:40.994898",
+    "luminance": 60.0,
+    "sharpness": 405.9
   },
   "asad_bourbon": {
     "product_id": 120,
@@ -589,11 +617,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/asad_bourbon.svg",
-    "fallback_image_path": "static/images/products/asad_bourbon.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/asad_bourbon.webp",
+    "fallback_image_path": "static/images/products/asad_bourbon.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Asad Bourbon fragrance (Warm Amber Woody). An original, fluted architectural column flacon concept crafted from heavy deep charcoal obsidian glass with polished gold metallic bands, with a grooved textured black and gold cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: dramatic dark luxury studio with crisp edge lighting and contact shadow. Subtle olfactory nuances reflected in ambient warmth: top notes of Bourbon Whiskey Accord, Cardamom, Bergamot, heart of Roasted Cocoa, Tonka Bean, Nutmeg, base of Amber, Oak Wood, Madagascar Vanilla, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "4d00accf3bbc7aa7",
     "aspect_ratio": "4:5",
@@ -602,12 +630,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 44.5,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:46.664154",
+    "luminance": 36.4,
+    "sharpness": 539.5
   },
   "khamrah_qahwa": {
     "product_id": 121,
@@ -619,11 +649,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/khamrah_qahwa.svg",
-    "fallback_image_path": "static/images/products/khamrah_qahwa.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/khamrah_qahwa.webp",
+    "fallback_image_path": "static/images/products/khamrah_qahwa.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Khamrah Qahwa fragrance (Gourmand Coffee Oriental). An original, faceted cut crystal whisky decanter concept crafted from heavy leaded crystal glass with warm cognac-amber liquid, with a geometric faceted crystal stopper with gold trim. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: warm amber studio with soft golden rim light and subtle dark wood surface reflections. Subtle olfactory nuances reflected in ambient warmth: top notes of Cardamom, Ginger, Cinnamon, heart of Roasted Arabic Coffee (Qahwa), Candied Fruits, White Flowers, base of Coffee Beans, Vanilla, Tonka Bean, Benzoin, Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "03793cd1f082639d",
     "aspect_ratio": "4:5",
@@ -632,12 +662,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 47.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:52.821421",
+    "luminance": 28.2,
+    "sharpness": 536.7
   },
   "oud_for_glory": {
     "product_id": 122,
@@ -681,11 +713,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/badee_sublime.svg",
-    "fallback_image_path": "static/images/products/badee_sublime.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/badee_sublime.webp",
+    "fallback_image_path": "static/images/products/badee_sublime.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Badee Al Oud Sublime fragrance (Fruity Floral Woody). An original, monolithic faceted obelisk bottle concept crafted from deep ruby-crimson crystal glass with polished gold filigree trim, with a faceted ruby and gold finial stopper. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luxurious crimson and dark velvet studio with sparkling edge reflections. Subtle olfactory nuances reflected in ambient warmth: top notes of Crisp Red Apple, Litchi, Rose, heart of Plum, Jasmine, Forest Moss, base of Vanilla, Moss, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "1907189edd8b98c7",
     "aspect_ratio": "4:5",
@@ -694,12 +726,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 76.2,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:05:58.272057",
+    "luminance": 26.5,
+    "sharpness": 783.5
   },
   "honor_and_glory": {
     "product_id": 124,
@@ -711,11 +745,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/honor_and_glory.svg",
-    "fallback_image_path": "static/images/products/honor_and_glory.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/honor_and_glory.webp",
+    "fallback_image_path": "static/images/products/honor_and_glory.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Badee Al Oud Honor & Glory fragrance (Gourmand Spicy Sweet). An original, monolithic faceted obelisk bottle concept crafted from pure white marble-finish opaline glass with polished royal gold filigree, with a sculpted white and gold finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: pristine high-contrast luxury studio with crisp gold highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Pineapple Cr\u00e8me Br\u00fbl\u00e9e, Cinnamon, heart of Benzoin, Black Pepper, Turmeric, base of Vanilla, Cashmeran, Sandalwood, Moss. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "c93f4ac74e46c0bd",
     "aspect_ratio": "4:5",
@@ -724,12 +758,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 82.0,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:06:03.630873",
+    "luminance": 38.7,
+    "sharpness": 745.5
   },
   "amethyst": {
     "product_id": 125,
@@ -741,11 +777,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/amethyst.svg",
-    "fallback_image_path": "static/images/products/amethyst.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/amethyst.webp",
+    "fallback_image_path": "static/images/products/amethyst.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Badee Al Oud Amethyst fragrance (Floral Amber Oud). An original, monolithic faceted obelisk bottle concept crafted from deep royal amethyst purple glass with delicate gold arabesque filigree, with a faceted amethyst and gold finial stopper. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: mysterious jewel-toned studio setting with soft specular reflections. Subtle olfactory nuances reflected in ambient warmth: top notes of Pink Pepper, Bergamot, heart of Turkish Rose, Bulgarian Rose, Jasmine, base of Agarwood (Oud), Amber, Madagascar Vanilla. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "c385c2842bce1ed8",
     "aspect_ratio": "4:5",
@@ -754,12 +790,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 83.1,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:06:09.207892",
+    "luminance": 39.1,
+    "sharpness": 820.4
   },
   "nebras": {
     "product_id": 126,
@@ -771,11 +809,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/nebras.svg",
-    "fallback_image_path": "static/images/products/nebras.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/nebras.webp",
+    "fallback_image_path": "static/images/products/nebras.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Nebras fragrance (Sweet Vanilla Gourmand). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Red Berries, Sicilian Mandarin, heart of Vanilla, Cacao, Rose, base of Sugar, Tonka Bean, Amber, Clean Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "7fb735edc85de699",
     "aspect_ratio": "4:5",
@@ -784,12 +822,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 47.1,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:06:14.497355",
+    "luminance": 28.3,
+    "sharpness": 457.6
   },
   "vintage_radio": {
     "product_id": 127,
@@ -801,11 +841,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/vintage_radio.svg",
-    "fallback_image_path": "static/images/products/vintage_radio.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/vintage_radio.webp",
+    "fallback_image_path": "static/images/products/vintage_radio.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Vintage Radio fragrance (Woody Fruity Aromatic). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Lavender, Sage, Bergamot, heart of Dark Plum, Palo Santo, Black Pepper, base of Sandalwood, Amberwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "b1299cacb2656c7c",
     "aspect_ratio": "4:5",
@@ -814,12 +854,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 43.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:06:19.865593",
+    "luminance": 33.2,
+    "sharpness": 619.3
   },
   "affection": {
     "product_id": 128,
@@ -831,11 +873,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/affection.svg",
-    "fallback_image_path": "static/images/products/affection.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/affection.webp",
+    "fallback_image_path": "static/images/products/affection.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Affection fragrance (Nutty Floral Gourmand). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Pistachio, Hazelnut, Cassis, heart of Lactonic Accord, Lily of the Valley, Jasmine, Raspberry, base of Lactones, Vanilla, Tonka Bean. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "09d186c4a7109a53",
     "aspect_ratio": "4:5",
@@ -844,12 +886,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.2,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:06:25.566439",
+    "luminance": 46.0,
+    "sharpness": 575.7
   },
   "eternal_oud": {
     "product_id": 129,
@@ -861,11 +905,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/eternal_oud.svg",
-    "fallback_image_path": "static/images/products/eternal_oud.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/eternal_oud.webp",
+    "fallback_image_path": "static/images/products/eternal_oud.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Eternal Oud fragrance (Amber Woody). An original, ornate faceted crystal flacon concept crafted from heavy beveled crystal with glowing golden agarwood oil, with a sculpted crystal finial with gold filigree collar. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: opulent warm amber studio with soft reflections. Subtle olfactory nuances reflected in ambient warmth: top notes of Grapefruit, Plum, heart of Orchid, Heliotrope, base of Vanilla, Amber, Oud, Benzoin, Tonka Bean, Labdanum. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "6c8f7b135a4c4d3f",
     "aspect_ratio": "4:5",
@@ -874,12 +918,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 79.0,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:06:31.170085",
+    "luminance": 36.8,
+    "sharpness": 812.2
   },
   "art_of_arabia_i": {
     "product_id": 130,
@@ -891,11 +937,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/art_of_arabia_i.svg",
-    "fallback_image_path": "static/images/products/art_of_arabia_i.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/art_of_arabia_i.webp",
+    "fallback_image_path": "static/images/products/art_of_arabia_i.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Art of Arabia I fragrance (Citrus Spicy Woody). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Bergamot, Mint, heart of Black Tea, Ginger, Lavender, base of Ambroxan, Olibanum, Cedarwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "8b79fadddf16d19f",
     "aspect_ratio": "4:5",
@@ -904,12 +950,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 41.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:06:37.722811",
+    "luminance": 47.0,
+    "sharpness": 590.3
   },
   "masa": {
     "product_id": 131,
@@ -921,11 +969,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/masa.svg",
-    "fallback_image_path": "static/images/products/masa.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/masa.webp",
+    "fallback_image_path": "static/images/products/masa.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Masa fragrance (Fruity Mineral Leather). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Mango, Saffron, Lemon, Pink Pepper, heart of Osmanthus, Violet Leaf, Orange Blossom, Ginger, base of Mineral Notes, Suede Leather, Amber, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "e30fa76a2f833076",
     "aspect_ratio": "4:5",
@@ -934,12 +982,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 43.2,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:06:43.777315",
+    "luminance": 30.1,
+    "sharpness": 378.0
   },
   "hala": {
     "product_id": 132,
@@ -951,11 +1001,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/hala.svg",
-    "fallback_image_path": "static/images/products/hala.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/hala.webp",
+    "fallback_image_path": "static/images/products/hala.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Hala fragrance (Warm Woody Spicy). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Nutmeg, Black Pepper, heart of Cedarwood, Amber, base of Incense, Labdanum. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "490e5059fa698316",
     "aspect_ratio": "4:5",
@@ -964,12 +1014,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 41.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:06:56.596642",
+    "luminance": 42.1,
+    "sharpness": 587.7
   },
   "winners_trophy_gold": {
     "product_id": 133,
@@ -981,11 +1033,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/winners_trophy_gold.svg",
-    "fallback_image_path": "static/images/products/winners_trophy_gold.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/winners_trophy_gold.webp",
+    "fallback_image_path": "static/images/products/winners_trophy_gold.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Winners Trophy Gold fragrance (Amber Fruity Gourmand). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Pink Pepper, Plum, heart of Jasmine, Rose, base of Patchouli, Vanilla, Amber. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "9fb224cb29d1d2f1",
     "aspect_ratio": "4:5",
@@ -994,12 +1046,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 43.8,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:03.048919",
+    "luminance": 42.0,
+    "sharpness": 601.7
   },
   "shaheen_gold": {
     "product_id": 134,
@@ -1011,11 +1065,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/shaheen_gold.svg",
-    "fallback_image_path": "static/images/products/shaheen_gold.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/shaheen_gold.webp",
+    "fallback_image_path": "static/images/products/shaheen_gold.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Shaheen Gold fragrance (Fruity Sweet Amber). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Pineapple, Grapefruit, heart of Fig, Lavender, base of Vanilla, Tonka Bean, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "8b0a1561f6a5cb15",
     "aspect_ratio": "4:5",
@@ -1024,12 +1078,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.2,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:09.170464",
+    "luminance": 41.2,
+    "sharpness": 583.4
   },
   "al_qiam_silver": {
     "product_id": 135,
@@ -1041,11 +1097,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/al_qiam_silver.svg",
-    "fallback_image_path": "static/images/products/al_qiam_silver.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/al_qiam_silver.webp",
+    "fallback_image_path": "static/images/products/al_qiam_silver.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Al Qiam Silver fragrance (Citrus Woody Fresh). An original, artisanal geometric architectural flacon concept crafted from beveled crystal glass with satin gold filigree accents, with a faceted crown finial cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: haute parfumerie luxury studio with focused spot lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Grapefruit, Ginger, heart of Ambrox, Sandalwood, base of Vetiver, Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "b509ebd55da088db",
     "aspect_ratio": "4:5",
@@ -1054,12 +1110,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 41.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:15.546154",
+    "luminance": 46.6,
+    "sharpness": 530.1
   },
   "fakhar_black": {
     "product_id": 136,
@@ -1103,11 +1161,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/fakhar_rose.svg",
-    "fallback_image_path": "static/images/products/fakhar_rose.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/fakhar_rose.webp",
+    "fallback_image_path": "static/images/products/fakhar_rose.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Fakhar Rose fragrance (Floral Fruity). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Pomegranate, Lily, Aldehydes, heart of Tuberose, Jasmine, Gardenia, Ylang-Ylang, base of Vanilla, Sandalwood, White Musk, Ambroxan. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "f0ef282dd67b5ade",
     "aspect_ratio": "4:5",
@@ -1116,12 +1174,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 46.8,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:21.906909",
+    "luminance": 38.6,
+    "sharpness": 389.6
   },
   "qaed_al_fursan": {
     "product_id": 138,
@@ -1133,11 +1193,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "90ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/qaed_al_fursan.svg",
-    "fallback_image_path": "static/images/products/qaed_al_fursan.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/qaed_al_fursan.webp",
+    "fallback_image_path": "static/images/products/qaed_al_fursan.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Qaed Al Fursan fragrance (Aromatic Fruity Woody). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Smoky Sweet Pineapple, Saffron, heart of Balsam Fir, Jasmine, base of Oud, Cedar, Amber. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "48476a6851aea0fd",
     "aspect_ratio": "4:5",
@@ -1146,12 +1206,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 44.0,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:27.445082",
+    "luminance": 41.3,
+    "sharpness": 589.7
   },
   "qaed_fursan_unlimited": {
     "product_id": 139,
@@ -1163,11 +1225,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "90ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/qaed_fursan_unlimited.svg",
-    "fallback_image_path": "static/images/products/qaed_fursan_unlimited.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/qaed_fursan_unlimited.webp",
+    "fallback_image_path": "static/images/products/qaed_fursan_unlimited.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Qaed Al Fursan Unlimited fragrance (Creamy Coconut Gourmand). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Coconut Milk, Citrus, Pineapple, heart of Ylang-Ylang, Frangipani, Jasmine, base of Vanilla, White Musk, Sandalwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "aa8faea041fcc003",
     "aspect_ratio": "4:5",
@@ -1176,12 +1238,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 43.7,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:32.688659",
+    "luminance": 41.4,
+    "sharpness": 565.1
   },
   "ameer_al_oudh": {
     "product_id": 140,
@@ -1225,11 +1289,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/raghba.svg",
-    "fallback_image_path": "static/images/products/raghba.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/raghba.webp",
+    "fallback_image_path": "static/images/products/raghba.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Raghba fragrance (Sweet Amber Oriental). An original, royal Arabian rectangular flacon concept crafted from thick crystal glass base with warm radiant liquid, with a sculpted metallic crown cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: opulent neutral studio with balanced key and rim illumination. Subtle olfactory nuances reflected in ambient warmth: top notes of Sugar, Vanilla, heart of Agarwood, Incense, base of Sandalwood, Amber, Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "78c70078098351cc",
     "aspect_ratio": "4:5",
@@ -1238,12 +1302,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 41.8,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:37.804751",
+    "luminance": 29.0,
+    "sharpness": 512.7
   },
   "raghba_wood_intense": {
     "product_id": 142,
@@ -1255,11 +1321,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/raghba_wood_intense.svg",
-    "fallback_image_path": "static/images/products/raghba_wood_intense.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/raghba_wood_intense.webp",
+    "fallback_image_path": "static/images/products/raghba_wood_intense.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Raghba Wood Intense fragrance (Smoky Woody Amber). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Cedarwood, Guaiac Wood, Licorice, Caramel, heart of Oud, Sandalwood, Sugar, base of Incense, Amber, Vanilla, Oakmoss. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "d12747351320df0f",
     "aspect_ratio": "4:5",
@@ -1268,12 +1334,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 40.6,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:43.265910",
+    "luminance": 33.3,
+    "sharpness": 428.3
   },
   "maahir_gold": {
     "product_id": 143,
@@ -1285,11 +1353,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/maahir_gold.svg",
-    "fallback_image_path": "static/images/products/maahir_gold.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/maahir_gold.webp",
+    "fallback_image_path": "static/images/products/maahir_gold.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Maahir fragrance (Floral Amber Oriental). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Bergamot, Red Berries, Peach Bellini, heart of Peony, Pink Lily, Jasmine, base of Sandalwood, Vanilla, Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "61c08657d090f3e1",
     "aspect_ratio": "4:5",
@@ -1298,12 +1366,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 46.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:48.591049",
+    "luminance": 41.3,
+    "sharpness": 480.5
   },
   "maahir_black": {
     "product_id": 144,
@@ -1347,11 +1417,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/maahir_legacy.svg",
-    "fallback_image_path": "static/images/products/maahir_legacy.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/maahir_legacy.webp",
+    "fallback_image_path": "static/images/products/maahir_legacy.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Maahir Legacy fragrance (Aromatic Citrus Fresh). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Lime, Mint, Grapefruit, Lavender, Pineapple, heart of Juniper Berry, Rosemary, Geranium, Pepper, base of Ambroxan, Oakmoss, Vetiver, Cashmeran, Tonka. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "6485ecc25b220669",
     "aspect_ratio": "4:5",
@@ -1360,12 +1430,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 43.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:53.616140",
+    "luminance": 32.7,
+    "sharpness": 507.7
   },
   "najdia": {
     "product_id": 146,
@@ -1377,11 +1449,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/najdia.svg",
-    "fallback_image_path": "static/images/products/najdia.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/najdia.webp",
+    "fallback_image_path": "static/images/products/najdia.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Najdia fragrance (Aquatic Aromatic Fresh). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Crisp Lemon, Green Apple, Cinnamon, Lemongrass, heart of Aqua Notes, Lavender, Cardamom, Rosemary, base of Amber, Musk, Cedar, Sandalwood, Tobacco. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "a6ee900546647c50",
     "aspect_ratio": "4:5",
@@ -1390,12 +1462,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 44.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:07:58.870404",
+    "luminance": 32.8,
+    "sharpness": 563.9
   },
   "hayaati": {
     "product_id": 147,
@@ -1407,11 +1481,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/hayaati.svg",
-    "fallback_image_path": "static/images/products/hayaati.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/hayaati.webp",
+    "fallback_image_path": "static/images/products/hayaati.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Hayaati fragrance (Woody Aromatic Sweet). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Crisp Apple, Bergamot, heart of Cinnamon, Woody Notes, base of Vanilla, Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "ec9ed2a2d1bdb47b",
     "aspect_ratio": "4:5",
@@ -1420,12 +1494,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 47.7,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:04.736491",
+    "luminance": 37.1,
+    "sharpness": 389.1
   },
   "hayaati_florence": {
     "product_id": 148,
@@ -1437,11 +1513,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/hayaati_florence.svg",
-    "fallback_image_path": "static/images/products/hayaati_florence.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/hayaati_florence.webp",
+    "fallback_image_path": "static/images/products/hayaati_florence.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Hayaati Florence fragrance (Floral Fruity Sweet). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Pink Grapefruit, Sweet Litchi, heart of Peony, Rose, Citrus Blossoms, base of Vanilla, Soft Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "6bbf654c708bb6bd",
     "aspect_ratio": "4:5",
@@ -1450,12 +1526,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 48.5,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:10.562203",
+    "luminance": 36.4,
+    "sharpness": 406.9
   },
   "hayaati_gold_elixir": {
     "product_id": 149,
@@ -1467,11 +1545,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/hayaati_gold_elixir.svg",
-    "fallback_image_path": "static/images/products/hayaati_gold_elixir.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/hayaati_gold_elixir.webp",
+    "fallback_image_path": "static/images/products/hayaati_gold_elixir.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Hayaati Gold Elixir fragrance (Amber Fruity Leather). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Grapefruit, Bergamot, Cassis, heart of Peach, Saffron, Leather, base of Vanilla, Amber, Musk, Vetiver. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "ee59cb44f950c93f",
     "aspect_ratio": "4:5",
@@ -1480,12 +1558,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 48.0,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:15.752813",
+    "luminance": 32.3,
+    "sharpness": 395.5
   },
   "ajwad": {
     "product_id": 150,
@@ -1497,11 +1577,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "60ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/ajwad.svg",
-    "fallback_image_path": "static/images/products/ajwad.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/ajwad.webp",
+    "fallback_image_path": "static/images/products/ajwad.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Ajwad fragrance (Sweet Fruity Floral). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Fruity Notes, Sweet Berries, heart of Rose, Jasmine, base of Vanilla, Musk, Amber, Cedar. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "b10f4b6b3b76858d",
     "aspect_ratio": "4:5",
@@ -1510,12 +1590,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 48.1,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:21.247392",
+    "luminance": 34.3,
+    "sharpness": 480.4
   },
   "ajwad_pink": {
     "product_id": 151,
@@ -1527,11 +1609,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "60ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/ajwad_pink.svg",
-    "fallback_image_path": "static/images/products/ajwad_pink.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/ajwad_pink.webp",
+    "fallback_image_path": "static/images/products/ajwad_pink.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Ajwad Pink to Pink fragrance (Fruity Leather Floral). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Pink Guava, Grapefruit, Pink Pepper, Lychee, heart of Magnolia, Peony, Rose, base of Leather, Ambergris, Vanilla, Moss. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "e09ab6739099be19",
     "aspect_ratio": "4:5",
@@ -1540,12 +1622,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 48.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:27.229963",
+    "luminance": 38.2,
+    "sharpness": 451.8
   },
   "musk_mood": {
     "product_id": 152,
@@ -1557,11 +1641,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/musk_mood.svg",
-    "fallback_image_path": "static/images/products/musk_mood.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/musk_mood.webp",
+    "fallback_image_path": "static/images/products/musk_mood.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Musk Mood fragrance (Clean White Musk). An original, royal Arabian rectangular flacon concept crafted from thick crystal glass base with warm radiant liquid, with a sculpted metallic crown cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: opulent neutral studio with balanced key and rim illumination. Subtle olfactory nuances reflected in ambient warmth: top notes of Citrus, Fruity Notes, heart of White Floral Notes, Vanilla, White Musk, base of Sandalwood, Clean Musk, Amber. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "38005e547ca5054c",
     "aspect_ratio": "4:5",
@@ -1570,12 +1654,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 47.0,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:32.606685",
+    "luminance": 41.6,
+    "sharpness": 515.4
   },
   "pure_musk": {
     "product_id": 153,
@@ -1587,11 +1673,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/pure_musk.svg",
-    "fallback_image_path": "static/images/products/pure_musk.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/pure_musk.webp",
+    "fallback_image_path": "static/images/products/pure_musk.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Pure Musk fragrance (Powdery White Musk). An original, royal Arabian rectangular flacon concept crafted from thick crystal glass base with warm radiant liquid, with a sculpted metallic crown cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: opulent neutral studio with balanced key and rim illumination. Subtle olfactory nuances reflected in ambient warmth: top notes of White Musk, Lily of the Valley, heart of Violet, Sweet Amber, base of Powdery Musk, Soft Woods. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "3e96684aecf09f45",
     "aspect_ratio": "4:5",
@@ -1600,12 +1686,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 46.6,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:38.023849",
+    "luminance": 41.6,
+    "sharpness": 502.3
   },
   "opulent_red": {
     "product_id": 154,
@@ -1617,11 +1705,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/opulent_red.svg",
-    "fallback_image_path": "static/images/products/opulent_red.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/opulent_red.webp",
+    "fallback_image_path": "static/images/products/opulent_red.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Opulent Red fragrance (Warm Spicy Oriental). An original, royal Arabian rectangular flacon concept crafted from thick crystal glass base with warm radiant liquid, with a sculpted metallic crown cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: opulent neutral studio with balanced key and rim illumination. Subtle olfactory nuances reflected in ambient warmth: top notes of Blood Orange, Pear, Pink Pepper, Cardamom, heart of Tuberose, Jasmine, Cognac, Heliotrope, base of Amber, Vanilla, Tonka Bean, Sandalwood, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "187817df78294a19",
     "aspect_ratio": "4:5",
@@ -1630,12 +1718,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 46.7,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:43.291709",
+    "luminance": 41.9,
+    "sharpness": 513.5
   },
   "opulent_oud": {
     "product_id": 155,
@@ -1647,11 +1737,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/opulent_oud.svg",
-    "fallback_image_path": "static/images/products/opulent_oud.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/opulent_oud.webp",
+    "fallback_image_path": "static/images/products/opulent_oud.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Opulent Oud fragrance (Amber Woody Oud). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Cinnamon Bark, Saffron, heart of Rose, Agarwood (Oud), base of Cedarwood, Amber, Resins. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "e1dfb067ddc8ffd9",
     "aspect_ratio": "4:5",
@@ -1660,12 +1750,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 82.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:48.768154",
+    "luminance": 42.7,
+    "sharpness": 735.2
   },
   "suqraat": {
     "product_id": 156,
@@ -1677,11 +1769,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/suqraat.svg",
-    "fallback_image_path": "static/images/products/suqraat.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/suqraat.webp",
+    "fallback_image_path": "static/images/products/suqraat.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Suqraat fragrance (Aromatic Marine Woody). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Bergamot, Fresh Ginger, heart of Violet Leaf, Lavender, Cypress, base of Ambroxan, Sandalwood, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "4b213454071898f1",
     "aspect_ratio": "4:5",
@@ -1690,12 +1782,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 44.7,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:54.461438",
+    "luminance": 36.2,
+    "sharpness": 568.0
   },
   "ana_abiyedh": {
     "product_id": 157,
@@ -1707,11 +1801,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "60ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/ana_abiyedh.svg",
-    "fallback_image_path": "static/images/products/ana_abiyedh.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/ana_abiyedh.webp",
+    "fallback_image_path": "static/images/products/ana_abiyedh.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Ana Abiyedh fragrance (Fruity Sweet Musky). An original, royal Arabian rectangular flacon concept crafted from thick crystal glass base with warm radiant liquid, with a sculpted metallic crown cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: opulent neutral studio with balanced key and rim illumination. Subtle olfactory nuances reflected in ambient warmth: top notes of White Musk, Calabrian Bergamot, heart of Sweet Pear, Vanilla, Cardamom, base of Saffron, Tonka Bean, Guaiac Wood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "697a4d5443de9152",
     "aspect_ratio": "4:5",
@@ -1720,12 +1814,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 41.6,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:08:59.643104",
+    "luminance": 41.6,
+    "sharpness": 538.0
   },
   "ana_abiyedh_rouge": {
     "product_id": 158,
@@ -1737,11 +1833,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "60ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/ana_abiyedh_rouge.svg",
-    "fallback_image_path": "static/images/products/ana_abiyedh_rouge.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/ana_abiyedh_rouge.webp",
+    "fallback_image_path": "static/images/products/ana_abiyedh_rouge.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Ana Abiyedh Rouge fragrance (Amber Floral Sweet). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Nashi Pear, Kumquat, Bergamot, heart of Geranium, Caramel, Warm Ambergris, base of Oakmoss, White Musk, Leather. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "62b77390fa0d40cd",
     "aspect_ratio": "4:5",
@@ -1750,12 +1846,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 43.5,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:04.889196",
+    "luminance": 41.6,
+    "sharpness": 597.0
   },
   "ana_abiyedh_leather": {
     "product_id": 159,
@@ -1767,11 +1865,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "60ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/ana_abiyedh_leather.svg",
-    "fallback_image_path": "static/images/products/ana_abiyedh_leather.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/ana_abiyedh_leather.webp",
+    "fallback_image_path": "static/images/products/ana_abiyedh_leather.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Ana Abiyedh Leather fragrance (Leather Spicy Woody). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Cardamom, Juniper Berry, Pink Pepper, heart of Orris, Ginger, Rose, base of Russian Leather, Amber, Tonka Bean, Sandalwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "367de98d0db6b7ce",
     "aspect_ratio": "4:5",
@@ -1780,12 +1878,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.0,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:10.758099",
+    "luminance": 46.7,
+    "sharpness": 547.0
   },
   "mayar": {
     "product_id": 160,
@@ -1797,11 +1897,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/mayar.svg",
-    "fallback_image_path": "static/images/products/mayar.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/mayar.webp",
+    "fallback_image_path": "static/images/products/mayar.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Mayar fragrance (Fruity Floral Fresh). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Lychee, Sweet Raspberry, Violet Leaf, heart of White Rose, Peony, Jasmine, base of Madagascar Vanilla, Clean Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "d3b0b14935d3b79d",
     "aspect_ratio": "4:5",
@@ -1810,12 +1910,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 46.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:16.440076",
+    "luminance": 38.3,
+    "sharpness": 371.9
   },
   "mayar_natural_intense": {
     "product_id": 161,
@@ -1827,11 +1929,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/mayar_natural_intense.svg",
-    "fallback_image_path": "static/images/products/mayar_natural_intense.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/mayar_natural_intense.webp",
+    "fallback_image_path": "static/images/products/mayar_natural_intense.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Mayar Natural Intense fragrance (Aquatic Fruity Green). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Green Mandarin, Fresh Fig, Melon, Coconut Water, heart of Water Lily, Jasmine, Lotus Blossom, base of Sandalwood, Vanilla, Ambroxan. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "d1db2fcada75e5c4",
     "aspect_ratio": "4:5",
@@ -1840,12 +1942,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 44.5,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:21.495747",
+    "luminance": 31.9,
+    "sharpness": 383.3
   },
   "ejaazi": {
     "product_id": 162,
@@ -1857,11 +1961,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/ejaazi.svg",
-    "fallback_image_path": "static/images/products/ejaazi.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/ejaazi.webp",
+    "fallback_image_path": "static/images/products/ejaazi.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Ejaazi fragrance (Aromatic Woody Amber). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Sweet Orange, Myrtle, Citrus, Lavender, heart of Cardamom, Cinnamon, Patchouli, Lily of the Valley, base of Ambroxan, Cedarwood, Oakmoss, Amber, Vetiver. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "8c064c76d713a929",
     "aspect_ratio": "4:5",
@@ -1870,12 +1974,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 43.0,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:27.237764",
+    "luminance": 36.4,
+    "sharpness": 545.1
   },
   "ejaazi_silver": {
     "product_id": 163,
@@ -1887,11 +1993,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/ejaazi_silver.svg",
-    "fallback_image_path": "static/images/products/ejaazi_silver.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/ejaazi_silver.webp",
+    "fallback_image_path": "static/images/products/ejaazi_silver.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Ejaazi Intensive Silver fragrance (Aromatic Marine Fresh). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Grapefruit, Mandarin Orange, heart of Sea Notes, Cedar Leaf, base of Ambergris, Oakmoss. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "34fb181e2c34224b",
     "aspect_ratio": "4:5",
@@ -1900,12 +2006,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 44.3,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:32.935999",
+    "luminance": 36.0,
+    "sharpness": 566.1
   },
   "kismet_men": {
     "product_id": 164,
@@ -1917,11 +2025,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/kismet_men.svg",
-    "fallback_image_path": "static/images/products/kismet_men.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/kismet_men.webp",
+    "fallback_image_path": "static/images/products/kismet_men.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Kismet for Men fragrance (Woody Spicy Gourmand). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Nutmeg, Woody Notes, heart of Cacao, Coffee, Patchouli, Sandalwood, base of Vanilla, Vetiver. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "af4920a2cd9334d1",
     "aspect_ratio": "4:5",
@@ -1930,12 +2038,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 44.8,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:38.651030",
+    "luminance": 37.8,
+    "sharpness": 589.4
   },
   "kismet_magic": {
     "product_id": 165,
@@ -1947,11 +2057,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/kismet_magic.svg",
-    "fallback_image_path": "static/images/products/kismet_magic.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/kismet_magic.webp",
+    "fallback_image_path": "static/images/products/kismet_magic.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Kismet Magic fragrance (Warm Boozy Gourmand). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of French Cognac, Honey, heart of Cinnamon, Tonka Bean, Oak Wood, base of Praline, Vanilla, Sandalwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "5dc73333a440aa01",
     "aspect_ratio": "4:5",
@@ -1960,12 +2070,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 46.3,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:44.167143",
+    "luminance": 35.5,
+    "sharpness": 560.3
   },
   "haya": {
     "product_id": 166,
@@ -1977,11 +2089,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/haya.svg",
-    "fallback_image_path": "static/images/products/haya.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/haya.webp",
+    "fallback_image_path": "static/images/products/haya.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Haya fragrance (Fruity Floral Sparkling). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Champagne Accord, Strawberry, Blood Orange, Rose, heart of Gardenia, Vanilla Orchid, Jasmine, base of Praline, Amber, Sandalwood, Chestnut. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "19e013484bd939b1",
     "aspect_ratio": "4:5",
@@ -1990,12 +2102,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 48.1,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:49.717511",
+    "luminance": 36.2,
+    "sharpness": 396.8
   },
   "al_noble_safeer": {
     "product_id": 167,
@@ -2007,11 +2121,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/al_noble_safeer.svg",
-    "fallback_image_path": "static/images/products/al_noble_safeer.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/al_noble_safeer.webp",
+    "fallback_image_path": "static/images/products/al_noble_safeer.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Al Noble Safeer fragrance (Herbal Green Aromatic). An original, royal Arabian rectangular flacon concept crafted from thick crystal glass base with warm radiant liquid, with a sculpted metallic crown cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: opulent neutral studio with balanced key and rim illumination. Subtle olfactory nuances reflected in ambient warmth: top notes of Artemisia, Bergamot, heart of Herbal Notes, Green Notes, Spicy Accords, base of Guaiac Wood, Nutty Notes, Patchouli, Frankincense, Cumin. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "e630cbde6cfe0a13",
     "aspect_ratio": "4:5",
@@ -2020,12 +2134,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 45.5,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:54.880165",
+    "luminance": 30.4,
+    "sharpness": 410.2
   },
   "al_noble_wazeer": {
     "product_id": 168,
@@ -2037,11 +2153,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/al_noble_wazeer.svg",
-    "fallback_image_path": "static/images/products/al_noble_wazeer.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/al_noble_wazeer.webp",
+    "fallback_image_path": "static/images/products/al_noble_wazeer.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Al Noble Wazeer fragrance (Fruity Gourmand Woody). An original, sculpted sensual hourglass flacon concept crafted from soft tinted rose or amber glass with polished metallic collar, with a sculpted rounded crystal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: luminous soft-focus studio setting with delicate specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Fresh Mint, Bitter Orange, Bergamot, Juniper, heart of Dark Chocolate, Caramel, Pear, Raspberry, Iris, base of Amber, Vanilla, Sandalwood, Cedarwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "ebac1a95e8ca615d",
     "aspect_ratio": "4:5",
@@ -2050,12 +2166,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 45.3,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:09:59.974391",
+    "luminance": 30.2,
+    "sharpness": 410.5
   },
   "al_noble_ameer": {
     "product_id": 169,
@@ -2067,11 +2185,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/al_noble_ameer.svg",
-    "fallback_image_path": "static/images/products/al_noble_ameer.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/al_noble_ameer.webp",
+    "fallback_image_path": "static/images/products/al_noble_ameer.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Al Noble Ameer fragrance (Woody Spicy Oriental). An original, fluted columnar luxury flacon concept crafted from heavy smoked obsidian glass with burnished metallic bands, with a grooved solid metal cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: masculine dark stone luxury studio with crisp edge rim lighting. Subtle olfactory nuances reflected in ambient warmth: top notes of Apple, Pink Pepper, Rosemary, heart of Clove, Floral Notes, base of Agarwood, Vetiver, Cypress, Labdanum, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "ad69daeeb3fd239b",
     "aspect_ratio": "4:5",
@@ -2080,12 +2198,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 44.6,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:10:05.129036",
+    "luminance": 30.1,
+    "sharpness": 402.2
   },
   "sutoor": {
     "product_id": 170,
@@ -2097,11 +2217,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/sutoor.svg",
-    "fallback_image_path": "static/images/products/sutoor.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/sutoor.webp",
+    "fallback_image_path": "static/images/products/sutoor.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Sutoor fragrance (Warm Boozy Fruity). An original, royal Arabian rectangular flacon concept crafted from thick crystal glass base with warm radiant liquid, with a sculpted metallic crown cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: opulent neutral studio with balanced key and rim illumination. Subtle olfactory nuances reflected in ambient warmth: top notes of Ripe Peach, Cardamom, Blood Orange, Heliotrope, heart of Cognac, Rum, Davana, Jasmine Sambac, base of Indonesian Patchouli, Vanilla, Sandalwood, Tonka, Benzoin. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "509af82accbc6d38",
     "aspect_ratio": "4:5",
@@ -2110,12 +2230,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 47.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:10:10.570554",
+    "luminance": 41.2,
+    "sharpness": 519.9
   },
   "bright_peach": {
     "product_id": 171,
@@ -2127,11 +2249,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "80ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/bright_peach.svg",
-    "fallback_image_path": "static/images/products/bright_peach.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/bright_peach.webp",
+    "fallback_image_path": "static/images/products/bright_peach.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Bright Peach fragrance (Fruity Amber Boozy). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Peach, Blood Orange, Cardamom, Heliotrope, heart of Rum, Cognac, Davana, Jasmine, base of Patchouli, Vanilla, Sandalwood, Tonka Bean, Cashmeran. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "fee309ca20c3fbec",
     "aspect_ratio": "4:5",
@@ -2140,12 +2262,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 46.8,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:10:15.815497",
+    "luminance": 36.2,
+    "sharpness": 568.8
   },
   "woody_oud": {
     "product_id": 172,
@@ -2189,11 +2313,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "80ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/tobacco_touch.svg",
-    "fallback_image_path": "static/images/products/tobacco_touch.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/tobacco_touch.webp",
+    "fallback_image_path": "static/images/products/tobacco_touch.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Tobacco Touch fragrance (Warm Spicy Tobacco). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Tobacco Leaf, Spicy Notes, heart of Tonka Bean, Tobacco Blossom, Vanilla, Cacao, base of Dry Fruit Accord, Woody Notes. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "5b5bdb9e4db66717",
     "aspect_ratio": "4:5",
@@ -2202,12 +2326,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 39.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:10:20.510954",
+    "luminance": 28.4,
+    "sharpness": 578.1
   },
   "fabulo_intense": {
     "product_id": 174,
@@ -2219,11 +2345,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "80ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/fabulo_intense.svg",
-    "fallback_image_path": "static/images/products/fabulo_intense.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/fabulo_intense.webp",
+    "fallback_image_path": "static/images/products/fabulo_intense.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Fabulo Intense fragrance (Leather Aromatic Gourmand). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Clary Sage, Lavender, heart of Bitter Almond, Leather, Orris, Vanilla, base of Leather, Tonka Bean, Cashmeran, Amber, White Woods. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "8aebefe58ee49968",
     "aspect_ratio": "4:5",
@@ -2232,12 +2358,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 30.2,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:10:28.568864",
+    "luminance": 25.1,
+    "sharpness": 683.9
   },
   "porto_neroli": {
     "product_id": 175,
@@ -2249,11 +2377,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "80ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/porto_neroli.svg",
-    "fallback_image_path": "static/images/products/porto_neroli.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/porto_neroli.webp",
+    "fallback_image_path": "static/images/products/porto_neroli.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Porto Neroli fragrance (Citrus Aromatic Floral). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Tunisian Neroli, Italian Lemon, Sicilian Mandarin, Bitter Orange, heart of African Orange Flower, Lavender, Pittosporum, Jasmine, base of Amber, Angelica, Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "4c1558548ac13fd8",
     "aspect_ratio": "4:5",
@@ -2262,12 +2390,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:10:38.417851",
+    "luminance": 35.5,
+    "sharpness": 591.6
   },
   "lovely_cherie": {
     "product_id": 176,
@@ -2279,11 +2409,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "80ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/lovely_cherie.svg",
-    "fallback_image_path": "static/images/products/lovely_cherie.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/lovely_cherie.webp",
+    "fallback_image_path": "static/images/products/lovely_cherie.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Lovely Ch\u00e8rie fragrance (Fruity Amber Gourmand). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Black Cherry, Bitter Almond, Cherry Liqueur, heart of Sour Cherry, Plum, Turkish Rose, Jasmine Sambac, base of Tonka Bean, Vanilla, Peru Balsam, Cinnamon, Sandalwood, Cedar. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "178cdc3d36954406",
     "aspect_ratio": "4:5",
@@ -2292,12 +2422,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 36.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:10:49.206017",
+    "luminance": 28.2,
+    "sharpness": 605.9
   },
   "rose_petals": {
     "product_id": 177,
@@ -2309,11 +2441,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "80ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/rose_petals.svg",
-    "fallback_image_path": "static/images/products/rose_petals.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/rose_petals.webp",
+    "fallback_image_path": "static/images/products/rose_petals.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Rose Petals fragrance (Floral Spicy Rose). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Sichuan Pepper, Turmeric, heart of May Rose, Bulgarian Rose, Turkish Rose, base of Patchouli, Tonka Bean. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "0abe7d6daf394dc3",
     "aspect_ratio": "4:5",
@@ -2322,12 +2454,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 39.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:10:58.831276",
+    "luminance": 40.3,
+    "sharpness": 617.2
   },
   "toscano_leather": {
     "product_id": 178,
@@ -2339,11 +2473,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "80ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/toscano_leather.svg",
-    "fallback_image_path": "static/images/products/toscano_leather.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/toscano_leather.webp",
+    "fallback_image_path": "static/images/products/toscano_leather.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Toscano Leather fragrance (Leather Fruity Amber). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Wild Thyme, Saffron, Raspberry, heart of Olibanum, Night Jasmine, base of Leather, Black Suede, Amberwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "9ae6a49f58b4f930",
     "aspect_ratio": "4:5",
@@ -2352,12 +2486,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 36.1,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:11:08.551336",
+    "luminance": 25.3,
+    "sharpness": 565.4
   },
   "salvo_intense": {
     "product_id": 179,
@@ -2369,11 +2505,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/salvo_intense.svg",
-    "fallback_image_path": "static/images/products/salvo_intense.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/salvo_intense.webp",
+    "fallback_image_path": "static/images/products/salvo_intense.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Salvo Intense fragrance (Aromatic Fresh Spicy). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Calabrian Bergamot, Sichuan Pepper, heart of Lavender, Pink Pepper, Vetiver, Patchouli, Geranium, base of Ambroxan, Cedar, Labdanum. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "bbf6a20f685a6925",
     "aspect_ratio": "4:5",
@@ -2382,12 +2518,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 41.5,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:11:19.467273",
+    "luminance": 45.5,
+    "sharpness": 595.6
   },
   "baroque_rouge": {
     "product_id": 180,
@@ -2463,11 +2601,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/jorge_di_profondo.svg",
-    "fallback_image_path": "static/images/products/jorge_di_profondo.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/jorge_di_profondo.webp",
+    "fallback_image_path": "static/images/products/jorge_di_profondo.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Jorge Di Profondo fragrance (Aquatic Aromatic Citrus). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Marine Accord, Green Mandarin, Bergamot, heart of Rosemary, Lavender, Cypress, Mastic, base of Mineral Amber, Patchouli, Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "bf7b7a3414f949c1",
     "aspect_ratio": "4:5",
@@ -2476,12 +2614,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 41.2,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:11:29.673725",
+    "luminance": 40.6,
+    "sharpness": 642.7
   },
   "jean_lowe_immortal": {
     "product_id": 183,
@@ -2525,11 +2665,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/jean_lowe_nouveau.svg",
-    "fallback_image_path": "static/images/products/jean_lowe_nouveau.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/jean_lowe_nouveau.webp",
+    "fallback_image_path": "static/images/products/jean_lowe_nouveau.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Jean Lowe Nouveau fragrance (Leather Cocoa Oud). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Blackcurrant, Caramel, Saffron, heart of May Rose, Incense, Dark Cocoa, base of Agarwood, Leather, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "e897ed2b24c68c31",
     "aspect_ratio": "4:5",
@@ -2538,12 +2678,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 77.0,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:11:39.366541",
+    "luminance": 41.3,
+    "sharpness": 784.5
   },
   "jean_lowe_ombre": {
     "product_id": 185,
@@ -2555,11 +2697,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/jean_lowe_ombre.svg",
-    "fallback_image_path": "static/images/products/jean_lowe_ombre.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/jean_lowe_ombre.webp",
+    "fallback_image_path": "static/images/products/jean_lowe_ombre.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Jean Lowe Ombre fragrance (Smoky Oud Amber). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Raspberry, Saffron, heart of Damask Rose, Geranium, Incense, base of Assam Oud, Benzoin Tears, Birch Smoke, Amberwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "4dff7794c63dca96",
     "aspect_ratio": "4:5",
@@ -2568,12 +2710,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 78.1,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:11:49.205843",
+    "luminance": 41.7,
+    "sharpness": 783.8
   },
   "victorioso": {
     "product_id": 186,
@@ -2585,11 +2729,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/victorioso.svg",
-    "fallback_image_path": "static/images/products/victorioso.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/victorioso.webp",
+    "fallback_image_path": "static/images/products/victorioso.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Victorioso fragrance (Marine Woody Fresh). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Marine Notes, Grapefruit, Mandarin, heart of Bay Leaf, Jasmine, base of Ambergris, Guaiac Wood, Oakmoss, Patchouli. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "b4c497bfaf6f6c5d",
     "aspect_ratio": "4:5",
@@ -2598,12 +2742,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.4,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:11:59.810906",
+    "luminance": 45.7,
+    "sharpness": 567.7
   },
   "victorioso_victory": {
     "product_id": 187,
@@ -2615,11 +2761,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/victorioso_victory.svg",
-    "fallback_image_path": "static/images/products/victorioso_victory.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/victorioso_victory.webp",
+    "fallback_image_path": "static/images/products/victorioso_victory.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Victorioso Victory fragrance (Amber Spicy Vanilla). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Pink Pepper, Lemon, heart of Olibanum, Lavender, base of Vanilla, Tonka Bean, Amber. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "6b94e3df166827ff",
     "aspect_ratio": "4:5",
@@ -2628,12 +2774,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 41.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:12:10.529870",
+    "luminance": 45.2,
+    "sharpness": 584.8
   },
   "glacier_homme": {
     "product_id": 188,
@@ -2645,11 +2793,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/glacier_homme.svg",
-    "fallback_image_path": "static/images/products/glacier_homme.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/glacier_homme.webp",
+    "fallback_image_path": "static/images/products/glacier_homme.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Glacier Pour Homme fragrance (Oriental Fougere). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Lavender, Mint, Cardamom, Bergamot, heart of Cinnamon, Orange Blossom, Caraway, base of Vanilla, Tonka Bean, Amber, Sandalwood, Cedar. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "df37f37a4f4ddb10",
     "aspect_ratio": "4:5",
@@ -2658,12 +2806,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 39.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:12:20.859823",
+    "luminance": 40.5,
+    "sharpness": 654.1
   },
   "glacier_ultra": {
     "product_id": 189,
@@ -2675,11 +2825,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/glacier_ultra.svg",
-    "fallback_image_path": "static/images/products/glacier_ultra.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/glacier_ultra.webp",
+    "fallback_image_path": "static/images/products/glacier_ultra.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Glacier Ultra fragrance (Sweet Aromatic Gourmand). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Pear, Lavender, Mint, Bergamot, Lemon, heart of Cinnamon, Clary Sage, Caraway, base of Black Vanilla Husk, Amber, Patchouli, Cedar. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "ef716e8861f52c1e",
     "aspect_ratio": "4:5",
@@ -2688,12 +2838,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 39.7,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:12:31.070734",
+    "luminance": 40.7,
+    "sharpness": 656.8
   },
   "hercules": {
     "product_id": 190,
@@ -2705,11 +2857,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/hercules.svg",
-    "fallback_image_path": "static/images/products/hercules.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/hercules.webp",
+    "fallback_image_path": "static/images/products/hercules.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Hercules fragrance (Woody Spicy Tobacco). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Cinnamon, Pepper, heart of Tobacco Leaf, Incense, Osmanthus, Labdanum, base of Vanilla, Iso E Super, Cedar, Vetiver, Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "1a591e934c2de276",
     "aspect_ratio": "4:5",
@@ -2718,12 +2870,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.0,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:12:38.697479",
+    "luminance": 45.6,
+    "sharpness": 576.6
   },
   "cassius": {
     "product_id": 191,
@@ -2735,11 +2889,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/cassius.svg",
-    "fallback_image_path": "static/images/products/cassius.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/cassius.webp",
+    "fallback_image_path": "static/images/products/cassius.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Cassius fragrance (Woody Spicy Floral). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Nutmeg, Green Apple, Saffron, heart of Tonka Bean, Rose, Osmanthus, Artemisia, base of Vanilla, Patchouli, Amber. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "2941e791aadd7998",
     "aspect_ratio": "4:5",
@@ -2748,12 +2902,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 41.2,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:12:45.069172",
+    "luminance": 45.7,
+    "sharpness": 641.3
   },
   "galatea": {
     "product_id": 192,
@@ -2765,11 +2921,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/galatea.svg",
-    "fallback_image_path": "static/images/products/galatea.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/galatea.webp",
+    "fallback_image_path": "static/images/products/galatea.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Galatea fragrance (Leather Fruity Herbal). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Wild Thyme, Saffron, Green Notes, Cypress, heart of Rose, Orris, Night Jasmine, base of Leather, Amber, Vanilla, Virginia Cedar. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "bc59e5a73d3e1276",
     "aspect_ratio": "4:5",
@@ -2778,12 +2934,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 38.8,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:12:50.724326",
+    "luminance": 40.2,
+    "sharpness": 551.2
   },
   "philos_pura": {
     "product_id": 193,
@@ -2795,11 +2953,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/philos_pura.svg",
-    "fallback_image_path": "static/images/products/philos_pura.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/philos_pura.webp",
+    "fallback_image_path": "static/images/products/philos_pura.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Philos Pura fragrance (Fruity Musky Sweet). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Sicilian Orange, Calabrian Bergamot, Sicilian Lemon, heart of Mediterranean Fruits Basket, base of White Musk, Madagascar Vanilla, Amber. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "f9f487f487dd59fa",
     "aspect_ratio": "4:5",
@@ -2808,12 +2966,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 40.0,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:12:56.771738",
+    "luminance": 40.9,
+    "sharpness": 625.3
   },
   "philos_rosso": {
     "product_id": 194,
@@ -2825,11 +2985,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/philos_rosso.svg",
-    "fallback_image_path": "static/images/products/philos_rosso.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/philos_rosso.webp",
+    "fallback_image_path": "static/images/products/philos_rosso.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Philos Rosso fragrance (Floral Amber Oriental). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Damask Rose, Davana, heart of Violet, Patchouli, Pine, base of Amber, Vanilla, Musk, Sandalwood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "4c234faeabdc579d",
     "aspect_ratio": "4:5",
@@ -2838,12 +2998,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 38.8,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:13:02.823874",
+    "luminance": 40.1,
+    "sharpness": 580.0
   },
   "versencia_oro": {
     "product_id": 195,
@@ -2855,11 +3017,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/versencia_oro.svg",
-    "fallback_image_path": "static/images/products/versencia_oro.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/versencia_oro.webp",
+    "fallback_image_path": "static/images/products/versencia_oro.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Versencia Oro fragrance (Fresh Aromatic Oriental). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Mint Leaves, Green Apple, Italian Lemon, heart of Tonka Bean, Ambroxan, Venezuelan Geranium, base of Madagascar Vanilla, Virginian Cedar, Atlas Cedar, Oakmoss, Vetiver. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "fd38cf1015056867",
     "aspect_ratio": "4:5",
@@ -2868,12 +3030,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 39.6,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:13:08.864836",
+    "luminance": 40.5,
+    "sharpness": 624.3
   },
   "versencia_crystal": {
     "product_id": 196,
@@ -2885,11 +3049,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/versencia_crystal.svg",
-    "fallback_image_path": "static/images/products/versencia_crystal.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/versencia_crystal.webp",
+    "fallback_image_path": "static/images/products/versencia_crystal.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Versencia Crystal fragrance (Floral Aquatic Fresh). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Yuzu, Pomegranate, Iced Accord, heart of Peony, Lotus Blossom, Magnolia, base of Musk, Mahogany Wood, Amber. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "6c2b709bb2e0655c",
     "aspect_ratio": "4:5",
@@ -2898,12 +3062,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.8,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:13:15.617020",
+    "luminance": 44.8,
+    "sharpness": 603.5
   },
   "bad_femme": {
     "product_id": 197,
@@ -2915,11 +3081,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/bad_femme.svg",
-    "fallback_image_path": "static/images/products/bad_femme.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/bad_femme.webp",
+    "fallback_image_path": "static/images/products/bad_femme.jpg",
     "prompt": "Professional commercial luxury perfume product photography of B.A.D. Femme fragrance (Amber Floral Gourmand). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Almond, Coffee, Bergamot, Lemon, heart of Tuberose, Jasmine Sambac, Orange Blossom, Orris, Bulgarian Rose, base of Tonka Bean, Cacao, Vanilla, Praline, Sandalwood, Musk, Amber, Cedar, Cashmere Wood. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "6949cd5d5d891fb0",
     "aspect_ratio": "4:5",
@@ -2928,12 +3094,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 43.3,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:13:22.347988",
+    "luminance": 45.5,
+    "sharpness": 628.6
   },
   "dark_door_intense": {
     "product_id": 198,
@@ -2945,11 +3113,11 @@
     "gender": "Men",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/dark_door_intense.svg",
-    "fallback_image_path": "static/images/products/dark_door_intense.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/dark_door_intense.webp",
+    "fallback_image_path": "static/images/products/dark_door_intense.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Dark Door Intense fragrance (Woody Floral Musk). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Lavender, heart of Tuscan Iris, Ambrette Seed, Sweet Pear, base of Virginian Cedar, Haitian Vetiver. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "04b288f3a7a01132",
     "aspect_ratio": "4:5",
@@ -2958,12 +3126,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.9,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:13:28.907906",
+    "luminance": 45.6,
+    "sharpness": 611.9
   },
   "libbra": {
     "product_id": 199,
@@ -2975,11 +3145,11 @@
     "gender": "Women",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/libbra.svg",
-    "fallback_image_path": "static/images/products/libbra.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/libbra.webp",
+    "fallback_image_path": "static/images/products/libbra.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Libbra fragrance (Amber Fougere Floral). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Lavender, Mandarin Orange, Blackcurrant, Petitgrain, heart of Lavender, Orange Blossom, Jasmine Sambac, base of Madagascar Vanilla, Virginian Cedar, Ambergris, Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "e7dd278703b1eecb",
     "aspect_ratio": "4:5",
@@ -2988,12 +3158,14 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 42.8,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:13:34.942527",
+    "luminance": 45.5,
+    "sharpness": 580.2
   },
   "sceptre_malachite": {
     "product_id": 200,
@@ -3005,11 +3177,11 @@
     "gender": "Unisex",
     "concentration": "Eau de Parfum (EDP)",
     "bottle_size": "100ml",
-    "mode": "FALLBACK_ARCHITECTURAL",
-    "source_type": "fallback_svg",
-    "generation_status": "pending",
-    "primary_image_path": "static/images/products/sceptre_malachite.svg",
-    "fallback_image_path": "static/images/products/sceptre_malachite.svg",
+    "mode": "MODE_B_PROCEDURAL_FLACON",
+    "source_type": "procedural_vector_flacon",
+    "generation_status": "optimized",
+    "primary_image_path": "static/images/products/sceptre_malachite.webp",
+    "fallback_image_path": "static/images/products/sceptre_malachite.jpg",
     "prompt": "Professional commercial luxury perfume product photography of Sceptre Malachite fragrance (Aromatic Fruity Amber). An original, heavy apothecary rectangular flacon concept crafted from thick-walled clear glass revealing rich scented oil, with a brushed metallic minimalist cylindrical cap. Clean, unbranded metallic label plaque centered on the bottle with no words, no letters, no text, no logos, completely unbranded front cartouche. Studio atmosphere: refined Parisian-Arabian niche studio lighting with soft specular highlights. Subtle olfactory nuances reflected in ambient warmth: top notes of Green Mandarin, Bergamot, Clary Sage, heart of Ripe Mango, Mineral Notes, Aromatic Herbs, base of Amber, Cedarwood, Musk. Strict commercial still-life standards: realistic glass refraction, crisp specular highlights, true-to-life contact shadow, no floating elements, no props cluttering the frame, centered portrait composition, photorealistic 8k commercial quality.",
     "prompt_hash": "8d01744c03975f20",
     "aspect_ratio": "4:5",
@@ -3018,11 +3190,13 @@
       1500
     ],
     "actual_resolution": [
-      600,
-      750
+      1200,
+      1500
     ],
-    "file_size_kb": 0.0,
+    "file_size_kb": 41.1,
     "quality_score": 100.0,
-    "updated_at": "2026-11-07T21:32:44.047446"
+    "updated_at": "2026-11-08T15:13:40.472366",
+    "luminance": 40.7,
+    "sharpness": 641.7
   }
 }
