@@ -10,10 +10,10 @@ root_dir = os.path.dirname(os.path.abspath(__file__))
 if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
-import test_app
-import test_perfume_suite
-import test_secret_key
-import test_ssl_db
+from tests.integration import test_app
+from tests.integration import test_perfume_suite
+from tests.unit import test_secret_key
+from tests.unit import test_ssl_db
 
 print("========================================================")
 print("  EXECUTING COMPREHENSIVE PROJECT TEST HARNESS")

@@ -24,13 +24,13 @@ import re
 import pymysql
 from dotenv import load_dotenv
 
-# Ensure app package is importable
-root_dir = os.path.dirname(__file__)
+# Ensure project root is in sys.path and app package is importable
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
 # Load environment configuration
-load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+load_dotenv(os.path.join(root_dir, '.env'))
 
 # Target strictly the isolated test database
 TEST_DB_NAME = os.getenv('TEST_DB_NAME', 'online_shop_perfume_test')

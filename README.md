@@ -1,150 +1,337 @@
-# LATTAFA — Haute Arabian Perfumery E-Commerce Platform
+# LUXE FRAGRANCE — Haute Arabian Perfumery E-Commerce Platform
 **Department of Software Engineering, Mehran University of Engineering and Technology (MUET)**  
 **Course:** Database Management Systems (DBMS) — Complex Engineering Problem (CEP)  
-**Semester:** Fall 2024 / Semester 3 | **Instructor:** Engr. Aisha Ashfaque  
-**Domain Transformation:** Phase 4 — Arabian Perfume E-Commerce Experience  
+**Curriculum Scope:** Fall 2024 / Semester 3 | **Instructor:** Engr. Aisha Ashfaque  
+**Domain:** Luxury Arabian Fragrance Storefront & ACID Relational DBMS  
 
 [![MySQL 8.0](https://img.shields.io/badge/Database-MySQL%208.0%20InnoDB-00758F?logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Python 3.11](https://img.shields.io/badge/Backend-Python%203.11%20%7C%20Flask-3776AB?logo=python&logoColor=white)](https://flask.palletsprojects.com/)
 [![Bootstrap 5](https://img.shields.io/badge/Frontend-Bootstrap%205%20%2B%20Custom%20CSS-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![Tests](https://img.shields.io/badge/Verification-56%2F56%20PASSED-success)](#automated-testing--verification)
+[![Tests Passed](https://img.shields.io/badge/Verification-69%2F69%20PASSED%20(100%25)-success)](#11-running-automated-tests)
+[![Security Audited](https://img.shields.io/badge/Security-CSRF%20%7C%20RBAC%20%7C%20TLS-blue)](#4-security--architecture)
 
 ---
 
-## 1. Project Overview
+## 1. Project Introduction
 
-This project implements a full-featured, relational e-commerce application transformed into a high-end Arabian perfume store demonstration inspired by the official **LATTAFA** shopping experience. 
+**LUXE FRAGRANCE** is an enterprise-grade, relational e-commerce application transformed into a high-end Arabian perfume store demonstration inspired by the official **LATTAFA** brand experience. Originally developed as a multi-vendor marketplace, the system underwent a comprehensive architectural transformation to demonstrate advanced relational database engineering, ACID transaction isolation, and secure web application development.
 
-Originally developed as a generic multi-vendor shop, the system underwent a comprehensive **Domain Transformation (Phase 4)** to showcase advanced database concepts, including:
-- **Relational Integrity & 1:1 Extensions**: Normalized extension pattern (`product_perfume_details`) capturing olfactory pyramids, concentrations, and bottle volumes without altering baseline tables.
-- **ACID Transaction Management**: Multi-table atomic checkout procedures (`sp_place_order` and `sp_place_guest_order`) enforcing stock deduction and financial settlement isolation.
-- **Automated Triggers**: Inventory stock adjustments on order placement/cancellation and immutable audit logging on order state transitions.
-- **Multi-Role Access Control (RBAC)**: Role separation between unregistered guests, authenticated shoppers, sellers, and system administrators.
-- **Curated Fragrance Catalog**: 100 verified perfume products across major houses (*Khamrah*, *Asad*, *Yara*, *Badee Al Oud*, *Lattafa Pride*, *Maison Alhambra*) including all 17 mandatory academic specimens with authentic olfactory notes (Top, Heart, Base).
+The system manages a complete luxury fragrance catalog of **100 verified commercial products** across world-renowned Arabian perfume houses (*Lattafa Perfumes*, *Lattafa Pride*, and *Maison Alhambra*), featuring genuine olfactory pyramids (Top, Heart, and Base notes), custom-engineered procedural 1200×1500 product imagery, and comprehensive order lifecycle management.
 
 ---
 
-## 2. Technology Stack
+## 2. Key Features
 
-| Layer | Technology | Details |
+- **Normalized Fragrance Catalog (100 Fragrances)**:
+  - 1:1 extension pattern (`product_perfume_details`) capturing fragrance families, concentrations (EDP, Extrait), volumes (100ml), longevity, and olfactory notes without altering baseline e-commerce tables.
+  - Dedicated brand hubs for *Khamrah*, *Asad*, *Yara*, *Badee Al Oud*, and *Lattafa Pride*.
+  - Strict inclusion and verification of all 17 mandatory academic specimen fragrances.
+- **ACID Transactional Stored Procedures**:
+  - `sp_place_order`: Multi-table atomic customer checkout enforcing stock deduction, order line items, and financial records within a single transaction boundary.
+  - `sp_place_guest_order`: Anonymous checkout workflow supporting guest sessions.
+  - `sp_cart_summary`: Real-time pricing calculations (subtotals, tax rates, shipping, net totals).
+- **Automated Database Triggers & Audit Trail**:
+  - `trg_orders_status_audit`: Immutable audit log recording all order status transitions with timestamps and actors.
+  - `trg_after_order_item_insert_stock`: Atomic stock decrement upon purchase.
+  - `trg_restore_stock_on_cancel`: Automatic inventory restoration upon order cancellation.
+- **Role-Based Access Control (RBAC)**:
+  - Strict role isolation separating Customers, Guests, Sellers, and Administrators.
+  - Granular administrative dashboards for inventory control, seller approvals, and order tracking.
+- **Procedural & Photorealistic Visual Pipeline**:
+  - Dual asset generation pipeline producing high-resolution (1200×1500) WebP and JPEG flacon visuals with 12 archetypal bottle silhouettes, optical glass gradients, and authentic color palettes.
+- **Enterprise Security**:
+  - Flask-WTF CSRF protection across all forms and AJAX mutations.
+  - Mandatory high-entropy secret key validation in production.
+  - Remote database TLS/SSL enforcement for managed cloud databases.
+
+---
+
+## 3. Technology Stack
+
+| Layer | Component | Specification |
 |---|---|---|
-| **Language** | Python 3.11 | Application logic and transaction orchestration |
-| **Backend Framework** | Flask 3.0.3 | Lightweight WSGI web framework |
-| **Database Engine** | MySQL 8.0 (InnoDB) | ACID transactions, foreign keys, stored procedures, triggers |
-| **Database Driver** | PyMySQL 1.1.1 | Python native DB-API connector |
-| **Template Engine** | Jinja2 | Dynamic HTML rendering with custom filters |
-| **Frontend Styling** | Bootstrap 5.3 + Custom CSS | Arabian luxury theme (Cinzel serif typography, gold accents, deep noir) |
-| **Security** | Flask-WTF / CSRFProtect | Per-session CSRF protection and Werkzeug PBKDF2 password hashing |
+| **Runtime** | Python | 3.11+ |
+| **Framework** | Flask | 3.0.3 (WSGI Web Framework) |
+| **Database** | MySQL Server | 8.0+ (InnoDB Engine, UTF8MB4) |
+| **Database Driver** | PyMySQL | 1.1.1 (Pure-Python DB-API Client) |
+| **Templates** | Jinja2 | Dynamic HTML templating with custom currency and text filters |
+| **Styling** | Bootstrap 5.3 + Custom CSS | Luxury noir aesthetic: gold accents (`#D4AF37`), dark slate, Cinzel typography |
+| **Security** | Flask-WTF / Werkzeug | CSRF token validation, PBKDF2:SHA256 password hashing |
+| **Image Processing** | Pillow & resvg-py | 1200×1500 vector rendering and multi-format WebP/JPEG conversion |
+| **Production WSGI** | Gunicorn | Multi-worker, threaded WSGI HTTP server |
+| **Containerization** | Docker & Docker Compose | Multi-container microservices architecture (App + MySQL 8) |
 
 ---
 
-## 3. Database Architecture & Design
+## 4. Repository Directory Structure
 
-### 3.1 Schema Summary
-- **19 Total Tables**: `users`, `categories`, `brands`, `products`, `product_perfume_details`, `product_images`, `orders`, `order_items`, `payments`, `payment_attempts`, `order_status_history`, `reviews`, `addresses`, `cart_items`, `guest_carts`, `sellers`, `support_tickets`, `ticket_replies`, `order_returns`.
-- **Primary Views**:
-  - `v_perfume_catalog`: Consolidated catalog projection combining core product specs, brand provenance, flacon images, ratings, and olfactory attributes.
-  - `v_perfume_collections`: Aggregations of volume, pricing range, and product counts per fragrance house.
-  - `v_order_summary`: Detailed customer order metrics.
-  - `v_abandoned_carts`: SLA monitoring for checkout recovery.
-  - `v_overdue_return_requests`: Operational dispute resolution queue.
-- **Stored Procedures**:
-  - `sp_place_order`: Atomic customer checkout with inventory verification.
-  - `sp_place_guest_order`: Frictionless guest checkout without account registration.
-  - `sp_update_order_status`: Controlled state transition management with audit tracking.
-  - `sp_cart_summary`: Real-time calculation of subtotal, sales tax, shipping fees, and item counts.
-- **Triggers**:
-  - `trg_orders_status_audit`: Automatically inserts an audit record whenever an order's status changes.
-  - `trg_after_order_item_insert_stock`: Decrements warehouse inventory upon order confirmation.
-  - `trg_restore_stock_on_cancel`: Restores reserved stock when an order is cancelled.
+```text
+.
+├── app/                        # Application package
+│   ├── app.py                  # Core Flask application, route handlers, view functions
+│   ├── db.py                   # Centralized PyMySQL connection & SSL/TLS helper
+│   ├── __init__.py             # App package marker exporting Flask instance
+│   ├── data/                   # Runtime data (manifests, cache)
+│   ├── scripts/                # Backward-compatibility execution forwarders
+│   ├── static/                 # Application static assets (CSS, JS, images)
+│   └── templates/              # Jinja2 HTML templates organized by domain
+│
+├── database/                   # Structured MySQL 8 relational artifacts
+│   ├── schema/                 # DDL: Tables, views, procedures, triggers, roles
+│   ├── seeds/                  # Baseline seed datasets and 100-perfume catalog
+│   ├── migrations/             # Incremental schema evolution and SRS alignment
+│   ├── queries/                # Analytical KPI queries and SQL test scripts
+│   ├── init_perfume/           # Sequential automated container bootstrap (01 to 09)
+│   ├── init_legacy/            # Preserved pre-transformation baseline SQL
+│   └── README.md               # Detailed database documentation and restore guides
+│
+├── tests/                      # Automated test harness (69 Tests)
+│   ├── unit/                   # Unit test suites (Secret key security, SSL/TLS DB)
+│   ├── integration/            # E2E regression suite & perfume domain test suite
+│   ├── conftest.py             # Pytest fixtures and environment configuration
+│   ├── run_test_suite.py       # Test harness executor
+│   └── __init__.py
+│
+├── docs/                       # Comprehensive project documentation
+│   ├── architecture/           # Architecture design records and decisions
+│   ├── database/               # Database ER diagrams and schema specifications
+│   ├── development/            # Developer setup guides and demonstration walkthroughs
+│   ├── deployment/             # Cloud deployment readiness and production audits
+│   ├── audits/                 # Comprehensive QA, code quality, and security audits
+│   ├── reports/                # Academic reports, SRS test sheets, and milestones
+│   └── project/                # Catalog specifications, task logs, and roadmap
+│
+├── scripts/                    # Standalone utility and automation scripts
+│   ├── database/               # SQL migration generators and catalog importers
+│   ├── development/            # Endpoint checkers and developer tooling
+│   └── maintenance/            # Perfume asset and flacon rendering engines
+│
+├── data/                       # Active dataset files and manifests
+│   ├── PERFUME_CATALOG_DATA.csv# 100 curated authentic perfumes with notes
+│   ├── PERFUME_IMAGE_MANIFEST.json # Image metadata and silhouette mappings
+│   └── products_manifest.csv   # Legacy baseline catalog manifest
+│
+├── static/                     # Primary static assets (mirrored with app/static)
+│   ├── css/                    # Custom stylesheets and Bootstrap theme overrides
+│   ├── js/                     # Client-side scripts (cart mutations, search)
+│   └── images/                 # Product photography, SVGs, and category hero banners
+│
+├── archive/                    # Preserved historical assets and reports
+├── backups/                    # Stage backups and database SQL dumps
+├── .env.example                # Sanitized environment configuration template
+├── .gitignore                  # Git tracking rules
+├── docker-compose.yml          # Multi-container service definition
+├── Dockerfile                  # Production Debian-slim container image definition
+├── gunicorn_config.py          # Production WSGI process configuration
+├── requirements.txt            # Locked Python package dependencies
+├── run.py                      # Primary application local development entrypoint
+├── run_test_suite.py           # Master automated test harness entrypoint
+└── README.md                   # Authoritative repository documentation
+```
 
 ---
 
-## 4. Quick Start & Local Demonstration
+## 5. Installation & Prerequisites
 
 ### Prerequisites
-- Python 3.11+
-- MySQL 8.0 Server running on `localhost:3306`
+- **Python 3.11+** installed on host machine.
+- **MySQL Server 8.0+** running locally (or Docker installed for containerized deployment).
+- **Git** for version control.
 
-### 1. Environment Setup
-```powershell
-# Create and activate virtual environment
+### Step 1: Clone Repository & Create Virtual Environment
+```bash
+git clone <repository_url>
+cd "DBS project"
+
+# Create virtual environment
 python -m venv venv
-.\venv\Scripts\activate
 
-# Install required Python packages
+# Activate virtual environment (Windows PowerShell)
+.\venv\Scripts\Activate.ps1
+
+# Activate virtual environment (Linux/macOS)
+source venv/bin/activate
+```
+
+### Step 2: Install Python Dependencies
+```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 2. Configure Environment (`.env`)
-The project defaults to the transformed development database `online_shop_perfume_dev`:
+---
+
+## 6. Environment Configuration
+
+Copy `.env.example` to create your local `.env` configuration:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` to supply your local MySQL database credentials:
+
 ```ini
+# Database Connection Settings
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=online_shop_perfume_dev
+TEST_DB_NAME=online_shop_perfume_test
 
-FLASK_SECRET_KEY=muet-dbms-cep-2024-secret
+# Application Environment (development, testing, or production)
+APP_ENV=development
 FLASK_DEBUG=1
+
+# Secret Key (Auto-generated ephemeral key used in dev if left blank)
+# In production, this MUST be a 64-character random hex string:
+FLASK_SECRET_KEY=dev-secret-key-change-in-production
+
+# Optional SSL CA certificate for cloud databases (e.g. AWS RDS, Aiven)
+# DB_SSL_CA=/path/to/ca.pem
 ```
-
-### 3. Database Initialization (If Not Already Imported)
-```powershell
-# The Docker Compose stack uses the perfume-specific bootstrap in sql/init_perfume/
-docker compose up --build
-
-# For an existing local MySQL instance, restore the dedicated perfume snapshot
-# or run the files in sql/init_perfume/ in filename order.
-# The final migration is sql/init_perfume/09_perfume_transformation.sql.
-```
-
-### 4. Run Automated Test Suites
-```powershell
-# Run the 49-test core regression suite
-.\venv\Scripts\python.exe run_test_suite.py
-
-# Run the 7-test perfume domain verification suite
-.\venv\Scripts\python.exe test_perfume_suite.py
-```
-
-### 5. Launch Local Web Application
-```powershell
-.\venv\Scripts\python.exe app\app.py
-```
-Open your browser and navigate to:  
-`http://127.0.0.1:5000`
 
 ---
 
-## 5. Demonstration Accounts
+## 7. Database Initialization
 
-| Role | Email Address | Password | Permissions |
+The system requires two databases:
+1. `online_shop_perfume_dev`: Active database for browsing, shopping, and administrative management.
+2. `online_shop_perfume_test`: Isolated database used exclusively by the automated test harness.
+
+### Automated Container Initialization (Docker)
+Docker Compose will automatically execute all scripts in `database/init_perfume/` in sequential order:
+```bash
+docker compose up db -d
+```
+
+### Manual Local MySQL Initialization
+Run the sequential initialization scripts against your local MySQL server:
+
+```powershell
+# 1. Create databases
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS online_shop_perfume_dev;"
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS online_shop_perfume_test;"
+
+# 2. Populate development database
+Get-ChildItem -Path "database/init_perfume/*.sql" | ForEach-Object {
+    Write-Host "Executing $_.Name on dev..."
+    Get-Content $_.FullName | mysql -u root -p online_shop_perfume_dev
+}
+
+# 3. Populate test database
+Get-ChildItem -Path "database/init_perfume/*.sql" | ForEach-Object {
+    Write-Host "Executing $_.Name on test..."
+    Get-Content $_.FullName | mysql -u root -p online_shop_perfume_test
+}
+```
+
+---
+
+## 8. Running the Application
+
+### Local Development Server
+Execute the application entry point:
+
+```bash
+python run.py
+```
+
+The application will bind to `http://127.0.0.1:5000/`.
+
+### Verified Navigation Routes
+- **Storefront & Catalog**:
+  - Homepage: `http://127.0.0.1:5000/`
+  - All Perfumes: `http://127.0.0.1:5000/products`
+  - Collections Hub: `http://127.0.0.1:5000/collections`
+  - Specific Collection: `http://127.0.0.1:5000/collection/khamrah-collection`
+  - Gender Landing Pages: `/men`, `/women`, `/unisex`
+  - Discovery Hubs: `/bestsellers`, `/new-arrivals`
+  - Product Detail: `http://127.0.0.1:5000/product/101`
+- **Customer Shopping Flow**:
+  - Shopping Cart: `http://127.0.0.1:5000/cart`
+  - Checkout (Guest / User): `http://127.0.0.1:5000/checkout`
+  - Live Order Tracking: `http://127.0.0.1:5000/orders/<order_id>/track`
+- **Administrative Portals**:
+  - Admin Dashboard: `http://127.0.0.1:5000/admin`
+  - Product Catalog Management: `http://127.0.0.1:5000/admin/products`
+  - Order Processing: `http://127.0.0.1:5000/admin/orders`
+  - Analytical Reporting Views: `http://127.0.0.1:5000/admin/reports`
+- **System Monitoring**:
+  - Health Probe: `http://127.0.0.1:5000/health` (Returns JSON status: 200 OK)
+
+---
+
+## 9. Running Automated Tests
+
+The test harness enforces 100% database isolation, executing strictly against `online_shop_perfume_test` and aborting immediately if pointed at development or production.
+
+Execute the unified test suite:
+
+```bash
+python run_test_suite.py
+```
+*(Alternatively, execute directly from the test package: `python tests/run_test_suite.py`)*
+
+### Test Suite Structure (69 Total Tests)
+
+| Suite | Module Location | Tests | Focus Area |
 |---|---|---|---|
-| **System Administrator** | `admin@muetshop.pk` | `password123` | Full catalog, orders, and seller administration |
-| **Registered Customer** | `zeeshan@gmail.com` | `password123` | Cart, checkout, order history, review submission |
-| **Guest Shopper** | *(None required)* | *(None)* | Instant cookie cart, guest checkout, order tracking |
+| **Suite 1: E2E Regression** | `tests/integration/test_app.py` | 49 | CSRF protection, auth, cart merge, atomic checkout, RBAC, returns, order tracking, error handling |
+| **Suite 2: Perfume Domain** | `tests/integration/test_perfume_suite.py` | 7 | 100 verified perfumes, 17 mandatory specimens, olfactory pyramids, faceted filtering |
+| **Suite 3: Secret Key Security** | `tests/unit/test_secret_key.py` | 7 | Ephemeral dev keys, strict production entropy enforcement, invalid key rejection |
+| **Suite 4: Database TLS/SSL** | `tests/unit/test_ssl_db.py` | 6 | Localhost unencrypted allowance, remote cloud TLS enforcement, certificate validation |
+| **Total** | | **69** | **100% Passed (0 Failures, 0 Errors)** |
 
 ---
 
-## 6. Project Documentation Index
+## 10. Docker Deployment
 
-| Document | Description |
-|---|---|
-| [`PERFUME_TRANSFORMATION_PLAN.md`](PERFUME_TRANSFORMATION_PLAN.md) | Initial architecture and execution roadmap for Phase 4 |
-| [`PERFUME_DATABASE_DESIGN.md`](PERFUME_DATABASE_DESIGN.md) | Relational database schema extension, views, and data dictionaries |
-| [`PERFUME_CATALOG.md`](PERFUME_CATALOG.md) | Full 100-perfume catalog documentation with notes and pricing |
-| [`PERFUME_CATALOG_DATA.csv`](PERFUME_CATALOG_DATA.csv) | Machine-readable dataset of all 100 fragrance specimens |
-| [`PERFUME_TRANSFORMATION_CHANGELOG.md`](PERFUME_TRANSFORMATION_CHANGELOG.md) | Step-by-step delta of schema, route, and template changes |
-| [`PERFUME_TRANSFORMATION_TEST_RESULTS.md`](PERFUME_TRANSFORMATION_TEST_RESULTS.md) | Comprehensive 56-test execution matrix and Playwright evidence |
-| [`PERFUME_TRANSFORMATION_FINAL_REPORT.md`](PERFUME_TRANSFORMATION_FINAL_REPORT.md) | Complete executive and technical transformation sign-off report |
-| [`PROGRESS.md`](PROGRESS.md) | Historical task progress and milestone tracking |
-| [`FINAL_PROJECT_STRUCTURE.md`](FINAL_PROJECT_STRUCTURE.md) | Full repository directory tree and asset index |
+The application includes a production-ready, multi-container Docker configuration with healthchecks, non-root user execution, and persistent data volumes.
+
+### Build and Start Stack
+```bash
+docker compose up --build -d
+```
+
+### Inspect Container Health
+```bash
+docker compose ps
+```
+
+### Stream Application Logs
+```bash
+docker compose logs -f web
+```
+
+### Stop Containers
+```bash
+docker compose down
+```
 
 ---
 
-## 7. Academic Integrity & Non-Commercial Notice
+## 11. Production Deployment & Security Notes
 
-This project was developed strictly for academic demonstration purposes as part of the Database Management Systems (DBMS) coursework at the Department of Software Engineering, Mehran University of Engineering and Technology (MUET), Jamshoro, Pakistan.
+1. **WSGI Process Management**:
+   In production environments (e.g. Render, Railway, AWS ECS, DigitalOcean), run the application via Gunicorn using the verified configuration:
+   ```bash
+   gunicorn --config gunicorn_config.py app.app:app
+   ```
+2. **Strict Production Environment Variables**:
+   - `APP_ENV=production`
+   - `FLASK_SECRET_KEY`: Set to a cryptographically strong 64-character hex string generated via:
+     ```bash
+     python -c "import secrets; print(secrets.token_hex(32))"
+     ```
+3. **Database TLS/SSL Configuration**:
+   When connecting to remote managed MySQL instances (AWS RDS, Aiven, GCP Cloud SQL), set `DB_SSL_CA=/path/to/ca.pem` to ensure all transit traffic is encrypted. The application automatically enforces SSL connections in production mode when connecting to non-local hosts.
 
-All brand names, product references, and trademarks (including *Lattafa*, *Yara*, *Asad*, *Khamrah*, *Badee Al Oud*, *Maison Alhambra*) remain the exclusive property of **Lattafa Perfumes Industries L.L.C.** No commercial affiliation, endorsement, or cloud deployment is claimed or authorized.
+---
+
+## 12. Authors & Acknowledgments
+
+- **Department of Software Engineering**, Mehran University of Engineering and Technology (MUET), Jamshoro.
+- **Complex Engineering Problem (CEP)** for Database Management Systems (DBMS).
+- Academic Guidance: **Engr. Aisha Ashfaque**.

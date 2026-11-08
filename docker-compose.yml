@@ -1,4 +1,4 @@
-﻿# docker-compose.yml - Production & Local Demonstration Stack (Phase 13A)
+# docker-compose.yml - Production & Local Demonstration Stack (Phase 13A)
 # WHY: Orchestrates MySQL 8 database service and Flask WSGI web application
 #      with volume persistence, mutual networking, and automated health checks.
 
@@ -16,7 +16,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./sql/init_perfume:/docker-entrypoint-initdb.d:ro
+      - ./database/init_perfume:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u${DB_USER:-shopuser}", "-p${DB_PASSWORD:-shoppass123}"]
       interval: 10s

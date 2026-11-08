@@ -11,8 +11,11 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-# Ensure app package is importable
-app_dir = os.path.join(os.path.dirname(__file__), 'app')
+# Ensure project root and app package are in sys.path
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
+app_dir = os.path.join(root_dir, 'app')
 if app_dir not in sys.path:
     sys.path.insert(0, app_dir)
 

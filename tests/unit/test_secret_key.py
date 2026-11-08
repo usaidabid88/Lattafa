@@ -6,10 +6,16 @@ WHY: Validates that production mode strictly enforces a secure FLASK_SECRET_KEY,
 """
 
 import os
+import sys
 import unittest
 import secrets
 from unittest.mock import patch
 from flask import Flask
+
+# Ensure project root is in sys.path
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
 
 
 class TestFlaskSecretKeySecurity(unittest.TestCase):
