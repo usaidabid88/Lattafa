@@ -1,0 +1,45 @@
+# .dockerignore - Docker Build Context Exclusions
+
+# Version control
+.git/
+.gitignore
+
+# Environment & credentials (use docker-compose environment or container env)
+.env
+.env.*
+
+# Python caches and virtual environments
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary and scratch files
+scratch/
+tmp/
+temp/
+*.log
+.*.log
+
+# IDE & Editor configs
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Documentation submission & backups (not required in container runtime)
+backups/
+.agent/
+.work/
+.manus/
+.playwright-mcp/

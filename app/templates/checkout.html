@@ -157,22 +157,65 @@
                 </div>
 
                 {% else %}
-                <!-- Authenticated Customer Saved Addresses -->
+                <!-- Authenticated Customer Saved Addresses & Add New Address -->
                 {% if addresses %}
-                <div class="d-flex flex-column gap-2">
+                <div class="d-flex flex-column gap-2 mb-3">
+                    <span class="small fw-semibold text-secondary">Saved Delivery Addresses:</span>
                     {% for addr in addresses %}
                     <label for="addr_{{ addr.address_id }}" class="form-check-label d-flex align-items-start gap-2 p-2 rounded cursor-pointer" style="border: 1px solid var(--border-hairline); background-color: var(--bg-card); cursor: pointer;">
-                        <input class="form-check-input mt-1" type="radio" name="address_id" id="addr_{{ addr.address_id }}" value="{{ addr.address_id }}" {% if loop.first %}checked{% endif %} required>
+                        <input class="form-check-input mt-1" type="radio" name="address_id" id="addr_{{ addr.address_id }}" value="{{ addr.address_id }}" {% if loop.first %}checked{% endif %} onchange="toggleNewAddressForm(false)" required>
                         <div>
                             <div class="fw-medium small" style="color: var(--text-primary);">{{ addr.line1 or addr.address_line1 }}</div>
                             <div class="small text-muted">{{ addr.city }}, {{ addr.province }}{% if addr.postal_code %}, {{ addr.postal_code }}{% endif %}</div>
                         </div>
                     </label>
                     {% endfor %}
+
+                    <label for="addr_new" class="form-check-label d-flex align-items-center gap-2 p-2 rounded cursor-pointer" style="border: 1px dashed var(--border-hairline); background-color: var(--bg-raised); cursor: pointer;">
+                        <input class="form-check-input" type="radio" name="address_id" id="addr_new" value="new" onchange="toggleNewAddressForm(true)">
+                        <div class="fw-medium small" style="color: var(--accent-indigo);">
+                            <i class="bi bi-plus-circle me-1"></i> Deliver to a new address
+                        </div>
+                    </label>
                 </div>
+
+                <div id="new_address_fields" class="row g-2 pt-2 border-top" style="display: none; border-color: var(--border-hairline) !important;">
                 {% else %}
-                <p class="text-muted small mb-0">No saved addresses found. Please ensure an address is attached to your account.</p>
+                <!-- No Saved Addresses: Directly display Address Entry Form -->
+                <div class="p-2 mb-2 rounded bg-light border small text-muted">
+                    <i class="bi bi-geo-alt-fill text-primary me-1"></i> <strong>Delivery Address Required:</strong> Please enter your delivery address below. It will be attached to your account for this and future orders.
+                </div>
+                <div id="new_address_fields" class="row g-2">
                 {% endif %}
+                    <div class="col-12">
+                        <label for="new_address_line1" class="form-label small fw-medium text-secondary">Street Delivery Address <span class="text-danger">*</span></label>
+                        <input type="text" id="new_address_line1" name="new_address_line1" class="form-control form-control-sm" placeholder="House/Flat number, Street name, Sector" style="border-color: var(--border-hairline);" {% if not addresses %}required{% endif %}>
+                    </div>
+                    <div class="col-6">
+                        <label for="new_province" class="form-label small fw-medium text-secondary">Province / Territory <span class="text-danger">*</span></label>
+                        <select id="new_province" name="new_province" class="form-select form-select-sm" style="border-color: var(--border-hairline);" onchange="updateCheckoutCity(this.value)">
+                            <optgroup label="Provinces">
+                                <option value="Sindh" {% if selected_province == 'Sindh' %}selected{% endif %}>Sindh</option>
+                                <option value="Punjab" {% if selected_province == 'Punjab' %}selected{% endif %}>Punjab</option>
+                                <option value="Khyber Pakhtunkhwa" {% if selected_province == 'Khyber Pakhtunkhwa' %}selected{% endif %}>Khyber Pakhtunkhwa</option>
+                                <option value="Balochistan" {% if selected_province == 'Balochistan' %}selected{% endif %}>Balochistan</option>
+                            </optgroup>
+                            <optgroup label="Federal Territory">
+                                <option value="Islamabad Capital Territory" {% if selected_province in ('Islamabad', 'Islamabad Capital Territory') %}selected{% endif %}>Islamabad Capital Territory</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="new_city" class="form-label small fw-medium text-secondary">City <span class="text-danger">*</span></label>
+                        <select id="new_city" name="new_city" class="form-select form-select-sm" style="border-color: var(--border-hairline);">
+                            <!-- Populated dynamically based on Province -->
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="new_postal_code" class="form-label small fw-medium text-secondary">Postal Code (Optional)</label>
+                        <input type="text" id="new_postal_code" name="new_postal_code" class="form-control form-control-sm" placeholder="e.g. 71000" style="border-color: var(--border-hairline);">
+                    </div>
+                </div>
                 {% endif %}
             </div>
 
@@ -230,28 +273,43 @@ const provinceCities = {
     "Islamabad": ["Islamabad"]
 };
 
+function toggleNewAddressForm(show) {
+    const fields = document.getElementById('new_address_fields');
+    const input = document.getElementById('new_address_line1');
+    if (fields) {
+        fields.style.display = show ? 'flex' : 'none';
+    }
+    if (input) {
+        input.required = show;
+        if (show) input.focus();
+    }
+}
+
 function updateCheckoutCity(prov, initialCity) {
-    const cityEl = document.getElementById('guest_city');
-    if (!cityEl) return;
+    const cityEls = [document.getElementById('guest_city'), document.getElementById('new_city')];
     const cities = provinceCities[prov] || ["Karachi"];
-    const targetCity = initialCity || cityEl.value || cities[0];
-    cityEl.innerHTML = '';
-    cities.forEach(function(c) {
-        const opt = document.createElement('option');
-        opt.value = c;
-        opt.textContent = c;
-        if (targetCity && c.toLowerCase() === targetCity.toLowerCase()) {
-            opt.selected = true;
-        }
-        cityEl.appendChild(opt);
+    
+    cityEls.forEach(function(cityEl) {
+        if (!cityEl) return;
+        const targetCity = initialCity || cityEl.value || cities[0];
+        cityEl.innerHTML = '';
+        cities.forEach(function(c) {
+            const opt = document.createElement('option');
+            opt.value = c;
+            opt.textContent = c;
+            if (targetCity && c.toLowerCase() === targetCity.toLowerCase()) {
+                opt.selected = true;
+            }
+            cityEl.appendChild(opt);
+        });
     });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const provEl = document.getElementById('guest_province');
-    if (provEl) {
-        updateCheckoutCity(provEl.value, '{{ selected_city or "Karachi" }}');
-    }
+    const guestProv = document.getElementById('guest_province');
+    const newProv = document.getElementById('new_province');
+    const provVal = (guestProv ? guestProv.value : null) || (newProv ? newProv.value : null) || '{{ selected_province or "Sindh" }}';
+    updateCheckoutCity(provVal, '{{ selected_city or "Karachi" }}');
 });
 </script>
 {% endblock %}

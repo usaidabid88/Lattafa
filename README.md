@@ -329,7 +329,21 @@ docker compose down
 
 ---
 
-## 12. Authors & Acknowledgments
+## 12. Academic Submission Package (CEP Deliverables)
+
+The repository includes a dedicated, self-contained academic submission package in the [`project_submission/`](project_submission/) folder for evaluators and viva presentation:
+
+| Deliverable | File Format | Contents & Academic Assessment Scope |
+|---|:---:|---|
+| **`01_Project_Overview.docx`** | `.docx` | System overview, luxury fragrance domain challenges, user personas, system requirements (FR-01 to FR-12, NFR-01 to NFR-05), 3-tier architecture, and tech stack table. |
+| **`02_Database_Design.docx`** | `.docx` | Complete data dictionary (all 25 tables), relationship analysis (1:1 flacon vertical partitioning, 1:N hierarchies, M:N associative tables), formal normalization walkthrough (1NF, 2NF, 3NF, BCNF), referential integrity matrix, and embedded ER diagram. |
+| **`03_Database_Implementation.docx`** | `.docx` | Ordered SQL execution pipeline (`01`–`09`), canonical DDL code blocks, 11 database views portfolio, stored procedures with row-level locking (`sp_place_order`, `sp_merge_carts`), automated business triggers, MySQL 8.0 RBAC roles, PyMySQL integration, and 12 SQL queries with output tables. |
+| **`04_CEP_Compliance_and_Testing.docx`** | `.docx` | Complete answers to all 9 instructor CEP evaluation questions, acceptance criteria verification matrix (15 criteria verified), mapping to all 6 evaluation rubrics (R1–R6, 10/10 marks justified), and automated test execution log (69/69 passing tests). |
+| **`ER_Diagram.png`** | `.png` | Standalone high-resolution 4200 × 2700 (300 DPI) Crow's Foot Entity-Relationship relational schema diagram detailing all 25 tables, primary keys, foreign keys, unique keys, and cardinalities. |
+
+---
+
+## 13. Authors & Acknowledgments
 
 - **Department of Software Engineering**, Mehran University of Engineering and Technology (MUET), Jamshoro.
 - **Complex Engineering Problem (CEP)** for Database Management Systems (DBMS).

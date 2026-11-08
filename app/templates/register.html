@@ -30,9 +30,38 @@
                         <input type="password" class="form-control form-control-sm" id="confirm_password" name="confirm_password" placeholder="Repeat password" style="border-color: var(--border-hairline);" required>
                     </div>
                 </div>
-                <div class="mb-4">
+                <div class="mb-3">
                     <label for="phone" class="form-label small fw-medium" style="color: var(--text-secondary); font-size: 0.8rem;">Phone number (optional)</label>
                     <input type="text" class="form-control form-control-sm" id="phone" name="phone" placeholder="e.g. 03001234567" style="border-color: var(--border-hairline);">
+                </div>
+
+                <!-- Optional Address Section -->
+                <div class="mb-4 pt-2 border-top" style="border-color: var(--border-hairline) !important;">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="small fw-semibold" style="color: var(--text-primary); font-size: 0.8rem;">Delivery Address</span>
+                        <span class="badge bg-secondary text-white rounded-pill px-2 py-1" style="font-size: 0.65rem;">Optional</span>
+                    </div>
+                    <div class="mb-2">
+                        <label for="line1" class="form-label small fw-medium text-secondary" style="font-size: 0.75rem;">Street address</label>
+                        <input type="text" class="form-control form-control-sm" id="line1" name="line1" placeholder="House/Flat number, Street, Sector" style="border-color: var(--border-hairline);">
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <label for="province" class="form-label small fw-medium text-secondary" style="font-size: 0.75rem;">Province</label>
+                            <select id="province" name="province" class="form-select form-select-sm" style="border-color: var(--border-hairline);">
+                                <option value="">Select province...</option>
+                                <option value="Sindh">Sindh</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
+                                <option value="Balochistan">Balochistan</option>
+                                <option value="Islamabad Capital Territory">Islamabad</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="city" class="form-label small fw-medium text-secondary" style="font-size: 0.75rem;">City</label>
+                            <input type="text" class="form-control form-control-sm" id="city" name="city" placeholder="e.g. Karachi" style="border-color: var(--border-hairline);">
+                        </div>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-indigo w-100 py-2 mb-3">

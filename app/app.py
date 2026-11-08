@@ -329,6 +329,19 @@ def register():
                     "VALUES (%s, %s, %s, %s, 'customer')",
                     (full_name, email, pw_hash, phone or None)
                 )
+                new_user_id = cur.lastrowid
+
+                # Optional initial address during registration
+                reg_line1 = request.form.get('line1', '').strip()
+                reg_city = request.form.get('city', '').strip()
+                reg_prov = request.form.get('province', '').strip()
+                reg_postal = request.form.get('postal_code', '71000').strip()
+                if reg_line1 and reg_city and reg_prov:
+                    cur.execute(
+                        "INSERT INTO addresses (user_id, line1, city, province, postal_code, is_default) "
+                        "VALUES (%s, %s, %s, %s, %s, 1)",
+                        (new_user_id, reg_line1, reg_city, reg_prov, reg_postal or '71000')
+                    )
             conn.commit()
             flash('Registration successful! Please log in.', 'success')
             return redirect(url_for('login'))
@@ -1018,17 +1031,78 @@ def checkout():
         payment_method = request.form.get('payment_method', 'cod')
 
         # Mandatory terms consent (FR-19, AC-06.3)
-        if not request.form.get('consent_terms') and not request.form.get('address_id'):
-            pass
-        elif not request.form.get('consent_terms') and is_guest:
+        if not request.form.get('consent_terms') and is_guest:
+            flash('Please accept the Terms of Service and Privacy Policy to proceed.', 'danger')
+            return redirect(url_for('checkout'))
+        elif not request.form.get('consent_terms') and not request.form.get('address_id') and not request.form.get('new_address_line1'):
             flash('Please accept the Terms of Service and Privacy Policy to proceed.', 'danger')
             return redirect(url_for('checkout'))
 
         try:
             with conn.cursor() as cur:
                 if 'user_id' in session:
-                    # Authenticated checkout
-                    address_id = int(request.form['address_id'])
+                    # Authenticated checkout - supports both saved addresses and entering a new address
+                    raw_addr_id = request.form.get('address_id', '').strip()
+                    address_id = None
+
+                    # 1. Check if user selected an existing saved address
+                    if raw_addr_id and raw_addr_id != 'new' and raw_addr_id.isdigit():
+                        candidate_id = int(raw_addr_id)
+                        cur.execute(
+                            "SELECT address_id FROM addresses WHERE address_id = %s AND user_id = %s",
+                            (candidate_id, session['user_id'])
+                        )
+                        if cur.fetchone():
+                            address_id = candidate_id
+
+                    # 2. If 'new' address chosen or no saved addresses, inspect entered address fields
+                    if not address_id:
+                        line1 = (
+                            request.form.get('new_address_line1') or 
+                            request.form.get('address_line1') or 
+                            request.form.get('line1') or 
+                            request.form.get('guest_address') or 
+                            ''
+                        ).strip()
+                        city = (
+                            request.form.get('new_city') or 
+                            request.form.get('city') or 
+                            request.form.get('guest_city') or 
+                            selected_city or 
+                            'Karachi'
+                        ).strip()
+                        province = (
+                            request.form.get('new_province') or 
+                            request.form.get('province') or 
+                            request.form.get('guest_province') or 
+                            selected_province or 
+                            'Sindh'
+                        ).strip()
+                        postal_code = (
+                            request.form.get('new_postal_code') or 
+                            request.form.get('postal_code') or 
+                            '71000'
+                        ).strip()
+
+                        if line1 and city and province:
+                            cur.execute(
+                                "SELECT COUNT(*) AS cnt FROM addresses WHERE user_id = %s",
+                                (session['user_id'],)
+                            )
+                            has_existing = cur.fetchone()['cnt'] > 0
+                            is_default = 0 if has_existing else 1
+
+                            cur.execute(
+                                "INSERT INTO addresses (user_id, line1, city, province, postal_code, is_default) "
+                                "VALUES (%s, %s, %s, %s, %s, %s)",
+                                (session['user_id'], line1, city, province, postal_code, is_default)
+                            )
+                            address_id = cur.lastrowid
+
+                    if not address_id:
+                        flash('Please select a saved address or enter your delivery address details.', 'danger')
+                        return redirect(url_for('checkout'))
+
                     cur.execute(
                         "CALL sp_place_order(%s, %s, %s, @p_order_id, @p_status_message)",
                         (session['user_id'], address_id, payment_method)
@@ -1087,6 +1161,18 @@ def checkout():
             flash('Your cart is empty. Add products before checking out.', 'warning')
             return redirect(url_for('products'))
 
+        addresses = []
+        if 'user_id' in session:
+            cur.execute(
+                "SELECT address_id, line1, line1 AS address_line1, city, province, postal_code, is_default "
+                "FROM addresses WHERE user_id = %s ORDER BY is_default DESC",
+                (session['user_id'],)
+            )
+            addresses = cur.fetchall()
+            if addresses and not request.args.get('province'):
+                selected_province = addresses[0].get('province') or selected_province
+                selected_city = addresses[0].get('city') or selected_city
+
         # Fetch pricing breakdown from sp_cart_summary
         cur.execute(
             "CALL sp_cart_summary(%s, %s, %s, @p_subtotal, @p_tax, @p_fee, @p_total, @p_min, @p_max)",
@@ -1098,15 +1184,6 @@ def checkout():
                    @p_min AS min_days, @p_max AS max_days
         """)
         pricing = cur.fetchone()
-
-        addresses = []
-        if 'user_id' in session:
-            cur.execute(
-                "SELECT address_id, line1, line1 AS address_line1, city, province, postal_code, is_default "
-                "FROM addresses WHERE user_id = %s ORDER BY is_default DESC",
-                (session['user_id'],)
-            )
-            addresses = cur.fetchall()
 
     min_days = int(pricing['min_days']) if pricing else 2
     max_days = int(pricing['max_days']) if pricing else 5
